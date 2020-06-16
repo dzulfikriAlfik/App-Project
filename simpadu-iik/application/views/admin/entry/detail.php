@@ -90,7 +90,7 @@ if ($data2 != "") { ?>
                 $icon1 = "home";
                 $class1 = "default";
               } else if ($row->mutasi == 3) {
-                echo "<center><span class='label label-default'> Warga Asli</span></center>";
+                echo "<center><a class=\"label label-default\" href=\"" . site_url('entry/mutasi/' . $row->nik) . "\"> Warga Asli</a></center>";
                 $site1 = site_url('entry/individuIn/' . $row->nik);
                 $teks1 = "Ubah Mutasi Masuk";
                 $icon1 = "home";
