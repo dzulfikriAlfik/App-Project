@@ -89,8 +89,8 @@ if ($data2 != "") { ?>
                 $teks1 = "Ubah Mutasi Masuk";
                 $icon1 = "home";
                 $class1 = "default";
-              } else if ($row->mutasi == 0) {
-                echo "<center><span class='label label-default'> Asli</span></center>";
+              } else if ($row->mutasi == 3) {
+                echo "<center><span class='label label-default'> Warga Asli</span></center>";
                 $site1 = site_url('entry/individuIn/' . $row->nik);
                 $teks1 = "Ubah Mutasi Masuk";
                 $icon1 = "home";
