@@ -37,10 +37,10 @@
         </tr>
         <tr>
           <?php if ($getrow['mutasi'] == 1) {
-            echo "<th>Mutasi dari : </th>";
+            echo "<th>Mutasi dari </th>";
             echo "<td>Jakarta</td>";
           } else if ($getrow['mutasi'] == 2) {
-            echo "<th>Mutasi ke : </th>";
+            echo "<th>Mutasi ke </th>";
             echo "<td>Sukabumi</td>";
           }
           ?>
