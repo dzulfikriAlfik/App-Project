@@ -286,6 +286,25 @@ class Entry extends CI_Controller
 	}
 
 	// 
+	public function mutasi($id)
+	{
+		$kk = getKK($id);
+		$data = array(
+			"title" => 'Detail Mutasi||Detail KK||Entri Data',
+			"menu" => getmenu(),
+			"aktif" => "entry",
+			"id" => $id,
+			"getrow" => $this->db->where('nik', $id)->get('penduduk')->row_array(),
+			"getklasifikasi" => $this->M_entry->getKategori($id)->result(),
+			"content" => "entry/detailindividu.php",
+		);
+		$this->breadcrumb->append_crumb('Entri Data KK', site_url('entry'));
+		$this->breadcrumb->append_crumb('Data Individu KK <i>' . getnamakk($kk) . '</i>', site_url('entry/detailkk/' . $kk));
+		$this->breadcrumb->append_crumb('Detail Individu <i>' . getnama($id) . '</i>', site_url('entry'));
+		$this->load->view('admin/template', $data);
+	}
+
+	// 
 	public function editfile()
 	{
 		$this->form_validation->set_rules('nik', 'nik', 'required');
