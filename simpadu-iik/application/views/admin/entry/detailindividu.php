@@ -33,9 +33,7 @@
           <th>Status dan Mutasi</th>
           <td>
             <?php
-            if ($getrow['status'] == 1 and $getrow['mutasi'] == 0) {
-              echo "<span class='label label-success'> Hidup</span>";
-            } else if ($getrow['status'] == 1 and $getrow['mutasi'] == 1) {
+            if ($getrow['status'] == 1 and $getrow['mutasi'] == 1) {
               echo "<span class='label label-success'> Hidup</span>";
               echo "&nbsp&nbsp";
               echo "<span class='label label-primary'> Masuk</span>";
@@ -43,9 +41,10 @@
               echo "<span class='label label-success'> Hidup</span>";
               echo "&nbsp&nbsp";
               echo "<span class='label label-warning'> Keluar</span>";
-            } else if ($getrow['status'] == 2 and $getrow['mutasi'] == 0) {
-              echo "<span class='label label-danger'> Meninggal</span>";
+            } else if ($getrow['status'] == 1 and $getrow['mutasi'] == 3) {
+              echo "<span class='label label-success'> Hidup</span>";
               echo "&nbsp&nbsp";
+              echo "<span class='label label-default'> Warga Asli</span>";
             } else if ($getrow['status'] == 2 and $getrow['mutasi'] == 1) {
               echo "<span class='label label-danger'> Meninggal</span>";
               echo "&nbsp&nbsp";
@@ -54,6 +53,10 @@
               echo "<span class='label label-danger'> Meninggal</span>";
               echo "&nbsp&nbsp";
               echo "<span class='label label-warning'> Keluar</span>";
+            } else if ($getrow['status'] == 2 and $getrow['mutasi'] == 3) {
+              echo "<span class='label label-danger'> Meninggal</span>";
+              echo "&nbsp&nbsp";
+              echo "<span class='label label-default'> Warga Asli</span>";
             }
             ?>
           </td>
