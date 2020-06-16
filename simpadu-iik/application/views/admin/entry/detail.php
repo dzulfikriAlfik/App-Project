@@ -56,19 +56,19 @@ if ($data2 != "") { ?>
             <!-- Status Hidup/Mati -->
             <td>
               <?php if ($row->status == 1) {
-                echo "<span class='label label-success'> Hidup</span>";
+                echo "<center><span class='label label-success'> Hidup</span></center>";
                 $site = site_url('entry/deadindividu/' . $row->nik);
                 $teks = "Ubah Status Meninggal";
                 $icon = "switch";
                 $class = "danger";
               } elseif ($row->status == 2) {
-                echo "<span class='label label-danger'> Meninggal</span>";
+                echo "<center><span class='label label-danger'> Meninggal</span></center>";
                 $site = site_url('entry/onindividu/' . $row->nik);
                 $teks = "Ubah Status Hidup";
                 $icon = "switch";
                 $class = "default";
               } else {
-                echo "<label class='label label-primary> Lainnya</label>";
+                echo "<center><label class='label label-primary> Lainnya</label></center>";
                 $site = site_url('entry/onindividu/' . $row->nik);
                 $teks = "Aktifkan Data";
                 $icon = "switch";
@@ -78,19 +78,23 @@ if ($data2 != "") { ?>
             <!-- Status Masuk/Keluar -->
             <td>
               <?php if ($row->mutasi == 1) {
-                echo "<span class='label label-primary'> Masuk</span>";
+                echo "<center><span class='label label-primary'> Masuk</span></center>";
                 $site1 = site_url('entry/individuOut/' . $row->nik);
                 $teks1 = "Ubah Mutasi Keluar";
                 $icon1 = "home";
                 $class1 = "warning";
-              } elseif ($row->mutasi == 2) {
-                echo "<span class='label label-warning'> Keluar</span>";
+              } else if ($row->mutasi == 2) {
+                echo "<center><span class='label label-warning'> Keluar</span></center>";
                 $site1 = site_url('entry/individuIn/' . $row->nik);
                 $teks1 = "Ubah Mutasi Masuk";
                 $icon1 = "home";
                 $class1 = "default";
-              } else {
-                echo "<span class='label label-default'> lainnya</span>";
+              } else if ($row->mutasi == 0) {
+                echo "<center><span class='label label-default'> Asli</span></center>";
+                $site1 = site_url('entry/individuIn/' . $row->nik);
+                $teks1 = "Ubah Mutasi Masuk";
+                $icon1 = "home";
+                $class1 = "default";
               } ?>
             </td>
             <td>
