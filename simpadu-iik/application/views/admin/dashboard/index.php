@@ -13,40 +13,30 @@ if ($data2 != "") { ?>
 <div class="panel panel-flat">
     <div class="panel-body">
         <div class="chart-container">
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <center><i class="label label-info"><strong>Berdasarkan Jenis Kelamin</strong></i></center>
                 <hr>
                 <center>
                     <div class="chart has-fixed-height" id="basic_bars"></div>
                 </center>
             </div>
-            <div class="col-md-6">
-                <center><i class="label label-default"><strong>Berdasarkan Status</strong></i></center>
+            <div class="col-md-4">
+                <center><i class="label label-success"><strong>Berdasarkan Status</strong></i></center>
                 <hr>
                 <center>
                     <div class="chart has-fixed-height" id="basic_line"></div>
                 </center>
             </div>
-            <br><br><br><br>
-            <div class="col-md-12">
-                <center><i class="label label-default"><strong>Berdasarkan Mutasi Masuk/Keluar</strong></i></center>
+            <div class="col-md-4">
+                <center><i class="label label-warning"><strong>Berdasarkan Mutasi Masuk/Keluar</strong></i></center>
                 <hr>
                 <center>
                     <div class="chart has-fixed-height" id="basic_line1"></div>
                 </center>
             </div>
-            <br><br><br>
-            <div class="col-md-12">
-                <center><i class="label label-primary"><strong>Berdasarkan Agama</strong></i></center>
-                <hr>
-                <center>
-                    <div class="chart has-fixed-height" id="basic_columns"></div>
-                </center>
-            </div>
         </div>
     </div>
 </div>
-<?php $agama = $this->db->get('agama')->result(); ?>
 <script>
     $(function() {
         require.config({
@@ -65,7 +55,6 @@ if ($data2 != "") { ?>
                 var basic_bars = ec.init(document.getElementById('basic_bars'), limitless);
                 var basic_line = ec.init(document.getElementById('basic_line'), limitless);
                 var basic_line1 = ec.init(document.getElementById('basic_line1'), limitless);
-                var basic_columns = ec.init(document.getElementById('basic_columns'), limitless);
                 basic_bars_options = {
                     grid: {
                         x: 40,
@@ -96,7 +85,7 @@ if ($data2 != "") { ?>
                             type: 'bar',
                             itemStyle: {
                                 normal: {
-                                    color: '#EF5350'
+                                    color: '#ef8a50'
                                 }
                             },
                             data: [<?php echo $this->db->query("select nik from penduduk where jk='Laki-laki'")->num_rows(); ?>]
@@ -106,7 +95,7 @@ if ($data2 != "") { ?>
                             type: 'bar',
                             itemStyle: {
                                 normal: {
-                                    color: '#66BB6A'
+                                    color: '#66bb89'
                                 }
                             },
                             data: [<?php echo $this->db->query("select nik from penduduk where jk='Perempuan'")->num_rows(); ?>]
@@ -190,7 +179,7 @@ if ($data2 != "") { ?>
                             type: 'bar',
                             itemStyle: {
                                 normal: {
-                                    color: '#66BB6A'
+                                    color: '#aebb66'
                                 }
                             },
                             data: [<?php echo getjummutasi(1); ?>]
@@ -200,66 +189,11 @@ if ($data2 != "") { ?>
                             type: 'bar',
                             itemStyle: {
                                 normal: {
-                                    color: '#EF5350'
+                                    color: '#bb8766'
                                 }
                             },
                             data: [<?php echo getjummutasi(2); ?>]
                         }
-                    ]
-                };
-                basic_columns_options = {
-
-                    // Setup grid
-                    grid: {
-                        x: 40,
-                        x2: 40,
-                        y: 35,
-                        y2: 25
-                    },
-
-                    // Add tooltip
-                    tooltip: {
-                        trigger: 'axis'
-                    },
-
-                    // Add legend
-                    legend: {
-                        data: ['Jumlah']
-                    },
-
-                    // Enable drag recalculate
-                    calculable: true,
-
-                    // Horizontal axis
-                    xAxis: [{
-                        type: 'category',
-                        data: [<?php $no = 0;
-                                foreach ($agama as $row) : $no++; ?> '<?= $row->agama; ?>', <?php endforeach; ?>]
-                    }],
-
-                    // Vertical axis
-                    yAxis: [{
-                        type: 'value'
-                    }],
-
-                    // Add series
-                    series: [{
-                            name: 'Jumlah',
-                            type: 'line',
-                            data: [<?php $no = 0;
-                                    foreach ($agama as $row) : $no++; ?> '<?php echo getjumagama($row->id_agama); ?>', <?php endforeach; ?>],
-                            itemStyle: {
-                                normal: {
-                                    label: {
-                                        show: true,
-                                        textStyle: {
-                                            fontWeight: 500
-                                        }
-                                    }
-                                }
-                            },
-                        },
-
                     ]
                 };
 
@@ -267,8 +201,6 @@ if ($data2 != "") { ?>
 
                 // Apply options
                 // ------------------------------
-
-                basic_columns.setOption(basic_columns_options);
                 basic_bars.setOption(basic_bars_options);
                 basic_line.setOption(basic_line_options);
                 basic_line1.setOption(basic_line1_options);
