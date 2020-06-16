@@ -78,13 +78,13 @@ if ($data2 != "") { ?>
             <!-- Status Masuk/Keluar -->
             <td>
               <?php if ($row->mutasi == 1) {
-                echo "<center><span class='label label-primary'> Masuk</span></center>";
+                echo "<center><a class=\"label label-primary\" href=\"" . site_url('entry/mutasi/' . $row->nik) . "\"> Masuk</a></center>";
                 $site1 = site_url('entry/individuOut/' . $row->nik);
                 $teks1 = "Ubah Mutasi Keluar";
                 $icon1 = "home";
                 $class1 = "warning";
               } else if ($row->mutasi == 2) {
-                echo "<center><span class='label label-warning'> Keluar</span></center>";
+                echo "<center><a class=\"label label-warning\" href=\"" . site_url('entry/mutasi/' . $row->nik) . "\"> Keluar</a></center>";
                 $site1 = site_url('entry/individuIn/' . $row->nik);
                 $teks1 = "Ubah Mutasi Masuk";
                 $icon1 = "home";

@@ -296,11 +296,11 @@ class Entry extends CI_Controller
 			"id" => $id,
 			"getrow" => $this->db->where('nik', $id)->get('penduduk')->row_array(),
 			"getklasifikasi" => $this->M_entry->getKategori($id)->result(),
-			"content" => "entry/detailindividu.php",
+			"content" => "entry/detailmutasi.php",
 		);
 		$this->breadcrumb->append_crumb('Entri Data KK', site_url('entry'));
 		$this->breadcrumb->append_crumb('Data Individu KK <i>' . getnamakk($kk) . '</i>', site_url('entry/detailkk/' . $kk));
-		$this->breadcrumb->append_crumb('Detail Individu <i>' . getnama($id) . '</i>', site_url('entry'));
+		$this->breadcrumb->append_crumb('Detail Mutasi <i>' . getnama($id) . '</i>', site_url('entry'));
 		$this->load->view('admin/template', $data);
 	}
 
