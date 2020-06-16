@@ -118,6 +118,7 @@ if ($data2 != "") { ?>
           <option></option>
           <option value="1">Masuk</option>
           <option value="2">Keluar</option>
+          <option value="3">Warga Asli</option>
         </select>
       </div>
     </div>
