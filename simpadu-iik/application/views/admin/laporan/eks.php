@@ -51,6 +51,8 @@ header("Expires: 0");
                     echo 'Masuk';
                   } else if ($row->mutasi == 2) {
                     echo 'Keluar';
+                  } else if ($row->mutasi == 3) {
+                    echo 'Warga Asli';
                   } ?></td>
       </tr>
     <?php endforeach; ?>
