@@ -13,21 +13,27 @@ if ($data2 != "") { ?>
 <div class="panel panel-flat">
     <div class="panel-body">
         <div class="chart-container">
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <center><i class="label label-info"><strong>Berdasarkan Jenis Kelamin</strong></i></center>
                 <hr>
                 <center>
                     <div class="chart has-fixed-height" id="basic_bars"></div>
                 </center>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <center><i class="label label-success"><strong>Berdasarkan Status</strong></i></center>
                 <hr>
                 <center>
                     <div class="chart has-fixed-height" id="basic_line"></div>
                 </center>
             </div>
-            <div class="col-md-4">
+        </div>
+    </div>
+</div>
+<div class="panel panel-flat">
+    <div class="panel-body">
+        <div class="chart-container">
+            <div class="col-md-6 col-md-offset-3">
                 <center><i class="label label-warning"><strong>Berdasarkan Mutasi Masuk/Keluar</strong></i></center>
                 <hr>
                 <center>
@@ -55,6 +61,8 @@ if ($data2 != "") { ?>
                 var basic_bars = ec.init(document.getElementById('basic_bars'), limitless);
                 var basic_line = ec.init(document.getElementById('basic_line'), limitless);
                 var basic_line1 = ec.init(document.getElementById('basic_line1'), limitless);
+
+                // bars laki/perempuan
                 basic_bars_options = {
                     grid: {
                         x: 40,
@@ -102,6 +110,8 @@ if ($data2 != "") { ?>
                         }
                     ]
                 };
+
+                // bars hidup/meninggal
                 basic_line_options = {
                     grid: {
                         x: 40,
@@ -149,12 +159,16 @@ if ($data2 != "") { ?>
                         }
                     ]
                 };
+
+                // bars masuk/keluar
                 basic_line1_options = {
                     grid: {
                         x: 40,
                         x2: 40,
                         y: 35,
-                        y2: 25
+                        y2: 25,
+                        z: 20,
+                        z2: 20
                     },
                     tooltip: {
                         trigger: 'axis',
@@ -163,12 +177,12 @@ if ($data2 != "") { ?>
                         }
                     },
                     legend: {
-                        data: ['Masuk', 'Keluar']
+                        data: ['Masuk', 'Keluar', 'Warga Asli']
                     },
                     calculable: true,
                     yAxis: [{
                         type: 'value',
-                        boundaryGap: [0, 1]
+                        boundaryGap: [0, 1, 2]
                     }],
                     xAxis: [{
                         type: 'category',
@@ -193,11 +207,19 @@ if ($data2 != "") { ?>
                                 }
                             },
                             data: [<?php echo getjummutasi(2); ?>]
+                        },
+                        {
+                            name: 'Warga Asli',
+                            type: 'bar',
+                            itemStyle: {
+                                normal: {
+                                    color: '#62a145'
+                                }
+                            },
+                            data: [<?php echo getjummutasi(3); ?>]
                         }
                     ]
                 };
-
-
 
                 // Apply options
                 // ------------------------------
