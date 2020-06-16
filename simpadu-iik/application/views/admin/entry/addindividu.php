@@ -64,11 +64,18 @@ if ($data2 != "") { ?>
       </div>
     </div>
     <br><br>
-    <div class="form-group">
+    <div class="form-group" id="warga_menetap" style="display:block;margin-bottom:100px;">
       <label class='col-md-3'>Alamat</label>
       <div class='col-md-9'><textarea name="alamat" required class="form-control"></textarea></div>
     </div>
-    <br><br><br>
+    <div class="form-group" id="before_mutasi" style="display:none; margin-bottom:100px;">
+      <label class='col-md-3'>Alamat Sebelum Mutasi</label>
+      <div class='col-md-9'><textarea name="alamat" required class="form-control"></textarea></div>
+    </div>
+    <div class="form-group" id="after_mutasi" style="display:none; margin-bottom:100px;">
+      <label class='col-md-3'>Alamat Setelah Mutasi</label>
+      <div class='col-md-9'><textarea name="alamat_sesudah" required class="form-control"></textarea></div>
+    </div><br>
     <div class="form-group">
       <label class='col-md-3'>Pekerjaan</label>
       <div class='col-md-9'><input type="text" name="pekerjaan" autocomplete="off" placeholder="Masukkan Pekerjaan" class="form-control"></div>
@@ -120,7 +127,7 @@ if ($data2 != "") { ?>
     <div class="form-group">
       <label class='col-md-3'>Mutasi</label>
       <div class='col-md-9'>
-        <select data-placeholder="Pilih Status" name="mutasi" class="select-clear">
+        <select id="changeMutasi" onchange="mutasiChange(this);" data-placeholder="Pilih Status" name="mutasi" class="select-clear">
           <option></option>
           <option value="1">Masuk</option>
           <option value="2">Keluar</option>
@@ -138,3 +145,21 @@ if ($data2 != "") { ?>
   </div>
   <?php echo form_close(); ?>
 </div>
+
+<script type="text/javascript">
+  function mutasiChange(select) {
+    if (select.value == 1 || select.value == 2) {
+      document.getElementById('warga_menetap').style.display = "none";
+      document.getElementById('before_mutasi').style.display = "block";
+      document.getElementById('after_mutasi').style.display = "block";
+    } else if (select.value == 3) {
+      document.getElementById('warga_menetap').style.display = "block";
+      document.getElementById('before_mutasi').style.display = "none";
+      document.getElementById('after_mutasi').style.display = "none";
+    } else {
+      document.getElementById('warga_menetap').style.display = "block";
+      document.getElementById('before_mutasi').style.display = "none";
+      document.getElementById('after_mutasi').style.display = "none";
+    }
+  }
+</script>
