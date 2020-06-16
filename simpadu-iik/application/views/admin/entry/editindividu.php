@@ -161,7 +161,7 @@ if ($data2 != "") { ?>
     <div class="form-group">
       <label class='col-md-3'>Mutasi</label>
       <div class='col-md-9'>
-        <select data-placeholder="Pilih Mutasi" name="mutasi" class="select-clear">
+        <select data-placeholder="Pilih Mutasi" name="mutasi" required class="select-clear">
           <?php $mutasi = $this->db->get('mutasi')->result(); ?>
           <option></option>
           <?php
