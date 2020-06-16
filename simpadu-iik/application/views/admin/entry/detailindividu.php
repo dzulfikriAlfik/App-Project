@@ -1,3 +1,8 @@
+<!-- button back -->
+<a href="<?= base_url('entry/detailkk/' . $kk) ?>" class="btn btn-warning">Kembali</a>
+<br><br>
+<!-- end button back -->
+
 <div class="panel panel-primary">
   <div class="panel-heading">
     <h5 class="panel-title"><i class="icon-pencil7"></i> Detail Individu <b><i><?= getnama($id); ?></i></b></h5>

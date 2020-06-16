@@ -1,4 +1,7 @@
 <a href="<?php echo site_url('Entry/addindividu/' . $id); ?>" class="btn btn-primary btn-sm"><i class="icon-file-plus"></i> Tambah </a>
+<!-- button back -->
+<a href="<?= base_url('entry'); ?>" class="btn btn-warning btn-sm">Kembali</a>
+<!-- end button back -->
 <?php
 echo br(2);
 $data = $this->session->flashdata('sukses');
@@ -10,6 +13,7 @@ $data2 = $this->session->flashdata('error');
 if ($data2 != "") { ?>
   <div class="alert alert-danger"><strong> Error! </strong> <?= $data2; ?></div>
 <?php } ?>
+
 <div class="panel panel-primary">
   <div class="panel-heading">
     <h5 class="panel-title"><i class="icon-pencil7"></i> Detail Individu Di KK <b><i><?= getnamakk($id); ?></i></b></h5>

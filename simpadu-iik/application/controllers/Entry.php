@@ -278,6 +278,7 @@ class Entry extends CI_Controller
 			"getrow" => $this->db->where('nik', $id)->get('penduduk')->row_array(),
 			"getklasifikasi" => $this->M_entry->getKategori($id)->result(),
 			"content" => "entry/detailindividu.php",
+			"kk" => $kk,
 		);
 		$this->breadcrumb->append_crumb('Entri Data KK', site_url('entry'));
 		$this->breadcrumb->append_crumb('Data Individu KK <i>' . getnamakk($kk) . '</i>', site_url('entry/detailkk/' . $kk));
@@ -297,6 +298,7 @@ class Entry extends CI_Controller
 			"getrow" => $this->db->where('nik', $id)->get('penduduk')->row_array(),
 			"getklasifikasi" => $this->M_entry->getKategori($id)->result(),
 			"content" => "entry/detailmutasi.php",
+			"kk" => $kk,
 		);
 		$this->breadcrumb->append_crumb('Entri Data KK', site_url('entry'));
 		$this->breadcrumb->append_crumb('Data Individu KK <i>' . getnamakk($kk) . '</i>', site_url('entry/detailkk/' . $kk));
@@ -379,6 +381,7 @@ class Entry extends CI_Controller
 			"getrow" => $this->db->where('nik', $id)->get('penduduk')->row_array(),
 			"id" => $id,
 			"content" => "entry/editindividu.php",
+			"kk" => $kk,
 		);
 		$this->breadcrumb->append_crumb('Entri Data KK', site_url('entry'));
 		$this->breadcrumb->append_crumb('Data Individu KK <i>' . getnamakk($kk) . '</i>', site_url('entry/detailkk/' . $kk));
