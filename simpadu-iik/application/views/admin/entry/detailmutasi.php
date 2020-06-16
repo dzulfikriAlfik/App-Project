@@ -6,6 +6,14 @@
     <div class="col-md-6">
       <table class="table table-bordered">
         <tr>
+          <th>Nama</th>
+          <td><?php echo $getrow['nama']; ?></td>
+        </tr>
+        <tr>
+          <th width="180">NIK</th>
+          <td><?php echo $getrow['nik']; ?></td>
+        </tr>
+        <tr>
           <th>Mutasi</th>
           <td>
             <?php
@@ -24,13 +32,27 @@
           </td>
         </tr>
         <tr>
-          <th width="180">NIK</th>
-          <td><?php echo $getrow['nik']; ?></td>
+          <?php if ($getrow['mutasi'] == 1) {
+            echo "<th>Mutasi dari : </th>";
+            echo "<td>Jakarta</td>";
+          } else if ($getrow['mutasi'] == 2) {
+            echo "<th>Mutasi ke : </th>";
+            echo "<td>Sukabumi</td>";
+          }
+          ?>
         </tr>
         <tr>
-          <th>Nama</th>
-          <td><?php echo $getrow['nama']; ?></td>
+          <th width="180">Alamat Sebelumnya</th>
+          <td><?php echo $getrow['alamat']; ?></td>
         </tr>
+        <tr>
+          <th width="180">Alamat Setelah Mutasi</th>
+          <td><?php echo $getrow['alamat_sesudah']; ?></td>
+        </tr>
+      </table>
+    </div>
+    <div class="col-md-6">
+      <table class="table table-bordered">
         <tr>
           <th>Tempat Lahir</th>
           <td><?php echo $getrow['tempat_lahir']; ?></td>
@@ -40,20 +62,16 @@
           <td><?php echo $getrow['tanggal_lahir']; ?></td>
         </tr>
         <tr>
+          <th>Agama</th>
+          <td><?php echo getnamaagama($getrow['id_agama']); ?></td>
+        </tr>
+        <tr>
           <th>Jenis Kelamin</th>
           <td><?php echo $getrow['jk']; ?></td>
         </tr>
         <tr>
           <th>Golongan Darah</th>
           <td><?php echo $getrow['golongan_darah']; ?></td>
-        </tr>
-      </table>
-    </div>
-    <div class="col-md-6">
-      <table class="table table-bordered">
-        <tr>
-          <th width="180">Alamat</th>
-          <td><?php echo $getrow['alamat']; ?></td>
         </tr>
         <tr>
           <th>Pekerjaan</th>
@@ -62,14 +80,6 @@
         <tr>
           <th>Kewarganegaraan</th>
           <td><?php echo $getrow['kewarganegaraan']; ?></td>
-        </tr>
-        <tr>
-          <th>Agama</th>
-          <td><?php echo getnamaagama($getrow['id_agama']); ?></td>
-        </tr>
-        <tr>
-          <th>Foto</th>
-          <td><img src="<?php echo base_url('uploads/' . $getrow['foto']); ?>" alt="Belum Di Update" class='img4'></td>
         </tr>
       </table>
     </div>
