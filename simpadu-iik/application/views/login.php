@@ -5,7 +5,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>LOGIN SIPUDES</title>
+	<title>LOGIN SIMPADU</title>
 
 	<!-- Global stylesheets -->
 	<link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet" type="text/css">
@@ -54,7 +54,7 @@
 						<div class="panel panel-body login-form">
 							<div class="text-center">
 								<div class="icon-object border-slate-300 text-slate-300"><i class="icon-reading"></i></div>
-								<h5 class="content-group">LOGIN SIPUDES</h5>
+								<h5 class="content-group">LOGIN SIMPADU</h5>
 							</div>
 							<?php
 							$data = $this->session->flashdata('sukses');

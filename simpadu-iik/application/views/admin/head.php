@@ -1,6 +1,6 @@
 <div class="navbar navbar-default navbar-fixed-top header-highlight">
   <div class="navbar-header">
-    <a class="navbar-brand" href="<?php echo base_url(); ?>"><b style="color:white;font-size:17px;"><i>SIPUDES <?php echo getnamains('desa');?></i></b></a>
+    <a class="navbar-brand" href="<?php echo base_url(); ?>"><b style="color:white;font-size:17px;"><i>SIMPADU <?php echo getnamains('desa');?></i></b></a>
     <ul class="nav navbar-nav visible-xs-block">
       <li><a data-toggle="collapse" data-target="#navbar-mobile"><i class="icon-tree5"></i></a></li>
       <li><a class="sidebar-mobile-main-toggle"><i class="icon-paragraph-justify3"></i></a></li>
