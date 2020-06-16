@@ -29,7 +29,7 @@
                 echo "<span class='label label-warning'> Keluar</span>";
                 break;
               case 3:
-                echo "<span class='label label-default'> Warga Asli</span>";
+                echo "<span class='label label-default'> Warga Asli Menetap</span>";
                 break;
             }
             ?>
@@ -45,14 +45,22 @@
           }
           ?>
         </tr>
-        <tr>
-          <th width="180">Alamat Sebelumnya</th>
-          <td><?php echo $getrow['alamat']; ?></td>
-        </tr>
-        <tr>
-          <th width="180">Alamat Setelah Mutasi</th>
-          <td><?php echo $getrow['alamat_sesudah']; ?></td>
-        </tr>
+        <?php if ($getrow['mutasi'] == 3) { ?>
+          <tr>
+            <th width="180">Alamat</th>
+            <td><?php echo $getrow['alamat']; ?></td>
+          </tr>
+        <?php } else {
+        ?>
+          <tr>
+            <th width="180">Alamat Sebelumnya</th>
+            <td><?php echo $getrow['alamat']; ?></td>
+          </tr>
+          <tr>
+            <th width="180">Alamat Setelah Mutasi</th>
+            <td><?php echo $getrow['alamat_sesudah']; ?></td>
+          </tr>
+        <?php } ?>
       </table>
     </div>
     <div class="col-md-6">
