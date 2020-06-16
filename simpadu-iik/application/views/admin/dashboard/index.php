@@ -116,7 +116,7 @@ if ($data2 != "") { ?>
                         }
                     },
                     legend: {
-                        data: ['Meninggal', 'Hidup']
+                        data: ['Hidup', 'Meninggal']
                     },
                     calculable: true,
                     yAxis: [{
@@ -128,16 +128,6 @@ if ($data2 != "") { ?>
                         data: ['']
                     }],
                     series: [{
-                            name: 'Meninggal',
-                            type: 'bar',
-                            itemStyle: {
-                                normal: {
-                                    color: '#EF5350'
-                                }
-                            },
-                            data: [<?php echo getjumstatus(2); ?>]
-                        },
-                        {
                             name: 'Hidup',
                             type: 'bar',
                             itemStyle: {
@@ -146,6 +136,16 @@ if ($data2 != "") { ?>
                                 }
                             },
                             data: [<?php echo getjumstatus(1); ?>]
+                        },
+                        {
+                            name: 'Meninggal',
+                            type: 'bar',
+                            itemStyle: {
+                                normal: {
+                                    color: '#EF5350'
+                                }
+                            },
+                            data: [<?php echo getjumstatus(2); ?>]
                         }
                     ]
                 };
@@ -179,7 +179,7 @@ if ($data2 != "") { ?>
                             type: 'bar',
                             itemStyle: {
                                 normal: {
-                                    color: '#aebb66'
+                                    color: '#66bbb1'
                                 }
                             },
                             data: [<?php echo getjummutasi(1); ?>]
