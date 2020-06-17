@@ -71,7 +71,7 @@ if ($data2 != "") { ?>
     <br>
     <div class="form-group" id="after_mutasi" style="display:none; margin-bottom:100px;">
       <label class='col-md-3'>Alamat Setelah Mutasi</label>
-      <div class='col-md-9'><textarea name="alamat_sesudah" class="form-control"></textarea></div>
+      <div class='col-md-9'><textarea name="alamat_sesudah" id="harusdiisi" class="form-control"></textarea></div>
     </div>
     <br>
     <div class="form-group">
@@ -148,9 +148,10 @@ if ($data2 != "") { ?>
 <script type="text/javascript">
   function mutasiChange(select) {
     if (select.value == 1 || select.value == 2) {
-      document.getElementById('before_mutasi').style.display = "block";
       document.getElementById('label').innerHTML = "Alamat Sebelum Mutasi";
+      document.getElementById('before_mutasi').style.display = "block";
       document.getElementById('after_mutasi').style.display = "block";
+      document.getElementById("harusdiisi").required = true;
     } else if (select.value == 3) {
       document.getElementById('before_mutasi').style.display = "block";
       document.getElementById('label').innerHTML = "Alamat";
