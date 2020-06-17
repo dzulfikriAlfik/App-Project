@@ -2,7 +2,7 @@
 
 require_once dirname(__FILE__) . '/tcpdf/tcpdf.php';
 
-class pdfReport extends TCPDF
+class Pdf_report extends TCPDF
 {
   protected $ci;
 

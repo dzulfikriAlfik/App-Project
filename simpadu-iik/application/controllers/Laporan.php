@@ -1,7 +1,9 @@
 <?php
 
-class Laporan extends CI_Controller {
-	function __construct(){
+class Laporan extends CI_Controller
+{
+	function __construct()
+	{
 
 		parent::__construct();
 		$this->load->helper('url');
@@ -12,22 +14,35 @@ class Laporan extends CI_Controller {
 		$config['divider'] = '<span class="divider"> » </span>';
 		$this->breadcrumb->initialize($config);
 		$this->load->model('M_laporan');
+		$this->load->library('pdf_report');
 		no_access();
 	}
+
 	public function index()
 	{
-		$data=array(
-			"title"=>'Laporan',
-			"menu"=>getmenu(),
-			"aktif"=>"laporan",
-			"content"=>"laporan/index.php",
+		$data = array(
+			"title" => 'Laporan',
+			"menu" => getmenu(),
+			"aktif" => "laporan",
+			"content" => "laporan/index.php",
 		);
 		$this->breadcrumb->append_crumb('Laporan', site_url('laporan'));
-		$this->load->view('admin/template',$data);
+		$this->load->view('admin/template', $data);
 	}
+
 	public function eks()
 	{
-		$data['all']=$this->M_laporan->all();
-		$this->load->view('admin/laporan/eks',$data);
+		$data['all'] = $this->M_laporan->all();
+		$this->load->view('admin/laporan/eks', $data);
+	}
+
+	public function printpdf($id)
+	{
+		$kk = getKK($id);
+		$data = array(
+			"id" => $id,
+			"getrow" => $this->db->where('nik', $id)->get('penduduk')->row_array(),
+		);
+		$this->load->view('admin/laporan/pdf', $data);
 	}
 }
