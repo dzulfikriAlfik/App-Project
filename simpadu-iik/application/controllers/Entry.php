@@ -405,6 +405,7 @@ class Entry extends CI_Controller
 		$this->form_validation->set_rules('kewarganegaraan', 'kewarganegaraan', 'required');
 		$this->form_validation->set_rules('agama', 'agama', 'required');
 		$id = $_POST['nik'];
+		$kk = getKK($id);
 		$cek = $this->db->query("select * from penduduk where nik='$id'")->num_rows();
 		if ($this->form_validation->run() == FALSE) {
 			$this->session->set_flashdata('error', "Data Anda Gagal Di Inputkan");
@@ -466,6 +467,7 @@ class Entry extends CI_Controller
 				"jk" => $_POST['jk'],
 				"golongan_darah" => $_POST['golongan_darah'],
 				"alamat" => strtoupper($_POST['alamat']),
+				"alamat_sesudah" => strtoupper($_POST['alamat_sesudah']),
 				"pekerjaan" => strtoupper($_POST['pekerjaan']),
 				"kewarganegaraan" => $_POST['kewarganegaraan'],
 				"id_agama" => $_POST['agama'],
@@ -485,7 +487,7 @@ class Entry extends CI_Controller
 				$this->db->insert('klasifikasi_penduduk', $objek);
 			}
 			$this->session->set_flashdata('sukses', "Data Berhasil Diedit");
-			redirect('entry/editindividu/' . $_POST['nik']);
+			redirect('entry/detailkk/' . $kk);
 		}
 	}
 

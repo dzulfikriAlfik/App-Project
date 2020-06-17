@@ -64,8 +64,8 @@ if ($data2 != "") { ?>
       </div>
     </div>
     <br><br>
-    <div class="form-group" id="before_mutasi" style="display:none; margin-bottom:100px;">
-      <label class='col-md-3' id="label"></label>
+    <div class="form-group" id="before_mutasi" style="display:block; margin-bottom:100px;">
+      <label class='col-md-3' id="label">Alamatgit </label>
       <div class='col-md-9'><textarea name="alamat" required class="form-control"></textarea></div>
     </div>
     <br>
@@ -125,7 +125,7 @@ if ($data2 != "") { ?>
     <div class="form-group">
       <label class='col-md-3'>Mutasi</label>
       <div class='col-md-9'>
-        <select id="changeMutasi" required onchange="mutasiChange(this);" data-placeholder="Pilih Status" name="mutasi" class="select-clear">
+        <select required onchange="mutasiChange(this);" data-placeholder="Pilih Status" name="mutasi" class="select-clear">
           <option></option>
           <option value="1">Masuk</option>
           <option value="2">Keluar</option>

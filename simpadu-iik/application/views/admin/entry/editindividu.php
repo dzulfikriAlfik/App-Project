@@ -83,11 +83,15 @@ if ($data2 != "") { ?>
     </div>
     <br>
     <br>
-    <div class="form-group">
-      <label class='col-md-3'>Alamat</label>
+    <div class="form-group" id="b_mutasi" style="display:block; margin-bottom:100px;">
+      <label class='col-md-3' id="label_mutasi">Alamat</label>
       <div class='col-md-9'><textarea name="alamat" required class="form-control"><?php echo $getrow['alamat']; ?></textarea></div>
     </div>
     <br>
+    <div class="form-group" id="set_mutasi" style="display:none; margin-bottom:100px;">
+      <label class='col-md-3'>Alamat Setelah Mutasi</label>
+      <div class='col-md-9'><textarea name="alamat_sesudah" id="harusdiisi" class="form-control"><?php echo $getrow['alamat_sesudah']; ?></textarea></div>
+    </div>
     <br>
     <br>
     <div class="form-group">
@@ -167,13 +171,15 @@ if ($data2 != "") { ?>
     <div class="form-group">
       <label class='col-md-3'>Mutasi</label>
       <div class='col-md-9'>
-        <select data-placeholder="Pilih Mutasi" name="mutasi" required class="select-clear">
+        <select required onchange="mutasiPil(this);" data-placeholder="Pilih Status" name="mutasi" class="select-clear">
+          <option></option>
           <?php $mutasi = $this->db->get('mutasi')->result(); ?>
           <option></option>
           <?php
           $no = 0;
-          foreach ($mutasi as $r) : $no++;
-            echo '<option value="' . $r->id_mutasi . '" ' . select($getrow['mutasi'], $r->id_mutasi) . '>' . $r->mutasi . '</option>';
+          foreach ($mutasi as $r) : $no++; ?>
+            <option value="<?= $r->id_mutasi; ?>" <?= select($getrow['mutasi'], $r->id_mutasi) ?> onchange="mutasiPil(this);"><?= $r->mutasi; ?></option>
+          <?php
           endforeach;
           ?>
         </select>
@@ -189,3 +195,22 @@ if ($data2 != "") { ?>
   </div>
   <?php echo form_close(); ?>
 </div>
+
+<script type="text/javascript">
+  function mutasiPil(select) {
+    if (select.value == 1 || select.value == 2) {
+      document.getElementById('label_mutasi').innerHTML = "Alamat Sebelum Mutasi";
+      document.getElementById('b_mutasi').style.display = "block";
+      document.getElementById('set_mutasi').style.display = "block";
+      document.getElementById("harusdiisi").required = true;
+    } else if (select.value == 3) {
+      document.getElementById('b_mutasi').style.display = "block";
+      document.getElementById('label_mutasi').innerHTML = "Alamat";
+      document.getElementById('set_mutasi').style.display = "none";
+    } else {
+      document.getElementById('b_mutasi').style.display = "block";
+      document.getElementById('label_mutasi').innerHTML = "Alamat";
+      document.getElementById('set_mutasi').style.display = "none";
+    }
+  }
+</script>
