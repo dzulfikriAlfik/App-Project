@@ -65,7 +65,7 @@ if ($data2 != "") { ?>
     </div>
     <br><br>
     <div class="form-group" id="before_mutasi" style="display:block; margin-bottom:100px;">
-      <label class='col-md-3' id="label">Alamatgit </label>
+      <label class='col-md-3' id="label">Alamat </label>
       <div class='col-md-9'><textarea name="alamat" required class="form-control"></textarea></div>
     </div>
     <br>
