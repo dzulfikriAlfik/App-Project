@@ -193,7 +193,7 @@ if ($data2 != "") { ?>
                             type: 'bar',
                             itemStyle: {
                                 normal: {
-                                    color: '#66bbb1'
+                                    color: '#66BB6A'
                                 }
                             },
                             data: [<?php echo getjummutasi(1); ?>]
@@ -203,7 +203,7 @@ if ($data2 != "") { ?>
                             type: 'bar',
                             itemStyle: {
                                 normal: {
-                                    color: '#bb8766'
+                                    color: '#EF5350'
                                 }
                             },
                             data: [<?php echo getjummutasi(2); ?>]
@@ -213,7 +213,7 @@ if ($data2 != "") { ?>
                             type: 'bar',
                             itemStyle: {
                                 normal: {
-                                    color: '#62a145'
+                                    color: '#69655d'
                                 }
                             },
                             data: [<?php echo getjummutasi(3); ?>]
