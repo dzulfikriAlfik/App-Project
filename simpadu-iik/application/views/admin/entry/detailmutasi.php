@@ -35,16 +35,6 @@
             ?>
           </td>
         </tr>
-        <tr>
-          <?php if ($getrow['mutasi'] == 1) {
-            echo "<th>Mutasi dari </th>";
-            echo "<td>Jakarta</td>";
-          } else if ($getrow['mutasi'] == 2) {
-            echo "<th>Mutasi ke </th>";
-            echo "<td>Sukabumi</td>";
-          }
-          ?>
-        </tr>
         <?php if ($getrow['mutasi'] == 3) { ?>
           <tr>
             <th width="180">Alamat</th>
