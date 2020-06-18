@@ -32,26 +32,29 @@ $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8',
 
 // set document information
 $pdf->SetCreator(PDF_CREATOR);
-$pdf->SetAuthor('Nicola Asuni');
-$pdf->SetTitle('TCPDF Example 005');
+$pdf->SetAuthor('Iik Muspik');
+$pdf->SetTitle('Data Mutasi ' .  ucwords(strtolower($getrow['nama'])));
 $pdf->SetSubject('TCPDF Tutorial');
 $pdf->SetKeywords('TCPDF, PDF, example, test, guide');
 
+$des = ucwords(strtolower($getdesa['desa']));
+$kec = ucwords(strtolower($getdesa['kecamatan']));
+$kab = ucwords(strtolower($getdesa['kabupaten']));
 // set default header data
-$pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, "Pemerintahan Desa Cengal", "Alamat  : Jln. Raya Pacengalan No.12 \nDesa Cengal, Kecamatan Maja, Kabupaten Majalengka | Telp : (0221) 988909");
+$pdf->SetHeaderData(PDF_HEADER_LOGO, 28, "Pemerintahan Desa ". ucwords(strtolower($des)), "Alamat  : Jln. Raya Pacengalan No.12 \nDesa Cengal, Kecamatan $kec, Kabupaten $kab \nTelp : (0221) 988909");
 
 // set header and footer fonts
-$pdf->setHeaderFont(array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
-$pdf->setFooterFont(array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
+$pdf->setHeaderFont(array(PDF_FONT_NAME_MAIN, '', 11));
+$pdf->setFooterFont(array(PDF_FONT_NAME_DATA, '', 10));
 
 // set default monospaced font
 $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
 
 // set margins
 // $pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
-$pdf->SetMargins(20, 32, 20);
+$pdf->SetMargins(20, 42, 20);
 // $pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
-$pdf->SetHeaderMargin(13);
+$pdf->SetHeaderMargin(15);
 // $pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
 $pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
 
@@ -62,10 +65,10 @@ $pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
 $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
 
 // set some language-dependent strings (optional)
-if (@file_exists(dirname(__FILE__) . '/lang/eng.php')) {
-  require_once(dirname(__FILE__) . '/lang/eng.php');
-  $pdf->setLanguageArray($l);
-}
+// if (@file_exists(dirname(__FILE__) . '/lang/eng.php')) {
+//   require_once(dirname(__FILE__) . '/lang/eng.php');
+//   $pdf->setLanguageArray($l);
+// }
 
 // ---------------------------------------------------------
 
@@ -177,7 +180,6 @@ switch ($mutasi) {
     break;
 }
 // desa
-$desa_iik = ucwords(strtolower($getdesa['desa']));
 $kepdes = ucwords(strtolower($getdesa['kepala_desa']));
 
 // define some HTML content with style
@@ -243,7 +245,7 @@ $alamat
 
 <tr>
   <th style="text-align:center; line-height:0.1;" width="230"></th>
-  <th style="text-align:center; line-height:0.1;">$desa_iik, $tanggal_sekarang</th>
+  <th style="text-align:center; line-height:0.1;">$des, $tanggal_sekarang</th>
 </tr>
 <tr>
   <th style="text-align:center; line-height:0.1;" width="230"></th>
@@ -276,7 +278,7 @@ $pdf->lastPage();
 // ---------------------------------------------------------
 
 //Close and output PDF document
-$pdf->Output('Data Mutasi ' .  ucwords(strtolower($getrow['nama'])), 'I');
+$pdf->Output('Data Mutasi ' .  ucwords(strtolower($getrow['nama'])) . '.pdf', 'I');
 
 //============================================================+
 // END OF FILE
