@@ -42,6 +42,7 @@ class Laporan extends CI_Controller
 		$data = array(
 			"id" => $id,
 			"getrow" => $this->db->where('nik', $id)->get('penduduk')->row_array(),
+			"getdesa" => $this->db->get('desa')->row_array()
 		);
 		$this->load->view('admin/laporan/pdf', $data);
 	}

@@ -114,6 +114,7 @@ $tempat = ucwords(strtolower($getrow['tempat_lahir']));
 // tanggal
 setlocale(LC_ALL, 'id-ID', 'id_ID');
 $tanggal = strftime("%d %B %Y", strtotime(strtr($getrow['tanggal_lahir'], '/', '-')));
+$tanggal_sekarang = strftime("%d %B %Y");
 // jenis kelamin
 $jk = $getrow['jk'];
 // agama
@@ -175,6 +176,9 @@ switch ($mutasi) {
     $alamat = '<tr><th width="150">Alamat</th><td width="450">: ' . ucwords(strtolower($alamat)) . '</td></tr><tr><th width="150"></th><td></td></tr>';
     break;
 }
+// desa
+$desa_iik = ucwords(strtolower($getdesa['desa']));
+$kepdes = ucwords(strtolower($getdesa['kepala_desa']));
 
 // define some HTML content with style
 $html = <<<EOF
@@ -235,6 +239,24 @@ $html = <<<EOF
 
 $alamat
 
+<br><br><br><br>
+
+<tr>
+  <th style="text-align:center; line-height:0.1;" width="230"></th>
+  <th style="text-align:center; line-height:0.1;">$desa_iik, $tanggal_sekarang</th>
+</tr>
+<tr>
+  <th style="text-align:center; line-height:0.1;" width="230"></th>
+  <th style="text-align:center; line-height:0.1;">Mengetahui, $kepdes</th>
+</tr>
+
+<br><br><br><br><br>
+
+<tr>
+  <th style="text-align:center; line-height:0.1;" width="230"></th>
+  <th style="text-align:center; line-height:0.1;">Kepala Desa</th>
+</tr>
+
 </table>
 
 EOF;
@@ -254,7 +276,7 @@ $pdf->lastPage();
 // ---------------------------------------------------------
 
 //Close and output PDF document
-$pdf->Output('Data Mutasi ' .  strtolower($getrow['nama']), 'I');
+$pdf->Output('Data Mutasi ' .  ucwords(strtolower($getrow['nama'])), 'I');
 
 //============================================================+
 // END OF FILE
