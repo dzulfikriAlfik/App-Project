@@ -38,10 +38,13 @@ $pdf->SetSubject('TCPDF Tutorial');
 $pdf->SetKeywords('TCPDF, PDF, example, test, guide');
 
 $des = ucwords(strtolower($getdesa['desa']));
+$almt = ucwords(strtolower($getdesa['alamat_desa']));
+$pos = ucwords(strtolower($getdesa['kode_pos']));
+$tel = ucwords(strtolower($getdesa['telp']));
 $kec = ucwords(strtolower($getdesa['kecamatan']));
 $kab = ucwords(strtolower($getdesa['kabupaten']));
 // set default header data
-$pdf->SetHeaderData(PDF_HEADER_LOGO, 25, "Pemerintahan Desa ". ucwords(strtolower($des)), "Alamat  : Jln. Raya Pacengalan No.12 \nDesa Cengal, Kecamatan $kec, Kabupaten $kab \nTelp : (0221) 988909");
+$pdf->SetHeaderData(PDF_HEADER_LOGO, 25, "Pemerintahan Desa ". ucwords(strtolower($des)), "Alamat  : $almt \nDesa $des, Kecamatan $kec, Kabupaten $kab ($pos) \nTelp : $tel");
 
 // set header and footer fonts
 $pdf->setHeaderFont(array(PDF_FONT_NAME_MAIN, '', 11));
