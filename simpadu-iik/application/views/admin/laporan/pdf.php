@@ -41,7 +41,7 @@ $des = ucwords(strtolower($getdesa['desa']));
 $kec = ucwords(strtolower($getdesa['kecamatan']));
 $kab = ucwords(strtolower($getdesa['kabupaten']));
 // set default header data
-$pdf->SetHeaderData(PDF_HEADER_LOGO, 28, "Pemerintahan Desa ". ucwords(strtolower($des)), "Alamat  : Jln. Raya Pacengalan No.12 \nDesa Cengal, Kecamatan $kec, Kabupaten $kab \nTelp : (0221) 988909");
+$pdf->SetHeaderData(PDF_HEADER_LOGO, 25, "Pemerintahan Desa ". ucwords(strtolower($des)), "Alamat  : Jln. Raya Pacengalan No.12 \nDesa Cengal, Kecamatan $kec, Kabupaten $kab \nTelp : (0221) 988909");
 
 // set header and footer fonts
 $pdf->setHeaderFont(array(PDF_FONT_NAME_MAIN, '', 11));
