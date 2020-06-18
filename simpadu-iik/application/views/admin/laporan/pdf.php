@@ -103,12 +103,20 @@ $pdf->SetFont('helvetica', '', 10);
  */
 
 // define some HTML content with style
+// nama
 $nama = $getrow['nama'];
+// nik
 $nik = $getrow['nik'];
+// kk
 $kk = $getrow['id_kk'];
-$tempat = $getrow['tempat_lahir'];
-$tanggal = date('d F Y', strtotime($getrow['tanggal_lahir']));
+// tempat lahir
+$tempat = ucwords(strtolower($getrow['tempat_lahir']));
+// tanggal
+setlocale(LC_ALL, 'id-ID', 'id_ID');
+$tanggal = strftime("%d %B %Y", strtotime(strtr($getrow['tanggal_lahir'], '/', '-')));
+// jenis kelamin
 $jk = $getrow['jk'];
+// agama
 $agama = $getrow['id_agama'];
 switch ($agama) {
   case '000000001':
@@ -133,8 +141,11 @@ switch ($agama) {
     $agama = 'Islam';
     break;
 }
-$pekerjaan = $getrow['pekerjaan'];
-$kewarganegaraan = $getrow['kewarganegaraan'];
+// pekerjaan
+$pekerjaan = ucwords(strtolower($getrow['pekerjaan']));
+// kewarganegaraan
+$kewarganegaraan = ucwords(strtolower($getrow['kewarganegaraan']));
+// status
 $status = $getrow['status'];
 switch ($status) {
   case '2':
@@ -144,23 +155,24 @@ switch ($status) {
     $status = 'Hidup';
     break;
 }
-
+// alamat
 $alamat = $getrow['alamat'];
+// alamat sesudah
 $alamat_sesudah = $getrow['alamat_sesudah'];
-
+// mutasi
 $mutasi = $getrow['mutasi'];
 switch ($mutasi) {
   case '1':
     $mutasi = 'Masuk';
-    $alamat = '<tr><th width="150">Alamat Sebelum Mutasi</th><td width="450">: ' . $alamat . '</td></tr><tr><th width="150">Alamat Sesudah Mutasi</th><td>: ' . $alamat_sesudah . '</td></tr>';
+    $alamat = '<tr><th width="150">Alamat Sebelum Mutasi</th><td width="450">: ' . ucwords(strtolower($alamat)) . '</td></tr><tr><th width="150">Alamat Sesudah Mutasi</th><td>: ' . ucwords(strtolower($alamat_sesudah)) . '</td></tr>';
     break;
   case '2':
     $mutasi = 'Keluar';
-    $alamat = '<tr><th width="150">Alamat Sebelum Mutasi</th><td width="450">: ' . $alamat . '</td></tr><tr><th width="150">Alamat Sesudah Mutasi</th><td>: ' . $alamat_sesudah . '</td></tr>';
+    $alamat = '<tr><th width="150">Alamat Sebelum Mutasi</th><td width="450">: ' . ucwords(strtolower($alamat)) . '</td></tr><tr><th width="150">Alamat Sesudah Mutasi</th><td>: ' . ucwords(strtolower($alamat_sesudah)) . '</td></tr>';
     break;
   default:
     $mutasi = 'Warga Asli Menetap';
-    $alamat = '<tr><th width="150">Alamat</th><td width="450">: ' . $alamat . '</td></tr><tr><th width="150"></th><td></td></tr>';
+    $alamat = '<tr><th width="150">Alamat</th><td width="450">: ' . ucwords(strtolower($alamat)) . '</td></tr><tr><th width="150"></th><td></td></tr>';
     break;
 }
 
@@ -168,7 +180,9 @@ switch ($mutasi) {
 $html = <<<EOF
 <!-- EXAMPLE OF CSS STYLE -->
 <style>
-	
+	td {
+    line-height : 2;
+  }
 </style>
 
 <h3>Data Mutasi</h3>
