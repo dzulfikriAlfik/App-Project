@@ -197,7 +197,6 @@ if ($data2 != "") { ?>
 </div>
 
 <script type="text/javascript">
-
   function mutasiPil(select) {
     if (select.value == 1 || select.value == 2) {
       document.getElementById('label_mutasi').innerHTML = "Alamat Sebelum Mutasi";
@@ -214,20 +213,21 @@ if ($data2 != "") { ?>
       document.getElementById('set_mutasi').style.display = "none";
     }
   }
-  
 </script>
 
 <script type="text/javascript">
-window.addEventListener("load",function(){
-    if (document.getElementById("my_select").value == 1 || document.getElementById("my_select").value == 2) {
+  window.addEventListener("load", function() {
+    const pil = document.getElementById("my_select");
+
+    if (pil.value == 1 || pil.value == 2) {
       document.getElementById('label_mutasi').innerHTML = "Alamat Sebelum Mutasi";
       document.getElementById('seb_mutasi').style.display = "block";
       document.getElementById('set_mutasi').style.display = "block";
       document.getElementById("harusdiisi").required = true;
-    } else if (document.getElementById("my_select").value == 3) {
+    } else if (pil.value == 3) {
       document.getElementById('seb_mutasi').style.display = "block";
       document.getElementById('label_mutasi').innerHTML = "Alamat";
       document.getElementById('set_mutasi').style.display = "none";
     }
-},false);
+  }, false);
 </script>
