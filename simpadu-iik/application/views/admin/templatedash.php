@@ -70,17 +70,17 @@
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h6 class="modal-title"><strong>Ubah Username Password</strong></h6>
                   </div>
+                  <?php
+                  $pend = $this->session->userdata('id_penduduk');
+                  $row = $this->db->query("select * from admin where id_penduduk='$pend'")->row_array(); ?>
                   <div class="modal-body">
                     <div class="form-group">
                       <label class='col-md-3'>Username</label>
-                      <div class='col-md-9'><input type="text" name="username" placeholder="Masukkan Username" class="form-control"></div>
+                      <div class='col-md-9'><input type="text" name="username" value="<?= $row['username']; ?>" placeholder="Masukkan Username" class="form-control"></div>
                     </div>
                     <br>
-                    <?php
-                    $pend = $this->session->userdata('id_penduduk');
-                    $qu = $this->db->query("select * from admin where id_penduduk='$pend'")->row_array(); ?>
-                    <input type="hidden" name="passlama" value="<?php echo $qu['password']; ?>">
-                    <input type="hidden" name="userlama" value="<?php echo $qu['username']; ?>">
+                    <input type="hidden" name="passlama" value="<?php echo $row['password']; ?>">
+                    <input type="hidden" name="userlama" value="<?php echo $row['username']; ?>">
                     <div class="form-group">
                       <label class='col-md-3'>Password Lama</label>
                       <div class='col-md-9'><input type="password" name="password" autocomplete="off" required placeholder="Masukkan Password" class="form-control"></div>

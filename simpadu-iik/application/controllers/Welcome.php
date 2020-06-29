@@ -52,6 +52,7 @@ class Welcome extends CI_Controller
 		$konfbaru = $_POST['konf_baru'];
 		$arr = $this->db->query("select * from admin where username='$userlama'")->row_array();
 		$cek = $this->db->query("select * from admin where username='$user'")->num_rows();
+
 		if ($userlama != $user) {
 			if ($cek > 0) {
 				$this->session->set_flashdata('error', 'Maaf Username Sudah Di Gunakan');

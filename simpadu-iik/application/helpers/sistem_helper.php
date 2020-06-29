@@ -13,7 +13,7 @@ function no_access()
   $ci = &get_instance();
   if (!$ci->session->userdata('user')) {
     redirect('login');
-  } 
+  }
 }
 
 
