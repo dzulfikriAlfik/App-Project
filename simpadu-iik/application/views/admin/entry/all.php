@@ -29,7 +29,7 @@
             <td><?php echo getnamakk($row->id_kk); ?></td>
             <td><?php echo $no; ?></td>
             <td><?php echo $row->nama; ?></td>
-            <td><?php echo $row->tanggal_lahir; ?></td>
+            <td><?php echo date('d/m/Y', strtotime($row->tanggal_lahir)); ?></td>
             <td><?php echo $row->jk; ?></td>
             <td><?php echo $row->agama; ?></td>
             <td>
