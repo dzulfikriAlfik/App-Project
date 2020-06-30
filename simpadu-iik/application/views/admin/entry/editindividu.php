@@ -42,7 +42,7 @@ if ($data2 != "") { ?>
     <br>
     <div class="form-group">
       <label class='col-md-3'>Tanggal Lahir</label>
-      <div class='col-md-9'><input type="text" name="tanggal" value="<?php echo $getrow['tanggal_lahir']; ?>" autocomplete="off" required placeholder="Masukkan Tanggal Lahir" class="form-control datepicker"></div>
+      <div class='col-md-9'><input type="text" name="tanggal" value="<?php echo date('d/m/Y', strtotime($getrow['tanggal_lahir'])); ?>" autocomplete="off" required placeholder="Masukkan Tanggal Lahir" class="form-control datepicker"></div>
     </div>
     <br>
     <br>

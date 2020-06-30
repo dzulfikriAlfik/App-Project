@@ -56,7 +56,7 @@ if ($data2 != "") { ?>
             <td><?php echo $no; ?></td>
             <td><?php echo $row->nama; ?></td>
             <td><?php echo $row->jk; ?></td>
-            <td><?php echo $row->tanggal_lahir; ?></td>
+            <td><?php echo date('d/m/Y', strtotime($row->tanggal_lahir)); ?></td>
             <!-- Status Hidup/Mati -->
             <td>
               <?php if ($row->status == 1) {

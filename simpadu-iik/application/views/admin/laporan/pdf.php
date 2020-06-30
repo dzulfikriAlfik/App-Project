@@ -44,7 +44,7 @@ $tel = ucwords(strtolower($getdesa['telp']));
 $kec = ucwords(strtolower($getdesa['kecamatan']));
 $kab = ucwords(strtolower($getdesa['kabupaten']));
 // set default header data
-$pdf->SetHeaderData(PDF_HEADER_LOGO, 25, "Pemerintahan Desa ". ucwords(strtolower($des)), "Alamat  : $almt \nDesa $des, Kecamatan $kec, Kabupaten $kab ($pos) \nTelp : $tel");
+$pdf->SetHeaderData(PDF_HEADER_LOGO, 25, "Pemerintahan Desa " . ucwords(strtolower($des)), "Alamat  : $almt \nDesa $des, Kecamatan $kec, Kabupaten $kab ($pos) \nTelp : $tel");
 
 // set header and footer fonts
 $pdf->setHeaderFont(array(PDF_FONT_NAME_MAIN, '', 11));
@@ -119,7 +119,8 @@ $kk = $getrow['id_kk'];
 $tempat = ucwords(strtolower($getrow['tempat_lahir']));
 // tanggal
 setlocale(LC_ALL, 'id-ID', 'id_ID');
-$tanggal = strftime("%d %B %Y", strtotime(strtr($getrow['tanggal_lahir'], '/', '-')));
+// $tanggal = strftime("%d %B %Y", strtotime(strtr($getrow['tanggal_lahir'], '/', '-')));
+$tanggal = strftime("%d %B %Y", strtotime($getrow['tanggal_lahir']));
 $tanggal_sekarang = strftime("%d %B %Y");
 // jenis kelamin
 $jk = $getrow['jk'];

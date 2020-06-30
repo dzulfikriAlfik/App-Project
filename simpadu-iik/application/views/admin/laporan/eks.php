@@ -39,7 +39,7 @@ header("Expires: 0");
         <td width="80">&nbsp;<?php echo getnamakk($row->id_kk); ?></td>
         <td>&nbsp;<?php echo $row->nama; ?></td>
         <td>&nbsp;<?php echo $row->tempat_lahir; ?></td>
-        <td>&nbsp;<?php echo $row->tanggal_lahir; ?></td>
+        <td>&nbsp;<?php echo date('d/m/Y', strtotime($row->tanggal_lahir)); ?></td>
         <td width="100">&nbsp;<?php echo $row->jk; ?></td>
         <td>&nbsp;<?php echo $row->golongan_darah; ?></td>
         <td>&nbsp;<?php echo $row->alamat; ?></td>
