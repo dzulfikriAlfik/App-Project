@@ -30,6 +30,35 @@ class Entry extends CI_Controller
 		$this->load->view('admin/template', $data);
 	}
 
+	// Kelahiran
+	public function kelahiran()
+	{
+		$tanggal1 = date('Y-m-d', strtotime('01/01/2018'));
+		$data = array(
+			"title" => 'Data Kelahiran',
+			"menu" => getmenu(),
+			"all" => $this->db->query("SELECT * FROM penduduk JOIN kk ON penduduk.id_kk = kk.id_kk WHERE mutasi = 3 AND date_format(tanggal_lahir, '%Y') >= 2018 ORDER BY penduduk.id_kk ASC")->result(),
+			"aktif" => "kelahiran",
+			"content" => "entry/kelahiran.php",
+		);
+		$this->breadcrumb->append_crumb('Data Kelahiran', site_url('entry/all'));
+		$this->load->view('admin/template', $data);
+	}
+
+	// Kelahiran
+	public function kematian()
+	{
+		$data = array(
+			"title" => 'Data Kematian',
+			"menu" => getmenu(),
+			"all" => $this->db->query("SELECT * FROM penduduk WHERE penduduk.status = 2 ")->result(),
+			"aktif" => "kematian",
+			"content" => "entry/kematian.php",
+		);
+		$this->breadcrumb->append_crumb('Data Kematian', site_url('entry/all'));
+		$this->load->view('admin/template', $data);
+	}
+
 	// 
 	public function addkk()
 	{
@@ -66,8 +95,8 @@ class Entry extends CI_Controller
 			$this->session->set_flashdata('error', "Data Anda Gagal Di Hapus");
 			redirect('Entry');
 		} else {
-			$this->db->where('id_kk', $id);
-			$this->db->delete('kk');
+			$this->db->delete('penduduk', ['id_kk' => $id]);
+			$this->db->delete('kk', ['id_kk' => $id]);
 			$this->session->set_flashdata('sukses', "Data Berhasil Dihapus");
 			redirect('Entry');
 		}
@@ -225,7 +254,7 @@ class Entry extends CI_Controller
 				"nik" => $_POST['nik'],
 				"nama" => strtoupper($_POST['nama']),
 				"tempat_lahir" => strtoupper($_POST['tempat']),
-				"tanggal_lahir" => $_POST['tanggal'],
+				"tanggal_lahir" => date('Y-m-d', strtotime($_POST['tanggal'])),
 				"jk" => $_POST['jk'],
 				"golongan_darah" => $_POST['golongan_darah'],
 				"alamat" => strtoupper($_POST['alamat']),
@@ -463,7 +492,7 @@ class Entry extends CI_Controller
 			$data = array(
 				"nama" => strtoupper($_POST['nama']),
 				"tempat_lahir" => strtoupper($_POST['tempat']),
-				"tanggal_lahir" => $_POST['tanggal'],
+				"tanggal_lahir" => date('Y-m-d', strtotime($_POST['tanggal'])),
 				"jk" => $_POST['jk'],
 				"golongan_darah" => $_POST['golongan_darah'],
 				"alamat" => strtoupper($_POST['alamat']),
