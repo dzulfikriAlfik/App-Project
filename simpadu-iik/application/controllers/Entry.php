@@ -33,7 +33,6 @@ class Entry extends CI_Controller
 	// Kelahiran
 	public function kelahiran()
 	{
-		$tanggal1 = date('Y-m-d', strtotime('01/01/2018'));
 		$data = array(
 			"title" => 'Data Kelahiran',
 			"menu" => getmenu(),
