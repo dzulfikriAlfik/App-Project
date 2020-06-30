@@ -75,7 +75,6 @@ if ($data2 != "") { ?>
             <td>
               <center>
                 <a href="<?php echo site_url('User/reset/' . $row->id_admin); ?>" onclick="return confirm('Apakah Anda Mereser Data Ini');" class="btn btn-primary btn-xs tooltips" data-popup="tooltip" data-original-title="Reset Data" data-placement="top"><i class="icon-spinner3"></i></a>
-                <a href="<?php echo site_url('User/editAkses/' . $row->id_penduduk); ?>" class="btn btn-warning btn-xs tooltips" data-popup="tooltip" data-original-title="Edit Hak Akses" data-placement="top"><i class="icon-pencil5"></i></a>
                 <a href="<?php echo site_url('User/delete/' . $row->id_admin); ?>" onclick="return confirm('Apakah Anda Ingin Menghapus Data Ini');" class="btn btn-danger btn-xs tooltips" data-popup="tooltip" data-original-title="Hapus Data" data-placement="top"><i class="icon-x"></i></a>
               </center>
             </td>

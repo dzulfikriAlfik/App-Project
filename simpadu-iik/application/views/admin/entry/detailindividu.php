@@ -24,7 +24,7 @@
         </tr>
         <tr>
           <th>Tanggal Lahir</th>
-          <td><?php echo $getrow['tanggal_lahir']; ?></td>
+          <td><?php echo date('d/m/Y', strtotime($getrow['tanggal_lahir'])); ?></td>
         </tr>
         <tr>
           <th>Jenis Kelamin</th>
