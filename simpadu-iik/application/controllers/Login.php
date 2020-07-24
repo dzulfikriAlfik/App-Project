@@ -16,10 +16,10 @@ class Login extends CI_Controller
 	}
 	public function signin()
 	{
-		$username = $this->security->sanitize_filename($_POST['username']);
-		$password = $this->security->sanitize_filename($_POST['password']);
-		$ceknum = $this->M_login->ceknum($username, md5($password))->num_rows();
-		$rows = $this->M_login->ceknum($username, md5($password))->row_array();
+			$username = $this->security->sanitize_filename($_POST['username']);
+			$password = $this->security->sanitize_filename($_POST['password']);
+			$ceknum = $this->M_login->ceknum($username, md5($password))->num_rows();
+			$rows = $this->M_login->ceknum($username, md5($password))->row_array();
 		if ($ceknum > 0) {
 			$this->session->set_userdata('user', $username);
 			$this->session->set_userdata('id_penduduk', $rows['id_penduduk']);

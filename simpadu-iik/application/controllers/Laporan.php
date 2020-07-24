@@ -46,4 +46,22 @@ class Laporan extends CI_Controller
 		);
 		$this->load->view('admin/laporan/pdf', $data);
 	}
+
+	public function printkelahiran()
+	{
+		$data = [
+			"all" => $this->db->query("SELECT * FROM penduduk JOIN kk ON penduduk.id_kk = kk.id_kk WHERE mutasi = 3 AND date_format(tanggal_lahir, '%Y') >= 2018 ORDER BY penduduk.id_kk ASC")->result(),
+			"getdesa" => $this->db->get('desa')->row_array()
+		];
+		$this->load->view('admin/laporan/printkelahiran', $data);
+	}
+
+	public function printkematian()
+	{
+		$data = [
+			"all" => $this->db->query("SELECT * FROM penduduk WHERE penduduk.status = 2 AND (penduduk.mutasi = 1 OR penduduk.mutasi = 3)")->result(),
+			"getdesa" => $this->db->get('desa')->row_array()
+		];
+		$this->load->view('admin/laporan/printkematian', $data);
+	}
 }

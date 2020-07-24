@@ -1,5 +1,5 @@
 <!-- button back -->
-<a href="<?= base_url('laporan/printpdf/' . $getrow['nik']) ?>" class="btn btn-primary">Cetak PDF</a>
+<a href="<?= base_url('laporan/printpdf/' . $getrow['nik']) ?>" class="btn btn-success">Cetak PDF</a>
 <a href="<?= base_url('entry/detailkk/' . $kk) ?>" class="btn btn-warning">Kembali</a>
 <br><br>
 <!-- end button back -->

@@ -1,3 +1,5 @@
+<a href="<?= base_url('laporan/printkematian') ?>" class="btn btn-success">Cetak PDF</a>
+<br><br>
 <div class="panel panel-primary">
   <div class="panel-heading">
     <h5 class="panel-title"><i class="icon-file-eye2"></i> Data Kematian</h5>
@@ -19,7 +21,6 @@
       </thead>
       <tbody>
         <?php $no = 0;
-        $tanggal = time() - (60 * 60 * 24 * 365 * 2);
         foreach ($all as $row) : $no++; ?>
           <tr>
             <td></td>

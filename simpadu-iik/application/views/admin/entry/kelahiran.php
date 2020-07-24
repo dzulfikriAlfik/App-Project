@@ -1,3 +1,5 @@
+<a href="<?= base_url('laporan/printkelahiran') ?>" class="btn btn-success">Cetak PDF</a>
+<br><br>
 <div class="panel panel-primary">
   <div class="panel-heading">
     <h5 class="panel-title"><i class="icon-file-eye2"></i> Data Kelahiran</h5>
