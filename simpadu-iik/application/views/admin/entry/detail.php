@@ -1,6 +1,7 @@
 <a href="<?php echo site_url('Entry/addindividu/' . $id); ?>" class="btn btn-primary btn-sm"><i class="icon-file-plus"></i> Tambah </a>
 <!-- button back -->
-<a href="<?= base_url('entry'); ?>" class="btn btn-warning btn-sm">Kembali</a>
+<a href="javascript:history.go(-1)" class="btn btn-warning btn-sm">Kembali</a>
+<!-- <a href="<?= base_url('entry'); ?>" class="btn btn-warning btn-sm">Kembali</a> -->
 <!-- end button back -->
 <?php
 echo br(2);
@@ -101,7 +102,7 @@ if ($data2 != "") { ?>
                 $class1 = "default";
               } ?>
             </td>
-            <td>
+            <td style="width:200px">
               <center>
                 <a href="<?php echo site_url('entry/detailindividu/' . $row->nik); ?>" class="btn btn-success btn-xs tooltips" data-popup="tooltip" data-original-title="Detail Data" data-placement="top"><i class="icon-zoomin3"></i></a>
                 <!--  -->

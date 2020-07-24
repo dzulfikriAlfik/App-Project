@@ -1,6 +1,7 @@
 <!-- button back -->
 <a href="<?= base_url('laporan/printpdf/' . $getrow['nik']) ?>" class="btn btn-success">Cetak PDF</a>
-<a href="<?= base_url('entry/detailkk/' . $kk) ?>" class="btn btn-warning">Kembali</a>
+<a href="javascript:history.go(-1)" class="btn btn-warning">Kembali</a>
+<!-- <a href="<?= base_url('entry/detailkk/' . $kk) ?>" class="btn btn-warning">Kembali</a> -->
 <br><br>
 <!-- end button back -->
 <div class="panel panel-primary">
