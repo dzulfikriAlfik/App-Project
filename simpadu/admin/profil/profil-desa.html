@@ -15,6 +15,11 @@
    <link href="../../assets/css-dashboard/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
    <!-- Custom styles for this template-->
    <link href="../../assets/css-dashboard/css/sb-admin-2.min.css" rel="stylesheet">
+   <style>
+      .th-left {
+         width: 230px;
+      }
+   </style>
 
 </head>
 
@@ -42,16 +47,16 @@
 
          <div class="sidebar-heading">Menu Admin</div>
 
-         <li class="nav-item active">
+         <li class="nav-item">
             <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                <i class="fas fa-fw fa-table"></i>
                <span>Master Data</span>
             </a>
-            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionSidebar">
+            <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionSidebar">
                <div class="py-2 bg-white rounded collapse-inner">
                   <h6 class="collapse-header">Daftar Menu :</h6>
-                  <a class="collapse-item" href="agama.html">Agama</a>
-                  <a class="collapse-item active" href="#">Kategori</a>
+                  <a class="collapse-item" href="../master-data/agama.html">Agama</a>
+                  <a class="collapse-item" href="../master-data/kategori.html">Kategori</a>
                </div>
             </div>
          </li>
@@ -80,8 +85,8 @@
                <i class="fas fa-fw fa-user-lock"></i>
                <span>Manajemen Akses</span></a>
          </li>
-         <li class="nav-item">
-            <a class="nav-link" href="../profil/profil-desa.html">
+         <li class="nav-item active">
+            <a class="nav-link" href="#">
                <i class="fas fa-fw fa-id-card"></i>
                <span>Profil Desa</span></a>
          </li>
@@ -166,59 +171,51 @@
 
             <!-- Content -->
             <div class="container-fluid">
-               <div class="mb-4 d-sm-flex align-items-center justify-content-between">
-                  <h1 class="mb-0 text-gray-800 h3">Kategori</h1>
-               </div>
 
-               <!-- Table Kategori -->
+               <!-- Table Laporan -->
                <div class="mb-4 shadow card">
-                  <div class="py-3 card-header">
+                  <div class="py-3 card-header bg-warning">
                      <div class="d-flex justify-content-between align-items-center">
-                        <h6 class="m-0 font-weight-bold text-primary">Tabel Kategori</h6>
-                        <a href="#" class="btn-sm btn-primary" style="text-decoration: none;">Tambah Data</a>
+                        <h6 class="m-0 text-dark font-weight-bold">Manajemen Profil Desa</h6>
+                        <a href="#" class="btn-sm btn btn-primary"><i class="fas fa-fw fa-edit"></i> Update Profil</a>
                      </div>
                   </div>
-                  <div class="card-body">
-                     <div class="table-responsive">
-                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                           <thead>
-                              <tr>
-                                 <th class="text-center">No.</th>
-                                 <th class="text-center">Nama Kategori</th>
-                                 <th class="text-center">Opsi</th>
-                              </tr>
-                           </thead>
-                           <tbody>
-                              <tr>
-                                 <td class="text-center">1</td>
-                                 <td>KTP</td>
-                                 <td class="text-center">
-                                    <a href="#" class="btn-sm btn-warning"><i class="fas fa-fw fa-edit"></i></a>
-                                    <a href="#" class="btn-sm btn-danger"><i class="fas fa-fw fa-trash"></i></a>
-                                 </td>
-                              </tr>
-                              <tr>
-                                 <td class="text-center">2</td>
-                                 <td>Akte Kelahiran</td>
-                                 <td class="text-center">
-                                    <a href="#" class="btn-sm btn-warning"><i class="fas fa-fw fa-edit"></i></a>
-                                    <a href="#" class="btn-sm btn-danger"><i class="fas fa-fw fa-trash"></i></a>
-                                 </td>
-                              </tr>
-                              <tr>
-                                 <td class="text-center">3</td>
-                                 <td>Surat Nikah</td>
-                                 <td class="text-center">
-                                    <a href="#" class="btn-sm btn-warning"><i class="fas fa-fw fa-edit"></i></a>
-                                    <a href="#" class="btn-sm btn-danger"><i class="fas fa-fw fa-trash"></i></a>
-                                 </td>
-                              </tr>
-                           </tbody>
-                        </table>
-                     </div>
+                  <div class="m-5 row">
+                     <table class="table table-bordered">
+                        <tr>
+                           <th class="th-left">Desa</th>
+                           <td>Nama Desa</td>
+                        </tr>
+                        <tr>
+                           <th class="th-left">Kecamatan</th>
+                           <td>Nama Kecamatan</td>
+                        </tr>
+                        <tr>
+                           <th class="th-left">Kabupaten</th>
+                           <td>Nama Kabupaten</td>
+                        </tr>
+                        <tr>
+                           <th class="th-left">Kepala Desa</th>
+                           <td>Nama Kepala Desa</td>
+                        </tr>
+                        <tr>
+                           <th class="th-left">Alamat</th>
+                           <td>Jalan mana, no berapa alamat lengkap</td>
+                        </tr>
+                        <tr>
+                           <th class="th-left">No. Telp</th>
+                           <td>1234567890</td>
+                        </tr>
+                        <tr>
+                           <th class="th-left">Kode Pos</th>
+                           <td>123456</td>
+                        </tr>
+                     </table>
                   </div>
+
+
                </div>
-               <!-- End Table Kategori -->
+               <!-- End Table Laporan -->
 
             </div>
             <!-- EndContent -->
@@ -280,6 +277,8 @@
    <script src="../../assets/css-dashboard/vendor/datatables/dataTables.bootstrap4.min.js"></script>
    <!-- Page level custom scripts -->
    <script src="../../assets/css-dashboard/js/demo/datatables-demo.js"></script>
+   <!-- Select2 -->
+   <script src="../../assets/css-dashboard/js/select2.full.min.js"></script>
 
 </body>
 

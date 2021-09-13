@@ -77,7 +77,7 @@
          </li>
          <li class="nav-item">
             <a class="nav-link" href="../manajemen/manajemen-akses.html">
-               <i class="fas fa-fw fa-fingerprint"></i>
+               <i class="fas fa-fw fa-user-lock"></i>
                <span>Manajemen Akses</span></a>
          </li>
          <li class="nav-item">
@@ -176,18 +176,68 @@
                      <h6 class="m-0 text-dark font-weight-bold">Cetak Laporan</h6>
                   </div>
                   <div class="m-5 row">
-                     <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
-                     <div class="col-sm-10">
-                        <input type="password" class="form-control" id="inputPassword">
+                     <div class="col-md-12">
+                        <div class="form-group">
+                           <div class="row">
+                              <label class="col-md-2">Agama</label>
+                              <select class="form-control select2 col-md-10" style="width: 100%;">
+                                 <option selected="selected">Pilih Agama</option>
+                                 <option>----</option>
+                                 <option>Islam</option>
+                              </select>
+                           </div>
+                        </div>
                      </div>
-                     <div class="col-md-4">
-                        <label for="inputState" class="form-label">State</label>
-                        <select id="inputState" class="form-select">
-                           <option selected>Choose...</option>
-                           <option>...</option>
-                        </select>
+                     <div class="col-md-12">
+                        <div class="form-group">
+                           <div class="row">
+                              <label class="col-md-2">Jenis Kelamin</label>
+                              <select class="form-control select2 col-md-10" style="width: 100%;">
+                                 <option selected="selected">Pilih Jenis Kelamin</option>
+                                 <option>----</option>
+                                 <option>Laki-laki</option>
+                                 <option>Perempuan</option>
+                              </select>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="col-md-12">
+                        <div class="form-group">
+                           <div class="row">
+                              <label class="col-md-2">Status</label>
+                              <select class="form-control select2 col-md-10" style="width: 100%;">
+                                 <option selected="selected">Pilih Status</option>
+                                 <option>----</option>
+                                 <option>Hidup</option>
+                                 <option>Meninggal</option>
+                              </select>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="col-md-12">
+                        <div class="form-group">
+                           <div class="row">
+                              <label class="col-md-2">Mutasi</label>
+                              <select class="form-control select2 col-md-10" style="width: 100%;">
+                                 <option selected="selected">Pilih Mutasi</option>
+                                 <option>----</option>
+                                 <option>Masuk</option>
+                                 <option>Keluar</option>
+                                 <option>Warga Asli</option>
+                              </select>
+                           </div>
+                        </div>
+                        <hr class="pt-5 pb-0 mt-5 mb-0">
+                     </div>
+                     <div class="col-md-4 offset-5">
+                        <div class="form-group">
+                           <div class="row">
+                              <button class="mt-0 btn-primary btn"><i class="fas fa-fw fa-print"></i> Cetak</button>
+                           </div>
+                        </div>
                      </div>
                   </div>
+
 
                </div>
                <!-- End Table Laporan -->
@@ -252,6 +302,8 @@
    <script src="../../assets/css-dashboard/vendor/datatables/dataTables.bootstrap4.min.js"></script>
    <!-- Page level custom scripts -->
    <script src="../../assets/css-dashboard/js/demo/datatables-demo.js"></script>
+   <!-- Select2 -->
+   <script src="../../assets/css-dashboard/js/select2.full.min.js"></script>
 
 </body>
 
