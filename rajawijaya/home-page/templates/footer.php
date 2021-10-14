@@ -9,37 +9,30 @@
                <!-- Begin company info -->
                <div class="footer-company-info">
                   <div class="footer-company-top">
-                     <a href="/" class="logo" title="PathSoft">
-                        <img data-src="home-page/assets/img/logo-white.svg" width="115" height="36" class="lazy" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" alt="PathSoft">
+                     <a href="#" class="logo" title="Logo">
+                        <img src="admin-page/assets/img/logo/<?= $row['logo']; ?>" class="logo-footer" width="200" alt="Logo Raja Wijaya">
                      </a>
                      <div class="footer-company-desc">
-                        <p>Our company has been developing high-quality and reliable software for corporate needs since 2008. We are renowned professionals of software development.</p>
+                        <p><?= $row['sejarah']; ?></p>
                      </div>
                   </div>
                   <ul class="footer-social-links">
                      <li>
-                        <a href="#!" title="Facebook">
+                        <a href="https://facebook.com/<?= $socmed['facebook']; ?>" title="Facebook">
                            <svg viewBox="0 0 320 512">
                               <use xlink:href="home-page/assets/img/sprite.svg#facebook-icon"></use>
                            </svg>
                         </a>
                      </li>
                      <li>
-                        <a href="#!" title="Instagram">
+                        <a href="https://instagram.com/<?= $socmed['instagram']; ?>" title="Instagram">
                            <svg viewBox="0 0 448 512">
                               <use xlink:href="home-page/assets/img/sprite.svg#instagram-icon"></use>
                            </svg>
                         </a>
                      </li>
                      <li>
-                        <a href="#!" title="LinkedIn">
-                           <svg viewBox="0 0 448 512">
-                              <use xlink:href="home-page/assets/img/sprite.svg#linkedin-icon"></use>
-                           </svg>
-                        </a>
-                     </li>
-                     <li>
-                        <a href="#!" title="Twitter">
+                        <a href="https://twitter.com/<?= $socmed['twitter']; ?>" title="Twitter">
                            <svg viewBox="0 0 512 512">
                               <use xlink:href="home-page/assets/img/sprite.svg#twitter-icon"></use>
                            </svg>
@@ -54,35 +47,37 @@
                   <p class="footer-item-heading">Menu</p>
                   <nav class="footer-nav">
                      <ul class="footer-mnu">
-                        <li><a href="about-us.html" class="hover-link" data-title="About Us"><span>About Us</span></a></li>
-                        <li><a href="services.html" class="hover-link" data-title="Services"><span>Services</span></a></li>
-                        <li><a href="typography.html" data-title="Typography"><span>Typography</span></a></li>
-                        <li><a href="news.html" class="hover-link" data-title="News"><span>News</span></a></li>
-                        <li><a href="contact-us.html" class="hover-link" data-title="Contact Us"><span>Contact Us</span></a></li>
+                        <li><a href="#" class="hover-link" data-title="Home"><span>Home</span></a></li>
+                        <li><a href="#" class="hover-link" data-title="Tentang Kami"><span>Tentang Kami</span></a></li>
+                        <li><a href="#" class="hover-link" data-title="Sejarah"><span>Sejarah</span></a></li>
+                        <li><a href="#" class="hover-link" data-title="Kegiatan"><span>Kegiatan</span></a></li>
+                        <li><a href="#" class="hover-link" data-title="Mitra"><span>Mitra</span></a></li>
+                        <li><a href="#" class="hover-link" data-title="Kontak"><span>Kontak</span></a></li>
+                        <li><a href="admin-page/auth/login" class="hover-link" data-title="Login/Daftar"><span>Login/Daftar</span></a></li>
                      </ul>
                   </nav>
                </div>
             </div>
             <div class="col-xs-4 col-lg-4 col-12 item">
                <div class="footer-item">
-                  <p class="footer-item-heading">Our contacts</p>
+                  <p class="footer-item-heading">Kontak Kami</p>
                   <ul class="footer-contacts">
                      <li>
                         <i class="material-icons md-22">location_on</i>
                         <div class="footer-contact-info">
-                           301 S Irving Blvd Los Angeles, CA 90020
+                           <?= $row['address']; ?>
                         </div>
                      </li>
                      <li>
                         <i class="material-icons md-22 footer-contact-tel">smartphone</i>
                         <div class="footer-contact-info">
-                           <a href="#!" class="formingHrefTel">+1 323-913-4688</a>, <a href="#!" class="formingHrefTel">+1 323-888-4554</a>
+                           <a href="#!" class="formingHrefTel"><?= $row['telp']; ?></a>
                         </div>
                      </li>
                      <li>
                         <i class="material-icons md-22 footer-contact-email">email</i>
                         <div class="footer-contact-info">
-                           <a href="mailto:mail@example.com">mail@example.com</a>
+                           <a href="mailto:<?= $row['email']; ?>"><?= $row['email']; ?></a>
                         </div>
                      </li>
                   </ul>

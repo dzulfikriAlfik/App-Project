@@ -5,3 +5,9 @@
    border-radius: 25px;
    text-align: center;
 }
+
+.logo-footer {
+   background-color: #fff;
+   border-radius: 20px;
+   display: inline;
+}

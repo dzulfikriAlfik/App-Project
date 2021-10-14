@@ -9,7 +9,11 @@ RewriteCond %{REQUEST_FILENAME}\.html -f
 RewriteRule ^(.*)$ $1.html [NC,L]
 
 DirectoryIndex home-page/index.php
+RewriteRule ^tentang-kami home-page/tentang-kami.php
+RewriteRule ^kegiatan home-page/kegiatan.php
+RewriteRule ^mitra home-page/mitra.php
 
+# RewriteRule ^ http://example.com/something-blew-up.html [R=404]
 # RewriteEngine on
 # RewriteRule ^homepage index.php
 # RewriteRule ^tentang-kami about.php

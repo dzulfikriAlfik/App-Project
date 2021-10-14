@@ -4,7 +4,7 @@
 <head>
    <meta charset="utf-8">
    <meta name="viewport" content="width=device-width, initial-scale=1">
-   <title>AdminLTE 3 | Log in</title>
+   <title>Raja Wijaya Cirebon | Log in</title>
 
    <!-- Google Font: Source Sans Pro -->
    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -46,13 +46,13 @@
                <div class="row">
                   <!-- /.col -->
                   <div class="col-md-12">
-                     <a href="admin/dashboard.php" type="submit" class="btn btn-primary btn-block">Sign In</a>
+                     <a href="../dashboard" type="submit" class="btn btn-primary btn-block">Sign In</a>
                   </div>
                   <!-- /.col -->
                </div>
             </form>
             <p class="my-3 text-center">
-               <a href="index.php" class="text-center">Back to Homepage</a>
+               <a href="../../../rajawijaya/" class="text-center">Back to Homepage</a>
             </p>
          </div>
          <!-- /.login-card-body -->
