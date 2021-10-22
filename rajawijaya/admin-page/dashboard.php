@@ -31,14 +31,16 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/app-project/rajawijaya/admin-page/tem
             <div class="col-md-12">
                <div class="card card-primary card-outline">
                   <div class="card-body">
-                     <h5 class="card-title">Card title</h5>
 
-                     <p class="card-text">
-                        Some quick example text to build on the card title and make up the bulk of the card's
-                        content.
-                     </p>
-                     <a href="#" class="card-link">Card link</a>
-                     <a href="#" class="card-link">Another link</a>
+                     <div class="card-body pad">
+                        <div class="mb-3">
+                           <textarea class="textarea"
+                              placeholder="Place some text here"
+                              style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">
+                           </textarea>
+                        </div>
+                     </div>
+
                   </div>
                </div>
             </div>

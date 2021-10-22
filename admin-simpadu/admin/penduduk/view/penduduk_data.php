@@ -1,7 +1,8 @@
 <?php 
 session_start();
 $page = 'data penduduk';
-$subPage = '';
+$subPage = 'tabel data penduduk';
+$idPage = 'dp-1.1';
 require_once($_SERVER['DOCUMENT_ROOT'] . '/app-project/admin-simpadu/templates/header.php');
 
 $penduduk = query("SELECT * FROM tbl_penduduk");
@@ -49,7 +50,7 @@ $penduduk = query("SELECT * FROM tbl_penduduk");
             <div class="col-md-12">
                <div class="card">
                   <div class="card-header">
-                     <a href="penduduk_tambah.php" class="btn btn-sm btn-info"><i class="fas fa-plus"></i> Tambah</a>
+                     <a href="penduduk_tambah" class="btn btn-sm btn-info"><i class="fas fa-plus"></i> Tambah</a>
                   </div>
                   <!-- /.card-header -->
                   <div class="card-body">
@@ -77,7 +78,7 @@ $penduduk = query("SELECT * FROM tbl_penduduk");
                               <td><?= ($pend['id_status'] == 1 ? 'Hidup' : 'Meninggal'); ?></td>
                               <td><?= checkMutasi($pend['id_mutasi']); ?></td>
                               <td>
-                                 <a href="penduduk_detail.php?id=<?= $pend['id_penduduk']; ?>" class="btn btn-sm btn-warning"><i class="fas fa-info-circle"></i> Detail</a>
+                                 <a href="penduduk_detail?id=<?= $pend['id_penduduk']; ?>" class="btn btn-sm btn-warning"><i class="fas fa-info-circle"></i> Detail</a>
                               </td>
                            </tr>
                            <?php endforeach; ?>

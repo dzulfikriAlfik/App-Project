@@ -44,11 +44,11 @@ $socmed = query("SELECT * FROM socmed");
          <nav class="mmm">
             <div class="mmm-content">
                <ul class="mmm-list">
-                  <li><a href="index.php">Home</a></li>
-                  <li><a href="tentang-kami.php">Tentang Kami</a></li>
-                  <li><a href="#">Kegiatan</a></li>
-                  <li><a href="#">Mitra</a></li>
-                  <li><a href="#">Kontak</a></li>
+                  <li><a href="<?= baseUrl(''); ?>">Home</a></li>
+                  <li><a href="<?= baseUrl('tentang-kami'); ?>">Tentang Kami</a></li>
+                  <li><a href="<?= baseUrl('kegiatan'); ?>">Kegiatan</a></li>
+                  <li><a href="<?= baseUrl('mitra'); ?>">Mitra</a></li>
+                  <li><a href="<?= baseUrl('kontak'); ?>">Kontak</a></li>
                   <li><a href="admin-page/auth/login">Login/Daftar</a></li>
                </ul>
             </div>
@@ -142,6 +142,9 @@ $socmed = query("SELECT * FROM socmed");
                               </li>
                               <li>
                                  <a href="<?= baseUrl('mitra'); ?>" data-title="Mitra"><span>Mitra</span></a>
+                              </li>
+                              <li>
+                                 <a href="<?= baseUrl('kontak'); ?>" data-title="Kontak"><span>Kontak</span></a>
                               </li>
                               <li>
                                  <a href="admin-page/auth/login" data-title="Login/Daftar"><span>Login/Daftar</span></a>

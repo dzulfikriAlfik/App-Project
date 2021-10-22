@@ -27,6 +27,8 @@
    <!-- Bootstrap4 Duallistbox -->
    <link rel="stylesheet" href="<?= baseUrl('admin-page/assets/bootstrap/plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css'); ?>">
    <link rel="stylesheet" href="<?= baseUrl('admin-page/assets/custom/myStyle.css'); ?>">
+   <!-- summernote -->
+   <link rel="stylesheet" href="<?= baseUrl('admin-page/assets/bootstrap/plugins/summernote/summernote-bs4.min.css'); ?>">
 </head>
 
 <body class="hold-transition sidebar-mini">

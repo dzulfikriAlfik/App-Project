@@ -19,6 +19,14 @@ function addClass($page, $currentPage, $className) {
    }
 }
 
+function addClassDropDown($page, $currentPage, $idPage, $idPageCurrent, $className) {
+   if(($page == $currentPage) && $idPage == $idPageCurrent) {
+      echo $className;
+   } else {
+      echo null;
+   }
+}
+
 function checkLink($page, $currentPage, $url) {
    if($page == $currentPage) {
       echo '#';
@@ -84,10 +92,13 @@ function tambah($data) {
    $nik             = mysqli_real_escape_string($conn, strip_tags($data['nik']));
    $nama            = mysqli_real_escape_string($conn, strip_tags($data['nama']));
    $tempat_lahir    = mysqli_real_escape_string($conn, strip_tags($data['tempat_lahir']));
+   $tanggal_lahir   = mysqli_real_escape_string($conn, strip_tags($data['tanggal_lahir']));
+   // $date            = str_replace('/', '-', $var);
+   // $tanggal_lahir   = date('Y-m-d', strtotime($date));
    $kelamin         = $data['kelamin'];
    $golongan_darah  = $data['golongan_darah'];
    $alamat          = mysqli_real_escape_string($conn, strip_tags($data['alamat']));
-   $pekerjaan       = mysqli_real_escape_string($conn, strip_tags($data['pekerjaan']));
+   $id_pekerjaan    = mysqli_real_escape_string($conn, strip_tags($data['id_pekerjaan']));
    $kewarganegaraan = mysqli_real_escape_string($conn, strip_tags($data['kewarganegaraan']));
    $id_agama        = $data['id_agama'];
    $no_kk           = mysqli_real_escape_string($conn, strip_tags($data['no_kk']));
@@ -97,7 +108,7 @@ function tambah($data) {
    $query = "INSERT INTO
                tbl_penduduk
             VALUES
-               (null, '$nik', '$nama', '$tempat_lahir', '$kelamin', '$golongan_darah', '$alamat', '$pekerjaan', '$kewarganegaraan', '$id_agama', '$no_kk', null, '$id_status', '$id_mutasi')
+               (null, '$nik', '$nama', '$tempat_lahir', '$tanggal_lahir', '$kelamin', '$golongan_darah', '$alamat', '$id_pekerjaan', '$kewarganegaraan', '$id_agama', '$no_kk', null, '$id_status', '$id_mutasi')
             ";
    mysqli_query($conn, $query) or die(mysqli_error($conn));
    return mysqli_affected_rows($conn);
@@ -110,10 +121,11 @@ function edit($data) {
    $nik             = mysqli_real_escape_string($conn, strip_tags($data['nik']));
    $nama            = mysqli_real_escape_string($conn, strip_tags($data['nama']));
    $tempat_lahir    = mysqli_real_escape_string($conn, strip_tags($data['tempat_lahir']));
+   $tanggal_lahir   = mysqli_real_escape_string($conn, strip_tags($data['tanggal_lahir']));
    $kelamin         = $data['kelamin'];
    $golongan_darah  = $data['golongan_darah'];
    $alamat          = mysqli_real_escape_string($conn, strip_tags($data['alamat']));
-   $pekerjaan       = mysqli_real_escape_string($conn, strip_tags($data['pekerjaan']));
+   $id_pekerjaan    = mysqli_real_escape_string($conn, strip_tags($data['id_pekerjaan']));
    $kewarganegaraan = mysqli_real_escape_string($conn, strip_tags($data['kewarganegaraan']));
    $id_agama        = $data['id_agama'];
    $no_kk           = mysqli_real_escape_string($conn, strip_tags($data['no_kk']));
@@ -124,10 +136,11 @@ function edit($data) {
                nik             = '$nik',
                nama            = '$nama',
                tempat_lahir    = '$tempat_lahir',
+               tanggal_lahir   = '$tanggal_lahir',
                kelamin         = '$kelamin',
                golongan_darah  = '$golongan_darah',
                alamat          = '$alamat',
-               pekerjaan       = '$pekerjaan',
+               id_pekerjaan    = '$id_pekerjaan',
                kewarganegaraan = '$kewarganegaraan',
                id_agama        = '$id_agama',
                no_kk           = '$no_kk',
@@ -135,6 +148,34 @@ function edit($data) {
                id_status       = '$id_status',
                id_mutasi       = '$id_mutasi'
             WHERE id_penduduk  = $id_penduduk
+            ";
+   mysqli_query($conn, $query) or die(mysqli_error($conn));
+   return mysqli_affected_rows($conn);
+}
+
+function tambahPekerjaan($data) {
+   $conn = koneksi();
+
+   $pekerjaan    = mysqli_real_escape_string($conn, strip_tags($data['pekerjaan']));
+   
+   $query = "INSERT INTO
+               tbl_pekerjaan
+            VALUES
+               (null, '$pekerjaan')
+            ";
+   mysqli_query($conn, $query) or die(mysqli_error($conn));
+   return mysqli_affected_rows($conn);
+}
+
+function editPekerjaan($data) {
+   $conn = koneksi();
+
+   $id_pekerjaan = mysqli_real_escape_string($conn, strip_tags($data['id_pekerjaan']));
+   $pekerjaan  = mysqli_real_escape_string($conn, strip_tags($data['pekerjaan']));
+   
+   $query = "UPDATE tbl_pekerjaan SET
+               pekerjaan   = '$pekerjaan'
+            WHERE id_pekerjaan  = $id_pekerjaan
             ";
    mysqli_query($conn, $query) or die(mysqli_error($conn));
    return mysqli_affected_rows($conn);

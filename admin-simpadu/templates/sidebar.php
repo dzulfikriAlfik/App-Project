@@ -19,7 +19,7 @@
       <nav class="mt-2">
          <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
             <li class="nav-item">
-               <a href="<?= checkLink($page, 'dashboard', 'admin/dashboard.php') ?>" class="nav-link <?= addClass($page, 'dashboard', 'active') ?>">
+               <a href="<?= checkLink($page, 'dashboard', 'admin/dashboard') ?>" class="nav-link <?= addClass($page, 'dashboard', 'active') ?>">
                   <i class="nav-icon fas fa-tachometer-alt"></i>
                   <p>Dashboard</p>
                </a>
@@ -33,7 +33,7 @@
                </a>
                <ul class="nav nav-treeview">
                   <li class="nav-item">
-                     <a href="<?= checkLink($page, 'data penduduk', 'admin/penduduk/view/penduduk_data.php'); ?>" class="nav-link <?= addClass($page, 'data penduduk', 'active'); ?>">
+                     <a href="<?= checkLink($page, 'data penduduk', 'admin/penduduk/view/penduduk_data'); ?>" class="nav-link <?= addClass($page, 'data penduduk', 'active'); ?>">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Data Penduduk</p>
                      </a>
@@ -52,8 +52,14 @@
                   </li>
                </ul>
             </li>
-            <li class="nav-item has-treeview <?= addClass($page, 'agama', 'menu-open'); ?>">
-               <a href="#" class="nav-link <?= addClass($page, 'agama', 'active'); ?>">
+            <?php 
+               $masterDataPage = null;
+               if(($subPage == 'agama' && $idPage == 'md-1') || $subPage == 'kategori' || $subPage == 'klasifikasi' || $subPage == 'pekerjaan') {
+                  $masterDataPage = $page;
+               }
+            ?>
+            <li class="nav-item has-treeview <?= addClass($page, $masterDataPage, 'menu-open'); ?>">
+               <a href="#" class="nav-link <?= addClass($page, $masterDataPage, 'active'); ?>">
                   <i class="nav-icon fas fa-database"></i>
                   <p>Master Data
                      <i class="right fas fa-angle-left"></i>
@@ -61,7 +67,7 @@
                </a>
                <ul class="nav nav-treeview">
                   <li class="nav-item">
-                     <a href="<?= checkLink($page, 'agama', 'admin/data_agama.php'); ?>" class="nav-link <?= addClass($page, 'agama', 'active'); ?>">
+                     <a href="<?= checkLink($page, $masterDataPage, 'admin/master_data/agama_data'); ?>" class="nav-link <?= addClassDropDown($page, $masterDataPage, $idPage, 'md-1', 'active'); ?>">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Agama</p>
                      </a>
@@ -78,22 +84,28 @@
                         <p>Klasifikasi</p>
                      </a>
                   </li>
+                  <li class="nav-item">
+                     <a href="<?= checkLink($page, $masterDataPage, 'admin/master_data/view/pekerjaan_data'); ?>" class="nav-link <?= addClassDropDown($page, $masterDataPage, $idPage, 'md-4', 'active'); ?>">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Pekerjaan</p>
+                     </a>
+                  </li>
                </ul>
             </li>
             <li class="nav-item">
-               <a href="<?= checkLink($page, 'manajemen akses', 'admin/manajemen_akses.php') ?>" class="nav-link <?= addClass($page, 'manajemen akses', 'active') ?>">
+               <a href="<?= checkLink($page, 'manajemen akses', 'admin/manajemen_akses') ?>" class="nav-link <?= addClass($page, 'manajemen akses', 'active') ?>">
                   <i class="nav-icon fas fa-tasks"></i>
                   <p>Manajemen Akses</p>
                </a>
             </li>
             <li class="nav-item">
-               <a href="<?= checkLink($page, 'profil desa', 'admin/profil_desa.php') ?>" class="nav-link <?= addClass($page, 'profil desa', 'active') ?>">
+               <a href="<?= checkLink($page, 'profil desa', 'admin/profil_desa') ?>" class="nav-link <?= addClass($page, 'profil desa', 'active') ?>">
                   <i class="nav-icon fas fa-id-card"></i>
                   <p>Profil Desa</p>
                </a>
             </li>
             <li class="nav-item">
-               <a href="<?= baseUrl('logout.php'); ?>" class="nav-link">
+               <a href="<?= baseUrl('logout'); ?>" class="nav-link">
                   <i class="nav-icon fas fa-sign-out-alt"></i>
                   <p>Logout</p>
                </a>

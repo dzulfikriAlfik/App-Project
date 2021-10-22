@@ -1,0 +1,60 @@
+RewriteEngine on
+
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.php -f
+RewriteRule ^(.*)$ $1.php [NC,L] 
+
+DirectoryIndex index.php
+RewriteRule ^tentang-kami tentang-kami.php
+RewriteRule ^kegiatan kegiatan.php
+RewriteRule ^mitra mitra.php
+RewriteRule ^kontak kontak.php
+RewriteRule ^dashboard_mitra admin-page/dashboard_mitra.php
+RewriteRule ^dashboard admin-page/dashboard.php
+RewriteRule ^login_mitra admin-page/auth/login_mitra.php
+RewriteRule ^login admin-page/auth/login.php
+RewriteRule ^logout admin-page/auth/logout.php
+RewriteRule ^cek_login_admin admin-page/auth/cek_login_admin.php
+RewriteRule ^cek_login_mitra admin-page/auth/cek_login_mitra.php
+RewriteRule ^daftar_mitra_data admin-page/mitra/daftar_mitra_data.php
+RewriteRule ^kirim_chat_mitra_aksi admin-page/mitra/kirim_chat_mitra_aksi.php
+RewriteRule ^kirim_chat_mitra admin-page/mitra/kirim_chat_mitra.php
+RewriteRule ^kirim_chat_aksi admin-page/mitra/kirim_chat_aksi.php
+RewriteRule ^kirim_chat admin-page/mitra/kirim_chat.php
+RewriteRule ^chat_mitra admin-page/mitra/chat_mitra.php
+RewriteRule ^daftar_mitra_chat admin-page/mitra/mitra_chat.php
+RewriteRule ^detail_mitra_chat admin-page/mitra/detail_mitra_chat.php
+RewriteRule ^daftar_mitra_aksi admin-page/auth/daftar_mitra_aksi.php
+RewriteRule ^daftar_mitra admin-page/auth/daftar_mitra.php
+RewriteRule ^hapus_mitra admin-page/mitra/hapus_mitra.php
+RewriteRule ^company_data admin-page/company/company_data.php
+RewriteRule ^company_ubah_data admin-page/company/company_ubah_data.php
+RewriteRule ^admin_data admin-page/company/admin_data.php
+RewriteRule ^admin_hapus admin-page/company/admin_hapus.php
+RewriteRule ^admin_tambah_aksi admin-page/company/admin_tambah_aksi.php
+RewriteRule ^admin_tambah admin-page/company/admin_tambah.php
+RewriteRule ^admin_edit_aksi admin-page/company/admin_edit_aksi.php
+RewriteRule ^admin_edit admin-page/company/admin_edit.php
+RewriteRule ^approve_mitra admin-page/mitra/approve_mitra.php
+RewriteRule ^detail_mitra admin-page/mitra/detail_mitra.php
+RewriteRule ^tambah_mitra_aksi admin-page/mitra/tambah_mitra_aksi.php
+RewriteRule ^tambah_mitra admin-page/mitra/tambah_mitra.php
+RewriteRule ^edit_mitra_aksi admin-page/mitra/edit_mitra_aksi.php
+RewriteRule ^daftar_kegiatan_data admin-page/kegiatan/kegiatan_data.php
+RewriteRule ^tambah_kegiatan_aksi admin-page/kegiatan/tambah_kegiatan_aksi.php
+RewriteRule ^tambah_kegiatan admin-page/kegiatan/tambah_kegiatan.php
+RewriteRule ^edit_kegiatan_aksi admin-page/kegiatan/edit_kegiatan_aksi.php
+RewriteRule ^edit_kegiatan admin-page/kegiatan/edit_kegiatan.php
+RewriteRule ^hapus_kegiatan admin-page/kegiatan/hapus_kegiatan.php
+RewriteRule ^detail_kegiatan admin-page/kegiatan/detail_kegiatan.php
+RewriteRule ^daftar_galery admin-page/kegiatan/daftar_galery.php
+RewriteRule ^tambah_galery_aksi admin-page/kegiatan/tambah_galery_aksi.php
+RewriteRule ^tambah_galery admin-page/kegiatan/tambah_galery.php
+RewriteRule ^hapus_galery admin-page/kegiatan/hapus_galery.php
+
+# RewriteRule ^ http://example.com/something-blew-up.html [R=404]
+# RewriteEngine on
+# RewriteRule ^homepage index.php
+# RewriteRule ^tentang-kami about.php
+# RewriteRule ^barang/detail/([0-9]+)/(.*)$ produk.php?id=$1&nama=$2
+# RewriteRule ^lihat/([0-9]+)$ ../produk.php?id=$1&nama=$2

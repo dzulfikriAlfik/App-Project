@@ -1,13 +1,15 @@
 <?php 
 $page = 'data penduduk';
-$subPage = ' | Edit data penduduk';
+$subPage = 'edit data penduduk';
+$idPage = 'dp-1.4';
 require_once($_SERVER['DOCUMENT_ROOT'] . '/app-project/admin-simpadu/templates/header.php');
 
 $id_penduduk = $_GET['id'];
-$pend   = query("SELECT * FROM tbl_penduduk WHERE id_penduduk = $id_penduduk");
-$agama  = query("SELECT * FROM tbl_agama");
-$status = query("SELECT * FROM tbl_status");
-$mutasi = query("SELECT * FROM tbl_mutasi");
+$pend      = query("SELECT * FROM tbl_penduduk WHERE id_penduduk = $id_penduduk");
+$agama     = query("SELECT * FROM tbl_agama");
+$status    = query("SELECT * FROM tbl_status");
+$mutasi    = query("SELECT * FROM tbl_mutasi");
+$pekerjaan = query("SELECT * FROM tbl_pekerjaan");
 ?>
 
 <!-- Content Wrapper. Contains page content -->
@@ -21,7 +23,7 @@ $mutasi = query("SELECT * FROM tbl_mutasi");
             </div>
             <div class="col-sm-6">
                <ol class="breadcrumb float-sm-right">
-                  <li class="breadcrumb-item"><a href="penduduk_data.php">Data Penduduk</a></li>
+                  <li class="breadcrumb-item"><a href="penduduk_data">Data Penduduk</a></li>
                   <li class="breadcrumb-item">Edit Data Penduduk</li>
                </ol>
             </div>
@@ -37,11 +39,11 @@ $mutasi = query("SELECT * FROM tbl_mutasi");
             <div class="col-md-12">
                <div class="card card-primary">
                   <div class="card-header">
-                     <a href="penduduk_detail.php?id=<?= $id_penduduk; ?>" class="btn btn-sm btn-warning text-dark"><i class="fas fa-chevron-circle-left"></i> Kembali</a>
+                     <a href="penduduk_detail?id=<?= $id_penduduk; ?>" class="btn btn-sm btn-warning text-dark"><i class="fas fa-chevron-circle-left"></i> Kembali</a>
                   </div>
                   <!-- /.card-header -->
                   <!-- form start -->
-                  <form id="quickForm" method="post" action="<?= baseUrl('admin/penduduk/aksi/update.php'); ?>">
+                  <form id="pendudukValidator" method="post" action="<?= baseUrl('admin/penduduk/aksi/penduduk_update'); ?>">
                      <input type="hidden" name="id_penduduk" value="<?= $pend['id_penduduk']; ?>">
                      <div class="card-body">
                         <div class="row">
@@ -55,15 +57,24 @@ $mutasi = query("SELECT * FROM tbl_mutasi");
                            </div>
                         </div>
                         <div class="row">
-                           <div class="form-group col-md-12">
+                           <div class="form-group col-md-6">
                               <label for="no_kk">No. Kartu Keluarga</label>
                               <input type="text" name="no_kk" class="form-control" id="no_kk" placeholder="Masukan No. Kartu Keluarga" value="<?= $pend['no_kk']; ?>">
+                           </div>
+                           <div class="form-group col-md-6">
+                              <label for="tempat_lahir">Tempat Lahir</label>
+                              <input type="text" name="tempat_lahir" class="form-control" id="tempat_lahir" placeholder="Masukan Tempat lahir" value="<?= $pend['tempat_lahir']; ?>">
                            </div>
                         </div>
                         <div class="row">
                            <div class="form-group col-md-6">
-                              <label for="tempat_lahir">Tempat Lahir</label>
-                              <input type="text" name="tempat_lahir" class="form-control" id="tempat_lahir" placeholder="Masukan Tempat lahir" value="<?= $pend['tempat_lahir']; ?>">
+                              <label>Tanggal Lahir</label>
+                              <div class="input-group date" id="reservationdate" data-target-input="nearest">
+                                 <input name="tanggal_lahir" id="tanggal_lahir" placeholder="<?= $pend['tanggal_lahir']; ?>" type="text" class="form-control datetimepicker-input" data-target="#reservationdate" value="<?= $pend['tanggal_lahir']; ?>" />
+                                 <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
+                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                 </div>
+                              </div>
                            </div>
                            <div class="col-sm-6">
                               <label for="kelamin">Jenis Kelamin</label>
@@ -83,7 +94,7 @@ $mutasi = query("SELECT * FROM tbl_mutasi");
                            <div class="col-md-6">
                               <div class="form-group">
                                  <label>Golongan Darah</label>
-                                 <select class="form-control" name="golongan_darah" id="golongan_darah">
+                                 <select class="form-control select2bs4" name="golongan_darah" id="golongan_darah">
                                     <?php $darah = $pend['golongan_darah'] ?>
                                     <option value="-">-</option>
                                     <option value="A" <?= returnChoice($darah, 'A', 'selected'); ?>>A</option>
@@ -95,7 +106,12 @@ $mutasi = query("SELECT * FROM tbl_mutasi");
                            </div>
                            <div class="form-group col-md-6">
                               <label for="pekerjaan">Pekerjaan</label>
-                              <input type="text" name="pekerjaan" class="form-control" id="pekerjaan" placeholder="Masukan Pekerjaan" value="<?= $pend['pekerjaan']; ?>">
+                              <select class="form-control select2bs4" name="id_pekerjaan" id="id_pekerjaan">
+                                 <option value="">-</option>
+                                 <?php foreach($pekerjaan as $value) : ?>
+                                 <option value="<?= $value['id_pekerjaan']; ?>" <?= returnChoice($pend['id_pekerjaan'], $value['id_pekerjaan'], 'selected'); ?>><?= $value['pekerjaan']; ?></option>
+                                 <?php endforeach; ?>
+                              </select>
                            </div>
                         </div>
                         <div class="row">
@@ -114,7 +130,7 @@ $mutasi = query("SELECT * FROM tbl_mutasi");
                            <div class="col-md-6">
                               <div class="form-group">
                                  <label>Agama</label>
-                                 <select class="form-control" name="id_agama" id="id_agama">
+                                 <select class="form-control select2bs4" name="id_agama" id="id_agama">
                                     <option value="">-</option>
                                     <?php foreach($agama as $value) : ?>
                                     <option value="<?= $value['id_agama']; ?>" <?= returnChoice($pend['id_agama'], $value['id_agama'], 'selected'); ?>><?= $value['agama']; ?></option>
@@ -127,7 +143,7 @@ $mutasi = query("SELECT * FROM tbl_mutasi");
                            <div class="col-md-6">
                               <div class="form-group">
                                  <label>Status</label>
-                                 <select class="form-control" name="id_status" id="id_status">
+                                 <select class="form-control select2bs4" name="id_status" id="id_status">
                                     <option value="">-</option>
                                     <?php foreach($status as $value) : ?>
                                     <option value="<?= $value['id_status']; ?>" <?= returnChoice($pend['id_status'], $value['id_status'], 'selected'); ?>><?= $value['status']; ?></option>
@@ -138,7 +154,7 @@ $mutasi = query("SELECT * FROM tbl_mutasi");
                            <div class="col-md-6">
                               <div class="form-group">
                                  <label>Mutasi</label>
-                                 <select class="form-control" name="id_mutasi" id="id_mutasi">
+                                 <select class="form-control select2bs4" name="id_mutasi" id="id_mutasi">
                                     <option value="">-</option>
                                     <?php foreach($mutasi as $value) : ?>
                                     <option value="<?= $value['id_mutasi']; ?>" <?= returnChoice($pend['id_mutasi'], $value['id_mutasi'], 'selected'); ?>><?= $value['mutasi']; ?></option>

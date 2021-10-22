@@ -1,6 +1,7 @@
 <?php 
 $page = 'dashboard';
 $subPage = null;
+$idPage = 'd-1';
 require_once($_SERVER['DOCUMENT_ROOT'] . '/app-project/admin-simpadu/templates/header.php');
 ?>
 

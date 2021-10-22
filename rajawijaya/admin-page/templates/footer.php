@@ -40,6 +40,14 @@
 <script src="<?= baseUrl('admin-page/assets/custom/myDataTables.js'); ?>"></script>
 <script src="<?= baseUrl('admin-page/assets/custom/myDateTimePicker.js'); ?>"></script>
 <script src="<?= baseUrl('admin-page/assets/custom/myScript.js'); ?>"></script>
+<!-- Summernote -->
+<script src="<?= baseUrl('admin-page/assets/bootstrap/plugins/summernote/summernote-bs4.min.js'); ?>"></script>
+<script>
+$(function() {
+   // Summernote
+   $('.textarea').summernote()
+})
+</script>
 <!-- page script -->
 <script>
 $(function() {

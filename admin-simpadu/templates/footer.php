@@ -25,125 +25,24 @@
 <script src="<?= baseUrl('assets/bootstrap/plugins/jquery-validation/additional-methods.min.js'); ?>"></script>
 <!-- bs-custom-file-input -->
 <script src="<?= baseUrl('assets/bootstrap/plugins/bs-custom-file-input/bs-custom-file-input.min.js'); ?>"></script>
+<!-- Select2 -->
+<script src="<?= baseUrl('assets/bootstrap/plugins/select2/js/select2.full.min.js'); ?>"></script>
+<!-- Bootstrap4 Duallistbox -->
+<script src="<?= baseUrl('assets/bootstrap/plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js'); ?>"></script>
+<!-- InputMask -->
+<script src="<?= baseUrl('assets/bootstrap/plugins/moment/moment.min.js'); ?>"></script>
+<script src="<?= baseUrl('assets/bootstrap/plugins/inputmask/jquery.inputmask.min.js'); ?>"></script>
+<!-- date-range-picker -->
+<script src="<?= baseUrl('assets/bootstrap/plugins/daterangepicker/daterangepicker.js'); ?>"></script>
+<!-- Tempusdominus Bootstrap 4 -->
+<script src="<?= baseUrl('assets/bootstrap/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js'); ?>"></script>
+<script src="<?= baseUrl('assets/custom/myValidator.js'); ?>"></script>
+<script src="<?= baseUrl('assets/custom/myDataTables.js'); ?>"></script>
+<script src="<?= baseUrl('assets/custom/myDateTimePicker.js'); ?>"></script>
 <!-- page script -->
 <script>
 $(function() {
    bsCustomFileInput.init();
-});
-</script>
-<script>
-$(function() {
-   $("#example1").DataTable({
-      "responsive": true,
-      "autoWidth": false,
-   });
-   $('#example2').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": false,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false,
-      "responsive": true,
-   });
-});
-</script>
-<script>
-$(function() {
-   // $.validator.setDefaults({
-   //    submitHandler: function() {
-   //       window.location.href('penduduk_save.php');
-   //    }
-   // });
-   $('#quickForm').validate({
-      rules: {
-         nik: {
-            required: true,
-            minlength: 16,
-            maxlength: 16,
-            digits: true,
-         },
-         nama: {
-            required: true,
-         },
-         no_kk: {
-            required: true,
-            minlength: 16,
-            maxlength: 16,
-            digits: true,
-         },
-         tempat_lahir: {
-            required: true,
-         },
-         pekerjaan: {
-            required: true,
-         },
-         alamat: {
-            required: true,
-         },
-         kewarganegaraan: {
-            required: true,
-         },
-         id_agama: {
-            required: true,
-         },
-         id_status: {
-            required: true,
-         },
-         id_mutasi: {
-            required: true,
-         },
-      },
-      messages: {
-         nik: {
-            required: "NIK tidak boleh kosong!",
-            minlength: "NIK harus berjumlah 16 angka",
-            maxlength: "NIK harus berjumlah 16 angka",
-            digits: "NIK hanya boleh diisi dengan angka"
-         },
-         nama: {
-            required: "Nama tidak boleh kosong!"
-         },
-         no_kk: {
-            required: "No. Kartu Keluarga tidak boleh kosong!",
-            minlength: "No. Kartu Keluarga harus berjumlah 16 angka",
-            maxlength: "No. Kartu Keluarga harus berjumlah 16 angka",
-            digits: "No. Kartu Keluarga hanya boleh diisi dengan angka"
-         },
-         tempat_lahir: {
-            required: "Tempat lahir tidak boleh kosong!"
-         },
-         pekerjaan: {
-            required: "Pekerjaan tidak boleh kosong!"
-         },
-         alamat: {
-            required: "Alamat tidak boleh kosong!"
-         },
-         kewarganegaraan: {
-            required: "Kewarganegaraan tidak boleh kosong!"
-         },
-         id_agama: {
-            required: "Agama tidak boleh kosong!"
-         },
-         id_status: {
-            required: "Status tidak boleh kosong!"
-         },
-         id_mutasi: {
-            required: "Mutasi tidak boleh kosong!"
-         },
-      },
-      errorElement: 'span',
-      errorPlacement: function(error, element) {
-         error.addClass('invalid-feedback');
-         element.closest('.form-group').append(error);
-      },
-      highlight: function(element, errorClass, validClass) {
-         $(element).addClass('is-invalid');
-      },
-      unhighlight: function(element, errorClass, validClass) {
-         $(element).removeClass('is-invalid');
-      }
-   });
 });
 </script>
 </body>
