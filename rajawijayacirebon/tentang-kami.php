@@ -1,4 +1,4 @@
-<?php include_once 'templates/header.php'; ?>
+<?php include_once 'templates/home_header.php'; ?>
 
 <!-- Begin bread crumbs -->
 <nav class="bread-crumbs">
@@ -63,11 +63,11 @@
                </p>
             </div>
          </div>
-         <?php foreach($mitra_kami as $mitra) : ?>
+         <?php foreach ($mitra_kami as $mitra) : ?>
          <div class="col-lg-3 col-md-4 col-sm-4 col-6 item">
             <!-- Begin brands item -->
             <div class="brands-item item-style">
-               <img data-src="admin-page/assets/img/mitra/<?= $mitra['logo']; ?>" class="lazy" src="admin-page/assets/img/mitra/<?= $mitra['logo']; ?>" alt="" />
+               <img data-src="<?= baseUrl('assets/img/mitra/') . $mitra['logo']; ?>" class="lazy" src="<?= baseUrl('assets/img/mitra/') . $mitra['logo']; ?>" alt="" />
             </div>
             <!-- End brands item -->
          </div>
@@ -78,4 +78,4 @@
 <!-- End our customers -->
 
 
-<?php include_once 'templates/footer.php'; ?>
+<?php include_once 'templates/home_footer.php'; ?>

@@ -1,8 +1,4 @@
-<?php
-include_once 'templates/header.php';
-
-?>
-
+<?php include_once 'templates/home_header.php'; ?>
 
 <!-- Begin bread crumbs -->
 <nav class="bread-crumbs">
@@ -32,7 +28,7 @@ include_once 'templates/header.php';
                <h2>Foto Progress Pekerjaan</h2>
             </div>
          </div>
-         <?php 
+         <?php
          $kegiatan = query("SELECT * FROM kegiatan JOIN galery_kegiatan ON kegiatan.id_kegiatan = galery_kegiatan.id_kegiatan ORDER BY kegiatan.tanggal DESC");
 
          foreach ($kegiatan as $galery) :
@@ -55,9 +51,9 @@ include_once 'templates/header.php';
             </article><!-- End news item -->
          </div>
          <?php endforeach; ?>
-         
+
       </div>
    </div>
-</section><!-- End latest news -->  
+</section><!-- End latest news -->
 
-<?php include_once 'templates/footer.php'; ?>
+<?php include_once 'templates/home_footer.php'; ?>

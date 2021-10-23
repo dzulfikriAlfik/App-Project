@@ -1,17 +1,15 @@
-<?php include_once 'templates/header.php'; ?>
+<?php include_once 'templates/home_header.php'; ?>
 
-         
- <!-- Begin intro -->
+<!-- Begin intro -->
 <div class="section-bgc intro">
    <div class="intro-slider">
-      <div class="intro-item" style="background-image: url(templates/assets/img/fo2.jpg);">
+      <div class="intro-item" style="background-image: url(assets/home/img/fo2.jpg);">
          <div class="container">
             <div class="row">
                <div class="col offset-xs-4 offset-sm-1 offset-md-3 offset-lg-0">
                   <div class="intro-content bg-hero">
                      <div class="section-heading shm-none">
                         <h1>Sekilas <br> Tentang Kami</h1>
-                        <!--(strlen($result) > 15) ? $message = substr($result, 0, 15) . " . . . ." : $message = $result;-->
                         <p class="section-desc"><?= $sejarah ?></p>
                      </div>
                      <div class="ml-4 wrap-btn intro-btns">
@@ -41,7 +39,7 @@
             </div>
          </div>
 
-         <?php foreach($services as $service) : ?>
+         <?php foreach ($services as $service) : ?>
          <div class="col-lg-4 col-md-6 col-12 item">
             <a href="single-services.html" class="iitem item-style">
                <div class="iitem-icon">
@@ -68,10 +66,10 @@
                <div class="main-counter-item">
                   <div class="main-counter-item-center">
                      <div>
-                        <?php 
-                            $now = date("Y");
-                            $last = date("Y") - 5;
-                            $since = $now - $last;
+                        <?php
+                        $now = date("Y");
+                        $last = date("Y") - 5;
+                        $since = $now - $last;
                         ?>
                         <div class="main-counter-numb spincrement" data-from="0" data-to="<?= $since; ?>">0</div>
                         <div class="main-counter-heading">Years <br> Of Experience</div>
@@ -109,7 +107,7 @@
                <h2>Foto Progress Pekerjaan</h2>
             </div>
          </div>
-         <?php 
+         <?php
          $kegiatan = query("SELECT * FROM kegiatan JOIN galery_kegiatan ON kegiatan.id_kegiatan = galery_kegiatan.id_kegiatan ORDER BY kegiatan.tanggal DESC LIMIT 6");
 
          foreach ($kegiatan as $galery) :
@@ -144,7 +142,7 @@
          </div>
       </div>
    </div>
-</section><!-- End latest news -->        
-         
+</section><!-- End latest news -->
 
-<?php include_once 'templates/footer.php'; ?>
+
+<?php include_once 'templates/home_footer.php'; ?>
