@@ -36,16 +36,16 @@ $chatMitra = query("SELECT * FROM chat WHERE id_mitra = '$id_mitra' ORDER BY id_
             $message   = $_SESSION['message'];
             $typeAlert = $_SESSION['type'];
          ?>
-         <div class="row">
-            <div class="col-md-12">
-               <div class="alert alert-<?= $typeAlert; ?> alert-dismissible fade show" role="alert">
-                  <strong><?= $message; ?></strong>
-                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                     <span aria-hidden="true">&times;</span>
-                  </button>
+            <div class="row">
+               <div class="col-md-12">
+                  <div class="alert alert-<?= $typeAlert; ?> alert-dismissible fade show" role="alert">
+                     <strong><?= $message; ?></strong>
+                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                     </button>
+                  </div>
                </div>
             </div>
-         </div>
          <?php
             unset($_SESSION['alert']);
          endif; ?>
@@ -77,15 +77,15 @@ $chatMitra = query("SELECT * FROM chat WHERE id_mitra = '$id_mitra' ORDER BY id_
                         </thead>
                         <tbody>
                            <?php foreach ($chatMitra as $chat) : ?>
-                           <tr>
-                              <td width="120" class="text-center"><?= $chat['tanggal']; ?></td>
-                              <td width="650"><?= $chat['chat']; ?></td>
-                              <td width="40">
-                                 <?php if ($chat['id_admin'] != null) : ?>
-                                 <a href="action/admin_hapus_chat.php?id=<?= $chat['id_chat']; ?>" class="btn btn-sm btn-danger" onclick="return confirm('Yakin hapus data?')"> Hapus</a>
-                                 <?php endif; ?>
-                              </td>
-                           </tr>
+                              <tr>
+                                 <td width="120" class="text-center"><?= $chat['tanggal']; ?></td>
+                                 <td width="650"><?= $chat['chat']; ?></td>
+                                 <td width="40">
+                                    <?php if ($chat['id_admin'] != null) : ?>
+                                       <a href="action/admin_hapus_chat.php?id=<?= $chat['id_chat']; ?>&id_mitra=<?= $chat['id_mitra']; ?>" class="btn btn-sm btn-danger" onclick="return confirm('Yakin hapus data?')"> Hapus</a>
+                                    <?php endif; ?>
+                                 </td>
+                              </tr>
                            <?php endforeach; ?>
                         </tbody>
                      </table>
