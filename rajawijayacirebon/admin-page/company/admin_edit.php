@@ -1,19 +1,17 @@
-<?php
-session_start();
-if (!isset($_SESSION['login'])) {
-   header("Location: login");
+<?php session_start();
+if (!isset($_SESSION["login"])) {
+   header("Location: ../../auth/login");
    exit();
 }
 
 $page = 'profile perusahaan';
 $subPage = 'data admin';
 $idPage = 'cd-2';
-include_once "../templates/header.php";
-$koneksi = mysqli_connect('localhost', 'root', '', 'compro_adiwijaya');
-// include_once "../../koneksi.php";
+include_once "../../templates/admin_header.php";
+
 $nama_admin = $_SESSION['nama_admin'];
 $id_admin = $_GET['id'];
-$admin = query("SELECT * FROM admin WHERE id_admin ='$id_admin' ");
+$row = single_query("SELECT * FROM admin WHERE id_admin ='$id_admin' ");
 ?>
 
 <!-- All Content -->
@@ -68,9 +66,8 @@ $admin = query("SELECT * FROM admin WHERE id_admin ='$id_admin' ");
                   </div>
                   <!-- /.card-header -->
                   <!-- form start -->
-                  <?php foreach ($admin as $row) : ?>
                   <div class="card-body">
-                     <form action="admin_edit_aksi" method="POST">
+                     <form action="action/admin_edit_aksi" method="POST">
                         <input type="hidden" class="form-control" name="id_admin" value="<?= $row['id_admin'] ?>">
                         <input type="hidden" class="form-control" name="passwordLama" value="<?= $row['password'] ?>">
                         <div class="form-group">
@@ -106,7 +103,6 @@ $admin = query("SELECT * FROM admin WHERE id_admin ='$id_admin' ");
                         </div>
                      </form>
                   </div>
-                  <?php endforeach; ?>
 
                </div>
             </div>
@@ -116,4 +112,4 @@ $admin = query("SELECT * FROM admin WHERE id_admin ='$id_admin' ");
 
 </div>
 <!-- End All Content -->
-<?php include_once "../templates/footer.php"; ?>
+<?php include_once "../../templates/admin_footer.php"; ?>

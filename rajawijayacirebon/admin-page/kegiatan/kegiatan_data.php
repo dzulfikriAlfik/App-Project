@@ -1,15 +1,14 @@
-<?php 
-session_start();
-if(!isset($_SESSION['login'])) {
-    header("Location: login");
-    exit();
+<?php session_start();
+if (!isset($_SESSION["login"])) {
+   header("Location: ../../auth/login");
+   exit();
 }
 
 
 $page = 'data kegiatan';
 $subPage = 'daftar kegiatan';
 $idPage = 'keg-1';
-include_once "../templates/header.php";
+include_once "../../templates/admin_header.php";
 ?>
 
 <!-- All Content -->
@@ -29,22 +28,22 @@ include_once "../templates/header.php";
          </div>
          <!-- alert -->
          <?php
-         if (isset($_SESSION['alert'])) : 
-         $message   = $_SESSION['message'];
-         $typeAlert = $_SESSION['type'];
+         if (isset($_SESSION['alert'])) :
+            $message   = $_SESSION['message'];
+            $typeAlert = $_SESSION['type'];
          ?>
          <div class="row">
-             <div class="col-md-12">
-                <div class="alert alert-<?= $typeAlert; ?> alert-dismissible fade show" role="alert">
-                   <strong><?= $message; ?></strong>
-                   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                   </button>
-                </div>
-             </div>
+            <div class="col-md-12">
+               <div class="alert alert-<?= $typeAlert; ?> alert-dismissible fade show" role="alert">
+                  <strong><?= $message; ?></strong>
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                     <span aria-hidden="true">&times;</span>
+                  </button>
+               </div>
+            </div>
          </div>
-         <?php 
-         unset($_SESSION['alert']);
+         <?php
+            unset($_SESSION['alert']);
          endif; ?>
          <!-- EndAlert -->
       </div>
@@ -57,12 +56,12 @@ include_once "../templates/header.php";
          <div class="row">
             <div class="col-md-12">
                <div class="card card-primary card-outline">
-                  
-                    <div class="card-header">
-                        <a href="tambah_kegiatan" class="btn btn-sm btn-info"><i class="fas fa-plus"></i> Tambah</a>
-                    </div>
-                    <!-- /.card-header -->
-                    <div class="card-body">
+
+                  <div class="card-header">
+                     <a href="tambah_kegiatan" class="btn btn-sm btn-info"><i class="fas fa-plus"></i> Tambah</a>
+                  </div>
+                  <!-- /.card-header -->
+                  <div class="card-body">
                      <table id="example1" class="table table-bordered table-striped my-table">
                         <thead>
                            <tr>
@@ -74,11 +73,11 @@ include_once "../templates/header.php";
                            </tr>
                         </thead>
                         <tbody>
-                            <?php
-                            $no = 1;
-                            $kegiatan = query("SELECT * FROM kegiatan");
-                            foreach($kegiatan as $value) :
-                            ?>
+                           <?php
+                           $no = 1;
+                           $kegiatan = query("SELECT * FROM kegiatan");
+                           foreach ($kegiatan as $value) :
+                           ?>
                            <tr>
                               <td><?= $no++ ?></td>
                               <td><?= $value['nama_kegiatan'] ?></td>
@@ -86,14 +85,14 @@ include_once "../templates/header.php";
                               <td><?= tgl_indo($value['tanggal']); ?></td>
                               <td class="text-center">
                                  <a href="edit_kegiatan?id=<?= $value['id_kegiatan'] ?>" class="btn btn-sm btn-warning"><i class="fas fa-edit"></i> Edit</a>
-                                 <a href="hapus_kegiatan?id=<?= $value['id_kegiatan'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('Yakin hapus data?')"><i class="fas fa-trash"></i> Hapus</a>
+                                 <a href="action/hapus_kegiatan?id=<?= $value['id_kegiatan'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('Yakin hapus data?')"><i class="fas fa-trash"></i> Hapus</a>
                               </td>
                            </tr>
                            <?php endforeach; ?>
                         </tbody>
                      </table>
-                    </div>
-                  
+                  </div>
+
                </div>
             </div>
          </div>
@@ -102,4 +101,4 @@ include_once "../templates/header.php";
 
 </div>
 <!-- End All Content -->
-<?php include_once "../templates/footer.php"; ?>
+<?php include_once "../../templates/admin_footer.php"; ?>

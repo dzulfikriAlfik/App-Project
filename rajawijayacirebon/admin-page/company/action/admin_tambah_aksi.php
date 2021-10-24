@@ -1,7 +1,6 @@
 <?php session_start();
-
-if (!isset($_SESSION['login'])) {
-    header("Location: login");
+if (!isset($_SESSION["login"])) {
+    header("Location: ../../../auth/login");
     exit();
 }
 
@@ -21,7 +20,7 @@ if (isset($_POST['admin_tambah'])) {
         $_SESSION['alert'] = true;
         $_SESSION['message'] = "Username / email sudah terdaftar";
         $_SESSION['type'] = 'danger';
-        header("Location: admin_tambah");
+        header("Location: ../admin_tambah");
     } else {
         $password = password_hash($password, PASSWORD_DEFAULT);
 
@@ -30,12 +29,12 @@ if (isset($_POST['admin_tambah'])) {
             $_SESSION['alert'] = true;
             $_SESSION['message'] = 'Data berhasil ditambahkan';
             $_SESSION['type'] = 'success';
-            header("Location: admin_data");
+            header("Location: ../admin_data");
         } else {
             $_SESSION['alert'] = true;
             $_SESSION['message'] = mysqli_error($koneksi);
             $_SESSION['type'] = 'danger';
-            header("Location: admin_tambah");
+            header("Location: ../admin_tambah");
         }
     }
 }

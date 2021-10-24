@@ -1,18 +1,14 @@
-<?php 
-session_start();
-if(!isset($_SESSION['login'])) {
-    header("Location: login");
-    exit();
-} elseif (isset($_SESSION['login_mitra'])) {
-    header("Location: dashboard_mitra");
-    exit();
+<?php session_start();
+if (!isset($_SESSION["login"])) {
+   header("Location: ../../auth/login");
+   exit();
 }
 
 
 $page = 'mitra';
 $subPage = 'chat';
 $idPage = 'md-2';
-include_once "../templates/header.php";
+include_once "../../templates/admin_header.php";
 
 $chatMitra = query("SELECT * FROM chat INNER JOIN mitra ON chat.id_mitra = mitra.id_mitra ORDER BY tanggal DESC ");
 
@@ -35,22 +31,22 @@ $chatMitra = query("SELECT * FROM chat INNER JOIN mitra ON chat.id_mitra = mitra
          </div>
          <!-- alert -->
          <?php
-         if (isset($_SESSION['alert'])) : 
-         $message   = $_SESSION['message'];
-         $typeAlert = $_SESSION['type'];
+         if (isset($_SESSION['alert'])) :
+            $message   = $_SESSION['message'];
+            $typeAlert = $_SESSION['type'];
          ?>
          <div class="row">
-             <div class="col-md-12">
-                <div class="alert alert-<?= $typeAlert; ?> alert-dismissible fade show" role="alert">
-                   <strong><?= $message; ?></strong>
-                   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                   </button>
-                </div>
-             </div>
+            <div class="col-md-12">
+               <div class="alert alert-<?= $typeAlert; ?> alert-dismissible fade show" role="alert">
+                  <strong><?= $message; ?></strong>
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                     <span aria-hidden="true">&times;</span>
+                  </button>
+               </div>
+            </div>
          </div>
-         <?php 
-         unset($_SESSION['alert']);
+         <?php
+            unset($_SESSION['alert']);
          endif; ?>
          <!-- EndAlert -->
       </div>
@@ -63,11 +59,11 @@ $chatMitra = query("SELECT * FROM chat INNER JOIN mitra ON chat.id_mitra = mitra
          <div class="row">
             <div class="col-md-12">
                <div class="card card-primary card-outline">
-                   
-                   <div class="card-header">
-                        <a href="kirim_chat" class="btn btn-sm btn-info"><i class="fas fa-paper-plane"></i> Kirim Pesan</a>
-                    </div>
-                   
+
+                  <div class="card-header">
+                     <a href="admin_kirim_chat" class="btn btn-sm btn-info"><i class="fas fa-paper-plane"></i> Kirim Pesan</a>
+                  </div>
+
                   <div class="card-body">
                      <table id="example1" class="table table-bordered table-striped my-table">
                         <thead>
@@ -79,22 +75,22 @@ $chatMitra = query("SELECT * FROM chat INNER JOIN mitra ON chat.id_mitra = mitra
                            </tr>
                         </thead>
                         <tbody>
-                            <?php 
-                            $no = 1;
-                            foreach($chatMitra as $chat) : ?>   
+                           <?php
+                           $no = 1;
+                           foreach ($chatMitra as $chat) : ?>
                            <tr>
                               <td width="40" class="text-center"><?= $no++; ?></td>
                               <td width="150"><?= $chat['mitra']; ?></td>
                               <td width="650"><?= $chat['chat']; ?></td>
                               <!--<td class="text-center" >-->
-                                 <!--<a href="balas_chat?id=<?= $chat['id_mitra']; ?>" class="btn btn-sm btn-success"><i class="fas fa-reply"></i> Balas</a>-->
-                                 <!--<a href="#" class="btn btn-sm btn-danger" onclick="return confirm('Yakin hapus data?')"><i class="fas fa-trash"></i> Hapus</a>-->
+                              <!--<a href="balas_chat?id=<?= $chat['id_mitra']; ?>" class="btn btn-sm btn-success"><i class="fas fa-reply"></i> Balas</a>-->
+                              <!--<a href="#" class="btn btn-sm btn-danger" onclick="return confirm('Yakin hapus data?')"><i class="fas fa-trash"></i> Hapus</a>-->
                               <!--</td>-->
                            </tr>
-                            <?php endforeach; ?>
+                           <?php endforeach; ?>
                         </tbody>
                      </table>
-                     
+
                   </div>
                </div>
             </div>
@@ -104,4 +100,4 @@ $chatMitra = query("SELECT * FROM chat INNER JOIN mitra ON chat.id_mitra = mitra
 
 </div>
 <!-- End All Content -->
-<?php include_once "../templates/footer.php"; ?>
+<?php include_once "../../templates/admin_footer.php"; ?>

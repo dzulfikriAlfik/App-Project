@@ -1,15 +1,14 @@
-<?php
-session_start();
-if(!isset($_SESSION['login'])) {
-    header("Location: login");
-    exit();
-} 
+<?php session_start();
+if (!isset($_SESSION["login"])) {
+   header("Location: ../../auth/login");
+   exit();
+}
 
 $page = 'profile perusahaan';
 $subPage = 'data admin';
 $idPage = 'cd-2';
-include_once "../templates/header.php";
-// include_once "../../koneksi.php";
+include_once "../../templates/admin_header.php";
+
 $nama_admin = $_SESSION['nama_admin'];
 $id_admin = $_SESSION['id_admin'];
 $admin = query("SELECT * FROM admin WHERE nama_admin !='$nama_admin' ");
@@ -33,22 +32,22 @@ $admin = query("SELECT * FROM admin WHERE nama_admin !='$nama_admin' ");
          </div>
          <!-- alert -->
          <?php
-         if (isset($_SESSION['alert'])) : 
-         $message   = $_SESSION['message'];
-         $typeAlert = $_SESSION['type'];
+         if (isset($_SESSION['alert'])) :
+            $message   = $_SESSION['message'];
+            $typeAlert = $_SESSION['type'];
          ?>
          <div class="row">
-             <div class="col-md-12">
-                <div class="alert alert-<?= $typeAlert; ?> alert-dismissible fade show" role="alert">
-                   <strong><?= $message; ?></strong>
-                   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                   </button>
-                </div>
-             </div>
+            <div class="col-md-12">
+               <div class="alert alert-<?= $typeAlert; ?> alert-dismissible fade show" role="alert">
+                  <strong><?= $message; ?></strong>
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                     <span aria-hidden="true">&times;</span>
+                  </button>
+               </div>
+            </div>
          </div>
-         <?php 
-         unset($_SESSION['alert']);
+         <?php
+            unset($_SESSION['alert']);
          endif; ?>
          <!-- EndAlert -->
       </div>
@@ -61,16 +60,16 @@ $admin = query("SELECT * FROM admin WHERE nama_admin !='$nama_admin' ");
          <div class="row">
             <div class="col-md-12">
                <div class="card card-primary card-outline">
-                    <?php if($_SESSION['id_admin'] == 1) : ?>
-                    <div class="card-header">
-                        <a href="admin_tambah" class="btn btn-sm btn-info"><i class="fas fa-plus"></i> Tambah</a>
-                    </div>
-                    <?php else : ?>
-                        
-                    <?php endif; ?>
-                    
-                    <!-- /.card-header -->
-                    <div class="card-body">
+                  <?php if ($_SESSION['id_admin'] == 1) : ?>
+                  <div class="card-header">
+                     <a href="admin_tambah" class="btn btn-sm btn-info"><i class="fas fa-plus"></i> Tambah</a>
+                  </div>
+                  <?php else : ?>
+
+                  <?php endif; ?>
+
+                  <!-- /.card-header -->
+                  <div class="card-body">
                      <table id="example1" class="table table-bordered table-striped my-table">
                         <thead>
                            <tr>
@@ -83,11 +82,11 @@ $admin = query("SELECT * FROM admin WHERE nama_admin !='$nama_admin' ");
                            </tr>
                         </thead>
                         <tbody>
-                            <?php
-                            // var_dump($admin);die;
-                            $no = 1;
-                            foreach($admin as $value) :
-                            ?>
+                           <?php
+                           // var_dump($admin);die;
+                           $no = 1;
+                           foreach ($admin as $value) :
+                           ?>
                            <tr>
                               <td><?= $no++ ?></td>
                               <td><?= $value['nama_admin'] ?></td>
@@ -95,19 +94,19 @@ $admin = query("SELECT * FROM admin WHERE nama_admin !='$nama_admin' ");
                               <td><?= $value['telp'] ?></td>
                               <td><?= $value['email'] ?></td>
                               <td class="text-center">
-                                <?php if($id_admin != 1) : ?>
-                                    anda bukan superadmin
-                                <?php elseif($id_admin == 1) : ?>
-                                    <a href="admin_edit?id=<?= $value['id_admin']; ?>" class="btn btn-sm btn-warning"><i class="fas fa-edit"></i> Edit</a>
-                                    <a href="admin_hapus?id=<?= $value['id_admin']; ?>" class="btn btn-sm btn-danger" onclick="return confirm('Yakin hapus data ini?')"><i class="fas fa-trash"></i> Hapus</a>
-                                <?php endif; ?>
+                                 <?php if ($id_admin != 1) : ?>
+                                 anda bukan superadmin
+                                 <?php elseif ($id_admin == 1) : ?>
+                                 <a href="admin_edit?id=<?= $value['id_admin']; ?>" class="btn btn-sm btn-warning"><i class="fas fa-edit"></i> Edit</a>
+                                 <a href="action/admin_hapus?id=<?= $value['id_admin']; ?>" class="btn btn-sm btn-danger" onclick="return confirm('Yakin hapus data ini?')"><i class="fas fa-trash"></i> Hapus</a>
+                                 <?php endif; ?>
                               </td>
                            </tr>
                            <?php endforeach; ?>
                         </tbody>
                      </table>
-                    </div>
-                  
+                  </div>
+
                </div>
             </div>
          </div>
@@ -116,4 +115,4 @@ $admin = query("SELECT * FROM admin WHERE nama_admin !='$nama_admin' ");
 
 </div>
 <!-- End All Content -->
-<?php include_once "../templates/footer.php"; ?>
+<?php include_once "../../templates/admin_footer.php"; ?>

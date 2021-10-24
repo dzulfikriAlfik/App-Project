@@ -54,7 +54,7 @@ if (isset($_POST['daftar_mitra'])) {
                 header("Location: ../daftar_mitra");
             }
             $logo = uniqid() . '.' . $ekstensiGambar;
-            move_uploaded_file($tmpName, baseUrl('assets/img/mitra/') . $logo);
+            move_uploaded_file($tmpName, '../../assets/img/mitra/' . $logo);
         }
 
         $sql = "INSERT INTO mitra VALUES(null, '$nama_mitra', '$logo', '$username', '$password', '$alamat', '$email', '$telp', 'no', 'Offline', null)";

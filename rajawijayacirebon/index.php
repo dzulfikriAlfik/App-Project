@@ -116,7 +116,7 @@
             <!-- Begin news item -->
             <article class="news-item item-style">
                <a href="#" class="news-item-img">
-                  <img data-src="admin-page/assets/img/kegiatan/<?= $galery['foto']; ?>" class="lazy" src="admin-page/assets/img/kegiatan/<?= $galery['foto']; ?>" alt="">
+                  <img data-src="assets/img/kegiatan/<?= $galery['foto']; ?>" class="lazy" src="assets/img/kegiatan/<?= $galery['foto']; ?>" alt="">
                </a>
                <div class="news-item-info">
                   <div class="news-item-date"><?= tgl_indo($galery['tanggal']); ?></div>

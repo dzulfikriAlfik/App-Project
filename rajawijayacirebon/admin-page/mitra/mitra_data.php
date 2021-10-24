@@ -1,19 +1,14 @@
-<?php 
-session_start();
-if(!isset($_SESSION['login'])) {
-    header("Location: login");
-    exit();
-} elseif (isset($_SESSION['login_mitra'])) {
-    header("Location: dashboard_mitra");
-    exit();
+<?php session_start();
+if (!isset($_SESSION["login"])) {
+   header("Location: ../../auth/login");
+   exit();
 }
 
 
 $page = 'mitra';
 $subPage = 'daftar mitra';
 $idPage = 'md-1';
-include_once "../templates/header.php";
-// include_once '../../koneksi.php';
+include_once "../../templates/admin_header.php";
 
 $mitra = query("SELECT * FROM mitra");
 
@@ -36,22 +31,22 @@ $mitra = query("SELECT * FROM mitra");
          </div>
          <!-- alert -->
          <?php
-         if (isset($_SESSION['alert'])) : 
-         $message   = $_SESSION['message'];
-         $typeAlert = $_SESSION['type'];
+         if (isset($_SESSION['alert'])) :
+            $message   = $_SESSION['message'];
+            $typeAlert = $_SESSION['type'];
          ?>
          <div class="row">
-             <div class="col-md-12">
-                <div class="alert alert-<?= $typeAlert; ?> alert-dismissible fade show" role="alert">
-                   <strong><?= $message; ?></strong>
-                   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                   </button>
-                </div>
-             </div>
+            <div class="col-md-12">
+               <div class="alert alert-<?= $typeAlert; ?> alert-dismissible fade show" role="alert">
+                  <strong><?= $message; ?></strong>
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                     <span aria-hidden="true">&times;</span>
+                  </button>
+               </div>
+            </div>
          </div>
-         <?php 
-         unset($_SESSION['alert']);
+         <?php
+            unset($_SESSION['alert']);
          endif; ?>
          <!-- EndAlert -->
       </div>
@@ -64,8 +59,8 @@ $mitra = query("SELECT * FROM mitra");
          <div class="row">
             <div class="col-md-12">
                <div class="card card-primary card-outline">
-                    <!-- /.card-header -->
-                    <div class="card-body">
+                  <!-- /.card-header -->
+                  <div class="card-body">
                      <table id="example1" class="table table-bordered table-striped my-table">
                         <thead>
                            <tr>
@@ -79,10 +74,10 @@ $mitra = query("SELECT * FROM mitra");
                            </tr>
                         </thead>
                         <tbody>
-                            <?php
-                            $no = 1;
-                            foreach($mitra as $value) :
-                            ?>
+                           <?php
+                           $no = 1;
+                           foreach ($mitra as $value) :
+                           ?>
                            <tr>
                               <td><?= $no++ ?></td>
                               <td><?= $value['mitra'] ?></td>
@@ -90,22 +85,22 @@ $mitra = query("SELECT * FROM mitra");
                               <td><?= $value['telp'] ?></td>
                               <td><?= $value['alamat'] ?></td>
                               <td>
-                                  <?php if($value['approve'] == 'no') : ?>
-                                  <a href="approve_mitra?id=<?= $value['id_mitra']; ?>">Setujui</a>
-                                  <?php else :?>
-                                    Terdaftar
-                                  <?php endif; ?>
+                                 <?php if ($value['approve'] == 'no') : ?>
+                                 <a href="action/approve_mitra?id=<?= $value['id_mitra']; ?>">Setujui</a>
+                                 <?php else : ?>
+                                 Terdaftar
+                                 <?php endif; ?>
                               </td>
                               <td class="text-center">
                                  <a href="detail_mitra?id=<?= $value['id_mitra'] ?>" class="btn btn-sm btn-info"><i class="fas fa-info"></i> Detail</a>
-                                 <a href="hapus_mitra?id=<?= $value['id_mitra'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('Yakin hapus data?')"><i class="fas fa-trash"></i> Hapus</a>
+                                 <a href="action/hapus_mitra?id=<?= $value['id_mitra'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('Yakin hapus data?')"><i class="fas fa-trash"></i> Hapus</a>
                               </td>
                            </tr>
                            <?php endforeach; ?>
                         </tbody>
                      </table>
-                    </div>
-                  
+                  </div>
+
                </div>
             </div>
          </div>
@@ -114,4 +109,4 @@ $mitra = query("SELECT * FROM mitra");
 
 </div>
 <!-- End All Content -->
-<?php include_once "../templates/footer.php"; ?>
+<?php include_once "../../templates/admin_footer.php"; ?>

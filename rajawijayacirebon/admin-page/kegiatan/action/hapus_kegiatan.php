@@ -1,7 +1,6 @@
 <?php session_start();
-
-if (!isset($_SESSION['login'])) {
-    header("Location: login");
+if (!isset($_SESSION["login"])) {
+    header("Location: ../../auth/login");
     exit();
 }
 
@@ -19,16 +18,16 @@ $sql2 = "DELETE FROM galery_kegiatan WHERE id_kegiatan = '$id_kegiatan' ";
 if (mysqli_query($koneksi, $sql)) {
     if (mysqli_query($koneksi, $sql2)) {
         foreach ($rows as $data) {
-            unlink("../assets/img/kegiatan/" . $data['foto']);
+            unlink("../../../assets/img/kegiatan/" . $data['foto']);
         }
     };
     $_SESSION['alert'] = true;
     $_SESSION['message'] = 'Data berhasil dihapus';
     $_SESSION['type'] = 'success';
-    header("Location: daftar_kegiatan_data");
+    header("Location: ../kegiatan_data");
 } else {
     $_SESSION['alert'] = true;
     $_SESSION['message'] = mysqli_error($koneksi);
     $_SESSION['type'] = 'danger';
-    header("Location: daftar_kegiatan_data");
+    header("Location: ../kegiatan_data");
 }

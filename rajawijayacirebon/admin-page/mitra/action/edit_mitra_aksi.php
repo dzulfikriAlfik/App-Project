@@ -1,7 +1,6 @@
 <?php session_start();
-
-if (!isset($_SESSION['login'])) {
-    header("Location: login");
+if (!isset($_SESSION["login"])) {
+    header("Location: ../../../auth/login");
     exit();
 }
 
@@ -29,27 +28,23 @@ if (isset($_POST['edit_mitra'])) {
         $ekstensiGambar = explode('.', $namaFile);
         $ekstensiGambar = strtolower(end($ekstensiGambar));
         if (!in_array($ekstensiGambar, $ekstensiGambarValid)) {
-            echo "
-                <script>
-                    alert('Pilih ekstensi gambar jpg/jpeg/png!');
-                </script>
-            ";
-            // return false;
+            $_SESSION['alert'] = true;
+            $_SESSION['message'] = "Pilih ekstensi gambar jpg/jpeg/png";
+            $_SESSION['type'] = 'danger';
+            header("Location: ../detail_mitra?id=$id_mitra");
         }
         if ($ukuranFile > 1000000) {
-            echo "
-                <script>
-                    alert('Ukuran file terlalu besar Maksimal 1MB!');
-                </script>
-            ";
-            // return false;
+            $_SESSION['alert'] = true;
+            $_SESSION['message'] = "Ukuran file terlalu besar, maksimal 1MB";
+            $_SESSION['type'] = 'danger';
+            header("Location: ../detail_mitra?id=$id_mitra");
         }
         $logo = uniqid() . '.' . $ekstensiGambar;
         $sqlselect = "SELECT * FROM mitra WHERE id_mitra = '{$id_mitra}'";
         $queryselect = mysqli_query($koneksi, $sqlselect);
         $data = mysqli_fetch_assoc($queryselect);
-        unlink('../assets/img/mitra/' . $data['logo']);
-        move_uploaded_file($tmpName, '../assets/img/mitra/' . $logo);
+        unlink('../../../assets/img/mitra/' . $data['logo']);
+        move_uploaded_file($tmpName, '../../../assets/img/mitra/' . $logo);
     }
 
     $sql = "UPDATE mitra SET 
@@ -64,11 +59,11 @@ if (isset($_POST['edit_mitra'])) {
         $_SESSION['alert'] = true;
         $_SESSION['message'] = 'Data berhasil diupdate';
         $_SESSION['type'] = 'success';
-        header("Location: daftar_mitra_data");
+        header("Location: ../mitra_data");
     } else {
         $_SESSION['alert'] = true;
         $_SESSION['message'] = mysqli_error($koneksi);
         $_SESSION['type'] = 'danger';
-        header("Location: daftar_mitra_data");
+        header("Location: ../mitra_data");
     }
 }

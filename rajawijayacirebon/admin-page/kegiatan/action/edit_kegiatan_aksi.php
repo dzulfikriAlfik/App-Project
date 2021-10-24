@@ -1,7 +1,6 @@
 <?php session_start();
-
-if (!isset($_SESSION['login'])) {
-    header("Location: login");
+if (!isset($_SESSION["login"])) {
+    header("Location: ../../auth/login");
     exit();
 }
 
@@ -19,11 +18,11 @@ if (isset($_POST['edit_kegiatan'])) {
         $_SESSION['alert'] = true;
         $_SESSION['message'] = 'Data berhasil diubah';
         $_SESSION['type'] = 'success';
-        header("Location: daftar_kegiatan_data");
+        header("Location: ../kegiatan_data");
     } else {
         $_SESSION['alert'] = true;
         $_SESSION['message'] = mysqli_error($koneksi);
         $_SESSION['type'] = 'danger';
-        header("Location: daftar_kegiatan_data");
+        header("Location: ../kegiatan_data");
     }
 }

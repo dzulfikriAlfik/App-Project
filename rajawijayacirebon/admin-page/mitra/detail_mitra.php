@@ -1,21 +1,13 @@
-<?php 
-session_start();
-if(!isset($_SESSION['login'])) {
-    header("Location: login");
-    exit();
-} elseif (isset($_SESSION['login_mitra'])) {
-    header("Location: dashboard_mitra");
-    exit();
+<?php session_start();
+if (!isset($_SESSION["login"])) {
+   header("Location: ../../auth/login");
+   exit();
 }
-
 
 $page = 'mitra';
 $subPage = 'daftar mitra';
 $idPage = 'md-1';
-include_once "../templates/header.php";
-// include_once '../../koneksi.php';
-
-$mitra = query("SELECT * FROM mitra");
+include_once "../../templates/admin_header.php";
 
 ?>
 
@@ -30,36 +22,55 @@ $mitra = query("SELECT * FROM mitra");
             </div>
             <div class="col-sm-6">
                <ol class="breadcrumb float-sm-right">
-                  <li class="breadcrumb-item"><a href="daftar_mitra_data">Daftar Mitra</a></li>
+                  <li class="breadcrumb-item"><a href="mitra_data">Daftar Mitra</a></li>
                   <li class="breadcrumb-item"><a href="#">Detail Mitra</a></li>
                </ol>
             </div>
          </div>
+         <!-- alert -->
+         <?php
+         if (isset($_SESSION['alert'])) :
+            $message   = $_SESSION['message'];
+            $typeAlert = $_SESSION['type'];
+         ?>
+         <div class="row">
+            <div class="col-md-12">
+               <div class="alert alert-<?= $typeAlert; ?> alert-dismissible fade show" role="alert">
+                  <strong><?= $message; ?></strong>
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                     <span aria-hidden="true">&times;</span>
+                  </button>
+               </div>
+            </div>
+         </div>
+         <?php
+            unset($_SESSION['alert']);
+         endif; ?>
+         <!-- EndAlert -->
       </div>
    </div>
    <div class="card-header">
-        <a href="daftar_mitra_data" class="btn btn-sm btn-warning"><i class="fas fa-backward"></i> Kembali</a>
-    </div>
+      <a href="mitra_data" class="btn btn-sm btn-warning"><i class="fas fa-backward"></i> Kembali</a>
+   </div>
    <!-- /.content-header -->
 
    <!-- Main content -->
-   <?php 
+   <?php
    $id_mitra = $_GET['id'];
-   $mitras = query("SELECT * FROM mitra WHERE id_mitra = '$id_mitra' ");
+   $mitra = single_query("SELECT * FROM mitra WHERE id_mitra = '$id_mitra' ");
    ?>
    <div class="content">
       <div class="container-fluid">
-        <div class="row">
-            <?php foreach($mitras as $mitra) : ?>
+         <div class="row">
             <div class="col-md-8 offset-md-2 col-xs-12">
                <div class="card card-primary card-outline">
                   <div class="card-body box-profile">
                      <div class="text-center">
-                        <img class="profile-user-img img-fluid img-thumbnail rounded w-50" src="<?= baseUrl('admin-page/assets/img/mitra/'.$mitra['logo']); ?>" alt="User profile picture">
+                        <img class="profile-user-img img-fluid img-thumbnail rounded w-50" src="<?= baseUrl('assets/img/mitra/' . $mitra['logo']); ?>" alt="User profile picture">
                      </div>
                      <h2 class="text-center my-3 company-name"><?= $mitra['mitra']; ?></h2>
                      <ul class="list-group list-group-unbordered mb-3">
-                        <form action="edit_mitra_aksi" method="POST" enctype="multipart/form-data">
+                        <form action="action/edit_mitra_aksi" method="POST" enctype="multipart/form-data">
                            <li class="list-group-item">
                               <div class="form-group">
                                  <label for="nama_mitra">Nama Mitra</label>
@@ -82,24 +93,23 @@ $mitra = query("SELECT * FROM mitra");
                               <div class="form-group">
                                  <label for="logo">Logo</label>
                                  <br>
-                                 <img class="profile-user-img img-fluid img-circle mb-3" src="<?= baseUrl('admin-page/assets/img/mitra/'.$mitra['logo']); ?>" alt="Logo">
+                                 <img class="profile-user-img img-fluid img-circle mb-3" src="<?= baseUrl('assets/img/mitra/' . $mitra['logo']); ?>" alt="Logo">
                                  <input type="file" name="logo" class="form-control col-md-12" id="logo" value="" disabled>
                               </div>
                            </li>
-                            <button id="btn-simpan" class="btn btn-success mt-3 col-md-12 hide" value="submit" name="edit_mitra">Simpan</button>
+                           <button id="btn-simpan" class="btn btn-success mt-3 col-md-12 hide" value="submit" name="edit_mitra">Simpan</button>
                         </form>
                      </ul>
-        
+
                      <a href="#" class="btn btn-primary btn-block" id="btn-company"><b>Edit</b></a>
                   </div>
                   <!-- /.card-body -->
                </div>
             </div>
-            <?php endforeach; ?>
          </div>
       </div>
    </div>
 
 </div>
 <!-- End All Content -->
-<?php include_once "../templates/footer.php"; ?>
+<?php include_once "../../templates/admin_footer.php"; ?>

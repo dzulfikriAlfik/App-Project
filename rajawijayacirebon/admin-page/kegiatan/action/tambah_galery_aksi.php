@@ -1,10 +1,8 @@
 <?php session_start();
-
-if (!isset($_SESSION['login'])) {
-    header("Location: login");
+if (!isset($_SESSION["login"])) {
+    header("Location: ../../../auth/login");
     exit();
 }
-
 $koneksi = mysqli_connect('localhost', 'root', '', 'compro_adiwijaya');
 
 if (isset($_POST['tambah_galery'])) {
@@ -19,25 +17,19 @@ if (isset($_POST['tambah_galery'])) {
     $ekstensiGambar = explode('.', $namaFile);
     $ekstensiGambar = strtolower(end($ekstensiGambar));
     if (!in_array($ekstensiGambar, $ekstensiGambarValid)) {
-        echo "
-            <script>
-                alert('Pilih ekstensi gambar jpg/jpeg/png!');
-            </script>
-        ";
-        // return false;
+        $_SESSION['alert'] = true;
+        $_SESSION['message'] = 'Pilih gambar ekstensi jpg/jpeg/png';
+        $_SESSION['type'] = 'danger';
+        header("Location: ../daftar_galery");
     }
     if ($ukuranFile > 1000000) {
-        echo "
-            <script>
-                alert('Ukuran file terlalu besar Maksimal 1MB!');
-            </script>
-        ";
-        // return false;
+        $_SESSION['alert'] = true;
+        $_SESSION['message'] = 'Ukuran file terlalu besar, maksimal 1MB';
+        $_SESSION['type'] = 'danger';
+        header("Location: ../daftar_galery");
     }
-    $foto = uniqid();
-    $foto .= '.';
-    $foto .= $ekstensiGambar;
-    move_uploaded_file($tmpName, '../assets/img/kegiatan/' . $foto);
+    $foto = uniqid() . "." . $ekstensiGambar;
+    move_uploaded_file($tmpName, '../../../assets/img/kegiatan/' . $foto);
 
     $sql = "INSERT INTO galery_kegiatan VALUES(null, '$id_kegiatan', '$foto')";
 
@@ -45,11 +37,11 @@ if (isset($_POST['tambah_galery'])) {
         $_SESSION['alert'] = true;
         $_SESSION['message'] = 'Data berhasil ditambahkan';
         $_SESSION['type'] = 'success';
-        header("Location: daftar_galery");
+        header("Location: ../daftar_galery");
     } else {
         $_SESSION['alert'] = true;
         $_SESSION['message'] = mysqli_error($koneksi);
         $_SESSION['type'] = 'danger';
-        header("Location: daftar_galery");
+        header("Location: ../daftar_galery");
     }
 }

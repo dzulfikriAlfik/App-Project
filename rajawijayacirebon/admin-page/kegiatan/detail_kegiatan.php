@@ -1,15 +1,13 @@
-<?php 
-session_start();
-if(!isset($_SESSION['login'])) {
-    header("Location: login");
-    exit();
+<?php session_start();
+if (!isset($_SESSION["login"])) {
+   header("Location: ../../auth/login");
+   exit();
 }
-
 
 $page = 'data kegiatan';
 $subPage = null;
 $idPage = 'keg-1';
-include_once "../templates/header.php";
+include_once "../../templates/admin_header.php";
 ?>
 
 <!-- All Content -->
@@ -40,8 +38,8 @@ include_once "../templates/header.php";
                <div class="card card-primary card-outline">
                   <div class="card-body">
 
-                    
-                     
+
+
                   </div>
                </div>
             </div>
@@ -51,4 +49,4 @@ include_once "../templates/header.php";
 
 </div>
 <!-- End All Content -->
-<?php include_once "../templates/footer.php"; ?>
+<?php include_once "../../templates/admin_footer.php"; ?>
