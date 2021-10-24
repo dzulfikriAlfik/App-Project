@@ -9,15 +9,8 @@ $page = 'mitra';
 $subPage = 'chat';
 $idPage = 'md-2';
 include_once "../../templates/admin_header.php";
-
-// CONCAT (
-//    TIMESTAMPDIFF(DAY,`tanggal`, NOW()),' Days ',
-//    TIMESTAMPDIFF(HOUR, TIMESTAMPADD(DAY, TIMESTAMPDIFF(DAY, `tanggal`, NOW()), `tanggal`), NOW()),' Hours ',
-//    TIMESTAMPDIFF(MINUTE, TIMESTAMPADD(HOUR, TIMESTAMPDIFF(HOUR, `tanggal`, NOW()), `tanggal`), NOW()), ' Minutes ',
-//    TIMESTAMPDIFF(SECOND, TIMESTAMPADD(MINUTE, TIMESTAMPDIFF(MINUTE, `tanggal`, NOW()), `tanggal`), NOW()), ' Seconds '
-//    ' ago' ) AS `ago` 
-
-$mitras = query("SELECT * FROM mitra");
+$id_mitra = $_GET['id'];
+$chatMitra = query("SELECT * FROM chat WHERE id_mitra = '$id_mitra' ORDER BY id_chat DESC ");
 
 ?>
 
@@ -28,11 +21,12 @@ $mitras = query("SELECT * FROM mitra");
       <div class="container-fluid">
          <div class="mb-2 row">
             <div class="col-sm-6">
-               <h1 class="m-0 text-dark">Chat Mitra</h1>
+               <h1 class="m-0 text-dark">Detail Chat Mitra</h1>
             </div>
             <div class="col-sm-6">
                <ol class="breadcrumb float-sm-right">
-                  <li class="breadcrumb-item"><a href="#">Chat</a></li>
+                  <li class="breadcrumb-item"><a href="admin_chat">Chat</a></li>
+                  <li class="breadcrumb-item active"><a href="#">Detail Chat</a></li>
                </ol>
             </div>
          </div>
@@ -64,28 +58,32 @@ $mitras = query("SELECT * FROM mitra");
    <div class="content">
       <div class="container-fluid">
          <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-8">
                <div class="card card-primary card-outline">
 
                   <div class="card-header">
-                     <a href="admin_kirim_chat" class="btn btn-sm btn-info"><i class="fas fa-paper-plane"></i> Kirim Pesan</a>
+                     <a href="admin_chat" class="btn btn-sm btn-warning"><i class="fas fa-backward"></i> Kembali</a>
+                     <a href="admin_chat_balas?id=<?= $_GET['id'] ?>" class="btn btn-sm btn-info"><i class="fas fa-comment"></i> Balas</a>
                   </div>
 
                   <div class="card-body">
                      <table id="example1" class="table table-bordered table-striped my-table">
                         <thead>
                            <tr>
-                              <th>Mitra</th>
+                              <th>#`</th>
+                              <th>Pesan</th>
                               <th>Aksi</th>
                            </tr>
                         </thead>
                         <tbody>
-                           <?php foreach ($mitras as $chat) : ?>
+                           <?php foreach ($chatMitra as $chat) : ?>
                            <tr>
-                              <td><?= $chat['mitra']; ?></td>
-                              <td class="text-center">
-                                 <a href="admin_chat_detail?id=<?= $chat['id_mitra']; ?>" class="btn btn-sm btn-info"><i class="fas fa-info"></i> Lihat</a>
-                                 <!-- <a href="action/admin_hapus_chat?id=<?= $chat['id_mitra']; ?>" class="btn btn-sm btn-danger" onclick="return confirm('Yakin hapus data?')"><i class="fas fa-trash"></i> Hapus</a> -->
+                              <td width="120" class="text-center"><?= $chat['tanggal']; ?></td>
+                              <td width="650"><?= $chat['chat']; ?></td>
+                              <td width="40">
+                                 <?php if ($chat['id_admin'] != null) : ?>
+                                 <a href="action/admin_hapus_chat.php?id=<?= $chat['id_chat']; ?>" class="btn btn-sm btn-danger" onclick="return confirm('Yakin hapus data?')"> Hapus</a>
+                                 <?php endif; ?>
                               </td>
                            </tr>
                            <?php endforeach; ?>

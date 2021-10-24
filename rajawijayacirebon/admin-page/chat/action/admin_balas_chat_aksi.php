@@ -19,11 +19,11 @@ if (isset($_POST['kirim_chat'])) {
         $_SESSION['alert'] = true;
         $_SESSION['message'] = 'Pesan berhasil terkirim';
         $_SESSION['type'] = 'success';
-        header("Location: ../admin_chat");
+        header("Location: ../admin_chat_detail?id=$id_mitra");
     } else {
         $_SESSION['alert'] = true;
         $_SESSION['message'] = mysqli_error($koneksi);
         $_SESSION['type'] = 'danger';
-        header("Location: ../admin_chat");
+        header("Location: ../admin_chat_detail?id=$id_mitra");
     }
 }

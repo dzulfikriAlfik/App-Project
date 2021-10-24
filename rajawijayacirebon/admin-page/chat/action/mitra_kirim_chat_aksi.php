@@ -9,11 +9,11 @@ $koneksi = mysqli_connect('localhost', 'root', '', 'compro_adiwijaya');
 
 if (isset($_POST['kirim_chat'])) {
     $id_mitra = $_SESSION['id_mitra'];
-    $chat = mysqli_real_escape_string($koneksi, $_POST['chat']);
+    $chat = '<p style="text-align:right">' . mysqli_real_escape_string($koneksi, $_POST['chat']);
     date_default_timezone_set('Asia/Jakarta');
     $tanggal = date("Y-m-d H:i:s");
 
-    $sql = "INSERT INTO chat VALUES(null, '$id_mitra', '$chat', '$tanggal')";
+    $sql = "INSERT INTO chat VALUES(null, null, '$id_mitra', '$chat', '$tanggal')";
 
     if (mysqli_query($koneksi, $sql)) {
         $_SESSION['alert'] = true;

@@ -12,7 +12,7 @@ $idPage = 'd-1';
 include_once "../../templates/admin_header_mitra.php";
 $mitra_kami = query("SELECT * FROM mitra");
 $id_mitra = $_SESSION['id_mitra'];
-$chatMitra = query("SELECT * FROM chat WHERE id_mitra = '$id_mitra' ORDER BY tanggal DESC ");
+$chatMitra = query("SELECT * FROM chat WHERE id_mitra = '$id_mitra' ORDER BY id_chat DESC ");
 ?>
 
 <!-- All Content -->
@@ -58,7 +58,7 @@ $chatMitra = query("SELECT * FROM chat WHERE id_mitra = '$id_mitra' ORDER BY tan
    <div class="content">
       <div class="container-fluid">
          <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-8">
                <div class="card card-primary card-outline">
 
                   <div class="card-header">
@@ -71,19 +71,22 @@ $chatMitra = query("SELECT * FROM chat WHERE id_mitra = '$id_mitra' ORDER BY tan
                            <tr>
                               <th>#</th>
                               <th>Pesan</th>
-                              <!--<th>Aksi</th>-->
+                              <th>Aksi</th>
                            </tr>
                         </thead>
                         <tbody>
-                           <?php
-                           $no = 1;
-                           foreach ($chatMitra as $chat) : ?>
+                           <?php foreach ($chatMitra as $chat) : ?>
                            <tr>
-                              <td width="40" class="text-center"><?= $no++; ?></td>
+                              <td width="120" class="text-center"><?= $chat['tanggal']; ?></td>
                               <td width="650"><?= $chat['chat']; ?></td>
+                              <td width="40">
+                                 <?php if ($chat['id_admin'] != null) : ?>
+                                 <?php else : ?>
+                                 <a href="action/mitra_hapus_chat.php?id=<?= $chat['id_chat']; ?>" class="btn btn-sm btn-danger" onclick="return confirm('Yakin hapus data?')"> Hapus</a>
+                                 <?php endif; ?>
+                              </td>
                               <!--<td class="text-center" >-->
                               <!--<a href="#" class="btn btn-sm btn-success"><i class="fas fa-reply"></i> Balas</a>-->
-                              <!--<a href="#" class="btn btn-sm btn-danger" onclick="return confirm('Yakin hapus data?')"><i class="fas fa-trash"></i> Hapus</a>-->
                               <!--</td>-->
                            </tr>
                            <?php endforeach; ?>
