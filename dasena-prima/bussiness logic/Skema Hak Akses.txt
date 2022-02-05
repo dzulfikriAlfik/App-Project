@@ -1,0 +1,10 @@
+Superadmin : 
+- Menambah, mengubah, menghapus user dan admin
+- Punya hak akses ke semua menu
+
+Admin :
+- Menambah, mengubah, menghapus user
+- Mengubah informasi home page
+
+User :
+- Mengubah profil sendiri
