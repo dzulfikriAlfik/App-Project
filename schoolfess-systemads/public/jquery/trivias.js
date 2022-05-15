@@ -157,6 +157,7 @@ function save() {
          data,
          function (response) {
             commonJS.loading(false);
+            commonJS.swalOk("Data berhasil ditambahkan");
             search();
             $("#modalForm").modal("hide");
          },
@@ -175,6 +176,7 @@ function save() {
          data,
          function (response) {
             commonJS.loading(false);
+            commonJS.swalOk("Data berhasil diubah");
             search();
             $("#modalForm").modal("hide");
          },
@@ -212,6 +214,7 @@ function destroy(id) {
       `/api/trivia/delete/${id}`,
       function (response) {
          if (response.status == 200) {
+            commonJS.swalOk("Data berhasil dihapus");
             search(globalPage);
          } else if (response.status == 401) {
             swalError(response.message);
