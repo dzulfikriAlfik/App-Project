@@ -123,6 +123,8 @@ class VideoApiController extends Controller
          'video_subject'   => $request->video_subject,
          'video_thumbnail' => $nama_file,
          'video_views'     => 0,
+         'video_class'     => 7,
+         'video_tag'       => "",
          'user_id'         => Auth::id(),
          'created_by'      => Auth::id(),
          'updated_by'      => Auth::id()

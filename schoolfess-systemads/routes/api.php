@@ -27,6 +27,7 @@ Route::get('password', [UserApiController::class, 'hashPassword']);
 Route::post('login', [UserApiController::class, 'authenticate']);
 Route::post('register', [UserApiController::class, 'register']);
 Route::post('user/create', [UserApiController::class, 'store'])->middleware('jwt.verify');
+// Route::post('register', [UserApiController::class, 'store'])->middleware('jwt.verify');
 Route::get('logout', [UserApiController::class, 'logout'])->middleware('jwt.verify');
 Route::get('get_user', [UserApiController::class, 'getAuthenticatedUser'])->middleware('jwt.verify');
 Route::get('user/get', [UserApiController::class, 'get'])->middleware('jwt.verify');

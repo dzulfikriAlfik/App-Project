@@ -28,6 +28,8 @@ class Video extends Model
       'video_subject',
       'video_thumbnail',
       'video_views',
+      'video_class',
+      'video_tag',
       'created_by',
       'updated_by'
    ];

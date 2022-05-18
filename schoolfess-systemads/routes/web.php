@@ -17,6 +17,7 @@ use App\Http\Controllers\VideoController;
 
 // Landing Page Routes
 Route::get('/', 'AuthController@Login');
+Route::get('/register', 'AuthController@Register');
 Route::get('/404', 'NotFoundController@NotFound');
 
 // // route login

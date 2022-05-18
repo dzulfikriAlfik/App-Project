@@ -18,19 +18,30 @@ class UserApiController extends Controller
 {
     public function register(Request $request)
     {
+        // echo "Test";
+        // echo response()->json($request);
+        // die;
         $validator = Validator::make($request->all(), [
-            'name' => 'required|string',
-            'email' => 'required|email|unique:users,email',
-            'password' => 'required|string|min:8|max:50'
+            'user_name'         => 'required|string',
+            'user_email'        => 'required|email|unique:user,user_email',
+            'user_phone'        => 'required|numeric',
+            'user_company'      => 'required|string',
+            'user_company_type' => 'required|string',
+            'user_password'     => 'required|string|min:8|max:50'
         ], [
-            'name.required' => 'Name is Required',
-            'name.string' => 'Name Must Be String',
-            'email.required' => 'Email is Required',
-            'email.unique' => 'Email Has Already Been Taken',
-            'password.required' => 'Password is Required',
-            'password.string' => 'Password Must Be String',
-            'password.min' => 'Password Must Be At Least 8 Character',
-            'password.max' => 'Password Must Not Be Greater Than 50 Characters'
+            'user_name.required'         => 'Name is Required',
+            'user_name.string'           => 'Name Must Be String',
+            'user_email.required'        => 'Email is Required',
+            'user_email.unique'          => 'Email Has Already Been Taken',
+            'user_phone.required'        => 'No. Hp is Required',
+            'user_phone.string'          => 'Ho. Hp Must Be String',
+            'user_company.required'      => 'Nama Perusahaan is Required',
+            'user_company.string'        => 'Nama perusahaan Must Be String',
+            'user_company_type.required' => 'Jenis Usaha is Required',
+            'user_password.required'     => 'Password is Required',
+            'user_password.string'       => 'Password Must Be String',
+            'user_password.min'          => 'Password Must Be At Least 8 Character',
+            'user_password.max'          => 'Password Must Not Be Greater Than 50 Characters'
         ]);
 
         //Send failed response if request is not valid
@@ -40,12 +51,16 @@ class UserApiController extends Controller
 
         //Request is valid, create new user
         $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => bcrypt($request->password),
-            'created_by' => $request->name,
-            'updated_by' => $request->name,
-            'role' => "admin"
+            'user_name'         => $request->user_name,
+            'user_email'        => $request->user_email,
+            'user_phone'        => $request->user_phone,
+            'user_company'      => $request->user_company,
+            'user_company_type' => $request->user_company_type,
+            'user_status'       => "pending",
+            'user_role'         => "partner",
+            'user_password'     => bcrypt($request->user_password),
+            'created_dt'        => date("Y-m-d h:i:s"),
+            'user_token'        => $request->user_token
         ]);
 
         //============== send email
@@ -58,29 +73,35 @@ class UserApiController extends Controller
 
         //User created, return success response
         return response()->json([
-            'status' => 200,
+            'status'  => 200,
             'message' => 'User created successfully',
-            'data' => $user
+            'data'    => $user
         ], Response::HTTP_OK);
     }
 
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required|string',
-            'email' => 'required|email|unique:users,email',
-            'password' => 'required|string|min:8|max:50',
-            'role' => 'required|string|max:10'
+            'user_name'         => 'required|string',
+            'user_email'        => 'required|email|unique:user,user_email',
+            'user_phone'        => 'required|numeric',
+            'user_company'      => 'required|string',
+            'user_company_type' => 'required|string',
+            'password'          => 'required|string|min:8|max:50'
         ], [
-            'name.required' => 'Name is Required',
-            'name.string' => 'Name Must Be String',
-            'email.required' => 'Email is Required',
-            'email.unique' => 'Email Has Already Been Taken',
-            'password.required' => 'Password is Required',
-            'password.string' => 'Password Must Be String',
-            'password.min' => 'Password Must Be At Least 8 Character',
-            'password.max' => 'Password Must Not Be Greater Than 50 Characters',
-            'role.required' => 'Role is Required'
+            'user_name.required'         => 'Name is Required',
+            'user_name.string'           => 'Name Must Be String',
+            'user_email.required'        => 'Email is Required',
+            'user_email.unique'          => 'Email Has Already Been Taken',
+            'user_phone.required'        => 'No. Hp is Required',
+            'user_phone.string'          => 'Ho. Hp Must Be String',
+            'user_company.required'      => 'Nama Perusahaan is Required',
+            'user_company.string'        => 'Nama perusahaan Must Be String',
+            'user_company_type.required' => 'Jenis Usaha is Required',
+            'password.required'          => 'Password is Required',
+            'password.string'            => 'Password Must Be String',
+            'password.min'               => 'Password Must Be At Least 8 Character',
+            'password.max'               => 'Password Must Not Be Greater Than 50 Characters'
         ]);
 
         //Send failed response if request is not valid
@@ -90,13 +111,21 @@ class UserApiController extends Controller
 
         //Request is valid, create new user
         $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => bcrypt($request->password),
-            'created_by' => $request->name,
-            'updated_by' => $request->name,
-            'role' => $request->role,
+            'user_name'         => $request->name,
+            'user_email'        => $request->email,
+            'user_phone'        => $request->user_phone,
+            'user_company'      => $request->user_company,
+            'user_company_type' => $request->user_company_type,
+            'user_status'       => "pending",
+            'user_password'     => bcrypt($request->password),
+            'created_by'        => $request->name,
+            'updated_by'        => $request->name,
+            'user_token'        => $request->token,
+            'user_role'         => "partner"
         ]);
+        // echo "Test <br>";
+        // echo response()->json($request);
+        // die;
 
         //============== send email
         //$isi_email = [
@@ -130,7 +159,8 @@ class UserApiController extends Controller
         $user = User::where('user_email', '=', $credentials['user_email'])
             ->where(function ($query) {
                 $query->where('user_role', 'admin')
-                    ->orWhere('user_role', 'superadmin');
+                    ->orWhere('user_role', 'superadmin')
+                    ->orWhere('user_role', 'partner');
             })
             ->first();
 
