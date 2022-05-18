@@ -1,3 +1,4 @@
+{{-- This template is for cms admin --}}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -26,6 +27,8 @@
   <!-- End layout styles -->
   {{-- <link rel="shortcut icon" href="{{ asset('') }}assets/images/favicon.png" /> --}}
   <link rel="shortcut icon" href="{{ url('img/jdihn-favicon.png') }}?v={{ date('YmdHis') }}">
+  {{-- customcall --}}
+  @yield('custom-header')
 </head>
 
 <body class="sidebar-dark">

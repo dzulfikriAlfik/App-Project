@@ -70,7 +70,7 @@
             </li>
             <li class="nav-item dropdown nav-profile">
                 <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <img id="user_image_sm" src="https://via.placeholder.com/30x30" alt="userr">
+                    <img id="user_image_sm" src="https://via.placeholder.com/30x30" alt="userImage">
                 </a>
                 <div class="dropdown-menu" aria-labelledby="profileDropdown">
                     <div class="dropdown-header d-flex flex-column align-items-center">
@@ -91,7 +91,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="javascript:;" class="nav-link">
+                                <a href="/cms/userprofile" class="nav-link">
                                     <i data-feather="edit"></i>
                                     <span>Edit Profile</span>
                                 </a>

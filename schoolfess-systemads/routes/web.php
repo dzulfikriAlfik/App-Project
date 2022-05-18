@@ -41,6 +41,15 @@ Route::group(['middleware' => ['login.middleware']], function () {
     Route::prefix('cms')->group(function () {
         Route::get('/dashboard', 'DashboardController@Dashboard');
         Route::get('/video', 'VideoController@Video');
+        Route::get('/userprofile', 'UsersController@Profile');
+        // Route::post('/uploadprofile', 'UsersController@testupload');
         Route::post('/video', [VideoController::class, 'store']);
+    });
+});
+
+// route partner
+Route::group(['middleware' => ['login.middleware', 'partner.middleware']], function () {
+    Route::prefix('cms')->group(function () {
+        Route::get('/partner_dashboard', 'PartnerControllerController@Index');
     });
 });

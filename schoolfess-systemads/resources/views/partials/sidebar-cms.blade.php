@@ -12,7 +12,7 @@
    <div class="sidebar-body">
       <ul class="nav">
 
-         @if (session('role') == 'superadmin' || session('role') == 'admin')
+         @if (session('role') == 'superadmin' || session('role') == 'admin' || session('role') == 'partner')
          <li class="nav-item nav-category">Main</li>
          <li class="nav-item">
             <a href="/cms/dashboard" class="nav-link">
@@ -20,6 +20,14 @@
                <span class="link-title">Dashboard</span>
             </a>
          </li>
+         <li class="nav-item">
+            <a href="/cms/userprofile" class="nav-link">
+               <i class="link-icon" data-feather="edit"></i>
+               <span class="link-title">Edit Profile</span>
+            </a>
+         </li>
+         @endif
+         @if (session('role') == 'superadmin' || session('role') == 'admin')
          <li class="nav-item">
             <a href="/cms/trivias" class="nav-link">
                <i class="link-icon" data-feather="info"></i>
@@ -32,22 +40,10 @@
                <span class="link-title">Video</span>
             </a>
          </li>
-         <!-- <li class="nav-item">
-        <a href="/cms/blog" class="nav-link">
-        <i class="link-icon" data-feather="file-text"></i>
-        <span class="link-title">Blog</span>
-        </a>
-    </li> -->
          @endif
 
          @if (session('role') == 'superadmin')
          <li class="nav-item nav-category">SYSTEM</li>
-         <!-- <li class="nav-item">
-        <a href="/cms/systems" class="nav-link">
-        <i class="link-icon" data-feather="settings"></i>
-        <span class="link-title">System</span>
-        </a>
-    </li> -->
          <li class="nav-item">
             <a href="/cms/users" class="nav-link">
                <i class="link-icon" data-feather="users"></i>
@@ -58,6 +54,16 @@
             <a href="/cms/systems" class="nav-link">
                <i class="link-icon" data-feather="settings"></i>
                <span class="link-title">System</span>
+            </a>
+         </li>
+         @endif
+
+         @if (session('role') == 'partner')
+         <li class="nav-item nav-category">Partner</li>
+         <li class="nav-item">
+            <a href="#" class="nav-link">
+               <i class="link-icon" data-feather="award"></i>
+               <span class="link-title">Set Ads</span>
             </a>
          </li>
          @endif

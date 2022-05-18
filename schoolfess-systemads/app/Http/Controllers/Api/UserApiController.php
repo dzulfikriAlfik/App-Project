@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\SendEmail;
 use Auth;
+use File;
 
 class UserApiController extends Controller
 {
@@ -141,6 +142,35 @@ class UserApiController extends Controller
             'message' => 'User created successfully',
             'data' => $user
         ], Response::HTTP_OK);
+    }
+
+    public function upload(Request $request)
+    {
+        // echo "Test";
+        // echo $request->image;
+
+        $file = $request->file('image');
+        echo $file;
+        $nama_file = time() . '_' . $file->getClientOriginalName();
+
+        //created directory file 
+        $path = storage_path('app/public/user-profile');
+        if (!File::isDirectory($path)) {
+            File::makeDirectory($path, 0777, true, true);
+        }
+        $file->move($path, $nama_file);
+
+        // $data = $_POST['image'];
+
+        // $image_array_1 = explode(";", $data);
+
+        // $image_array_2 = explode(",", $image_array_1[1]);
+
+        // $data = base64_decode($image_array_2[1]);
+
+        // $image_name = asset('assets/images/upload/') . time() . '.png';
+
+        // file_put_contents($image_name, $data);
     }
 
     public function hashPassword(Request $request)
