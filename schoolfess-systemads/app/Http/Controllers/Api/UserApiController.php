@@ -146,10 +146,6 @@ class UserApiController extends Controller
 
     public function upload(Request $request)
     {
-        // echo "Test";
-        // echo "<script>console.log($request->image)</script>";
-        // die;
-
         $image = $request->image;  // your base64 encoded
         $image = str_replace('data:image/png;base64,', '', $image);
         $image = str_replace(' ', '+', $image);
@@ -160,6 +156,12 @@ class UserApiController extends Controller
             File::makeDirectory($path, 0777, true, true);
         }
         File::put($fullpath, base64_decode($image));
+        // response header
+        return response()->json([
+            'status' => 200,
+            'message' => 'Image uploaded successfully',
+            'data' => $fullpath
+        ], Response::HTTP_OK);
     }
 
     public function hashPassword(Request $request)
@@ -479,6 +481,20 @@ class UserApiController extends Controller
         //delete if not active user
         $user->update([
             'user_role' => "superadmin"
+        ]);
+
+        //respon success
+        return response()->json([
+            'status' => 200,
+            'message' => 'Data updated successfully'
+        ], Response::HTTP_OK);
+    }
+
+    public function adminAds(Request $request, User $user)
+    {
+        //delete if not active user
+        $user->update([
+            'user_role' => "adminads"
         ]);
 
         //respon success

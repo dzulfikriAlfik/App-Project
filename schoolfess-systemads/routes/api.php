@@ -41,6 +41,7 @@ Route::delete('user/delete/{user}',  [UserApiController::class, 'destroy'])->mid
 
 Route::post('user/admin/{user}',  [UserApiController::class, 'admin'])->middleware('jwt.verify');
 Route::post('user/superadmin/{user}',  [UserApiController::class, 'superAdmin'])->middleware('jwt.verify');
+Route::post('user/adminads/{user}',  [UserApiController::class, 'adminAds'])->middleware('jwt.verify');
 Route::post('user/removeadmin/{user}',  [UserApiController::class, 'removeAdmin'])->middleware('jwt.verify');
 
 //======== TRIVIA

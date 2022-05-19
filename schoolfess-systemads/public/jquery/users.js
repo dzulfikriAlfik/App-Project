@@ -1,4 +1,4 @@
-var globalPage = 1;
+let globalPage = 1;
 
 // function action button enter
 function setupEventHandler() {
@@ -17,13 +17,13 @@ function setupEventHandler() {
 
 // select role
 function selectRole() {
-   // var url = "/api/combo/role"
+   // let url = "/api/combo/role"
    // commonAPI.getAPI(url, (response) => {
    //     // console.log(response)
    //     if(response.status==200){
    //         // refine structure
-   //         var data = response.data
-   //         for (var index in data){
+   //         let data = response.data
+   //         for (let index in data){
    //             $('#role').append($('<option />').val(`${data[index].value}`).html(`${data[index].label}`));
    //         }
    //     }
@@ -31,69 +31,80 @@ function selectRole() {
 }
 
 function buildTemplate(data, index, page, perPage) {
-   var rows = "";
-   rows += "<tr class='template-data'>";
-   rows += "<td style='text-align: center'>";
-   rows += parseInt(perPage * (page - 1)) + parseInt(index) + 1;
-   rows += "</td>";
-   rows += "<td>";
-   rows += data[index].user_name + "<br/>";
-   rows +=
-      "<span style='color: #b1b1b1'>@" + data[index].user_username + "</span>";
-   rows += "</td>";
-   rows += "<td>";
-   rows += data[index].user_email + "<br/>";
-   rows += "<span style='color: #b1b1b1'>" + data[index].user_phone + "</span>";
-   rows += "</td>";
-   rows += "<td>";
-   rows += data[index].created_dt + "<br/>";
-   rows += data[index].user_banned == 1 ? "Blocked" : "Active";
-   rows += "</td>";
-   rows += "<td>";
-   rows += data[index].user_role;
-   rows += "</td>";
-   rows += "<td>";
-   rows += `
-    <div class="dropdown">
-    <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        Action
-    </button>
-    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">`;
-   // rows += "<button type='button' class='btn btn-light btn-xs  dropdown-item' onClick='edit(\"" + data[index].user_id + "\")' style='margin-right: 5px;'><i class='fa fa-pencil feather-16'></i> Edit</button>"
-
-   if (data[index].user_role == "user") {
-      rows +=
-         "<button type='button' class='btn btn-light btn-xs  dropdown-item' onClick='setAdmin(\"" +
-         data[index].user_id +
-         "\")'><i class='fa fa-user feather-16'></i> Make Admin</button>";
-      rows +=
-         "<button type='button' class='btn btn-light btn-xs  dropdown-item' onClick='setSuperAdmin(\"" +
-         data[index].user_id +
-         "\")'><i class='fa fa-user feather-16'></i> Make S-Admin</button>";
-   } else {
-      rows +=
-         "<button type='button' class='btn btn-light btn-xs  dropdown-item' onClick='removeAdmin(\"" +
-         data[index].user_id +
-         "\")'><i class='fa fa-user feather-16'></i> Remove Admin</button>";
-   }
-
-   if (data[index].user_banned == 1) {
-      rows +=
-         "<button type='button' class='btn btn-light btn-xs  dropdown-item' onClick='unblock(\"" +
-         data[index].user_id +
-         "\")'><i class='fa fa-user feather-16'></i> Unblock</button>";
-   } else {
-      rows +=
-         "<button type='button' class='btn btn-light btn-xs  dropdown-item' onClick='block(\"" +
-         data[index].user_id +
-         "\")'><i class='fa fa-ban feather-16'></i> Block</button>";
-   }
-   rows += `</div>
-    </div>`;
-   rows += "</td>";
-   rows += "</tr>";
+   let rows = `
+      <tr class='template-data'>
+         <td style='text-align: center'>
+            ${parseInt(perPage * (page - 1)) + parseInt(index) + 1}
+         </td>
+         <td>${data[index].user_name} <br/>
+            <span style='color: #b1b1b1'>@${data[index].user_username}</span>
+         </td>
+         <td>${data[index].user_email} <br/>
+            <span style='color: #b1b1b1'>${data[index].user_phone}</span>
+         </td>
+         <td>${data[index].created_dt} <br/>
+            ${data[index].user_banned == 1 ? "Blocked" : "Active"}
+         </td>
+         <td>${data[index].user_role}</td>
+         <td>
+            <div class="dropdown">
+               <button class="btn btn-light dropdown-toggle" type="button"          id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"  aria-expanded="false">
+                  Action
+               </button>
+               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <div class="role">
+                     ${checkRole(data[index].user_role, data[index].user_id)}
+                  </div>
+                  <div class="banned">${checkUserBanned(
+                     data[index].user_banned,
+                     data[index].user_id
+                  )}
+                  </div>
+               </div>
+            </div>
+         </td>
+      </tr>
+   `;
 
    return rows;
+}
+
+function checkRole(user_role, user_id) {
+   let rowsRole = "";
+   if (user_role != "partner") {
+      if (user_role == "user") {
+         rowsRole += `
+         <button type='button' class='btn btn-light btn-xs  dropdown-item' onClick='setAdmin(\"${user_id}\")'><i class='fa fa-user feather-16'></i> Make Admin
+         </button>
+         <button type='button' class='btn btn-light btn-xs  dropdown-item' onClick='setSuperAdmin(\"${user_id}\")'><i class='fa fa-user feather-16'></i> Make S-Admin
+         </button>
+         <button type='button' class='btn btn-light btn-xs  dropdown-item' onClick='setAdminAds(\"${user_id}\")'><i class='fa fa-user feather-16'></i> Make Admin Ads
+         </button>
+      `;
+      } else {
+         rowsRole += `
+         <button type='button' class='btn btn-light btn-xs  dropdown-item' onClick='removeAdmin(\"${user_id}\")'><i class='fa fa-user feather-16'></i> Remove Admin
+         </button>
+      `;
+      }
+   }
+   return rowsRole;
+}
+
+function checkUserBanned(user_banned, user_id) {
+   let rowsBanned = "";
+   if (user_banned == 1) {
+      rowsBanned += `
+         <button type='button' class='btn btn-light btn-xs  dropdown-item' onClick='unblock(\"${user_id}\")'><i class='fa fa-user feather-16'></i> Unblock
+         </button>
+      `;
+   } else {
+      rowsBanned += `
+         <button type='button' class='btn btn-light btn-xs  dropdown-item' onClick='block(\"${user_id}\")'><i class='fa fa-ban feather-16'></i> Block
+         </button>
+      `;
+   }
+   return rowsBanned;
 }
 
 // clear value filter search
@@ -123,27 +134,15 @@ function setUpInfo(structure) {
 
 function search(page) {
    if (!page) page = globalPage;
-   var url = "/api/user/get?page=" + page;
+   let url = "/api/user/get?page=" + page;
 
-   var filterName = $("#filterName").val();
-   var filterUsername = $("#filterUsername").val();
-   var filterEmail = $("#filterEmail").val();
-   var filterPhone = $("#filterPhone").val();
-   var filterStatus = $("#filterStatus").val();
-   var filterRole = $("#filterRole").val();
-   var params =
-      "&user_username=" +
-      filterUsername +
-      "&user_email=" +
-      filterEmail +
-      "&user_name=" +
-      filterName +
-      "&user_phone=" +
-      filterPhone +
-      "&user_banned=" +
-      filterStatus +
-      "&user_role=" +
-      filterRole;
+   let filterName = $("#filterName").val();
+   let filterUsername = $("#filterUsername").val();
+   let filterEmail = $("#filterEmail").val();
+   let filterPhone = $("#filterPhone").val();
+   let filterStatus = $("#filterStatus").val();
+   let filterRole = $("#filterRole").val();
+   let params = `&user_username=${filterUsername}&user_email=${filterEmail}&user_name=${filterName}&user_phone=${filterPhone}&user_banned=${filterStatus}&user_role=${filterRole}`;
 
    $(".template-data").remove();
    commonJS.loading(true);
@@ -151,8 +150,8 @@ function search(page) {
       // console.log(response)
       if (response.status == 200) {
          // refine structure
-         var structure = response.data;
-         var data = structure.data;
+         let structure = response.data;
+         let data = structure.data;
 
          // force search from page 1
          if (data.length == 0 && structure.current_page != 1) {
@@ -161,13 +160,13 @@ function search(page) {
             return;
          }
 
-         var rows = "";
+         let rows = "";
          if (data.length == 0) {
             $("#nodata").show();
          } else {
             $("#nodata").hide();
          }
-         for (var index in data) {
+         for (let index in data) {
             rows += buildTemplate(data, index, page, structure.per_page);
          }
 
@@ -248,7 +247,7 @@ function save() {
    commonJS.loading(true);
 
    // harus kaya gini, kalau langsung ke jquery ga kedeteksi
-   // var data
+   // let data
    let name = $("#name").val();
    let email = $("#email").val();
    let role = $("#role").val();
@@ -435,6 +434,29 @@ function removeAdmin(id) {
       "No",
       commonAPI.postAPIAsync,
       `/api/user/removeadmin/${id}`,
+      function (response) {
+         commonJS.loading(false);
+         if (response.status == 200) {
+            search(globalPage);
+         } else if (response.status == 401) {
+            swalError(response.message);
+         }
+      },
+      function (response) {
+         commonJS.loading(false);
+         commonJS.swalError(response.responseJSON.message);
+      },
+      {}
+   );
+}
+
+function setAdminAds(id) {
+   commonJS.swalConfirmAjax(
+      "Are you sure you want to set this user as Admin Ads?",
+      "Yes",
+      "No",
+      commonAPI.postAPIAsync,
+      `/api/user/adminads/${id}`,
       function (response) {
          commonJS.loading(false);
          if (response.status == 200) {
