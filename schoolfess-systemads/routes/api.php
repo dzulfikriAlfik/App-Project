@@ -32,11 +32,14 @@ Route::post('user/upload', [UserApiController::class, 'upload']);
 Route::get('logout', [UserApiController::class, 'logout'])->middleware('jwt.verify');
 Route::get('get_user', [UserApiController::class, 'getAuthenticatedUser'])->middleware('jwt.verify');
 Route::get('user/get', [UserApiController::class, 'get'])->middleware('jwt.verify');
+Route::get('user/get_partner', [UserApiController::class, 'get_partner'])->middleware('jwt.verify');
 Route::get('user/get/statistic', [UserApiController::class, 'getStatistic'])->middleware('jwt.verify');
 Route::get('user/get/{id}', [UserApiController::class, 'show'])->middleware('jwt.verify');
 Route::put('user/put/{user}', [UserApiController::class, 'update'])->middleware('jwt.verify');
 Route::delete('user/block/{user}',  [UserApiController::class, 'block'])->middleware('jwt.verify');
 Route::delete('user/unblock/{user}',  [UserApiController::class, 'unblock'])->middleware('jwt.verify');
+Route::delete('user/activate/{user}',  [UserApiController::class, 'activate'])->middleware('jwt.verify');
+Route::delete('user/pending/{user}',  [UserApiController::class, 'pending'])->middleware('jwt.verify');
 Route::delete('user/delete/{user}',  [UserApiController::class, 'destroy'])->middleware('jwt.verify');
 
 Route::post('user/admin/{user}',  [UserApiController::class, 'admin'])->middleware('jwt.verify');

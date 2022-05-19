@@ -57,7 +57,7 @@ class UserApiController extends Controller
             'user_phone'        => $request->user_phone,
             'user_company'      => $request->user_company,
             'user_company_type' => $request->user_company_type,
-            'user_status'       => "pending",
+            'user_status'       => 0,
             'user_role'         => "partner",
             'user_password'     => bcrypt($request->user_password),
             'created_dt'        => date("Y-m-d h:i:s"),
@@ -117,7 +117,7 @@ class UserApiController extends Controller
             'user_phone'        => $request->user_phone,
             'user_company'      => $request->user_company,
             'user_company_type' => $request->user_company_type,
-            'user_status'       => "pending",
+            'user_status'       => 0,
             'user_password'     => bcrypt($request->password),
             'created_by'        => $request->name,
             'updated_by'        => $request->name,
@@ -188,7 +188,7 @@ class UserApiController extends Controller
 
         $is_active = User::where('user_email', '=', $credentials['user_email'])
             ->where(function ($query) {
-                $query->where('user_status', 'active');
+                $query->where('user_status', 1);
             })
             ->first();
 
@@ -346,6 +346,62 @@ class UserApiController extends Controller
         }
     }
 
+    public function get_partner(Request $request)
+    {
+        $query = User::select(
+            'user.user_id',
+            'user.user_username',
+            'user.user_name',
+            'user.user_email',
+            'user.user_phone',
+            'user.user_company',
+            'user.user_company_type',
+            'user.created_dt',
+            'user.user_status'
+        );
+        $query->where('user_role', 'partner');
+
+        // by username
+        if ($request->user_username) {
+            $query = $query->where('user_username', 'LIKE', "%" . $request->user_username . "%");
+        }
+        // by name
+        if ($request->user_name) {
+            $query = $query->where('user_name', 'LIKE', "%" . $request->user_name . "%");
+        }
+        // by email
+        if ($request->user_email) {
+            $query = $query->where('user_email', 'LIKE', "%" . $request->user_email . "%");
+        }
+        // by companyname
+        if ($request->user_company) {
+            $query = $query->where('user_company', 'LIKE', "%" . $request->user_company . "%");
+        }
+        // by companytype
+        if ($request->user_company_type) {
+            $query = $query->where('user_company_type', $request->user_company_type);
+        }
+        // by status
+        if ($request->user_status != "") {
+            $query = $query->where('user_status', $request->user_status);
+        }
+
+        $data = $query->orderBy("created_dt", "DESC")->paginate(10);
+        if ($data->isEmpty()) {
+            return response()->json([
+                'status' => 200,
+                'message' => 'Data Not Found',
+                'data' => $data
+            ], Response::HTTP_OK);
+        } else {
+            return response()->json([
+                'status' => 200,
+                'message' => 'Data Found',
+                'data' => $data
+            ], Response::HTTP_OK);
+        }
+    }
+
     public function getStatistic(Request $request)
     {
         $data = json_decode("{}");
@@ -459,7 +515,35 @@ class UserApiController extends Controller
         //respon success
         return response()->json([
             'status' => 200,
-            'message' => 'Data blocked successfully'
+            'message' => 'Data unblocked successfully'
+        ], Response::HTTP_OK);
+    }
+
+    public function activate(Request $request, User $user)
+    {
+        //delete if not active user
+        $user->update([
+            'user_status' => 1
+        ]);
+
+        //respon success
+        return response()->json([
+            'status' => 200,
+            'message' => 'Partner have been successfully activated'
+        ], Response::HTTP_OK);
+    }
+
+    public function pending(Request $request, User $user)
+    {
+        //delete if not active user
+        $user->update([
+            'user_status' => 0
+        ]);
+
+        //respon success
+        return response()->json([
+            'status' => 200,
+            'message' => 'Partner have been successfully blocked'
         ], Response::HTTP_OK);
     }
 
