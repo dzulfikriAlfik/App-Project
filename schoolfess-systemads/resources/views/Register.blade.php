@@ -39,14 +39,11 @@
                {{-- Jenis Perusahaan --}}
                <h5 class="mt-3">Jenis Usaha</h5>
                <div class="form-label">
-                  {{-- <input id="companyname" type="text" class="form-control" placeholder="Masukan Nama Perusahaan" value="">
-                  <label for="companyname">Masukan Nama Perusahaan</label> --}}
-                  {{-- <label class="form-label">Jenis Perusahaan</label> --}}
                   <select id="user_company_type" class="form-control">
                      <option value="">-- Pilih satu --</option>
-                     <option value="1">Teknologi Informasi</option>
-                     <option value="2">Fund Management</option>
-                     <option value="3">Telecommunication Project</option>
+                     @foreach ($company_type as $type)
+                     <option value="{{ $type->company_type_id }}">{{ $type->company_type }}</option>
+                     @endforeach
                   </select>
                </div>
                {{-- Password --}}

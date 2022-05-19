@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Models\Companytype;
 use Session;
 
 use Alert;
@@ -25,7 +25,11 @@ class AuthController extends Controller
         if (Session::has('login')) {
             return redirect('/cms');
         } else {
-            return view('register', ["title" => 'Register']);
+            $data = [
+                "title"        => "Register",
+                "company_type" => Companytype::all()
+            ];
+            return view('register', $data);
         }
     }
 

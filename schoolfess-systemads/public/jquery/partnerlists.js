@@ -22,7 +22,7 @@ function buildTemplate(data, index, page, perPage) {
             <span style='color: #b1b1b1'>${data[index].user_phone}</span>
          </td>
          <td>${data[index].user_company} <br/>
-            <span style='color: #b1b1b1'>${data[index].user_company_type}</span>
+            <span style='color: #b1b1b1'>${data[index].company_type}</span>
          </td>
          <td>${data[index].user_status == 1 ? "Active" : "Pending"}</td>
          <td>
@@ -88,7 +88,7 @@ function setUpInfo(structure) {
 
 function search(page) {
    if (!page) page = globalPage;
-   let url = "/api/user/get_partner?page=" + page;
+   let url = `/api/user/get?page=${page}&user_type=partner`;
 
    let filterName = $("#filterName").val();
    let filterUsername = $("#filterUsername").val();

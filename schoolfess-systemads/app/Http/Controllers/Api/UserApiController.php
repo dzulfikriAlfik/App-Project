@@ -294,16 +294,56 @@ class UserApiController extends Controller
 
     public function get(Request $request)
     {
-        $query = User::select(
-            'user.user_id',
-            'user.user_username',
-            'user.user_name',
-            'user.user_email',
-            'user.user_phone',
-            'user.created_dt',
-            'user.user_banned',
-            'user.user_role',
-        );
+        if ($request->user_type == "partner") {
+            $query = User::join('company_type', 'user.user_company_type', '=', 'company_type.company_type_id');
+            $select = [
+                'user.user_id',
+                'user.user_username',
+                'user.user_name',
+                'user.user_email',
+                'user.user_phone',
+                'user.user_company',
+                'user.user_company_type',
+                'user.created_dt',
+                'user.user_status',
+                'company_type.company_type_id',
+                'company_type.company_type'
+            ];
+            $query->select($select);
+            $query->where('user_role', 'partner');
+
+            // by companyname
+            if ($request->user_company) {
+                $query = $query->where('user_company', 'LIKE', "%" . $request->user_company . "%");
+            }
+            // by companytype
+            if ($request->user_company_type) {
+                $query = $query->where('user_company_type', $request->user_company_type);
+            }
+            // by status
+            if ($request->user_status != "") {
+                $query = $query->where('user_status', $request->user_status);
+            }
+        } else {
+            $query = User::select(
+                'user.user_id',
+                'user.user_username',
+                'user.user_name',
+                'user.user_email',
+                'user.user_phone',
+                'user.created_dt',
+                'user.user_banned',
+                'user.user_role',
+            );
+            // by status
+            if ($request->user_banned != "") {
+                $query = $query->where('user_banned', $request->user_banned);
+            }
+            // by role
+            if ($request->user_role != "") {
+                $query = $query->where('user_role', $request->user_role);
+            }
+        }
 
         // by username
         if ($request->user_username) {
@@ -320,70 +360,6 @@ class UserApiController extends Controller
         // by phone
         if ($request->user_phone) {
             $query = $query->where('user_phone', 'LIKE', "%" . $request->user_phone . "%");
-        }
-        // by status
-        if ($request->user_banned != "") {
-            $query = $query->where('user_banned', $request->user_banned);
-        }
-        // by role
-        if ($request->user_role != "") {
-            $query = $query->where('user_role', $request->user_role);
-        }
-
-        $data = $query->orderBy("created_dt", "DESC")->paginate(10);
-        if ($data->isEmpty()) {
-            return response()->json([
-                'status' => 200,
-                'message' => 'Data Not Found',
-                'data' => $data
-            ], Response::HTTP_OK);
-        } else {
-            return response()->json([
-                'status' => 200,
-                'message' => 'Data Found',
-                'data' => $data
-            ], Response::HTTP_OK);
-        }
-    }
-
-    public function get_partner(Request $request)
-    {
-        $query = User::select(
-            'user.user_id',
-            'user.user_username',
-            'user.user_name',
-            'user.user_email',
-            'user.user_phone',
-            'user.user_company',
-            'user.user_company_type',
-            'user.created_dt',
-            'user.user_status'
-        );
-        $query->where('user_role', 'partner');
-
-        // by username
-        if ($request->user_username) {
-            $query = $query->where('user_username', 'LIKE', "%" . $request->user_username . "%");
-        }
-        // by name
-        if ($request->user_name) {
-            $query = $query->where('user_name', 'LIKE', "%" . $request->user_name . "%");
-        }
-        // by email
-        if ($request->user_email) {
-            $query = $query->where('user_email', 'LIKE', "%" . $request->user_email . "%");
-        }
-        // by companyname
-        if ($request->user_company) {
-            $query = $query->where('user_company', 'LIKE', "%" . $request->user_company . "%");
-        }
-        // by companytype
-        if ($request->user_company_type) {
-            $query = $query->where('user_company_type', $request->user_company_type);
-        }
-        // by status
-        if ($request->user_status != "") {
-            $query = $query->where('user_status', $request->user_status);
         }
 
         $data = $query->orderBy("created_dt", "DESC")->paginate(10);

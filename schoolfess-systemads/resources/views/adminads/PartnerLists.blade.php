@@ -48,9 +48,9 @@
                             <label class="form-label">Jenis Perusahaan</label>
                             <select id="filterCompanyType" disabled>
                                 <option value="">-- Semua --</option>
-                                <option value="1">Teknologi Informasi</option>
-                                <option value="2">Fund Management</option>
-                                <option value="3">Telecommunication Project</option>
+                                @foreach ($company_type as $type)
+                                <option value="{{ $type->company_type_id }}">{{ $type->company_type }}</option>
+                                @endforeach
                             </select>
                         </div>
                     </div><!-- Col -->
