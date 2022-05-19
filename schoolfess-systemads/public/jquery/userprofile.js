@@ -52,23 +52,30 @@ $(document).ready(function () {
             let data = {
                image: base64data,
             };
-            $.ajax({
-               url: "/api/user/upload",
-               method: "POST",
-               data: {
-                  image: base64data,
+            commonAPI.postWithImageBase64API(
+               "/api/user/upload",
+               data,
+               // onsuccess
+               function (response) {
+                  if (!response.error) {
+                     // search();
+                     $modal.modal("hide");
+                     commonJS.swalOk("Image Button Clicked");
+                     // $("#uploaded_image").attr("src", response);
+                  }
+                  commonJS.loading(false);
                },
-               success: function (data) {
-                  $modal.modal("hide");
-                  // $("#uploaded_image").attr("src", data);
-                  console.log(data);
-                  commonJS.swalOk("Image Uploaded");
-               },
-            });
+               // onerror
+               function (response) {
+                  commonJS.loading(false);
+                  commonJS.swalError(response.responseJSON.message);
+               }
+            );
          };
       });
    });
 });
+
 // commonAPI.postFormDataAPI(
 //    "/api/user/upload",
 //    data,
@@ -92,13 +99,17 @@ $(document).ready(function () {
 // $.ajax({
 //    url: "/api/user/upload",
 //    method: "POST",
-//    data: {
-//       image: base64data,
+//    data: data,
+//    headers: {
+//       Authorization: "Bearer " + localStorage.getItem("token"),
+//       "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+//       // "Content-Type": "application/json",
 //    },
 //    success: function (data) {
 //       $modal.modal("hide");
-//       // $("#uploaded_image").attr("src", data);
-//       console.log(data);
-//       commonJS.swalOk("Image Button Clicked");
+//       commonJS.swalOk("Image Uploaded");
+//    },
+//    error: function (data) {
+//       commonJS.swalOk("Something wen't wrong, can't upload image");
 //    },
 // });
