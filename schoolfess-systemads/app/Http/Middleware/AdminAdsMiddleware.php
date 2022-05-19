@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 
-class PartnerMiddleware
+class AdminAdsMiddleware
 {
     /**
      * Handle an incoming request.
@@ -16,10 +16,10 @@ class PartnerMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        if (session('role') == 'partner') {
+        if (session('role') == 'adminads') {
             return $next($request);
         } else {
-            return response()->view('Dashboard', ["title" => 'Partner Dashboard']);
+            return response()->view('adminads.PartnerLists', ["title" => 'Partner Lists']);
         }
     }
 }

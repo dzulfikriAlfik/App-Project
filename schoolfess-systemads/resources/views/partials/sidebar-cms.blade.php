@@ -68,6 +68,22 @@
          </li>
          @endif
 
+         @if (session('role') == 'adminads')
+         <li class="nav-item nav-category">Admin Ads</li>
+         <li class="nav-item">
+            <a href="/cms/partner_lists" class="nav-link">
+               <i class="link-icon" data-feather="users"></i>
+               <span class="link-title">Partner lists</span>
+            </a>
+         </li>
+         <li class="nav-item">
+            <a href="#" class="nav-link">
+               <i class="link-icon" data-feather="award"></i>
+               <span class="link-title">Ads lists</span>
+            </a>
+         </li>
+         @endif
+
       </ul>
    </div>
 </nav>

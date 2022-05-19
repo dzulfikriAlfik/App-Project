@@ -69,6 +69,7 @@ class Kernel extends HttpKernel
         'jwt.frontend' => \App\Http\Middleware\JwtFrontend::class,
         'login.middleware' => \App\Http\Middleware\LoginMiddleware::class,
         'superadmin.middleware' => \App\Http\Middleware\SuperadminMiddleware::class,
-
+        'partner.middleware' => \App\Http\Middleware\PartnerMiddleware::class,
+        'adminads.middleware' => \App\Http\Middleware\AdminAdsMiddleware::class,
     ];
 }

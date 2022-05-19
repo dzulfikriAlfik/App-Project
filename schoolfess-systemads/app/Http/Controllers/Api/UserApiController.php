@@ -181,6 +181,7 @@ class UserApiController extends Controller
             ->where(function ($query) {
                 $query->where('user_role', 'admin')
                     ->orWhere('user_role', 'superadmin')
+                    ->orWhere('user_role', 'adminads')
                     ->orWhere('user_role', 'partner');
             })
             ->first();
