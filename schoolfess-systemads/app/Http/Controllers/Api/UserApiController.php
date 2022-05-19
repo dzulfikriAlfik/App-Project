@@ -147,30 +147,19 @@ class UserApiController extends Controller
     public function upload(Request $request)
     {
         // echo "Test";
-        // echo $request->image;
+        // echo "<script>console.log($request->image)</script>";
+        // die;
 
-        $file = $request->file('image');
-        echo $file;
-        $nama_file = time() . '_' . $file->getClientOriginalName();
-
-        //created directory file 
+        $image = $request->image;  // your base64 encoded
+        $image = str_replace('data:image/png;base64,', '', $image);
+        $image = str_replace(' ', '+', $image);
+        $imageName = time() . '.' . 'png';
         $path = storage_path('app/public/user-profile');
+        $fullpath = $path . '/' . $imageName;
         if (!File::isDirectory($path)) {
             File::makeDirectory($path, 0777, true, true);
         }
-        $file->move($path, $nama_file);
-
-        // $data = $_POST['image'];
-
-        // $image_array_1 = explode(";", $data);
-
-        // $image_array_2 = explode(",", $image_array_1[1]);
-
-        // $data = base64_decode($image_array_2[1]);
-
-        // $image_name = asset('assets/images/upload/') . time() . '.png';
-
-        // file_put_contents($image_name, $data);
+        File::put($fullpath, base64_decode($image));
     }
 
     public function hashPassword(Request $request)
@@ -194,10 +183,21 @@ class UserApiController extends Controller
             })
             ->first();
 
+        $is_active = User::where('user_email', '=', $credentials['user_email'])
+            ->where(function ($query) {
+                $query->where('user_status', 'active');
+            })
+            ->first();
+
         if (!$user) {
             return response()->json([
                 'status' => 400,
                 'message' => 'User with that email is not found.',
+            ], 400);
+        } else if (!$is_active) {
+            return response()->json([
+                'status' => 400,
+                'message' => 'User with that email is not active.',
             ], 400);
         }
         // verify the credentials and create a token for the user

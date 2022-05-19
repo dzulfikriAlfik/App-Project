@@ -52,25 +52,19 @@ $(document).ready(function () {
             let data = {
                image: base64data,
             };
-            commonAPI.postFormDataAPI(
-               "/api/user/upload",
-               data,
-               // onsuccess
-               function (response) {
-                  if (!response.error) {
-                     // search();
-                     $modal.modal("hide");
-                     commonJS.swalOk("Image Button Clicked");
-                     // $("#uploaded_image").attr("src", response);
-                  }
-                  commonJS.loading(false);
+            $.ajax({
+               url: "/api/user/upload",
+               method: "POST",
+               data: {
+                  image: base64data,
                },
-               // onerror
-               function (response) {
-                  commonJS.loading(false);
-                  commonJS.swalError(response.responseJSON.message);
-               }
-            );
+               success: function (data) {
+                  $modal.modal("hide");
+                  // $("#uploaded_image").attr("src", data);
+                  console.log(data);
+                  commonJS.swalOk("Image Uploaded");
+               },
+            });
          };
       });
    });
