@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\TriviaApiController;
 use App\Http\Controllers\Api\SystemApiController;
 use App\Http\Controllers\Api\VideoApiController;
 use App\Http\Controllers\Api\StatisticApiController;
+use App\Http\Controllers\Api\AdsApiController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -46,6 +47,12 @@ Route::post('user/admin/{user}',  [UserApiController::class, 'admin'])->middlewa
 Route::post('user/superadmin/{user}',  [UserApiController::class, 'superAdmin'])->middleware('jwt.verify');
 Route::post('user/adminads/{user}',  [UserApiController::class, 'adminAds'])->middleware('jwt.verify');
 Route::post('user/removeadmin/{user}',  [UserApiController::class, 'removeAdmin'])->middleware('jwt.verify');
+
+//======== ADS
+Route::get('ads/get', [AdsApiController::class, 'get'])->middleware('jwt.verify');
+Route::delete('ads/approve/{ads}',  [AdsApiController::class, 'approve'])->middleware('jwt.verify');
+Route::delete('ads/reject/{ads}',  [AdsApiController::class, 'reject'])->middleware('jwt.verify');
+Route::delete('ads/suspend/{ads}',  [AdsApiController::class, 'suspend'])->middleware('jwt.verify');
 
 //======== TRIVIA
 Route::get('trivia/get', [TriviaApiController::class, 'get'])->middleware('jwt.verify');
