@@ -27,37 +27,37 @@ Route::get('/login', 'AuthController@Login');
 // CMS Routes
 // route superadmin
 Route::group(['middleware' => ['login.middleware', 'superadmin.middleware']], function () {
-    Route::prefix('cms')->group(function () {
-        Route::get('/users', 'UsersController@Users');
-        Route::get('/trivias', 'TriviasController@Trivias');
-        Route::get('/systems', 'SystemsController@Systems');
-    });
+   Route::prefix('cms')->group(function () {
+      Route::get('/users', 'UsersController@Users');
+      Route::get('/trivias', 'TriviasController@Trivias');
+      Route::get('/systems', 'SystemsController@Systems');
+   });
 });
 
 // route all users
 Route::group(['middleware' => ['login.middleware']], function () {
-    Route::get('/cms', 'DashboardController@Cms');
-    Route::get('/logout', 'AuthController@logout');
-    Route::prefix('cms')->group(function () {
-        Route::get('/dashboard', 'DashboardController@Dashboard');
-        Route::get('/video', 'VideoController@Video');
-        Route::get('/userprofile', 'UsersController@Profile');
-        // Route::post('/uploadprofile', 'UsersController@testupload');
-        Route::post('/video', [VideoController::class, 'store']);
-    });
+   Route::get('/cms', 'DashboardController@Cms');
+   Route::get('/logout', 'AuthController@logout');
+   Route::prefix('cms')->group(function () {
+      Route::get('/dashboard', 'DashboardController@Dashboard');
+      Route::get('/video', 'VideoController@Video');
+      Route::get('/userprofile', 'UsersController@Profile');
+      // Route::post('/uploadprofile', 'UsersController@testupload');
+      Route::post('/video', [VideoController::class, 'store']);
+   });
 });
 
 // route partner
 Route::group(['middleware' => ['login.middleware', 'partner.middleware']], function () {
-    Route::prefix('cms')->group(function () {
-        Route::get('/partner_dashboard', 'PartnerControllerController@Index');
-    });
+   Route::prefix('cms')->group(function () {
+      Route::get('/set_ads', 'PartnerController@set_ads');
+   });
 });
 
 // route adminads
 Route::group(['middleware' => ['login.middleware', 'adminads.middleware']], function () {
-    Route::prefix('cms')->group(function () {
-        Route::get('/partner_lists', 'AdminAdsController@Index');
-        Route::get('/ads_lists', 'AdminAdsController@ads_lists');
-    });
+   Route::prefix('cms')->group(function () {
+      Route::get('/partner_lists', 'AdminAdsController@Index');
+      Route::get('/ads_lists', 'AdminAdsController@ads_lists');
+   });
 });

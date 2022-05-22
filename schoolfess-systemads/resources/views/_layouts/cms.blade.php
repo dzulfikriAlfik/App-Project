@@ -36,12 +36,12 @@
 
 
     {{-- Partial Sidebar --}}
-    @include('partials.sidebar-cms')
+    @include('_partials.sidebar-cms')
 
     <div class="page-wrapper">
 
       {{-- Partial Header --}}
-      @include('partials.header-cms')
+      @include('_partials.header-cms')
 
       <div class="page-content">
 
@@ -51,7 +51,7 @@
       </div>
 
       <!-- Partial Footer -->
-      @include('partials.footer-cms')
+      @include('_partials.footer-cms')
 
     </div>
 

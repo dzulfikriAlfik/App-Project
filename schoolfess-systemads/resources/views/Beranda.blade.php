@@ -1,5 +1,5 @@
 <!-- Menghubungkan dengan view template -->
-@extends('layouts/template')
+@extends('_layouts/template')
 
 <!-- Judul Halaman -->
 @section('judul_halaman', 'Beranda')

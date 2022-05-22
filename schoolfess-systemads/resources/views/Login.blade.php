@@ -1,5 +1,5 @@
 <!-- Menghubungkan dengan view template cms -->
-@extends('layouts/template')
+@extends('_layouts/template')
 
 {{-- Content --}}
 @section('content')

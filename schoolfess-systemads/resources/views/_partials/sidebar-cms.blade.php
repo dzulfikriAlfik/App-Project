@@ -61,7 +61,7 @@
          @if (session('role') == 'partner')
          <li class="nav-item nav-category">Partner</li>
          <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="/cms/set_ads" class="nav-link">
                <i class="link-icon" data-feather="award"></i>
                <span class="link-title">Set Ads</span>
             </a>

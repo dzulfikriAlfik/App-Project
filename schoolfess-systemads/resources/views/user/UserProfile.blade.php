@@ -1,5 +1,5 @@
 <!-- Menghubungkan dengan view template cms -->
-@extends('layouts/cms')
+@extends('_layouts/cms')
 
 @section('custom-header')
 {{-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" /> --}}
