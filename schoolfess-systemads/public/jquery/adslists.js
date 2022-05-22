@@ -22,8 +22,8 @@ function buildTemplate(data, index, page, perPage) {
          </td>
          <td>${data[index].ads_title}</td>
          <td>
-            ${data[index].created_by} <br/>
-            <span style='color: #b1b1b1'>Company Type</span>
+            ${data[index].user_company} <br/>
+            <span style='color: #b1b1b1'>${data[index].company_type}</span>
          </td>
          <td>${checkAdsStatus(data[index].ads_status)}</td>
          <td>
@@ -115,7 +115,7 @@ function search(page) {
    let filterPlacement = $("#filterPlacement").val();
    let filterCreatedAt = $("#filterCreatedAt").val();
    let filterCompanyName = $("#filterCompanyName").val();
-   let params = `&ads_title=${filterAdsTitle}&ads_placement=${filterPlacement}&created_dt=${filterCreatedAt}&created_by=${filterCompanyName}`;
+   let params = `&ads_title=${filterAdsTitle}&ads_placement=${filterPlacement}&created_dt=${filterCreatedAt}&user_company=${filterCompanyName}`;
 
    $(".template-data").remove();
    commonJS.loading(true);

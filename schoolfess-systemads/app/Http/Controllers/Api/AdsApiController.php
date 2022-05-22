@@ -38,7 +38,10 @@ class AdsApiController extends Controller
 
    public function get(Request $request)
    {
-      $query = Ads::select(
+      $query = Ads::join('user', 'ads.created_by', '=', 'user.user_id');
+      $query->join('company_type', 'user.user_company_type', '=', 'company_type.company_type_id');
+
+      $select = [
          'ads.ads_id',
          'ads.ads_title',
          'ads.ads_status',
@@ -46,11 +49,16 @@ class AdsApiController extends Controller
          'ads.ads_image',
          'ads.created_dt',
          'ads.created_by',
-      );
+         'user.user_id',
+         'user.user_company',
+         'company_type.company_type as company_type'
+      ];
+      $query->select($select);
+      $query->where('user_company', '!=', '');
 
       // by status
       if ($request->ads_title != "") {
-         $query = $query->where('ads_title', $request->ads_title);
+         $query = $query->where('ads_title', 'LIKE', "%" . $request->ads_title . "%");
       }
 
       // by role
@@ -60,11 +68,11 @@ class AdsApiController extends Controller
 
       // by created_dt
       if ($request->created_dt) {
-         $query = $query->where('created_dt', 'LIKE', "%" . $request->created_dt . "%");
+         $query = $query->where('created_dt', $request->created_dt);
       }
       // by name
-      if ($request->created_by) {
-         $query = $query->where('created_by', 'LIKE', "%" . $request->created_by . "%");
+      if ($request->user_company) {
+         $query = $query->where('user_company', $request->user_company);
       }
 
       $data = $query->orderBy("created_dt", "DESC")->paginate(10);
