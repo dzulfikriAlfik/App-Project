@@ -6,11 +6,11 @@ use Illuminate\Http\Request;
 
 class PartnerController extends Controller
 {
-   public function set_ads()
+   public function manage_ads()
    {
       $data = [
-         "title" => "Set Ads"
+         "title" => "Manage Ads"
       ];
-      return view('Partner.SetAds', $data);
+      return view('Partner.ManageAds', $data);
    }
 }

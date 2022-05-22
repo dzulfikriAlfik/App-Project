@@ -50,6 +50,8 @@ Route::post('user/removeadmin/{user}',  [UserApiController::class, 'removeAdmin'
 
 //======== ADS
 Route::get('ads/get', [AdsApiController::class, 'get'])->middleware('jwt.verify');
+Route::post('ads/create', [AdsApiController::class, 'store'])->middleware('jwt.verify');
+Route::get('ads/partner_ads', [AdsApiController::class, 'partner_ads'])->middleware('jwt.verify');
 Route::delete('ads/approve/{ads}',  [AdsApiController::class, 'approve'])->middleware('jwt.verify');
 Route::delete('ads/reject/{ads}',  [AdsApiController::class, 'reject'])->middleware('jwt.verify');
 Route::delete('ads/suspend/{ads}',  [AdsApiController::class, 'suspend'])->middleware('jwt.verify');
