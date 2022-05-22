@@ -19,7 +19,7 @@ class AdminAdsMiddleware
         if (session('role') == 'adminads') {
             return $next($request);
         } else {
-            return response()->view('adminads.PartnerLists', ["title" => 'Partner Lists']);
+            return response()->view('Dashboard', ["title" => 'Dashboard']);
         }
     }
 }

@@ -47,10 +47,10 @@
                         <div class="mb-3">
                             <label class="form-label">Jenis Perusahaan</label>
                             <select id="filterCompanyType" disabled>
-                                <option value="">-- Semua --</option>
+                                {{-- <option value="">-- Semua --</option>
                                 @foreach ($company_type as $type)
                                 <option value="{{ $type->company_type_id }}">{{ $type->company_type }}</option>
-                                @endforeach
+                                @endforeach --}}
                             </select>
                         </div>
                     </div><!-- Col -->

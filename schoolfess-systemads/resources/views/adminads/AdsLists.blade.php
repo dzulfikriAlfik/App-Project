@@ -41,10 +41,10 @@
                         <div class="mb-3">
                             <label class="form-label">Dibuat oleh</label>
                             <select id="filterCompanyName">
-                                <option value="">-- Semua --</option>
+                                {{-- <option value="">-- Semua --</option>
                                 @foreach ($company_name as $company)
                                 <option value="{{ $company->user_company }}">{{ $company->user_company }}</option>
-                                @endforeach
+                                @endforeach --}}
                             </select>
                         </div>
                     </div><!-- Col -->
