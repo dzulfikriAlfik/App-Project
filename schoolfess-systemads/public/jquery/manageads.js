@@ -16,9 +16,9 @@ function buildTemplate(data, index, page, perPage) {
             ${parseInt(perPage * (page - 1)) + parseInt(index) + 1}
          </td>
          <td>
-            <img style='width:50px !important; height:auto !important; border-radius:0px !important;' src='/api/video/download/${
+            <img style='width:150px !important; height:auto !important; border-radius:0px !important;' src="/storage/ads-image/${
                data[index].ads_image
-            }'/>
+            }"/>
          </td>
          <td>${data[index].ads_title}</td>
          <td>
@@ -149,8 +149,17 @@ function search(page) {
 function add() {
    $("#modalForm").modal("show");
    $("#modalLabel").text("Add Ads Data");
+   cropper();
 }
 /* ------------------------------ End Function Add ------------------------------ */
+
+// clear value when modal close
+$(".modal").on("hidden.bs.modal", function () {
+   $("#ads_title").val("");
+   $("#ads_desc").val("");
+   $("#ads_placement").val("");
+   $("#ads_image").val("");
+});
 
 function save() {
    commonJS.clearMessage();
@@ -181,8 +190,15 @@ function save() {
       return;
    }
 
-   if ($("#ads_image").val() == "") {
-      $("#ads_image").focus();
+   // harus kaya gini, kalau langsung ke jquery ga kedeteksi
+   // var data
+   let ads_title = $("#ads_title").val();
+   let ads_desc = $("#ads_desc").val();
+   let ads_placement = $("#ads_placement").val();
+   // let ads_image = $("#ads_image").val();
+   let ads_image = $("#cropped_image").attr("src");
+
+   if (ads_image == "") {
       commonJS.showErrorMessage(
          "#msgBox",
          commonMsg.getMessage(["Ads Image"], commonMsg.MSG_REQUIRED)
@@ -192,13 +208,6 @@ function save() {
 
    commonJS.loading(true);
 
-   // harus kaya gini, kalau langsung ke jquery ga kedeteksi
-   // var data
-   let ads_title = $("#ads_title").val();
-   let ads_desc = $("#ads_desc").val();
-   let ads_placement = $("#ads_placement").val();
-   let ads_image = $("#ads_image").val();
-
    let data = {
       ads_title: ads_title,
       ads_desc: ads_desc,
@@ -206,7 +215,7 @@ function save() {
       ads_image: ads_image,
    };
 
-   commonAPI.postAPI(
+   commonAPI.postWithImageBase64API(
       "/api/ads/create",
       data,
       function (response) {
@@ -222,13 +231,72 @@ function save() {
    );
 }
 
-$("#ads_placement").on("change", function () {
-   let ads_placement = $("#ads_placement").val();
-});
+function cropper() {
+   var croppingImage = document.querySelector("#croppingImage"),
+      img_w = document.querySelector(".img-w"),
+      cropBtn = document.querySelector(".crop"),
+      croppedImg = document.querySelector(".cropped-img"),
+      dwn = document.querySelector(".download"),
+      upload = document.querySelector("#cropperImageUpload"),
+      cropper = "";
+
+   $(".file-upload-browse").on("click", function (e) {
+      var file = $(this)
+         .parent()
+         .parent()
+         .parent()
+         .find(".file-upload-default");
+      file.trigger("click");
+   });
+
+   cropper = new Cropper(croppingImage);
+
+   // on change show image with crop options
+   upload.addEventListener("change", function (e) {
+      $(this)
+         .parent()
+         .find(".form-control")
+         .val(
+            $(this)
+               .val()
+               .replace(/C:\\fakepath\\/i, "")
+         );
+      if (e.target.files.length) {
+         cropper.destroy();
+         // start file reader
+         const reader = new FileReader();
+         reader.onload = function (e) {
+            if (e.target.result) {
+               croppingImage.src = e.target.result;
+               cropper = new Cropper(croppingImage, {
+                  aspectRatio: 1,
+               });
+            }
+         };
+         reader.readAsDataURL(e.target.files[0]);
+      }
+   });
+
+   // crop on click
+   cropBtn.addEventListener("click", function (e) {
+      e.preventDefault();
+      // get result to data uri
+      let imgSrc = cropper
+         .getCroppedCanvas({
+            // width: img_w.value, // input value
+            width: 300, // input value
+         })
+         .toDataURL();
+      croppedImg.src = imgSrc;
+      dwn.setAttribute("href", imgSrc);
+      dwn.download = "imagename.png";
+   });
+}
 
 $(function () {
    // on document ready
    // selectRole()
    setupEventHandler();
    search();
+   // cropper();
 });

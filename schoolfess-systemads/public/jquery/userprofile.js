@@ -61,7 +61,6 @@ $(document).ready(function () {
                      // search();
                      $modal.modal("hide");
                      commonJS.swalOk("Image Button Clicked");
-                     // $("#uploaded_image").attr("src", response);
                   }
                   commonJS.loading(false);
                },
@@ -75,41 +74,3 @@ $(document).ready(function () {
       });
    });
 });
-
-// commonAPI.postFormDataAPI(
-//    "/api/user/upload",
-//    data,
-//    // onsuccess
-//    function (response) {
-//       if (!response.error) {
-//          // search();
-//          $modal.modal("hide");
-//          commonJS.swalOk("Image Button Clicked");
-//          // $("#uploaded_image").attr("src", response);
-//       }
-//       commonJS.loading(false);
-//    },
-//    // onerror
-//    function (response) {
-//       commonJS.loading(false);
-//       commonJS.swalError(response.responseJSON.message);
-//    }
-// );
-
-// $.ajax({
-//    url: "/api/user/upload",
-//    method: "POST",
-//    data: data,
-//    headers: {
-//       Authorization: "Bearer " + localStorage.getItem("token"),
-//       "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-//       // "Content-Type": "application/json",
-//    },
-//    success: function (data) {
-//       $modal.modal("hide");
-//       commonJS.swalOk("Image Uploaded");
-//    },
-//    error: function (data) {
-//       commonJS.swalOk("Something wen't wrong, can't upload image");
-//    },
-// });

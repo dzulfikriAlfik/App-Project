@@ -2,19 +2,20 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use JWTAuth;
-use App\Models\User;
-use Tymon\JWTAuth\Exceptions\JWTException;
-use Symfony\Component\HttpFoundation\Response;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Mail;
-use App\Mail\SendEmail;
 use Auth;
 use File;
+use JWTAuth;
 use App\Models\Ads;
+use App\Models\User;
+use App\Mail\SendEmail;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
+use Tymon\JWTAuth\Exceptions\JWTException;
+use Symfony\Component\HttpFoundation\Response;
 
 class AdsApiController extends Controller
 {
@@ -175,6 +176,36 @@ class AdsApiController extends Controller
       ], Response::HTTP_OK);
    }
 
+   public function download($id)
+   {
+      $ads = Ads::find($id);
+      if ($ads) {
+         // $ids = $perda[0]["id"];
+         $file = $ads["ads_image"];
+         // $download = $perda[0]["jml_download"];
+         // //count download
+         // $jml = $download + 1;
+         // //count download to database;
+         // $jml_download = Perda::where('id', '=', $id)->update([
+         //    'jml_download' => $jml
+         // ]);
+         //download document
+         if (Storage::disk('public')->exists("ads-image/$file")) {
+            $path = Storage::disk('public')->path("ads-image/$file");
+            $content = File_get_contents($path);
+            return response($content)->withHeaders([
+               'Content-Type' => mime_content_type($path)
+            ]);
+         }
+      } else {
+         //return response id not found
+         return response()->json([
+            'status' => 200,
+            'message' => 'ID Not Found'
+         ], Response::HTTP_OK);
+      }
+   }
+
    /**
     * Store a newly created resource in storage.
     *
@@ -202,6 +233,18 @@ class AdsApiController extends Controller
          return response()->json(['error' => $validator->messages()], 200);
       }
 
+      // upload image
+      $image = $request->ads_image;  // your base64 encoded
+      $image = str_replace('data:image/png;base64,', '', $image);
+      $image = str_replace(' ', '+', $image);
+      $imageName = time() . '.' . 'png';
+      $path = storage_path('app/public/ads-image');
+      $fullpath = $path . '/' . $imageName;
+      if (!File::isDirectory($path)) {
+         File::makeDirectory($path, 0777, true, true);
+      }
+      File::put($fullpath, base64_decode($image));
+
       //Request is valid, create new Trivia
       $ads = Ads::create([
          'ads_title'      => $request->ads_title,
@@ -210,7 +253,7 @@ class AdsApiController extends Controller
          'ads_view'       => 0,
          'ads_click'      => 0,
          'ads_placement'  => $request->ads_placement,
-         'ads_image'      => $request->ads_image,
+         'ads_image'      => $imageName,
          'ads_status'     => 0,
          'ads_start_date' => date("Y-m-d h:i:s"),
          'created_dt'     => date("Y-m-d h:i:s"),
