@@ -65,13 +65,13 @@ function approveAds(ads_status, ads_id) {
       rowsApproveAds += `
          <button type='button' class='btn btn-light btn-xs  dropdown-item' onClick='approve(\"${ads_id}\")'><i class='fa fa-check feather-16'></i> Approve
          </button>
-         <button type='button' class='btn btn-light btn-xs  dropdown-item' onClick='reject(\"${ads_id}\")'><i class='fa fa-ban feather-16'></i> Reject
+         <button type='button' class='btn btn-light btn-xs  dropdown-item' onClick='commonJS.swalAdsAction("reject",\"${ads_id}\")'><i class='fa fa-ban feather-16'></i> Reject
          </button>
       `;
    } else if (ads_status == 1) {
       // if approved
       rowsApproveAds += `
-         <button type='button' class='btn btn-light btn-xs  dropdown-item' onClick='suspend(\"${ads_id}\")'><i class='fa fa-ban feather-16'></i> Suspend
+         <button type='button' class='btn btn-light btn-xs  dropdown-item' onClick='commonJS.swalAdsAction("suspend",\"${ads_id}\")'><i class='fa fa-ban feather-16'></i> Suspend
          </button>
       `;
    } else {

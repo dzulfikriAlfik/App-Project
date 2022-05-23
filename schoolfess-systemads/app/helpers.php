@@ -42,6 +42,17 @@ function checkStatusAds($ads_status)
    }
 }
 
+function checkRejectOrSuspend($ads_status, $reject_reason, $suspend_reason)
+{
+   if ($ads_status == 2) {
+      $row = '<tr><td class="left">Reject Reason</td><td class="colon">:</td><td>' . $reject_reason . '</td></tr>';
+      return $row;
+   } else if ($ads_status == 3) {
+      $row = '<tr><td class="left">Suspend Reason</td><td class="colon">:</td><td>' . $suspend_reason . '</td></tr>';
+      return $row;
+   }
+}
+
 function checkApprovedDt($ads_status, $ads_approved_date)
 {
    if ($ads_status == 1) {

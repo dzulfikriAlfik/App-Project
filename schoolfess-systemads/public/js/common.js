@@ -91,6 +91,60 @@ class CommonJS {
          });
    }
 
+   swalAdsAction(type, id) {
+      Swal.mixin({
+         input: "text",
+         confirmButtonText: "Next &rarr;",
+         showCancelButton: true,
+         progressSteps: ["1"],
+      })
+         .queue([
+            {
+               title: "Type your reason to " + type,
+               text: "This message will append to the database",
+            },
+         ])
+         .then((result) => {
+            if (result.value) {
+               let data = {};
+               if (type == "reject") {
+                  data = {
+                     ads_status: 2,
+                     reject_reason: result.value[0],
+                  };
+               } else if (type == "suspend") {
+                  data = {
+                     ads_status: 3,
+                     suspend_reason: result.value[0],
+                  };
+               }
+
+               console.log(data);
+
+               commonAPI.putAPI(
+                  `/api/ads/${type}/${id}`,
+                  data,
+                  function (response) {
+                     commonJS.loading(false);
+                     // commonJS.swalOk("Data berhasil ditambahkan");
+                     search();
+                     // $("#modalForm").modal("hide");
+                  },
+                  function (response) {
+                     commonJS.loading(false);
+                     commonJS.swalError(response.responseJSON.message);
+                  }
+               );
+               Swal.fire({
+                  title: `You have ${type}ed this ads`,
+                  html: `
+                  Your Reason: <pre><code>${result.value[0]}</code></pre>`,
+                  confirmButtonText: "Close",
+               });
+            }
+         });
+   }
+
    toastRequired(field) {
       toastInstance.fire({
          icon: "error",

@@ -149,31 +149,40 @@ class AdsApiController extends Controller
       ], Response::HTTP_OK);
    }
 
-   public function reject(Request $request, Ads $ads)
+   public function reject(Request $request, $ads_id)
    {
       //delete if not active user
+      $ads = Ads::find($ads_id);
       $ads->update([
-         'ads_status' => 2
+         'ads_status'    => 2,
+         'reject_reason' => $request->reject_reason
       ]);
 
       //respon success
       return response()->json([
-         'status' => 200,
-         'message' => 'Ads have been successfully rejected'
+         'status'  => 200,
+         'message' => 'Ads have been successfully rejected',
+         'data'    => $ads
       ], Response::HTTP_OK);
    }
 
    public function suspend(Request $request, Ads $ads)
    {
       //delete if not active user
+      // $ads = Ads::find($ads_id);
+      // echo $request->suspend_reason;
+      // die;
       $ads->update([
-         'ads_status' => 3
+         'ads_status'     => 3,
+         'suspend_reason' => $request->suspend_reason
       ]);
+
 
       //respon success
       return response()->json([
-         'status' => 200,
-         'message' => 'Ads have been successfully suspended'
+         'status'  => 200,
+         'message' => 'Ads have been successfully suspended',
+         'data'    => $ads
       ], Response::HTTP_OK);
    }
 

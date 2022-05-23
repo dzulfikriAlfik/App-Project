@@ -74,6 +74,7 @@
                            <td>{!! checkStatusAds($ads->ads_status) !!}</td>
                         </tr>
                         {!! checkApprovedDt($ads->ads_status, $ads->approved_dt) !!}
+                        {!! checkRejectOrSuspend($ads->ads_status, $ads->reject_reason, $ads->suspend_reason) !!}
                         <tr>
                            <td class="left">Ads Created Date</td>
                            <td class="colon">:</td>

@@ -58,14 +58,14 @@ class CommonAPI {
       });
    }
 
-   postAPI(url, body, success, error) {
+   postAPI(url, data, success, error) {
       $.ajax({
          url: url,
          type: "POST",
          dataType: "JSON",
          // processData: false,
          // contentType: false,
-         data: body,
+         data: data,
          headers: {
             Authorization: "Bearer " + localStorage.getItem("token"),
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),

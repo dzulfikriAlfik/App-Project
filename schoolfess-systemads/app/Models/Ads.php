@@ -22,6 +22,8 @@ class Ads extends Model
       "ads_click",
       "ads_image",
       "ads_status",
+      "reject_reason",
+      "suspend_reason",
       "ads_placement",
       "ads_start_date",
       "ads_end_date",

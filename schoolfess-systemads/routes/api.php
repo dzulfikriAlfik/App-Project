@@ -54,8 +54,8 @@ Route::get('ads/download/{id}', [AdsApiController::class, 'download']);
 Route::post('ads/create', [AdsApiController::class, 'store'])->middleware('jwt.verify');
 Route::get('ads/partner_ads', [AdsApiController::class, 'partner_ads'])->middleware('jwt.verify');
 Route::delete('ads/approve/{ads}',  [AdsApiController::class, 'approve'])->middleware('jwt.verify');
-Route::delete('ads/reject/{ads}',  [AdsApiController::class, 'reject'])->middleware('jwt.verify');
-Route::delete('ads/suspend/{ads}',  [AdsApiController::class, 'suspend'])->middleware('jwt.verify');
+Route::put('ads/reject/{id}',  [AdsApiController::class, 'reject'])->middleware('jwt.verify');
+Route::put('ads/suspend/{ads}',  [AdsApiController::class, 'suspend'])->middleware('jwt.verify');
 
 //======== TRIVIA
 Route::get('trivia/get', [TriviaApiController::class, 'get'])->middleware('jwt.verify');
