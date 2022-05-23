@@ -77,7 +77,7 @@ function clearFilter() {
    $("#filterAdsTitle").val("");
    $("#filterPlacement").val("");
    $("#filterCreatedAt").val("");
-   $("#filterCompanyName").val("");
+   $("#filterAdsStatus").val("");
    globalPage = 1;
    search();
 }
@@ -102,8 +102,8 @@ function search(page) {
    let filterAdsTitle = $("#filterAdsTitle").val();
    let filterPlacement = $("#filterPlacement").val();
    let filterCreatedAt = $("#filterCreatedAt").val();
-   let filterCompanyName = $("#filterCompanyName").val();
-   let params = `&ads_title=${filterAdsTitle}&ads_placement=${filterPlacement}&created_dt=${filterCreatedAt}&created_by=${filterCompanyName}`;
+   let filterAdsStatus = $("#filterAdsStatus").val();
+   let params = `&ads_title=${filterAdsTitle}&ads_placement=${filterPlacement}&created_dt=${filterCreatedAt}&ads_status=${filterAdsStatus}`;
 
    $(".template-data").remove();
    commonJS.loading(true);

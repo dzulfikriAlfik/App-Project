@@ -77,22 +77,22 @@
                         <tr>
                            <td class="left">Ads Created Date</td>
                            <td class="colon">:</td>
-                           <td>{{ date('d F Y H:i:s', strtotime($ads->created_dt)) }}</td>
+                           <td>{{ dateTimeFormat($ads->created_dt) }}</td>
                         </tr>
                         <tr>
                            <td class="left">Ads Updated Date</td>
                            <td class="colon">:</td>
-                           <td>{{ date('d F Y H:i:s', strtotime($ads->updated_dt)) }}</td>
+                           <td>{{ dateTimeFormat($ads->updated_dt) }}</td>
                         </tr>
                         <tr>
                            <td class="left">Ads Start Date</td>
                            <td class="colon">:</td>
-                           <td>{{ date('d F Y H:i:s', strtotime($ads->ads_start_date)) }}</td>
+                           <td>{{ dateTimeFormat($ads->ads_start_date) }}</td>
                         </tr>
                         <tr>
                            <td class="left">Ads End Date</td>
                            <td class="colon">:</td>
-                           <td>{{ date('d F Y H:i:s', strtotime($ads->ads_end_date)) }}</td>
+                           <td>{{ dateTimeFormat($ads->ads_end_date) }}</td>
                         </tr>
                      </tbody>
                   </table>

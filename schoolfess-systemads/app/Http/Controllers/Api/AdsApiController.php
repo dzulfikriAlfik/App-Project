@@ -113,10 +113,10 @@ class AdsApiController extends Controller
          $query = $query->where('created_dt', 'LIKE', "%" . $request->created_dt . "%");
       }
 
-      // // by name
-      // if ($request->created_by) {
-      //    $query = $query->where('created_by', 'LIKE', "%" . $request->created_by . "%");
-      // }
+      // // by status
+      if ($request->ads_status != null) {
+         $query = $query->where('ads_status', $request->ads_status);
+      }
 
       $data = $query->orderBy("created_dt", "DESC")->paginate(10);
       if ($data->isEmpty()) {
@@ -138,7 +138,8 @@ class AdsApiController extends Controller
    {
       //delete if not active user
       $ads->update([
-         'ads_status' => 1
+         'ads_status'  => 1,
+         'approved_dt' => date("Y-m-d h:i:s")
       ]);
 
       //respon success

@@ -41,6 +41,18 @@
                      <input type="text" class="form-control" placeholder="Dibuat pada" id="filterCreatedAt" disabled>
                   </div>
                </div><!-- Col -->
+               <div class="col-sm-6">
+                  <div class="mb-3">
+                     <label class="form-label">Status</label>
+                     <select id="filterAdsStatus">
+                        <option value="">--Pilih satu--</option>
+                        <option value="0">Pending</option>
+                        <option value="1">Approved</option>
+                        <option value="2">Rejected</option>
+                        <option value="3">Suspended</option>
+                     </select>
+                  </div>
+               </div><!-- Col -->
             </div><!-- Row -->
             <div class="row">
                <div class="col-sm-12" style="text-align: right;">
