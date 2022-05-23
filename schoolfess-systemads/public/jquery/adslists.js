@@ -16,9 +16,9 @@ function buildTemplate(data, index, page, perPage) {
             ${parseInt(perPage * (page - 1)) + parseInt(index) + 1}
          </td>
          <td>
-            <img style='width:50px !important; height:auto !important; border-radius:0px !important;' src='/api/video/download/${
+            <img style='width:150px !important; height:auto !important; border-radius:0px !important;' src="/storage/ads-image/${
                data[index].ads_image
-            }'/>
+            }"/>
          </td>
          <td>${data[index].ads_title}</td>
          <td>

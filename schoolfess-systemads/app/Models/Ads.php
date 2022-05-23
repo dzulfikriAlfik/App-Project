@@ -25,6 +25,7 @@ class Ads extends Model
       "ads_placement",
       "ads_start_date",
       "ads_end_date",
+      "approved_dt",
       "created_dt",
       "created_by",
       "updated_dt",

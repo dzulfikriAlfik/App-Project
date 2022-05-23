@@ -21,9 +21,6 @@ function buildTemplate(data, index, page, perPage) {
             }"/>
          </td>
          <td>${data[index].ads_title}</td>
-         <td>
-            ${data[index].ads_desc}
-         </td>
          <td>${checkAdsStatus(data[index].ads_status)}</td>
          <td>
             <div class="dropdown">
@@ -60,15 +57,15 @@ function approveAds(ads_status, ads_id) {
    if (ads_status == 0 || ads_status == 1) {
       // if pending
       rowsApproveAds += `
-         <a href="/cms/ads_edit" class='btn btn-light btn-xs  dropdown-item'><i class='fa fa-edit feather-16'></i> Edit
+         <a href="/cms/ads_edit/${ads_id}" class='btn btn-light btn-xs  dropdown-item'><i class='fa fa-edit feather-16'></i> Edit
          </a>
-         <a href="#" class='btn btn-light btn-xs  dropdown-item'><i class='fa fa-eye feather-16'></i> Show Detail
+         <a href="/cms/show_ads_detail/${ads_id}" class='btn btn-light btn-xs  dropdown-item'><i class='fa fa-eye feather-16'></i> Show Detail
          </a>
       `;
    } else {
       // if rejected & suspended
       rowsApproveAds += `
-         <a href="#" class='btn btn-light btn-xs  dropdown-item'><i class='fa fa-flag feather-16'></i> See why?
+         <a href="/cms/show_ads_detail/${ads_id}" class='btn btn-light btn-xs  dropdown-item'><i class='fa fa-flag feather-16'></i> See why?
          </a>
       `;
    }
