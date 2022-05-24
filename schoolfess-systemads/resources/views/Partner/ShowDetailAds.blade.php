@@ -38,7 +38,18 @@
    <div class="card">
       <div class="card-body">
          <div class="media d-block d-sm-flex">
-            <img src="/storage/ads-image/{{ $ads->ads_image }}" class="align-self-center mr-4 wd-100p wd-sm-200 mb-3 mb-sm-0 mr-3" alt="...">
+            {{-- show image modal --}}
+            <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+               <div class="modal-dialog modal-lg modal-dialog-centered">
+                  <div class="modal-content">
+                     <img src="/storage/ads-image/{{ $ads->ads_image }}" class="align-self-center">
+                  </div>
+               </div>
+            </div>
+            {{-- show image modal --}}
+            <a href="#" data-toggle="modal" class="align-self-center" data-target=".bd-example-modal-lg">
+               <img src="/storage/ads-image/{{ $ads->ads_image }}" class="mr-4 wd-100p wd-sm-200 mb-3 mb-sm-0 mr-3" data-trigger="hover" data-container="body" data-toggle="popover" data-placement="top" data-content="Clik untuk melihat gambar penuh">
+            </a>
             <div class="media-body">
                <div class="table-responsive">
                   <table class="table mt-3">
