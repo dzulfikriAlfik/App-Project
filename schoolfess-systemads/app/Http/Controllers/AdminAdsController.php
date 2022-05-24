@@ -27,4 +27,13 @@ class AdminAdsController extends Controller
       ];
       return view("adminads.AdsLists", $data);
    }
+
+   public function show_detail(Ads $ads)
+   {
+      $data = [
+         "title"     => "Detail Ads",
+         "ads"       => $ads
+      ];
+      return view("Adminads.ShowDetailAds", $data);
+   }
 }

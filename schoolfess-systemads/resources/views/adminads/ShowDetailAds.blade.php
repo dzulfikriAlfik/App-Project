@@ -28,7 +28,7 @@
 <!-- Breadcrumb -->
 <nav class="page-breadcrumb">
    <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="/cms/manage_ads">My Ads Lists</a></li>
+      <li class="breadcrumb-item"><a href="/cms/ads_lists">Ads Lists</a></li>
       <li class="breadcrumb-item active" id="userprofile" aria-current="page">Detail Ads</li>
    </ol>
 </nav>
@@ -42,6 +42,7 @@
             <div class="media-body">
                <div class="table-responsive">
                   <table class="table mt-3">
+                     {!! status_for_action_button($ads->ads_status, $ads->ads_id) !!}
                      <tbody>
                         <tr>
                            <td class="left">Title</td>
@@ -71,7 +72,7 @@
                         <tr>
                            <td class="left">Status</td>
                            <td class="colon">:</td>
-                           <td>{!! check_Status_ads($ads->ads_status, $ads->ads_id) !!}</td>
+                           <td>{!! admin_check_status_ads($ads->ads_status) !!}</td>
                         </tr>
                         {!! check_approved_date($ads->ads_status, $ads->approved_dt) !!}
                         {!! check_reject_or_suspend($ads->ads_status, $ads->reject_reason, $ads->suspend_reason) !!}
@@ -121,5 +122,5 @@
 
 @section('jquery')
 <!-- JQUERY -->
-{{-- <script src="{{ asset('jquery/detailads.js') }}"></script> --}}
+<script src="{{ asset('jquery/detailads.js') }}"></script>
 @endsection

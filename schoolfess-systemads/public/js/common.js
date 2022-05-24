@@ -91,7 +91,7 @@ class CommonJS {
          });
    }
 
-   swalAdsAction(type, id) {
+   swalAdsAction(type, id, callback) {
       Swal.mixin({
          input: "text",
          confirmButtonText: "Next &rarr;",
@@ -127,7 +127,7 @@ class CommonJS {
                   function (response) {
                      commonJS.loading(false);
                      // commonJS.swalOk("Data berhasil ditambahkan");
-                     search();
+                     // callback();
                      // $("#modalForm").modal("hide");
                   },
                   function (response) {
@@ -140,6 +140,10 @@ class CommonJS {
                   html: `
                   Your Reason: <pre><code>${result.value[0]}</code></pre>`,
                   confirmButtonText: "Close",
+               }).then((result) => {
+                  if (result.isConfirmed) {
+                     callback();
+                  }
                });
             }
          });

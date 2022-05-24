@@ -65,7 +65,7 @@ function approveAds(ads_status, ads_id) {
       rowsApproveAds += `
          <button type='button' class='btn btn-light btn-xs  dropdown-item' onClick='approve(\"${ads_id}\")'><i class='fa fa-check feather-16'></i> Approve
          </button>
-         <button type='button' class='btn btn-light btn-xs  dropdown-item' onClick='commonJS.swalAdsAction("reject",\"${ads_id}\")'><i class='fa fa-ban feather-16'></i> Reject
+         <button type='button' class='btn btn-light btn-xs  dropdown-item' onClick='commonJS.swalAdsAction("reject",\"${ads_id}\",search)'><i class='fa fa-ban feather-16'></i> Reject
          </button>
          <a href="/cms/ads_detail/${ads_id}" class='btn btn-light btn-xs  dropdown-item'><i class='fa fa-eye feather-16'></i> Show Detail
          </a>
@@ -73,7 +73,7 @@ function approveAds(ads_status, ads_id) {
    } else if (ads_status == 1) {
       // if approved
       rowsApproveAds += `
-         <button type='button' class='btn btn-light btn-xs  dropdown-item' onClick='commonJS.swalAdsAction("suspend",\"${ads_id}\")'><i class='fa fa-ban feather-16'></i> Suspend
+         <button type='button' class='btn btn-light btn-xs  dropdown-item' onClick='commonJS.swalAdsAction("suspend",\"${ads_id}\",search)'><i class='fa fa-ban feather-16'></i> Suspend
          </button>
          <a href="/cms/ads_detail/${ads_id}" class='btn btn-light btn-xs  dropdown-item'><i class='fa fa-eye feather-16'></i> Show Detail
          </a>

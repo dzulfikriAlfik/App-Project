@@ -1,6 +1,6 @@
 <?php
 
-function trimVideoUrl($video_link): string
+function trim_video_url($video_link): string
 {
    $filterLink = str_replace(["https://", "www."], "", $video_link);
    $separateToArray = explode("?", $filterLink);
@@ -9,7 +9,7 @@ function trimVideoUrl($video_link): string
    return $filteredLink;
 }
 
-function humanizeNumber($num)
+function humanize_number($num)
 {
 
    if ($num > 1000) {
@@ -29,7 +29,18 @@ function humanizeNumber($num)
    return $num;
 }
 
-function checkStatusAds($ads_status, $ads_id)
+function status_for_action_button($ads_status, $ads_id)
+{
+   if ($ads_status == 0) {
+      return "<button type='button' onClick='approve(\"$ads_id\")' class='btn btn-danger'>Approve</button>&nbsp;<button type='button' onClick='commonJS.swalAdsAction(\"reject\",\"$ads_id\", reload)' class='btn btn-primary'>Reject</button>";
+   } else if ($ads_status == 1) {
+      return "<button type='button' onClick='commonJS.swalAdsAction(\"suspend\",\"$ads_id\", reload)' class='btn btn-primary'>Suspend</button>";
+   } else {
+      return "<button type='button' onClick='approve(\"$ads_id\")' class='btn btn-danger'>Reactivate</button>";
+   }
+}
+
+function check_Status_ads($ads_status, $ads_id)
 {
    if ($ads_status == 0) {
       return '<span class="badge badge-warning">Pending</span>';
@@ -42,7 +53,20 @@ function checkStatusAds($ads_status, $ads_id)
    }
 }
 
-function checkRejectOrSuspend($ads_status, $reject_reason, $suspend_reason)
+function admin_check_status_ads($ads_status)
+{
+   if ($ads_status == 0) {
+      return '<span class="badge badge-warning">Pending</span>';
+   } else if ($ads_status == 1) {
+      return '<span class="badge badge-success">Approved</span>';
+   } else if ($ads_status == 2) {
+      return '<span class="badge badge-danger">Rejected</span>';
+   } else {
+      return '<span class="badge badge-danger">Suspended</span>';
+   }
+}
+
+function check_reject_or_suspend($ads_status, $reject_reason, $suspend_reason)
 {
    if ($ads_status == 2) {
       $row = '<tr><td class="left">Reject Reason</td><td class="colon">:</td><td>' . $reject_reason . '</td></tr>';
@@ -53,15 +77,15 @@ function checkRejectOrSuspend($ads_status, $reject_reason, $suspend_reason)
    }
 }
 
-function checkApprovedDt($ads_status, $ads_approved_date)
+function check_approved_date($ads_status, $ads_approved_date)
 {
    if ($ads_status == 1) {
-      $row = '<tr><td class="left">Ads Approved Date</td><td class="colon">:</td><td>' . dateTimeFormat($ads_approved_date) . '</td></tr>';
+      $row = '<tr><td class="left">Ads Approved Date</td><td class="colon">:</td><td>' . date_time_format($ads_approved_date) . '</td></tr>';
       return $row;
    }
 }
 
-function dateTimeFormat($time)
+function date_time_format($time)
 {
    $tanggal = date('Y-m-d-H-i-s', strtotime($time));
    $bulan = array(

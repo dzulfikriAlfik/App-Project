@@ -61,7 +61,7 @@
                               <td class="colon">:</td>
                               {{-- <td class="desc">{!! wordwrap($ads->ads_desc,80,"<br>\n") !!}</td> --}}
                               <td>
-                                 <textarea id="ads_desc" cols="50" rows="5">{{ $ads->ads_title }}</textarea>
+                                 <textarea id="ads_desc" cols="50" rows="5">{{ $ads->ads_desc }}</textarea>
                               </td>
                            </tr>
                            <tr>
