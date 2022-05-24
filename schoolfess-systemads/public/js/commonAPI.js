@@ -121,6 +121,25 @@ class CommonAPI {
       });
    }
 
+   putWithImageBase64API(url, formData, success, error) {
+      $.ajax({
+         type: "PUT",
+         url: url,
+         data: formData,
+         headers: {
+            Authorization: "Bearer " + localStorage.getItem("token"),
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            // "Content-Type": "application/json",
+         },
+         success: function (response) {
+            if (success) success(response);
+         },
+         error: function (response) {
+            if (error) error(response);
+         },
+      });
+   }
+
    putFormDataAPI(url, formData, success, error) {
       $.ajax({
          type: "PUT",

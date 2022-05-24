@@ -23,6 +23,7 @@
    }
 
 </style>
+<link href="{{ asset("assets/vendors/cropperjs/cropper.min.css") }}" rel="stylesheet" />
 @endsection
 
 <!-- Breadcrumb -->
@@ -37,19 +38,21 @@
 <div class="row">
    <div class="card">
       <div class="card-body">
-         <div class="media d-block d-sm-flex">
-            <img src="/storage/ads-image/{{ $ads->ads_image }}" class="align-self-center mr-4 wd-100p wd-sm-200 mb-3 mb-sm-0 mr-3" alt="...">
-            <div class="media-body">
-               <div class="table-responsive">
-                  <table class="table mt-3">
-                     <form action="#">
+         <form action="#" enctype="multipart/form-data">
+            <div class="media d-block d-sm-flex">
+               <input type="hidden" id="ads_image" value="{{ $ads->ads_image }}">
+               <a href="#" onclick="openModal()" class="align-self-center ">
+                  <img src="/storage/ads-image/{{ $ads->ads_image }}" class="mr-4 wd-100p wd-sm-200 mb-3 mb-sm-0 mr-3" alt="..." id="previewAdsImage" data-trigger="hover" data-container="body" data-toggle="popover" data-placement="top" data-content="Clik gambar untuk mengubah">
+               </a>
+               <div class="media-body">
+                  <div class="table-responsive">
+                     <table class="table mt-3">
                         <tbody>
                            <tr>
                               <td class="left">Title</td>
                               <td class="colon">:</td>
                               <td>
                                  <input type="hidden" id="ads_id" value="{{ $ads->ads_id }}">
-                                 <input type="hidden" id="ads_image" value="{{ $ads->ads_image }}">
                                  <input type="text" class="form-control" id="ads_title" placeholder="Ads Title" value="{{ $ads->ads_title }}">
                               </td>
                            </tr>
@@ -58,9 +61,7 @@
                               <td class="colon">:</td>
                               {{-- <td class="desc">{!! wordwrap($ads->ads_desc,80,"<br>\n") !!}</td> --}}
                               <td>
-                                 <textarea id="ads_desc" cols="50" rows="5">
-                                 {{ $ads->ads_title }}
-                              </textarea>
+                                 <textarea id="ads_desc" cols="50" rows="5">{{ $ads->ads_title }}</textarea>
                               </td>
                            </tr>
                            <tr>
@@ -90,19 +91,73 @@
                               </td>
                            </tr>
                         </tbody>
-                     </form>
-                  </table>
+                     </table>
+                  </div>
                </div>
             </div>
-         </div>
+         </form>
       </div>
    </div>
 </div>
+
+{{-- -------------------------- Modal video -------------------------- --}}
+<div class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" id="modalForm" tabindex="-1" role="dialog" aria-labelledby="modal-video" aria-hidden="true">
+   <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h5 class="modal-title" id="modalLabel">!will be set on the function!</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+               <span aria-hidden="true">&times;</span>
+            </button>
+         </div>
+         <form class="forms-sample" id="formDataVideo" action="#" enctype="multipart/form-data">
+            <div class="modal-body">
+               <div class="row">
+                  <div class="col-sm-12" id="msgBox">
+                  </div>
+               </div>
+               <div class="row">
+                  <div class="col-md-8">
+                     <div class="form-group">
+                        <input type="file" name="img[]" class="file-upload-default" id="cropperImageUpload">
+                        <div class="input-group col-xs-12">
+                           <input type="text" id="upload_image" class="form-control file-upload-info" disabled="" placeholder="Upload Image">
+                           <span class="input-group-append">
+                              <button class="file-upload-browse btn btn-primary" type="button">Upload</button>
+                           </span>
+                        </div>
+                     </div>
+                     <div>
+                        <img src="/storage/ads-image/{{ $ads->ads_image }}" class="w-200" id="croppingImage" alt="cropper">
+                     </div>
+                     <div class="d-flex justify-content-between align-items-center flex-wrap">
+                        {{-- <div class="form-group d-flex align-items-center flex-wrapp mb-0 mr-2 mt-3">
+                           <button class="btn btn-primary crop mb-2 mb-md-0">Crop</button>
+                        </div> --}}
+                     </div>
+                  </div>
+                  <div class="col-md-4 ml-auto">
+                     <h6 class="card-description mb-2 mb-md-4">Cropped Image: </h6>
+                     <img class="w-100 cropped-img mt-2" src="" alt="" id="cropped_image">
+                  </div>
+               </div>
+            </div>
+            <div class="modal-footer">
+               <button type="button" class="btn btn-cancel btn-light" data-dismiss="modal">Cancel</button>
+               {{-- <button type="button" class="btn btn-input btn-dark" onClick="save()">Save</button> --}}
+               <button class="btn btn-primary crop mb-2 mb-md-0">Crop</button>
+            </div>
+         </form>
+      </div>
+   </div>
+</div>
+{{-- -------------------------- End Modal video -------------------------- --}}
 
 <!-- rowContent -->
 @endsection
 
 @section('jquery')
 <!-- JQUERY -->
+<script src="{{ asset("assets/vendors/cropperjs/cropper.min.js") }}"></script>
 <script src="{{ asset('jquery/editads.js') }}"></script>
 @endsection

@@ -52,8 +52,6 @@ function checkAdsStatus(ads_status) {
    }
 }
 
-console.log("<?= $user->user_role; ?>");
-
 function approveAds(ads_status, ads_id) {
    let rowsApproveAds = "";
    if (ads_status == 0 || ads_status == 1) {
@@ -157,7 +155,9 @@ $(".modal").on("hidden.bs.modal", function () {
    $("#ads_title").val("");
    $("#ads_desc").val("");
    $("#ads_placement").val("");
-   $("#ads_image").val("");
+   $("#upload_image").val("");
+   $("#cropped_image").attr("src", "");
+   $("#cropperImageUpload").val("");
 });
 
 function save() {
@@ -194,7 +194,6 @@ function save() {
    let ads_title = $("#ads_title").val();
    let ads_desc = $("#ads_desc").val();
    let ads_placement = $("#ads_placement").val();
-   // let ads_image = $("#ads_image").val();
    let ads_image = $("#cropped_image").attr("src");
 
    if (ads_image == "") {
@@ -283,12 +282,12 @@ function cropper() {
       let imgSrc = cropper
          .getCroppedCanvas({
             // width: img_w.value, // input value
-            width: 300, // input value
+            width: 500, // input value
          })
          .toDataURL();
       croppedImg.src = imgSrc;
-      dwn.setAttribute("href", imgSrc);
-      dwn.download = "imagename.png";
+      // dwn.setAttribute("href", imgSrc);
+      // dwn.download = "imagename.png";
    });
 }
 

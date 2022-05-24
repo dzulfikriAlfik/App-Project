@@ -169,7 +169,7 @@
                      <div class="form-group">
                         <input type="file" name="img[]" class="file-upload-default" id="cropperImageUpload">
                         <div class="input-group col-xs-12">
-                           <input type="text" class="form-control file-upload-info" disabled="" placeholder="Upload Image">
+                           <input type="text" id="upload_image" class="form-control file-upload-info" disabled="" placeholder="Upload Image">
                            <span class="input-group-append">
                               <button class="file-upload-browse btn btn-primary" type="button">Upload</button>
                            </span>

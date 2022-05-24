@@ -319,12 +319,34 @@ class AdsApiController extends Controller
          return response()->json(['error' => $validator->messages()], 200);
       }
 
+      // check is partner edited the image
+      if ($request->ads_image == $ads->ads_image) {
+         $imageName = $ads->ads_image;
+      } else {
+         // upload image
+         $image = $request->ads_image;  // your base64 encoded
+         $image = str_replace('data:image/png;base64,', '', $image);
+         $image = str_replace(' ', '+', $image);
+         $imageName = time() . '.' . 'png';
+         $path = storage_path('app/public/ads-image');
+         $fullpath = $path . '/' . $imageName;
+
+         $oldfile = storage_path('app/public/ads-image/' . $ads->ads_image);
+         File::delete($oldfile);
+
+         if (!File::isDirectory($path)) {
+            File::makeDirectory($path, 0777, true, true);
+         }
+         File::put($fullpath, base64_decode($image));
+      }
+
       //Request is valid, update trivia
       $ads->update([
          'ads_title'     => $request->ads_title,
          'ads_desc'      => $request->ads_desc,
          'ads_link'      => $request->ads_link,
          'ads_placement' => $request->ads_placement,
+         'ads_image'     => $imageName,
          'ads_status'    => 0,
          'updated_by'    => Auth::id(),
          'updated_dt'    => date("Y-m-d h:i:s"),
