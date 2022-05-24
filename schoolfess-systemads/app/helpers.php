@@ -29,16 +29,16 @@ function humanizeNumber($num)
    return $num;
 }
 
-function checkStatusAds($ads_status)
+function checkStatusAds($ads_status, $ads_id)
 {
    if ($ads_status == 0) {
       return '<span class="badge badge-warning">Pending</span>';
    } else if ($ads_status == 1) {
       return '<span class="badge badge-success">Approved</span>';
    } else if ($ads_status == 2) {
-      return '<span class="badge badge-danger">Rejected</span>';
+      return '<span class="badge badge-danger">Rejected</span> <a href="/cms/ads_edit/' . $ads_id . '" class="badge badge-warning">Edit</a>';
    } else {
-      return '<span class="badge badge-danger">Suspended</span>';
+      return '<span class="badge badge-danger">Suspended</span> <a href="/cms/ads_edit/' . $ads_id . '" class="badge badge-warning">Edit</a>';
    }
 }
 

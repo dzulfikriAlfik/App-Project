@@ -27,4 +27,13 @@ class PartnerController extends Controller
       ];
       return view("Partner.ShowDetailAds", $data);
    }
+
+   public function edit_ads_page(Ads $ads)
+   {
+      $data = [
+         "title"     => "Edit Ads",
+         "ads"       => $ads
+      ];
+      return view("Partner.EditAdsPage", $data);
+   }
 }

@@ -299,7 +299,43 @@ class AdsApiController extends Controller
     */
    public function update(Request $request, Ads $ads)
    {
-      //
+
+      //Validate data
+      $data = $request->all();
+      $validator = Validator::make($data, [
+         'ads_title'     => 'required|string',
+         'ads_desc'      => 'required|string',
+         'ads_link'      => 'required|string',
+         'ads_placement' => 'required|string',
+      ], [
+         'ads_title.required'     => 'Ads Title is Required',
+         'ads_desc.required'      => 'Ads Description is Required',
+         'ads_link.required'      => 'Ads Link is Required',
+         'ads_placement.required' => 'Ads Placement is Required',
+      ]);
+
+      //Send failed response if request is not valid
+      if ($validator->fails()) {
+         return response()->json(['error' => $validator->messages()], 200);
+      }
+
+      //Request is valid, update trivia
+      $ads->update([
+         'ads_title'     => $request->ads_title,
+         'ads_desc'      => $request->ads_desc,
+         'ads_link'      => $request->ads_link,
+         'ads_placement' => $request->ads_placement,
+         'ads_status'    => 0,
+         'updated_by'    => Auth::id(),
+         'updated_dt'    => date("Y-m-d h:i:s"),
+      ]);
+
+      //User updated, return success response
+      return response()->json([
+         'status' => 200,
+         'message' => 'Data updated successfully',
+         'data' => $ads
+      ], Response::HTTP_OK);
    }
 
    /**

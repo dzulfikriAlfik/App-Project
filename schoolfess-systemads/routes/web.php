@@ -51,6 +51,7 @@ Route::group(['middleware' => ['login.middleware']], function () {
 Route::group(['middleware' => ['login.middleware', 'partner.middleware']], function () {
    Route::prefix('cms')->group(function () {
       Route::get('/manage_ads', 'PartnerController@manage_ads');
+      Route::get('/ads_edit/{ads}', 'PartnerController@edit_ads_page');
       Route::get('/show_ads_detail/{ads}', 'PartnerController@show_detail');
    });
 });

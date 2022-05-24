@@ -71,7 +71,7 @@
                         <tr>
                            <td class="left">Status</td>
                            <td class="colon">:</td>
-                           <td>{!! checkStatusAds($ads->ads_status) !!}</td>
+                           <td>{!! checkStatusAds($ads->ads_status, $ads->ads_id) !!}</td>
                         </tr>
                         {!! checkApprovedDt($ads->ads_status, $ads->approved_dt) !!}
                         {!! checkRejectOrSuspend($ads->ads_status, $ads->reject_reason, $ads->suspend_reason) !!}
