@@ -22,7 +22,7 @@ class AdminAdsController extends Controller
    {
       $company = User::all();
       $data = [
-         "title" => "Ads Lists",
+         "title"        => "Ads Lists",
          "company_name" => $company->unique("user_company")->where('user_company', '!=', "")
       ];
       return view("adminads.AdsLists", $data);

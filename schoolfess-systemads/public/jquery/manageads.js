@@ -52,6 +52,8 @@ function checkAdsStatus(ads_status) {
    }
 }
 
+console.log("<?= $user->user_role; ?>");
+
 function approveAds(ads_status, ads_id) {
    let rowsApproveAds = "";
    if (ads_status == 0 || ads_status == 1) {

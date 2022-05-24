@@ -56,7 +56,7 @@ function checkRejectOrSuspend($ads_status, $reject_reason, $suspend_reason)
 function checkApprovedDt($ads_status, $ads_approved_date)
 {
    if ($ads_status == 1) {
-      $row = '<tr><td class="left">Ads Approved Date</td><td class="colon">:</td><td>' . date('d F Y H:i:s', strtotime($ads_approved_date)) . '</td></tr>';
+      $row = '<tr><td class="left">Ads Approved Date</td><td class="colon">:</td><td>' . dateTimeFormat($ads_approved_date) . '</td></tr>';
       return $row;
    }
 }

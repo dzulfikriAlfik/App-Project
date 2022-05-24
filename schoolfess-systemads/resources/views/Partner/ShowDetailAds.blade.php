@@ -28,7 +28,7 @@
 <!-- Breadcrumb -->
 <nav class="page-breadcrumb">
    <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="/cms/manage_ads">My Ads Lists</a></li>
+      <li class="breadcrumb-item"><a href="javascript:history.back()">My Ads Lists</a></li>
       <li class="breadcrumb-item active" id="userprofile" aria-current="page">Detail Ads</li>
    </ol>
 </nav>
