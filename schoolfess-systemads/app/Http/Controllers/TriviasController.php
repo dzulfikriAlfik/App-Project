@@ -6,8 +6,9 @@ use Illuminate\Http\Request;
 
 class TriviasController extends Controller
 {
-    //
-    public function Trivias(){
-      return view('Trivias', ["title" => 'Trivias']);
-    }
+   //
+   public function Trivias()
+   {
+      return view('Admin.Trivias', ["title" => 'Trivias']);
+   }
 }

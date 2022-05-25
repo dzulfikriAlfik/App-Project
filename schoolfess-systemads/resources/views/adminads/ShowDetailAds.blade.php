@@ -133,5 +133,5 @@
 
 @section('jquery')
 <!-- JQUERY -->
-<script src="{{ asset('jquery/detailads.js') }}"></script>
+<script src="{{ asset('jquery/adminads/detailads.js') }}"></script>
 @endsection

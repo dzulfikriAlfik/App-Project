@@ -132,5 +132,5 @@
 
 @section('jquery')
 <!-- JQUERY -->
-{{-- <script src="{{ asset('jquery/detailads.js') }}"></script> --}}
+{{-- tidak memanggil js karena di render dari helper custom php --}}
 @endsection

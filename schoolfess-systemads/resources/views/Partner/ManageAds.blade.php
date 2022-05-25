@@ -207,6 +207,6 @@
 @section('jquery')
 <!-- JQUERY -->
 <script src="{{ asset("assets/vendors/cropperjs/cropper.min.js") }}"></script>
-<script src="{{ asset('jquery/manageads.js') }}"></script>
+<script src="{{ asset('jquery/partner/manageads.js') }}"></script>
 {{-- <script src="{{ asset('jquery/cropper.js') }}"></script> --}}
 @endsection

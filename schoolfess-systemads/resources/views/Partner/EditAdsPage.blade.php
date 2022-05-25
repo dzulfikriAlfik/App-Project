@@ -159,5 +159,5 @@
 @section('jquery')
 <!-- JQUERY -->
 <script src="{{ asset("assets/vendors/cropperjs/cropper.min.js") }}"></script>
-<script src="{{ asset('jquery/editads.js') }}"></script>
+<script src="{{ asset('jquery/partner/editads.js') }}"></script>
 @endsection

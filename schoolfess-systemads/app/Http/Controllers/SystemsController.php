@@ -6,8 +6,9 @@ use Illuminate\Http\Request;
 
 class SystemsController extends Controller
 {
-    //
-    public function Systems(){
-        return view('Systems', ["title" => 'Systems']);
-    }
+   //
+   public function Systems()
+   {
+      return view('Superadmin.Systems', ["title" => 'Systems']);
+   }
 }

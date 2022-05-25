@@ -43,7 +43,6 @@ Route::group(['middleware' => ['login.middleware']], function () {
       Route::get('/video', 'VideoController@Video');
       Route::get('/userprofile', 'UsersController@Profile');
       // Route::post('/uploadprofile', 'UsersController@testupload');
-      Route::post('/video', [VideoController::class, 'store']);
    });
 });
 
