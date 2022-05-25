@@ -82,6 +82,12 @@
                <span class="link-title">Ads lists</span>
             </a>
          </li>
+         <li class="nav-item">
+            <a href="/cms/ads_type" class="nav-link">
+               <i class="link-icon" data-feather="feather"></i>
+               <span class="link-title">Ads type</span>
+            </a>
+         </li>
          @endif
 
       </ul>

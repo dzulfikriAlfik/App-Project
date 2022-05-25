@@ -8,6 +8,7 @@ use JWTAuth;
 use App\Models\Ads;
 use App\Models\User;
 use App\Mail\SendEmail;
+use App\Models\AdsType;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
@@ -74,6 +75,46 @@ class AdsApiController extends Controller
       // by name
       if ($request->user_company) {
          $query = $query->where('user_company', $request->user_company);
+      }
+
+      $data = $query->orderBy("created_dt", "DESC")->paginate(10);
+      if ($data->isEmpty()) {
+         return response()->json([
+            'status' => 200,
+            'message' => 'Data Not Found',
+            'data' => $data
+         ], Response::HTTP_OK);
+      } else {
+         return response()->json([
+            'status' => 200,
+            'message' => 'Data Found',
+            'data' => $data
+         ], Response::HTTP_OK);
+      }
+   }
+
+   public function get_ads_type(Request $request)
+   {
+      $query = AdsType::select("*");
+
+      // by ads_type_name
+      if ($request->ads_type_name != "") {
+         $query = $query->where('ads_type_name', $request->ads_type_name);
+      }
+
+      // // by role
+      if ($request->ads_placement != "") {
+         $query = $query->where('ads_placement', $request->ads_placement);
+      }
+
+      // // by created_dt
+      if ($request->created_dt) {
+         $query = $query->where('created_dt', 'LIKE', "%" . $request->created_dt . "%");
+      }
+
+      // // by status
+      if ($request->ads_status != null) {
+         $query = $query->where('ads_status', $request->ads_status);
       }
 
       $data = $query->orderBy("created_dt", "DESC")->paginate(10);

@@ -22,7 +22,7 @@ function buildTemplate(data, index, page, perPage) {
          <td style="text-align: center">
             ${parseInt(perPage * (page - 1)) + parseInt(index) + 1}
          </td>
-         <td>${data[index].trivia_id}</td>   
+         <td>${data[index].trivia_id}</td>
          <td title="${data[index].trivia_text}">
             ${data[index].trivia_text.substr(0, 100)}
             ${data[index].trivia_text.length > 100 ? "..." : ""}

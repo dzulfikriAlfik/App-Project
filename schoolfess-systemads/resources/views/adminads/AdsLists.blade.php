@@ -40,7 +40,7 @@
                <div class="col-sm-6">
                   <div class="mb-3">
                      <label class="form-label">Dibuat oleh</label>
-                     <select id="filterCompanyName">
+                     <select id="filterCompanyName" disabled>
                         <option value="">-- Semua --</option>
                         @foreach ($company_name as $company)
                         <option value="{{ $company->user_company }}">{{ $company->user_company }}</option>

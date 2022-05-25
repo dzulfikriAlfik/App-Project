@@ -36,4 +36,12 @@ class AdminAdsController extends Controller
       ];
       return view("Adminads.ShowDetailAds", $data);
    }
+
+   public function ads_type()
+   {
+      $data = [
+         "title"     => "Ads Type"
+      ];
+      return view("Adminads.AdsType", $data);
+   }
 }
