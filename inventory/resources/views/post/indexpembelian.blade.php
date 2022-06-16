@@ -122,8 +122,8 @@
 
    $(function () {
       Swal.fire({
-         title: 'Data ',
-         text: 'Berhasil ',
+         title: 'Sweet Alert',
+         text: 'Berhasil diload',
          type: 'success',
          icon: 'success',
          showConfirmButton: false,

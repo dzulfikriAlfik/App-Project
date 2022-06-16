@@ -9,17 +9,13 @@
    <div class="sidebar">
       <nav class="mt-2">
          <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-            <!-- Add icons to the links using the .nav-icon class
-                           with font-awesome or any other icon font library -->
             <li class="nav-item">
                <a href="/" class="nav-link {{ Request::is('/') ? 'active' : '' }}">
                   <i class="nav-icon fas fa-tachometer-alt"></i>
                   <p>Dashboard</p>
                </a>
             </li>
-            {{-- <li class="nav-item menu-open"> --}}
             <li class="nav-item {{ Request::is('pembelian*') ? 'menu-open' : '' }}">
-               {{-- <a href="#" class="nav-link active"> --}}
                <a href="#" class="nav-link {{ Request::is('pembelian*') ? 'active' : '' }}">
                   <i class="nav-icon fas fa-copy"></i>
                   <p>Data Barang
@@ -34,7 +30,6 @@
                      </a>
                   </li>
                   <li class="nav-item">
-                     {{-- <a href="/pembelians" class="nav-link active"> --}}
                      <a href="{{ route('pembelian.index') }}" class="nav-link {{ Request::is('pembelian*') ? 'active' : '' }}">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Pembelian</p>

@@ -47,7 +47,6 @@ class PembelianController extends Controller
     */
    public function create()
    {
-      // return view('post.formpembelian');
       return view('post.pembelian.create');
    }
 
