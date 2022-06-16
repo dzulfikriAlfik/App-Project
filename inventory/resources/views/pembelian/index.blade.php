@@ -53,40 +53,34 @@
                            <th>Aksi </th>
                         </tr>
                      </thead>
-
-                     <body>
-                        <tbody>
-                           @php
-                           $no = 1;
-                           @endphp
-                           @foreach ($pembelian as $post)
-                           <tr>
-                              <td style="width: 200px">{{ $no++}}</td>
-                              <td style="width: 200px">{{ $post->no_po}}</td>
-                              {{-- <td style="width: 500px">{{ $post->Tgl_po }}</td> --}}
-                              <td style="width: 500px">{{ $post->suplier_id }}</td>
-                              <td style="width: 500px">{{ $post->kode }}</td>
-                              <td style="width: 500px">{{ $post->nama_barang }}</td>
-                              <td style="width: 500px">{{ $post->satuan }}</td>
-                              <td style="width: 500px">{{ $post->qty}}</td>
-                              <td style="width: 500px">{{ rupiah($post->harga_satuan) }}</td>
-                              <td style="width: 500px">{{ totalHarga($post->harga_satuan, $post->qty) }} </td>
-
-                              <td style="width: 100px">
-                                 <a class="btn btn-primary btn-sm" href="/pembelians/{{ $post->id}}/edit">Edit</a>
-                                 <form method="POST" action="{{ url('pembelians', $post->id ) }}">
-                                    @csrf
-                                    @method('DELETE')
-                                    <a class="btn btn-primary btn-sm" href="/pembelians/{{ $post->id}}">Hapus</a>
-                                 </form>
-                              </td>
-                           </tr>
-                           @endforeach
-                        </tbody>
+                     <tbody>
+                        @php
+                        $no = 1;
+                        @endphp
+                        @foreach ($pembelian as $post)
                         <tr>
+                           <td>{{ $no++}}</td>
+                           <td>{{ $post->no_po}}</td>
+                           {{-- 00px">{{ $post->Tgl_po }}</td> --}}
+                           <td>{{ $post->suplier_id }}</td>
+                           <td>{{ $post->kode }}</td>
+                           <td>{{ $post->nama_barang }}</td>
+                           <td>{{ $post->satuan }}</td>
+                           <td>{{ $post->qty}}</td>
+                           <td>{{ rupiah($post->harga_satuan) }}</td>
+                           <td>{{ totalHarga($post->harga_satuan, $post->qty) }} </td>
+
+                           <td>
+                              <a class="btn btn-primary btn-sm" href="/pembelians/{{ $post->id}}/edit">Edit</a>
+                              <form method="POST" action="{{ url('pembelians', $post->id ) }}">
+                                 @csrf
+                                 @method('DELETE')
+                                 <a class="btn btn-primary btn-sm" href="/pembelians/{{ $post->id}}">Hapus</a>
+                              </form>
+                           </td>
                         </tr>
-                     </body>
-                     </tfoot>
+                        @endforeach
+                     </tbody>
                   </table>
                </div>
             </div>
@@ -120,17 +114,17 @@
       });
    });
 
-   $(function () {
-      Swal.fire({
-         title: 'Sweet Alert',
-         text: 'Berhasil diload',
-         type: 'success',
-         icon: 'success',
-         showConfirmButton: false,
-         timer: 2000,
-         footer: '<b>Aplikasi Inventory</b>'
-      });
-   })
+   // $(function () {
+   //    Swal.fire({
+   //       title: 'Sweet Alert',
+   //       text: 'Berhasil diload',
+   //       type: 'success',
+   //       icon: 'success',
+   //       showConfirmButton: false,
+   //       timer: 2000,
+   //       footer: '<b>Aplikasi Inventory</b>'
+   //    });
+   // })
 
 </script>
 @endpush

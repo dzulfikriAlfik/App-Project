@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Suplier;
+use App\Models\PermintaanProduk;
 use Illuminate\Http\Request;
 
-class SuplierController extends Controller
+class PermintaanProdukController extends Controller
 {
    /**
     * Display a listing of the resource.
@@ -14,11 +14,11 @@ class SuplierController extends Controller
     */
    public function index()
    {
-      $supliers = Suplier::all();
-      return view(
-         'post.index_suplier',
-         ['supliers' => $supliers]
-      );
+      $data = [
+         "title" => "Permintaan Produk",
+         "permintaan_produk" => PermintaanProduk::all()
+      ];
+      return view("permintaan-produk.index", $data);
    }
 
    /**
@@ -28,7 +28,7 @@ class SuplierController extends Controller
     */
    public function create()
    {
-      return view('post.form_suplier');
+      //
    }
 
    /**
@@ -39,18 +39,7 @@ class SuplierController extends Controller
     */
    public function store(Request $request)
    {
-      $request->validate([
-         'Kode_suplier' => '|unique:supliers|max:150',
-         'Nama_suplier' => 'required',
-         'Alamat_suplier' => 'required',
-         'No_tlp' => 'required',
-         'Email' => 'required'
-      ]);
-      $input = $request->all();
-
-      $post = Suplier::create($input);
-
-      return back()->with('success', ' Post baru berhasil dibuat.');
+      //
    }
 
    /**

@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
+use App\Models\Suplier;
 use Illuminate\Http\Request;
 
-class UserController extends Controller
+class SupplierController extends Controller
 {
    /**
     * Display a listing of the resource.
@@ -15,10 +15,10 @@ class UserController extends Controller
    public function index()
    {
       $data = [
-         "title" => "Users",
-         "users" => User::all()
+         "title" => "Supplier",
+         "suppliers" => Suplier::all()
       ];
-      return view("users.index", $data);
+      return view('suppliers.index', $data);
    }
 
    /**
@@ -28,7 +28,10 @@ class UserController extends Controller
     */
    public function create()
    {
-      //
+      $data = [
+         "title" => "Tambah Supplier"
+      ];
+      return view('suppliers.create', $data);
    }
 
    /**
@@ -39,7 +42,18 @@ class UserController extends Controller
     */
    public function store(Request $request)
    {
-      //
+      $request->validate([
+         'Kode_suplier' => '|unique:supliers|max:150',
+         'Nama_suplier' => 'required',
+         'Alamat_suplier' => 'required',
+         'No_tlp' => 'required',
+         'Email' => 'required'
+      ]);
+      $input = $request->all();
+
+      $post = Suplier::create($input);
+
+      return back()->with('success', ' Post baru berhasil dibuat.');
    }
 
    /**

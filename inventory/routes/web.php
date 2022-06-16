@@ -1,25 +1,50 @@
 <?php
-//use App\Http\Controllers\suplierController;
+
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\ProdukController;
+use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\PembelianController;
-use App\Http\Controllers\data_barangController;
-use App\Http\Controllers\suplierController;
-use App\Http\Controllers\userController;
-use App\Http\Controllers\permintaan_produksiController;
-use App\Http\Controllers\barang_keluarController;
-use App\Http\Controllers\rcv_barang_masukController;
+use App\Http\Controllers\ProdukMasukController;
+use App\Http\Controllers\ProdukKeluarController;
+use App\Http\Controllers\PermintaanProdukController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\KeluarController;
+use App\Http\Controllers\suplierController;
+use App\Http\Controllers\barang_keluarController;
+use App\Http\Controllers\rcv_barang_masukController;
+use App\Http\Controllers\permintaan_produksiController;
 
 
 Route::get('/', function () {
    return view('post.dashboard');
 });
-// Route::get('/dashboard', 'v_tamplateController@dashboard');
-Route::get('/supliers', [SuplierController::class, 'index']);
+Route::get('/blank', function () {
+   return view('_blank');
+});
+
+// Suppliers
+Route::resource('suppliers', SupplierController::class);
 
 // Pembelian
 Route::resource('pembelian', PembelianController::class);
+
+// Produk
+Route::resource('produks', ProdukController::class);
+
+// Produk Masuk
+Route::resource('produk-masuk', ProdukMasukController::class);
+
+// Produk Keluar
+Route::resource('produk-keluar', ProdukKeluarController::class);
+
+// Permintaan Produk
+Route::resource('permintaan-produk', PermintaanProdukController::class);
+
+// Users
+Route::resource('users', UserController::class);
+
+// Route::get('/dashboard', 'v_tamplateController@dashboard');
 // Route::post('/pembelian/list_product', [PembelianController::class, 'list_product']);
 // Route::post('/pembelian/list_suplier', [PembelianController::class, 'list_suplier']);
 

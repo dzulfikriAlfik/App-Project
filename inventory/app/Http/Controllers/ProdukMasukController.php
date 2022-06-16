@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
+use App\Models\ProdukMasuk;
 use Illuminate\Http\Request;
 
-class UserController extends Controller
+class ProdukMasukController extends Controller
 {
    /**
     * Display a listing of the resource.
@@ -15,10 +15,10 @@ class UserController extends Controller
    public function index()
    {
       $data = [
-         "title" => "Users",
-         "users" => User::all()
+         "title"        => "Produk Masuk",
+         "produk_masuk" => ProdukMasuk::all()
       ];
-      return view("users.index", $data);
+      return view('produk-masuk.index', $data);
    }
 
    /**

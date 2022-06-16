@@ -2,13 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers;
-use App\Models\suplier;
-use App\Models\data_barang;
-use App\Models\Pembelian;
+use App\Models\Produk;
 use Illuminate\Http\Request;
 
-class PembelianController extends Controller
+class ProdukController extends Controller
 {
    /**
     * Display a listing of the resource.
@@ -18,25 +15,10 @@ class PembelianController extends Controller
    public function index()
    {
       $data = [
-         "title" => "Pembelian",
-         "pembelian" => Pembelian::all()
+         "title" => "Data Barang",
+         "produk" => Produk::all()
       ];
-
-      return view('pembelian.index', $data);
-   }
-
-   public function list_product()
-   {
-      $ba = data_barang::all();
-
-      echo json_encode(array("data" => $ba));
-   }
-
-   public function list_suplier()
-   {
-      $suplier = suplier::all();
-
-      echo json_encode(array("data" => $suplier));
+      return view('produk.index', $data);
    }
 
    /**
@@ -46,10 +28,8 @@ class PembelianController extends Controller
     */
    public function create()
    {
-      return view('pembelian.create');
+      return view('post.form_data_barang');
    }
-
-
 
    /**
     * Store a newly created resource in storage.
@@ -60,23 +40,20 @@ class PembelianController extends Controller
    public function store(Request $request)
    {
       $request->validate([
-         'No_po' => 'required|:pembelians|max:150',
-         'Tgl_po' => 'required',
-         'Suplier' => 'required',
-         'Kode_barang' => 'required',
+         'Kode_barang' => 'required|:data_barangs|max:150',
          'Nama_barang' => 'required',
-         'Satuan' => 'required',
-         'Qty_po' => 'required',
-         'Harga_satuan' => 'required',
-         'Total_harga' => 'required',
+         'Harga_barang' => 'required',
+
+
       ]);
 
       $input = $request->all();
 
-      $post = Pembelian::create($input);
+      $post = Produk::create($input);
 
       return back()->with('success', ' Post baru berhasil dibuat.');
    }
+
 
    /**
     * Display the specified resource.
@@ -97,9 +74,9 @@ class PembelianController extends Controller
     */
    public function edit($id)
    {
-      $post = Pembelian::findOrFail($id);
+      $post = Produk::findOrFail($id);
 
-      return view('post.editpembelian', [
+      return view('post.editdata_barang', [
          'post' => $post
       ]);
    }
@@ -114,19 +91,12 @@ class PembelianController extends Controller
    public function update(Request $request, $id)
    {
       $request->validate([
-         'No_po' => 'required|:pembelians|max:150',
-         'Tgl_po' => 'required',
-         'Suplier' => 'required',
-         'Kode_barang' => 'required',
+         'Kode_barang' => 'required|:data_barangs|max:150',
          'Nama_barang' => 'required',
-         'Satuan' => 'required',
-         'Qty_po' => 'required',
-         'Harga_satuan' => 'required',
-         'Total_harga' => 'required',
-
+         'Harga_barang' => 'required',
       ]);
 
-      $post = Pembelian::find($id)->update($request->all());
+      $post = Produk::find($id)->update($request->all());
 
       return back()->with('success', ' Data telah diperbaharui!');
    }
@@ -139,7 +109,8 @@ class PembelianController extends Controller
     */
    public function destroy($id)
    {
-      $post = Pembelian::find($id);
+      $post = Produk::find($id);
+
       $post->delete();
 
       return back()->with('success', ' Penghapusan berhasil.');
