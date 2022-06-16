@@ -1,0 +1,96 @@
+
+// Booststrap functions and variables
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+
+// Template variables
+@import 'variables';
+
+// Bootstrap main SCSS
+@import '~bootstrap/scss/bootstrap.scss';
+
+// Template mixins
+@import 'mixins/animation';
+@import 'mixins/badges';
+@import 'mixins/blockquote';
+@import 'mixins/breadcrumbs';
+@import 'mixins/buttons';
+@import 'mixins/cards';
+@import 'mixins/misc';
+@import 'mixins/no_ui_slider';
+@import 'mixins/pagination';
+@import 'mixins/popovers';
+@import 'mixins/tooltips';
+@import 'mixins/width';
+
+// Core stules
+@import 'background';
+@import 'reset';
+@import 'functions';
+@import 'fonts';
+// @import url('https://fonts.googleapis.com/css?family=Overpass:300,400,600,700,800');
+@import 'footer';
+@import 'misc';
+@import 'utilities';
+@import 'demo';
+@import 'typography';
+@import 'spinner';
+
+@import 'vertical-wrapper';
+@import 'navbar';
+@import 'sidebar';
+@import 'layouts';
+
+// components
+@import "components/accordions";
+@import "components/badges";
+@import "components/bootstrap-alert";
+@import "components/breadcrumbs";
+@import "components/buttons";
+@import "components/cards";
+@import "components/checkbox-radio";
+@import "components/dashboard";
+@import "components/dropdown";
+@import "components/forms";
+@import "components/icons";
+@import "components/input-group";
+@import "components/list-group";
+@import "components/modal";
+@import "components/nav";
+@import "components/pagination";
+@import "components/popover";
+@import "components/profile";
+@import "components/tables";
+@import "components/timeline";
+@import "components/chat";
+@import "components/faq";
+@import "components/auth";
+
+// Email
+@import 'components/email/inbox';
+@import 'components/email/email-read';
+@import 'components/email/email-compose';
+
+
+// Plugin overrides
+@import "components/plugin-overrides/ace";
+@import "components/plugin-overrides/apex-charts";
+@import "components/plugin-overrides/bootstrap-datepicker";
+@import "components/plugin-overrides/data-tables";
+@import "components/plugin-overrides/dropify";
+@import "components/plugin-overrides/dropzone";
+@import "components/plugin-overrides/full-calendar";
+@import "components/plugin-overrides/jquery-flot";
+@import "components/plugin-overrides/peity";
+@import "components/plugin-overrides/perfect-scrollbar";
+@import "components/plugin-overrides/sweet-alert";
+@import "components/plugin-overrides/select2";
+@import "components/plugin-overrides/simplemde";
+@import "components/plugin-overrides/tags-input";
+@import "components/plugin-overrides/tempusdominus-bootstrap-4";
+@import "components/plugin-overrides/tinymce";
+@import "components/plugin-overrides/typeahead";
+@import "components/plugin-overrides/wizard";
+
+// Custom scss
+@import "custom";

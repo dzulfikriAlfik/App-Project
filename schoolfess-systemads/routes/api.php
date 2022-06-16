@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\VideoApiController;
 use App\Http\Controllers\Api\StatisticApiController;
 use App\Http\Controllers\Api\AdsApiController;
 use App\Http\Controllers\Api\AdsTypeApiController;
+use App\Http\Controllers\Api\AdsPlatformApiController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -58,6 +59,15 @@ Route::delete('ads/approve/{ads}',  [AdsApiController::class, 'approve'])->middl
 Route::put('ads/reject/{id}',  [AdsApiController::class, 'reject'])->middleware('jwt.verify');
 Route::put('ads/suspend/{ads}',  [AdsApiController::class, 'suspend'])->middleware('jwt.verify');
 Route::put('ads/put/{ads}', [AdsApiController::class, 'update'])->middleware('jwt.verify');
+
+//======== ADS PLATFORM
+Route::get('ads_platform/get', [AdsPlatformApiController::class, 'get'])->middleware('jwt.verify');
+Route::get('ads_platform/get/{ads_platform}', [AdsPlatformApiController::class, 'show'])->middleware('jwt.verify');
+Route::post('ads_platform/create', [AdsPlatformApiController::class, 'store'])->middleware('jwt.verify');
+Route::put('ads_platform/put/{ads_platform}', [AdsPlatformApiController::class, 'update'])->middleware('jwt.verify');
+Route::delete('ads_platform/activate/{ads_platform}',  [AdsPlatformApiController::class, 'activate'])->middleware('jwt.verify');
+Route::delete('ads_platform/inactive/{ads_platform}',  [AdsPlatformApiController::class, 'inactive'])->middleware('jwt.verify');
+Route::delete('ads_platform/destroy/{ads_platform}',  [AdsPlatformApiController::class, 'destroy'])->middleware('jwt.verify');
 
 //======== ADS TYPE
 Route::get('ads_type/get', [AdsTypeApiController::class, 'get'])->middleware('jwt.verify');

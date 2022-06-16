@@ -18,6 +18,7 @@ class Ads extends Model
       "ads_title",
       "ads_desc",
       "ads_link",
+      "ads_type",
       "ads_view",
       "ads_click",
       "ads_image",
