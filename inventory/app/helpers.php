@@ -1,6 +1,6 @@
 <?php
 
-function totalHarga($satuan, $qty)
+function total_harga($satuan, $qty)
 {
    return rupiah((int) $satuan * $qty);
 }
@@ -11,9 +11,9 @@ function rupiah($angka)
    return $hasil_rupiah;
 }
 
-function date_time_format($time)
+function tanggal_format($time)
 {
-   $tanggal = date('Y-m-d-H-i-s', strtotime($time));
+   $tanggal = date('Y-m-d', strtotime($time));
    $bulan = array(
       1 =>   'Januari',
       'Februari',
@@ -29,5 +29,5 @@ function date_time_format($time)
       'Desember'
    );
    $pecahkan = explode('-', $tanggal);
-   return $pecahkan[2] . ' ' . $bulan[(int) $pecahkan[1]] . ' ' . $pecahkan[0] . ' ' . $pecahkan[3] . ':' . $pecahkan[4] . ':' . $pecahkan[5];
+   return $pecahkan[2] . ' ' . $bulan[(int) $pecahkan[1]] . ' ' . $pecahkan[0];
 }

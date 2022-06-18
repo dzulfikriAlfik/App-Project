@@ -2,21 +2,24 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Produk;
+use App\Models\Supplier;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Pembelian extends Model
 {
    use HasFactory;
    protected $table = "pembelian";
-   protected $fillable = [
-      'no_po',
-      // 'Tgl_po',
-      'suplier',
-      'kode_barang',
-      'nama_barang',
-      'satuan',
-      'qty',
-      'harga_satuan',
-   ];
+   protected $guarded = [];
+
+   public function produk()
+   {
+      return $this->belongsTo(Produk::class);
+   }
+
+   public function supplier()
+   {
+      return $this->belongsTo(Supplier::class, 'supplier_id', 'supplier_id');
+   }
 }

@@ -24,8 +24,22 @@
 </div>
 <!-- /.content-header -->
 
-<section class="content">
+<div class="container-fluid">
+   <div class="row">
+      <div class="col-md-12">
+         @if (session()->has('success'))
+         <div class="alert alert-info alert-dismissible fade show" role="alert">
+            <strong>Success! </strong>{{ session('success') }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+               <span aria-hidden="true">&times;</span>
+            </button>
+         </div>
+         @endif
+      </div>
+   </div>
+</div>
 
+<section class="content">
    <div class="container-fluid">
       <div class="row">
          <div class="col-md-12">
@@ -48,24 +62,21 @@
                         </tr>
                      </thead>
                      <tbody>
-                        @php
-                        $no = 1;
-                        @endphp
-                        @foreach ($produk as $post)
+                        @foreach ($produk as $prod)
                         <tr>
-                           <td>{{ $no++ }}</td>
-                           <td>{{ $post->kode_barang}}</td>
-                           <td>{{ $post->nama_barang }}</td>
-                           <td>{{ $post->harga_barang }}</td>
-                           <td>{{ $post->jumlah_barang }}</td>
+                           <td>{{ $loop->iteration }}</td>
+                           <td>{{ $prod->kode_barang}}</td>
+                           <td>{{ $prod->nama_barang }}</td>
+                           <td>{{ rupiah($prod->harga_satuan) }}</td>
+                           <td>{{ $prod->jumlah_barang }}</td>
                            <td>
-                              <a href="#">
-                                 <button class="btn btn-warning">Edit</button>
+                              <a href="{{ route('produks.edit',$prod->id) }}">
+                                 <button class="btn btn-warning btn-sm">Edit</button>
                               </a>
-                              <form method="POST" action="#">
+                              <form method="POST" class="d-inline" action="{{ route('produks.destroy', $prod->id) }}">
                                  @csrf
                                  @method('DELETE')
-                                 <a href="#"><button class="btn btn-danger">Hapus</button>
+                                 <button class="btn btn-danger btn-sm" onclick="return confirm('Yakin hapus data ini?')">Hapus</button>
                               </form>
                            </td>
                         </tr>

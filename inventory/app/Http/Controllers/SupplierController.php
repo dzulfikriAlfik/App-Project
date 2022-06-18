@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Suplier;
+use App\Models\Supplier;
 use Illuminate\Http\Request;
 
 class SupplierController extends Controller
@@ -16,7 +16,7 @@ class SupplierController extends Controller
    {
       $data = [
          "title" => "Supplier",
-         "suppliers" => Suplier::all()
+         "suppliers" => Supplier::all()
       ];
       return view('suppliers.index', $data);
    }
@@ -42,18 +42,17 @@ class SupplierController extends Controller
     */
    public function store(Request $request)
    {
-      $request->validate([
-         'Kode_suplier' => '|unique:supliers|max:150',
-         'Nama_suplier' => 'required',
-         'Alamat_suplier' => 'required',
-         'No_tlp' => 'required',
-         'Email' => 'required'
+      $validatedData = $request->validate([
+         'supplier_name' => 'required',
+         'supplier_phone' => 'required',
+         'supplier_address' => 'required',
       ]);
-      $input = $request->all();
 
-      $post = Suplier::create($input);
+      Supplier::create($validatedData);
 
-      return back()->with('success', ' Post baru berhasil dibuat.');
+      return redirect('suppliers')->with('success', 'Berhasil menambah data supplier');
+
+      // return back()->with('success', ' Post baru berhasil dibuat.');
    }
 
    /**
@@ -75,7 +74,11 @@ class SupplierController extends Controller
     */
    public function edit($id)
    {
-      //
+      $data = [
+         "title" => "Edit Supplier",
+         "supplier" => Supplier::find($id)
+      ];
+      return view("suppliers.edit", $data);
    }
 
    /**
@@ -85,9 +88,18 @@ class SupplierController extends Controller
     * @param  int  $id
     * @return \Illuminate\Http\Response
     */
-   public function update(Request $request, $id)
+   public function update(Request $request, Supplier $supplier)
    {
-      //
+      $validatedData = $request->validate([
+         'supplier_name' => 'required',
+         'supplier_phone' => 'required',
+         'supplier_address' => 'required',
+      ]);
+
+      Supplier::where('supplier_id', $supplier->supplier_id)
+         ->update($validatedData);
+
+      return redirect('suppliers')->with('success', 'Berhasil mengubah data supplier');
    }
 
    /**
@@ -96,8 +108,10 @@ class SupplierController extends Controller
     * @param  int  $id
     * @return \Illuminate\Http\Response
     */
-   public function destroy($id)
+   public function destroy(Supplier $supplier)
    {
-      //
+      Supplier::destroy($supplier->supplier_id);
+
+      return redirect('/suppliers')->with('success', 'Berhasil menghapus supplier');
    }
 }

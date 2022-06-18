@@ -63,8 +63,13 @@
    <script src="{{ asset("assets/plugins/chart.js/Chart.min.js") }}"></script>
    <!-- SweetAlert2 -->
    <script src="{{ asset("assets/dist/swal/sweetalert2.all.min.js") }}"></script>
+   <script src="{{ asset('js/myscript.js') }}"></script>
    {{-- Custom Script --}}
    @stack("custom-script")
+   {{-- CommonJS --}}
+   <script src="{{ asset('js/common.js') }}"></script>
+   <script src="{{ asset('js/commonMessage.js') }}"></script>
+   <script src="{{ asset('js/commonAPI.js') }}"></script>
 </body>
 
 </html>

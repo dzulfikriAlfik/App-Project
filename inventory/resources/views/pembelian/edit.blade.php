@@ -15,7 +15,7 @@
          <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
                <li class="breadcrumb-item"><a href="#">Data Barang</a></li>
-               <li class="breadcrumb-item active">Tambah Data Pembelian</li>
+               <li class="breadcrumb-item active">Edit Data Pembelian</li>
             </ol>
          </div><!-- /.col -->
       </div><!-- /.row -->
@@ -32,13 +32,14 @@
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-               <form action="{{ route('pembelian.store') }}" method="post">
+               <form action="{{ route('pembelian.update', $pembelian->id) }}" method="post">
                   @csrf
+                  @method('put')
                   <div class="row d-flex justify-content-center">
                      <div class="col-md-5 mx-auto">
                         <div class="form-group">
                            <label for="no_po">No. PO <span class="text-red">*</span></label>
-                           <input type="text" name="no_po" id="no_po" class="form-control @error('no_po') is-invalid @enderror" placeholder="No. PO" value="{{ old('no_po') }}">
+                           <input type="text" name="no_po" id="no_po" class="form-control @error('no_po') is-invalid @enderror" placeholder="No. PO" value="{{ old('no_po', $pembelian->no_po) }}">
                            @error('no_po')
                            <small class="invalid-feedback">{{ $message }}</small>
                            @enderror
@@ -46,7 +47,7 @@
                         <div class="form-group">
                            <label>Tanggal PO</label>
                            <div class="input-group date" id="reservationdate" data-target-input="nearest">
-                              <input type="text" name="tanggal_po" value="{{ old('tanggal_po') }}" class="form-control datetimepicker-input @error('tanggal_po') is-invalid @enderror" data-target="#reservationdate" />
+                              <input type="text" name="tanggal_po" value="{{ old('tanggal_po', $pembelian->tanggal_po) }}" class="form-control datetimepicker-input @error('tanggal_po') is-invalid @enderror" data-target="#reservationdate" />
                               <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
                                  <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                               </div>
@@ -60,7 +61,7 @@
                            <select name="supplier_id" id="supplier_id" class="form-control @error('supplier_id') is-invalid @enderror">
                               <option value="">-- Pilih Supplier --</option>
                               @foreach ($suppliers as $supplier)
-                              @if (old('supplier_id') == $supplier->supplier_id)
+                              @if (old('supplier_id', $pembelian->supplier_id) == $supplier->supplier_id)
                               <option value="{{ $supplier->supplier_id }}" selected>{{ $supplier->supplier_name }}</option>
                               @else
                               <option value="{{ $supplier->supplier_id }}">{{ $supplier->supplier_name }}</option>
@@ -73,44 +74,33 @@
                         </div>
                         <div class="form-group">
                            <label for="produk_id">Produk <span class="text-red">*</span></label>
-                           <select name="produk_id" id="produk_id" class="form-control @error('produk_id') is-invalid @enderror">
-                              <option value="">-- Pilih Produk --</option>
-                              @foreach ($produks as $produk)
-                              @if (old('produk_id') == $produk->id)
-                              <option value="{{ $produk->id }}" selected>{{ $produk->kode_barang }}</option>
-                              @else
-                              <option value="{{ $produk->id }}">{{ $produk->kode_barang }}</option>
-                              @endif
-                              @endforeach
-                           </select>
-                           @error('produk_id')
-                           <small class="invalid-feedback">{{ $message }}</small>
-                           @enderror
+                           <input type="hidden" name="produk_id" id="produk_id" value="{{ $pembelian->produk_id }}">
+                           <input type="text" class="form-control" placeholder="Produk" value="{{ $pembelian->produk->kode_barang }}" disabled>
                         </div>
                         {{-- ajax --}}
                         <div class="form-group">
                            <label for="nama_barang">Nama Barang</label>
-                           <input type="text" name="nama_barang" id="nama_barang" value="{{ old('nama_barang') }}" class="form-control" disabled>
+                           <input type="text" name="nama_barang" id="nama_barang" value="{{ $pembelian->produk->nama_barang }}" class="form-control" disabled>
                         </div>
                         <div class="form-group">
                            <label for="harga_satuan">Harga Satuan</label>
-                           <input type="text" id="harga_satuan" class="form-control" disabled>
+                           <input type="text" id="harga_satuan" value="{{ rupiah($pembelian->produk->harga_satuan) }}" class="form-control" disabled>
                         </div>
                         <div class="form-group">
                            <label for="jumlah_barang">Stock Barang</label>
-                           <input type="text" id="jumlah_barang" value="" class="form-control" disabled>
+                           <input type="text" id="jumlah_barang" value="{{ $pembelian->produk->jumlah_barang }}" value="" class="form-control" disabled>
                         </div>
                         {{-- End ajax --}}
                         <div class="form-group">
                            <label for="qty">Quantity <span class="text-red">*</span></label>
-                           <input type="text" name="qty" id="qty" class="form-control @error('qty') is-invalid @enderror" placeholder="Quantity" value="{{ old('qty') }}">
+                           <input type="text" name="qty" id="qty" class="form-control @error('qty') is-invalid @enderror" placeholder="Quantity" value="{{ old('qty', $pembelian->qty) }}">
                            @error('qty')
                            <small class="invalid-feedback">{{ $message }}</small>
                            @enderror
                         </div>
                         <!-- Button -->
                         <div class="form-group text-center">
-                           <button type="submit" id="button-add" class="btn btn-success btn-flat"><i class="fas fa-paper-plane"></i> Save</button>
+                           <button type="submit" name="add" class="btn btn-success btn-flat"><i class="fas fa-paper-plane"></i> Save</button>
                            <button type="reset" class="btn btn-dark btn-flat"><i class="fas fa-backward"></i> Reset</button>
                         </div>
                      </div>
@@ -139,26 +129,14 @@
    });
 
    $("#button-add").on("click", function (e) {
-      if ($("#produk_id").val() == "") {
+      let qty = $("#qty").val();
+      let jumlahBarang = $("#jumlah_barang").val();
+
+      if (parseInt(qty) > parseInt(jumlahBarang)) {
          e.preventDefault();
-         commonJS.swalError("Produk tidak boleh kosong");
+         commonJS.swalError("Quantity tidak boleh melebihi stock barang tersedia")
+         return;
       }
-   });
-
-
-   $("#produk_id").on("change", function () {
-      let produk_id = $("#produk_id").val()
-      $.ajax({
-            url: `/pembelian/list-produk/${produk_id}`,
-            method: "GET",
-            dataType: "json",
-         })
-         .done(function (response) {
-            data = response.data;
-            $("#nama_barang").val(data.nama_barang)
-            $("#harga_satuan").val(`Rp${commonJS.formatNumber(data.harga_satuan)}`)
-            $("#jumlah_barang").val(data.jumlah_barang)
-         });
    });
 
 </script>

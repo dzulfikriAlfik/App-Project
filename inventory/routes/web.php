@@ -1,6 +1,8 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\SupplierController;
@@ -16,33 +18,38 @@ use App\Http\Controllers\rcv_barang_masukController;
 use App\Http\Controllers\permintaan_produksiController;
 
 
-Route::get('/', function () {
-   return view('post.dashboard');
-});
 Route::get('/blank', function () {
    return view('_blank');
 });
 
-// Suppliers
-Route::resource('suppliers', SupplierController::class);
+// Authentication
+Route::get('/', [AuthController::class, 'index'])->middleware('guest')->name('login');
+Route::post('/authenticate', [AuthController::class, 'authenticate']);
+Route::get('/register', [AuthController::class, 'register'])->middleware('guest');
+Route::post('/register/store', [AuthController::class, 'store'])->middleware('guest');
+Route::post('/logout', [AuthController::class, 'logout']);
 
-// Pembelian
-Route::resource('pembelian', PembelianController::class);
+// Get list-produk
+Route::get('pembelian/list-produk/{produk}', [PembelianController::class, 'list_product']);
 
-// Produk
-Route::resource('produks', ProdukController::class);
-
-// Produk Masuk
-Route::resource('produk-masuk', ProdukMasukController::class);
-
-// Produk Keluar
-Route::resource('produk-keluar', ProdukKeluarController::class);
-
-// Permintaan Produk
-Route::resource('permintaan-produk', PermintaanProdukController::class);
-
-// Users
-Route::resource('users', UserController::class);
+Route::group(['middleware' => 'auth'], function () {
+   // Dashboard
+   Route::get('/dashboard', [AuthController::class, 'dashboard']);
+   // Suppliers
+   Route::resource('suppliers', SupplierController::class);
+   // Pembelian
+   Route::resource('pembelian', PembelianController::class);
+   // Produk
+   Route::resource('produks', ProdukController::class);
+   // Produk Masuk
+   Route::resource('produk-masuk', ProdukMasukController::class);
+   // Produk Keluar
+   Route::resource('produk-keluar', ProdukKeluarController::class);
+   // Permintaan Produk
+   Route::resource('permintaan-produk', PermintaanProdukController::class);
+   // Users
+   Route::resource('users', UserController::class);
+});
 
 // Route::get('/dashboard', 'v_tamplateController@dashboard');
 // Route::post('/pembelian/list_product', [PembelianController::class, 'list_product']);

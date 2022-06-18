@@ -15,13 +15,16 @@
          <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
             <span class="dropdown-item dropdown-header">Menu</span>
             <div class="dropdown-divider"></div>
-            <a href="/" class="dropdown-item">
+            <a href="/dashboard" class="dropdown-item">
                <i class="fas fa-tachometer-alt"></i> Dashboard
             </a>
             <div class="dropdown-divider"></div>
-            <a href="/logout" class="dropdown-item">
-               <i class="fas fa-sign-out-alt"></i> Logout
-            </a>
+            <form action="/logout" method="post">
+               @csrf
+               <button type="submit" class="dropdown-item" onclick="return confirm('Anda yakin ingin logout?')">
+                  <i class="fas fa-sign-out-alt"></i> Logout
+               </button>
+            </form>
             <div class="dropdown-divider"></div>
             <span class="dropdown-item dropdown-header">-</span>
          </div>

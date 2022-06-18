@@ -24,6 +24,21 @@
 </div>
 <!-- /.content-header -->
 
+<div class="container-fluid">
+   <div class="row">
+      <div class="col-md-12">
+         @if (session()->has('success'))
+         <div class="alert alert-info alert-dismissible fade show" role="alert">
+            <strong>Success! </strong>{{ session('success') }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+               <span aria-hidden="true">&times;</span>
+            </button>
+         </div>
+         @endif
+      </div>
+   </div>
+</div>
+
 <section class="content">
 
    <div class="container-fluid">
@@ -42,8 +57,8 @@
                         <tr>
                            <th>No</th>
                            <th>No Po</th>
-                           {{-- <th>Tgl_po</th> --}}
-                           <th>Suplier</th>
+                           <th>Tanggal</th>
+                           <th>Supplier</th>
                            <th>Kode</th>
                            <th>Nama Barang</th>
                            <th>Satuan</th>
@@ -54,28 +69,24 @@
                         </tr>
                      </thead>
                      <tbody>
-                        @php
-                        $no = 1;
-                        @endphp
-                        @foreach ($pembelian as $post)
+                        @foreach ($pembelian as $pemb)
                         <tr>
-                           <td>{{ $no++}}</td>
-                           <td>{{ $post->no_po}}</td>
-                           {{-- 00px">{{ $post->Tgl_po }}</td> --}}
-                           <td>{{ $post->suplier_id }}</td>
-                           <td>{{ $post->kode }}</td>
-                           <td>{{ $post->nama_barang }}</td>
-                           <td>{{ $post->satuan }}</td>
-                           <td>{{ $post->qty}}</td>
-                           <td>{{ rupiah($post->harga_satuan) }}</td>
-                           <td>{{ totalHarga($post->harga_satuan, $post->qty) }} </td>
-
+                           <td>{{ $loop->iteration }}</td>
+                           <td style="width:200px">{{ $pemb->no_po}}</td>
+                           <td style="width:200px">{{ tanggal_format($pemb->tanggal_po) }}</td>
+                           <td style="width:200px">{{ $pemb->supplier->supplier_name }}</td>
+                           <td style="width:100px">{{ $pemb->produk->kode_barang }}</td>
+                           <td>{{ $pemb->produk->nama_barang }}</td>
+                           <td>{{ $pemb->produk->satuan }}</td>
+                           <td>{{ $pemb->qty }}</td>
+                           <td>{{ rupiah($pemb->produk->harga_satuan) }}</td>
+                           <td>{{ total_harga($pemb->produk->harga_satuan, $pemb->qty) }} </td>
                            <td>
-                              <a class="btn btn-primary btn-sm" href="/pembelians/{{ $post->id}}/edit">Edit</a>
-                              <form method="POST" action="{{ url('pembelians', $post->id ) }}">
+                              <a class="btn btn-warning btn-sm" href="{{ route('pembelian.edit',$pemb->id) }}">Edit</a>
+                              <form method="POST" class="d-inline" action="{{ route('pembelian.destroy', $pemb->id ) }}">
                                  @csrf
                                  @method('DELETE')
-                                 <a class="btn btn-primary btn-sm" href="/pembelians/{{ $post->id}}">Hapus</a>
+                                 <button class="btn btn-danger btn-sm" onclick="return confirm('Yakin hapus data ini?')">Hapus</button>
                               </form>
                            </td>
                         </tr>
@@ -102,6 +113,7 @@
       $("#example1").DataTable({
          "responsive": true,
          "autoWidth": false,
+         "ordering": true,
       });
       $('#example2').DataTable({
          "paging": true,

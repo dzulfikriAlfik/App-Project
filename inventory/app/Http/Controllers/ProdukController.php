@@ -15,7 +15,7 @@ class ProdukController extends Controller
    public function index()
    {
       $data = [
-         "title" => "Data Barang",
+         "title"  => "Data Barang",
          "produk" => Produk::all()
       ];
       return view('produk.index', $data);
@@ -28,7 +28,10 @@ class ProdukController extends Controller
     */
    public function create()
    {
-      return view('post.form_data_barang');
+      $data = [
+         "title" => "Tambah Data Barang"
+      ];
+      return view('produk.create', $data);
    }
 
    /**
@@ -39,19 +42,17 @@ class ProdukController extends Controller
     */
    public function store(Request $request)
    {
-      $request->validate([
-         'Kode_barang' => 'required|:data_barangs|max:150',
-         'Nama_barang' => 'required',
-         'Harga_barang' => 'required',
-
-
+      $validatedData = $request->validate([
+         'nama_barang'   => 'required|string',
+         'kode_barang'   => 'required|max:150|unique:produk,kode_barang',
+         'satuan'        => 'required|string',
+         'harga_satuan'  => 'required|numeric',
+         'jumlah_barang' => 'required|numeric',
       ]);
 
-      $input = $request->all();
+      Produk::create($validatedData);
 
-      $post = Produk::create($input);
-
-      return back()->with('success', ' Post baru berhasil dibuat.');
+      return redirect('produks')->with('success', ' Data Barang berhasil dibuat.');
    }
 
 
@@ -74,11 +75,11 @@ class ProdukController extends Controller
     */
    public function edit($id)
    {
-      $post = Produk::findOrFail($id);
-
-      return view('post.editdata_barang', [
-         'post' => $post
-      ]);
+      $data = [
+         "title" => "Edit Data Barang",
+         "produk" => Produk::findOrFail($id)
+      ];
+      return view("produk.edit", $data);
    }
 
    /**
@@ -88,17 +89,20 @@ class ProdukController extends Controller
     * @param  int  $id
     * @return \Illuminate\Http\Response
     */
-   public function update(Request $request, $id)
+   public function update(Request $request,  Produk $produk)
    {
-      $request->validate([
-         'Kode_barang' => 'required|:data_barangs|max:150',
-         'Nama_barang' => 'required',
-         'Harga_barang' => 'required',
+      $validatedData = $request->validate([
+         'nama_barang'   => 'required|string',
+         'kode_barang'   => 'required|max:150|unique:produk,kode_barang,' . $produk->id . ',id',
+         'satuan'        => 'required|string',
+         'harga_satuan'  => 'required|numeric',
+         'jumlah_barang' => 'required|numeric',
       ]);
 
-      $post = Produk::find($id)->update($request->all());
+      Produk::where('id', $produk->id)
+         ->update($validatedData);
 
-      return back()->with('success', ' Data telah diperbaharui!');
+      return redirect('produks')->with('success', ' Data telah diperbaharui!');
    }
 
    /**
@@ -113,6 +117,6 @@ class ProdukController extends Controller
 
       $post->delete();
 
-      return back()->with('success', ' Penghapusan berhasil.');
+      return back()->with('success', ' Data berhasil dihapus.');
    }
 }

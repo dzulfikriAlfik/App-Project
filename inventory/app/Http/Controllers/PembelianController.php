@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers;
+use App\Models\Produk;
 use App\Models\suplier;
-use App\Models\data_barang;
+use App\Models\Supplier;
+use App\Http\Controllers;
 use App\Models\Pembelian;
+use App\Models\data_barang;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class PembelianController extends Controller
 {
@@ -18,23 +21,25 @@ class PembelianController extends Controller
    public function index()
    {
       $data = [
-         "title" => "Pembelian",
+         "title"     => "Pembelian",
          "pembelian" => Pembelian::all()
       ];
 
       return view('pembelian.index', $data);
    }
 
-   public function list_product()
+   public function list_product(Produk $produk)
    {
-      $ba = data_barang::all();
-
-      echo json_encode(array("data" => $ba));
+      return response()->json([
+         'status'  => 200,
+         'message' => 'Data Found',
+         'data'    => $produk
+      ], Response::HTTP_OK);
    }
 
    public function list_suplier()
    {
-      $suplier = suplier::all();
+      $suplier = Supplier::all();
 
       echo json_encode(array("data" => $suplier));
    }
@@ -46,10 +51,13 @@ class PembelianController extends Controller
     */
    public function create()
    {
-      return view('pembelian.create');
+      $data = [
+         "title"     => "Tambah Data Pembelian",
+         "suppliers" => Supplier::all(),
+         "produks"   => Produk::all()
+      ];
+      return view('pembelian.create', $data);
    }
-
-
 
    /**
     * Store a newly created resource in storage.
@@ -59,23 +67,33 @@ class PembelianController extends Controller
     */
    public function store(Request $request)
    {
-      $request->validate([
-         'No_po' => 'required|:pembelians|max:150',
-         'Tgl_po' => 'required',
-         'Suplier' => 'required',
-         'Kode_barang' => 'required',
-         'Nama_barang' => 'required',
-         'Satuan' => 'required',
-         'Qty_po' => 'required',
-         'Harga_satuan' => 'required',
-         'Total_harga' => 'required',
-      ]);
+      $rules = [
+         'no_po'       => 'required|max:30|unique:pembelian,no_po',
+         'tanggal_po'  => 'required',
+         'supplier_id' => 'required',
+         'produk_id'   => 'required',
+      ];
 
-      $input = $request->all();
+      $message = [
+         'no_po.required' => "No PO tidak boleh kosong"
+      ];
 
-      $post = Pembelian::create($input);
+      $produk = Produk::find($request->produk_id);
 
-      return back()->with('success', ' Post baru berhasil dibuat.');
+      $qty_pembelian = $request->qty;
+      $qty_produk    = $produk->jumlah_barang;
+      $qty_final     = $qty_produk - $qty_pembelian;
+
+      $rules['qty']     = 'required|numeric|max:' . $qty_produk;
+      $message['qty.max'] = 'Quantity tidak boleh melebihi jumlah stok barang tersedia : ' . $qty_produk;
+
+      $request->validate($rules, $message);
+
+      Pembelian::create($request->all());
+
+      $produk->update(['jumlah_barang' => $qty_final]);
+
+      return redirect('pembelian')->with('success', ' Data Pembelian Barang berhasil dibuat.');
    }
 
    /**
@@ -97,11 +115,13 @@ class PembelianController extends Controller
     */
    public function edit($id)
    {
-      $post = Pembelian::findOrFail($id);
-
-      return view('post.editpembelian', [
-         'post' => $post
-      ]);
+      $data = [
+         "title"     => "Edit Data Pembelian",
+         "pembelian" => Pembelian::findOrFail($id),
+         "suppliers" => Supplier::all(),
+         "produks"   => Produk::all()
+      ];
+      return view("pembelian.edit", $data);
    }
 
    /**
@@ -111,24 +131,47 @@ class PembelianController extends Controller
     * @param  int  $id
     * @return \Illuminate\Http\Response
     */
-   public function update(Request $request, $id)
+   public function update(Request $request, Pembelian $pembelian)
    {
-      $request->validate([
-         'No_po' => 'required|:pembelians|max:150',
-         'Tgl_po' => 'required',
-         'Suplier' => 'required',
-         'Kode_barang' => 'required',
-         'Nama_barang' => 'required',
-         'Satuan' => 'required',
-         'Qty_po' => 'required',
-         'Harga_satuan' => 'required',
-         'Total_harga' => 'required',
+      // $produk = Produk::find($request->produk_id);
 
-      ]);
+      $qty_pembelian = $request->qty;
+      $qty_db        = $pembelian->qty;
+      $qty_produk    = $pembelian->produk->jumlah_barang;
+      $qty_final     = $qty_produk - ($qty_pembelian - $qty_db);
 
-      $post = Pembelian::find($id)->update($request->all());
+      $rules = [
+         'no_po'       => 'required|max:30|unique:pembelian,no_po,' . $pembelian->id . ',id',
+         'supplier_id' => 'required',
+         'tanggal_po'  => 'required',
+         'produk_id'   => 'required',
+         'qty'         => 'required|numeric'
+      ];
 
-      return back()->with('success', ' Data telah diperbaharui!');
+      $message = [
+         'no_po.required' => 'No. PO tidak boleh kosong',
+         'tanggal_po.required' => 'Tanggal PO tidak boleh kosong'
+      ];
+
+      if ($qty_pembelian != $qty_db) {
+         $rules['qty']     = 'required|numeric|max:' . $qty_produk;
+         $message['qty.max'] = 'Quantity tidak boleh melebihi jumlah stok barang tersedia : ' . $qty_produk;
+         if ($qty_pembelian > $qty_db) {
+            $qty_final = $qty_produk - ($qty_pembelian - $qty_db);
+         } else {
+            $qty_final = $qty_produk + ($qty_db - $qty_pembelian);
+         }
+      }
+
+      $validatedData = $request->validate($rules, $message);
+
+      Pembelian::where('id', $pembelian->id)
+         ->update($validatedData);
+
+      $produk = Produk::find($request->produk_id);
+      $produk->update(['jumlah_barang' => $qty_final]);
+
+      return redirect('pembelian')->with('success', ' Data Pembelian telah diperbaharui!');
    }
 
    /**
@@ -139,9 +182,8 @@ class PembelianController extends Controller
     */
    public function destroy($id)
    {
-      $post = Pembelian::find($id);
-      $post->delete();
+      Pembelian::find($id)->delete();
 
-      return back()->with('success', ' Penghapusan berhasil.');
+      return redirect('pembelian')->with('success', 'Data Pembelian berhasil dihapus.');
    }
 }

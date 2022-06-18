@@ -15,7 +15,6 @@
          </div><!-- /.col -->
          <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-               <li class="breadcrumb-item"><a href="#">Data Barang</a></li>
                <li class="breadcrumb-item active">Users</li>
             </ol>
          </div><!-- /.col -->
@@ -43,29 +42,22 @@
                            <th>Nama</th>
                            <th>Username</th>
                            <th>Email</th>
-                           <th>No. Telp</th>
                            <th>Aksi </th>
                         </tr>
                      </thead>
                      <tbody>
-                        @php
-                        $no = 1;
-                        @endphp
                         @foreach ($users as $user)
                         <tr>
-                           <td>{{ $no++ }}</td>
+                           <td>{{ $loop->iteration }}</td>
                            <td>{{ $user->name}}</td>
                            <td>{{ $user->username }}</td>
                            <td>{{ $user->email }}</td>
-                           <td>{{ $user->phone }}</td>
                            <td>
-                              <a href="#">
-                                 <button class="btn btn-warning">Edit</button>
-                              </a>
-                              <form method="POST" action="#">
+                              <a href="#" class="btn btn-sm btn-warning">Edit</a>
+                              <form method="POST" action="#" class="d-inline">
                                  @csrf
                                  @method('DELETE')
-                                 <a href="#"><button class="btn btn-danger">Hapus</button>
+                                 <button class="btn btn-sm btn-danger">Hapus</button>
                               </form>
                            </td>
                         </tr>

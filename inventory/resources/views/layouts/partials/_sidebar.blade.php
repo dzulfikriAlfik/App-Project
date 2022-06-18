@@ -10,7 +10,7 @@
       <nav class="mt-2">
          <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
             <li class="nav-item">
-               <a href="/" class="nav-link {{ Request::is('/') ? 'active' : '' }}">
+               <a href="/dashboard" class="nav-link {{ Request::is('dashboard') ? 'active' : '' }}">
                   <i class="nav-icon fas fa-tachometer-alt"></i>
                   <p>Dashboard</p>
                </a>
@@ -22,8 +22,7 @@
             'produks*',
             'produk-masuk*',
             'produk-keluar*',
-            'permintaan-produk*',
-            'users*'
+            'permintaan-produk*'
             ]
             @endphp
             <li class="nav-item {{ Request::is($menu_data_barang) ? 'menu-open' : '' }}">
@@ -41,15 +40,15 @@
                      </a>
                   </li>
                   <li class="nav-item">
-                     <a href="{{ route('pembelian.index') }}" class="nav-link {{ Request::is('pembelian*') ? 'active' : '' }}">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Pembelian</p>
-                     </a>
-                  </li>
-                  <li class="nav-item">
                      <a href="{{ route('produks.index') }}" class="nav-link {{ Request::is('produks*') ? 'active' : '' }}">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Data barang</p>
+                     </a>
+                  </li>
+                  <li class="nav-item">
+                     <a href="{{ route('pembelian.index') }}" class="nav-link {{ Request::is('pembelian*') ? 'active' : '' }}">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Pembelian</p>
                      </a>
                   </li>
                   <li class="nav-item">
@@ -70,19 +69,25 @@
                         <p>Permintaan Produksi</p>
                      </a>
                   </li>
-                  <li class="nav-item">
-                     <a href="{{ route('users.index') }}" class="nav-link {{ Request::is('users*') ? 'active' : '' }}">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>User</p>
-                     </a>
-                  </li>
                </ul>
             </li>
             <li class="nav-item">
-               <a href="/logout" class="nav-link">
+               <a href="{{ route('users.index') }}" class="nav-link {{ Request::is('users*') ? 'active' : '' }}">
+                  <i class="fas fa-users nav-icon"></i>
+                  <p>Users</p>
+               </a>
+            </li>
+            <li class="nav-item">
+               {{-- <a href="/logout" class="nav-link">
                   <i class="nav-icon fa fa-sign-out-alt"></i>
                   <p>Logout</p>
-               </a>
+               </a> --}}
+               {{-- <form action="/logout" method="post">
+                  @csrf
+                  <button type="submit" class="nav-link d-flex" onclick="return confirm('Anda yakin ingin logout?')">
+                     <i class="nav-icon fa fa-sign-out-alt"></i> Logout
+                  </button>
+               </form> --}}
             </li>
          </ul>
          <br><br><br><br>

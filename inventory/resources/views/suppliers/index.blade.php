@@ -24,8 +24,22 @@
 </div>
 <!-- /.content-header -->
 
-<section class="content">
+<div class="container-fluid">
+   <div class="row">
+      <div class="col-md-12">
+         @if (session()->has('success'))
+         <div class="alert alert-info alert-dismissible fade show" role="alert">
+            <strong>Success! </strong>{{ session('success') }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+               <span aria-hidden="true">&times;</span>
+            </button>
+         </div>
+         @endif
+      </div>
+   </div>
+</div>
 
+<section class="content">
    <div class="container-fluid">
       <div class="row">
          <div class="col-md-12">
@@ -47,22 +61,18 @@
                         </tr>
                      </thead>
                      <tbody>
-                        @php
-                        $no = 1;
-                        @endphp
-                        @foreach ($suppliers as $post)
+                        @foreach ($suppliers as $supp)
                         <tr>
-                           <td>{{ $post->supplier_name}}</td>
-                           <td>{{ $post->supplier_phone }}</td>
-                           <td>{{ $post->supplier_address }}</td>
+                           <td>{{ $loop->iteration }}</td>
+                           <td>{{ $supp->supplier_name}}</td>
+                           <td>{{ $supp->supplier_phone }}</td>
+                           <td>{{ $supp->supplier_address }}</td>
                            <td>
-                              <a href="#">
-                                 <button class="btn btn-warning">Edit</button>
-                              </a>
-                              <form method="POST" action="#">
-                                 @csrf
+                              <a href="{{ route('suppliers.edit', $supp->supplier_id) }}" class="btn btn-sm btn-warning">Edit</a>
+                              <form action="/suppliers/{{ $supp->supplier_id }}" method="post" class="d-inline">
                                  @method('DELETE')
-                                 <a href="#"><button class="btn btn-danger">Hapus</button>
+                                 @csrf
+                                 <button type="submit" onclick="return confirm('Yakin hapus data ini?')" class="btn btn-sm btn-danger">Hapus</button>
                               </form>
                            </td>
                         </tr>
