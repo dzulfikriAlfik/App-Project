@@ -15,10 +15,15 @@
                   <p>Dashboard</p>
                </a>
             </li>
+            <li class="nav-item">
+               <a href="{{ route('suppliers.index') }}" class="nav-link {{ Request::is('suppliers*') ? 'active' : '' }}">
+                  <i class="far fa-handshake nav-icon"></i>
+                  <p> Suplier</p>
+               </a>
+            </li>
             @php
             $menu_data_barang = [
             'pembelian*',
-            'suppliers*',
             'produks*',
             'produk-masuk*',
             'produk-keluar*',
@@ -34,18 +39,6 @@
                </a>
                <ul class="nav nav-treeview">
                   <li class="nav-item">
-                     <a href="{{ route('suppliers.index') }}" class="nav-link {{ Request::is('suppliers*') ? 'active' : '' }}">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Suplier</p>
-                     </a>
-                  </li>
-                  <li class="nav-item">
-                     <a href="{{ route('produks.index') }}" class="nav-link {{ Request::is('produks*') ? 'active' : '' }}">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Data barang</p>
-                     </a>
-                  </li>
-                  <li class="nav-item">
                      <a href="{{ route('pembelian.index') }}" class="nav-link {{ Request::is('pembelian*') ? 'active' : '' }}">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Pembelian</p>
@@ -58,15 +51,15 @@
                      </a>
                   </li>
                   <li class="nav-item">
-                     <a href="{{ route('produk-keluar.index') }}" class="nav-link {{ Request::is('produk-keluar*') ? 'active' : '' }}">
+                     <a href="{{ route('produks.index') }}" class="nav-link {{ Request::is('produks*') ? 'active' : '' }}">
                         <i class="far fa-circle nav-icon"></i>
-                        <p>Barang Keluar</p>
+                        <p>Data barang</p>
                      </a>
                   </li>
                   <li class="nav-item">
-                     <a href="{{ route('permintaan-produk.index') }}" class="nav-link {{ Request::is('permintaan-produk*') ? 'active' : '' }}">
+                     <a href="{{ route('produk-keluar.index') }}" class="nav-link {{ Request::is('produk-keluar*') ? 'active' : '' }}">
                         <i class="far fa-circle nav-icon"></i>
-                        <p>Permintaan Produksi</p>
+                        <p>Barang Keluar</p>
                      </a>
                   </li>
                </ul>

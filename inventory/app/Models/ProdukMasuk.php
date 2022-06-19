@@ -10,4 +10,9 @@ class ProdukMasuk extends Model
    use HasFactory;
    protected $table = "produk_masuk";
    protected $guarded = [];
+
+   public function pembelian()
+   {
+      return $this->belongsTo(Pembelian::class, 'pembelian_id');
+   }
 }

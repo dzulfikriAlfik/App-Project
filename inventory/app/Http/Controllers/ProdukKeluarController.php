@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Pembelian;
 use App\Models\ProdukKeluar;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class ProdukKeluarController extends Controller
 {
@@ -21,6 +23,15 @@ class ProdukKeluarController extends Controller
       return view("produk-keluar.index", $data);
    }
 
+   public function list_pembelian(Pembelian $pembelian)
+   {
+      return response()->json([
+         'status'  => 200,
+         'message' => 'Data Found',
+         'data'    => $pembelian
+      ], Response::HTTP_OK);
+   }
+
    /**
     * Show the form for creating a new resource.
     *
@@ -28,7 +39,11 @@ class ProdukKeluarController extends Controller
     */
    public function create()
    {
-      //
+      $data = [
+         "title"     => "Tambah Barang Keluar",
+         "pembelian" => Pembelian::all()
+      ];
+      return view('produk-keluar.create', $data);
    }
 
    /**
@@ -39,7 +54,37 @@ class ProdukKeluarController extends Controller
     */
    public function store(Request $request)
    {
-      //
+      $rules = [
+         'tanggal_keluar' => 'required',
+         'pembelian_id'   => 'required',
+      ];
+
+      $message = [
+         'tanggal_keluar.required' => "Tanggal Keluar tidak boleh kosong",
+         'pembelian_id.required' => "No. PO tidak boleh kosong"
+      ];
+
+      $pembelian = Pembelian::find($request->pembelian_id);
+
+      $qty_pembelian    = $pembelian->qty_sisa;
+
+      $rules['qty_kirim']     = 'required|numeric|max:' . $qty_pembelian;
+      $message['qty_kirim.max'] = 'Quantity Kirim tidak boleh melebihi quantity pembelian : ' . $qty_pembelian;
+
+      $validatedData = $request->validate($rules, $message);
+
+      $qty_sisa = $qty_pembelian - $request->qty_kirim;
+
+      $validatedData['qty_sisa'] = $qty_sisa;
+
+      ProdukKeluar::create($validatedData);
+
+      $pembelian->update([
+         'qty_terkirim' => ($pembelian->qty_terkirim + $request->qty_kirim),
+         'qty_sisa' => $validatedData['qty_sisa']
+      ]);
+
+      return redirect('produk-keluar')->with('success', ' Data Produk Keluar berhasil dibuat.');
    }
 
    /**
@@ -84,6 +129,8 @@ class ProdukKeluarController extends Controller
     */
    public function destroy($id)
    {
-      //
+      ProdukKeluar::find($id)->delete();
+
+      return redirect('produk-keluar')->with('success', 'Data Produk Keluar berhasil dihapus.');
    }
 }

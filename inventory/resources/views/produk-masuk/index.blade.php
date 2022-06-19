@@ -24,8 +24,22 @@
 </div>
 <!-- /.content-header -->
 
-<section class="content">
+<div class="container-fluid">
+   <div class="row">
+      <div class="col-md-12">
+         @if (session()->has('success'))
+         <div class="alert alert-info alert-dismissible fade show" role="alert">
+            <strong>Success! </strong>{{ session('success') }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+               <span aria-hidden="true">&times;</span>
+            </button>
+         </div>
+         @endif
+      </div>
+   </div>
+</div>
 
+<section class="content">
    <div class="container-fluid">
       <div class="row">
          <div class="col-md-12">
@@ -40,32 +54,31 @@
                      <thead>
                         <tr>
                            <th>No</th>
-                           <th>Kode</th>
+                           <th>No. PO</th>
                            <th>Nama Barang</th>
-                           <th>Harga</th>
-                           <th>Jumlah Barang</th>
-                           <th>Aksi </th>
+                           <th>Qty Order</th>
+                           <th>Qty Diterima</th>
+                           <th>Tanggal Diterima</th>
+                           <th>Keterangan</th>
+                           <th>Aksi</th>
                         </tr>
                      </thead>
                      <tbody>
-                        @php
-                        $no = 1;
-                        @endphp
-                        @foreach ($produk_masuk as $post)
+                        @foreach ($produk_masuk as $produk)
                         <tr>
-                           <td>{{ $no++ }}</td>
-                           <td>{{ $post->kode_barang}}</td>
-                           <td>{{ $post->nama_barang }}</td>
-                           <td>{{ $post->harga_barang }}</td>
-                           <td>{{ $post->jumlah_barang }}</td>
+                           <td>{{ $loop->iteration }}</td>
+                           <td>{{ $produk->pembelian->no_po}}</td>
+                           <td>{{ $produk->pembelian->nama_barang }}</td>
+                           <td>{{ $produk->pembelian->qty_beli }}</td>
+                           <td>{{ $produk->qty_terima }}</td>
+                           <td>{{ tanggal_format($produk->tanggal_masuk) }}</td>
+                           <td>{{ $produk->keterangan }}</td>
                            <td>
-                              <a href="#">
-                                 <button class="btn btn-warning">Edit</button>
-                              </a>
-                              <form method="POST" action="#">
+                              <a href="#" class="btn btn-sm btn-warning">Edit</a>
+                              <form method="POST" action="{{ route('produk-masuk.destroy', $produk->id) }}" class="d-inline">
                                  @csrf
                                  @method('DELETE')
-                                 <a href="#"><button class="btn btn-danger">Hapus</button>
+                                 <button onclick="return confirm('Yakin ingin hapus data ini? ini akan menghapus semua data yang berelasi!')" class="btn btn-sm btn-danger">Hapus</button>
                               </form>
                            </td>
                         </tr>

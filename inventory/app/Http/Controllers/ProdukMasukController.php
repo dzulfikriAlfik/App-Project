@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Pembelian;
 use App\Models\ProdukMasuk;
 use Illuminate\Http\Request;
 
@@ -28,7 +29,11 @@ class ProdukMasukController extends Controller
     */
    public function create()
    {
-      //
+      $data = [
+         "title"     => "Tambah Data Produk Masuk",
+         "pembelian" => Pembelian::all()
+      ];
+      return view('produk-masuk.create', $data);
    }
 
    /**
@@ -39,7 +44,29 @@ class ProdukMasukController extends Controller
     */
    public function store(Request $request)
    {
-      //
+      $rules = [
+         'tanggal_masuk' => 'required',
+         'pembelian_id'  => 'required',
+         'qty_terima'    => 'required|numeric',
+         'keterangan'    => 'required'
+      ];
+
+      $validatedData = $request->validate($rules, ServicesController::costomMessageValidation());
+
+      $pembelian = Pembelian::find($request->pembelian_id);
+
+      $validatedData['qty_sisa'] = ($pembelian->qty_beli - $request->qty_terima);
+      // dd($validatedData);
+
+      ProdukMasuk::create($validatedData);
+
+      if ($request->keterangan == 'Stock supplier tidak memenuhi Qty Order') {
+         $pembelian->update(['qty_sisa' => 0]);
+      } else {
+         $pembelian->update(['qty_sisa' => $validatedData['qty_sisa']]);
+      }
+
+      return redirect('produk-masuk')->with('success', 'Data Penerimaan Barang berhasil dibuat.');
    }
 
    /**
@@ -82,8 +109,10 @@ class ProdukMasukController extends Controller
     * @param  int  $id
     * @return \Illuminate\Http\Response
     */
-   public function destroy($id)
+   public function destroy(ProdukMasuk $produk_masuk)
    {
-      //
+      $produk_masuk->delete();
+
+      return redirect('produk-masuk')->with('success', 'Data Pembelian berhasil dihapus.');
    }
 }

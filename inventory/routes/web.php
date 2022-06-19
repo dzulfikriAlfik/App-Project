@@ -29,8 +29,11 @@ Route::get('/register', [AuthController::class, 'register'])->middleware('guest'
 Route::post('/register/store', [AuthController::class, 'store'])->middleware('guest');
 Route::post('/logout', [AuthController::class, 'logout']);
 
+// Route::get('produk-keluar', [ProdukKeluarController::class, 'index']);
+
 // Get list-produk
 Route::get('pembelian/list-produk/{produk}', [PembelianController::class, 'list_product']);
+Route::get('list_pembelian/{pembelian}', [ProdukKeluarController::class, 'list_pembelian']);
 
 Route::group(['middleware' => 'auth'], function () {
    // Dashboard

@@ -9,6 +9,8 @@ use App\Http\Controllers;
 use App\Models\Pembelian;
 use App\Models\data_barang;
 use Illuminate\Http\Request;
+use App\Http\Controllers\ServicesController;
+use App\Models\ProdukMasuk;
 use Symfony\Component\HttpFoundation\Response;
 
 class PembelianController extends Controller
@@ -53,8 +55,7 @@ class PembelianController extends Controller
    {
       $data = [
          "title"     => "Tambah Data Pembelian",
-         "suppliers" => Supplier::all(),
-         "produks"   => Produk::all()
+         "suppliers" => Supplier::all()
       ];
       return view('pembelian.create', $data);
    }
@@ -68,30 +69,21 @@ class PembelianController extends Controller
    public function store(Request $request)
    {
       $rules = [
-         'no_po'       => 'required|max:30|unique:pembelian,no_po',
-         'tanggal_po'  => 'required',
-         'supplier_id' => 'required',
-         'produk_id'   => 'required',
+         'no_po'         => 'required|max:30|unique:pembelian,no_po',
+         'tanggal_po'    => 'required',
+         'supplier_name' => 'required',
+         'kode_barang'   => 'required|max:50|unique:pembelian,kode_barang',
+         'nama_barang'   => 'required|max:50',
+         'satuan'        => 'required|max:30',
+         'qty_beli'      => 'required|numeric',
+         'harga_satuan'  => 'required|numeric',
       ];
 
-      $message = [
-         'no_po.required' => "No PO tidak boleh kosong"
-      ];
+      $validatedData = $request->validate($rules, ServicesController::costomMessageValidation());
 
-      $produk = Produk::find($request->produk_id);
+      $validatedData['qty_sisa'] = $request->qty_beli;
 
-      $qty_pembelian = $request->qty;
-      $qty_produk    = $produk->jumlah_barang;
-      $qty_final     = $qty_produk - $qty_pembelian;
-
-      $rules['qty']     = 'required|numeric|max:' . $qty_produk;
-      $message['qty.max'] = 'Quantity tidak boleh melebihi jumlah stok barang tersedia : ' . $qty_produk;
-
-      $request->validate($rules, $message);
-
-      Pembelian::create($request->all());
-
-      $produk->update(['jumlah_barang' => $qty_final]);
+      Pembelian::create($validatedData);
 
       return redirect('pembelian')->with('success', ' Data Pembelian Barang berhasil dibuat.');
    }
@@ -118,8 +110,7 @@ class PembelianController extends Controller
       $data = [
          "title"     => "Edit Data Pembelian",
          "pembelian" => Pembelian::findOrFail($id),
-         "suppliers" => Supplier::all(),
-         "produks"   => Produk::all()
+         "suppliers" => Supplier::all()
       ];
       return view("pembelian.edit", $data);
    }
@@ -133,43 +124,21 @@ class PembelianController extends Controller
     */
    public function update(Request $request, Pembelian $pembelian)
    {
-      // $produk = Produk::find($request->produk_id);
-
-      $qty_pembelian = $request->qty;
-      $qty_db        = $pembelian->qty;
-      $qty_produk    = $pembelian->produk->jumlah_barang;
-      $qty_final     = $qty_produk - ($qty_pembelian - $qty_db);
 
       $rules = [
-         'no_po'       => 'required|max:30|unique:pembelian,no_po,' . $pembelian->id . ',id',
-         'supplier_id' => 'required',
-         'tanggal_po'  => 'required',
-         'produk_id'   => 'required',
-         'qty'         => 'required|numeric'
+         'no_po'         => 'required|max:30|unique:pembelian,no_po,' . $pembelian->id . ',id',
+         'tanggal_po'    => 'required',
+         'supplier_name' => 'required',
+         'kode_barang'   => 'required|max:50|unique:pembelian,kode_barang,' . $pembelian->id . ',id',
+         'nama_barang'   => 'required|max:50',
+         'satuan'        => 'required|max:30',
+         'qty_beli'      => 'required|numeric',
+         'harga_satuan'  => 'required|numeric',
       ];
 
-      $message = [
-         'no_po.required' => 'No. PO tidak boleh kosong',
-         'tanggal_po.required' => 'Tanggal PO tidak boleh kosong'
-      ];
+      $validatedData = $request->validate($rules, ServicesController::costomMessageValidation());
 
-      if ($qty_pembelian != $qty_db) {
-         $rules['qty']     = 'required|numeric|max:' . $qty_produk;
-         $message['qty.max'] = 'Quantity tidak boleh melebihi jumlah stok barang tersedia : ' . $qty_produk;
-         if ($qty_pembelian > $qty_db) {
-            $qty_final = $qty_produk - ($qty_pembelian - $qty_db);
-         } else {
-            $qty_final = $qty_produk + ($qty_db - $qty_pembelian);
-         }
-      }
-
-      $validatedData = $request->validate($rules, $message);
-
-      Pembelian::where('id', $pembelian->id)
-         ->update($validatedData);
-
-      $produk = Produk::find($request->produk_id);
-      $produk->update(['jumlah_barang' => $qty_final]);
+      $pembelian->update($validatedData);
 
       return redirect('pembelian')->with('success', ' Data Pembelian telah diperbaharui!');
    }
@@ -180,10 +149,63 @@ class PembelianController extends Controller
     * @param  int  $id
     * @return \Illuminate\Http\Response
     */
-   public function destroy($id)
+   public function destroy(Pembelian $pembelian)
    {
-      Pembelian::find($id)->delete();
+      // dd($pembelian->id);
+      $produk_masuk = ProdukMasuk::where('pembelian_id', $pembelian->id);
+      // $produk_masuk = $pembelian->produk_masuk->delete();
+      // dd($produk_masuk);
+      $produk_masuk->delete();
+      $pembelian->delete();
+
 
       return redirect('pembelian')->with('success', 'Data Pembelian berhasil dihapus.');
    }
+
+   // public function update(Request $request, Pembelian $pembelian)
+   // {
+   //    $rules = [
+   //       'no_po'       => 'required|max:30|unique:pembelian,no_po,' . $pembelian->id . ',id',
+   //       'supplier_id' => 'required',
+   //       'tanggal_po'  => 'required',
+   //       'produk_id'   => 'required',
+   //       'qty'         => 'required|numeric'
+   //    ];
+
+   //    $message = [
+   //       'no_po.required'      => 'No. PO tidak boleh kosong',
+   //       'tanggal_po.required' => 'Tanggal PO tidak boleh kosong'
+   //    ];
+
+   //    $qty_pembelian = $request->qty;
+   //    $qty_db        = $pembelian->qty;
+   //    $qty_produk    = $pembelian->produk->jumlah_barang;
+   //    $qty_final     = $qty_produk - ($qty_pembelian - $qty_db);
+
+   //    if ($qty_pembelian != $qty_db) {
+   //       $rules['qty']     = 'required|numeric|max:' . $qty_produk;
+   //       $message['qty.max'] = 'Quantity tidak boleh melebihi jumlah stok barang tersedia : ' . $qty_produk;
+   //       if ($qty_pembelian > $qty_db) {
+   //          $qty_final = $qty_produk - ($qty_pembelian - $qty_db);
+   //       } else {
+   //          $qty_final = $qty_produk + ($qty_db - $qty_pembelian);
+   //       }
+   //    }
+
+   //    $validatedData = $request->validate($rules, $message);
+
+   //    $validatedData['qty_sisa'] = $request->qty - $pembelian->qty_terkirim;
+
+   //    if ($qty_pembelian < $pembelian->qty_terkirim) {
+   //       return back()->with('error', 'Quantity tidak boleh kurang dari quantity yang sudah terkirim : ' . $pembelian->qty_terkirim);
+   //    }
+
+   //    Pembelian::where('id', $pembelian->id)
+   //       ->update($validatedData);
+
+   //    $produk = Produk::find($request->produk_id);
+   //    $produk->update(['jumlah_barang' => $qty_final]);
+
+   //    return redirect('pembelian')->with('success', ' Data Pembelian telah diperbaharui!');
+   // }
 }

@@ -62,10 +62,13 @@
                            <th>Kode</th>
                            <th>Nama Barang</th>
                            <th>Satuan</th>
-                           <th>Qty</th>
+                           <th>Qty Beli</th>
                            <th>Harga Satuan</th>
-                           <th>Total</th>
+                           <th>Estimasi Total</th>
                            <th>Aksi </th>
+                           {{-- <th>Terkirim</th>
+                           <th>Sisa Kirim</th>
+                            --}}
                         </tr>
                      </thead>
                      <tbody>
@@ -74,19 +77,19 @@
                            <td>{{ $loop->iteration }}</td>
                            <td style="width:200px">{{ $pemb->no_po}}</td>
                            <td style="width:200px">{{ tanggal_format($pemb->tanggal_po) }}</td>
-                           <td style="width:200px">{{ $pemb->supplier->supplier_name }}</td>
-                           <td style="width:100px">{{ $pemb->produk->kode_barang }}</td>
-                           <td>{{ $pemb->produk->nama_barang }}</td>
-                           <td>{{ $pemb->produk->satuan }}</td>
-                           <td>{{ $pemb->qty }}</td>
-                           <td>{{ rupiah($pemb->produk->harga_satuan) }}</td>
-                           <td>{{ total_harga($pemb->produk->harga_satuan, $pemb->qty) }} </td>
+                           <td style="width:200px">{{ $pemb->supplier_name }}</td>
+                           <td style="width:100px">{{ $pemb->kode_barang }}</td>
+                           <td>{{ $pemb->nama_barang }}</td>
+                           <td>{{ $pemb->satuan }}</td>
+                           <td>{{ $pemb->qty_beli }}</td>
+                           <td>{{ rupiah($pemb->harga_satuan) }}</td>
+                           <td>{{ total_harga($pemb->harga_satuan, $pemb->qty_beli) }}</td>
                            <td>
                               <a class="btn btn-warning btn-sm" href="{{ route('pembelian.edit',$pemb->id) }}">Edit</a>
                               <form method="POST" class="d-inline" action="{{ route('pembelian.destroy', $pemb->id ) }}">
                                  @csrf
                                  @method('DELETE')
-                                 <button class="btn btn-danger btn-sm" onclick="return confirm('Yakin hapus data ini?')">Hapus</button>
+                                 <button class="btn btn-danger btn-sm" onclick="return confirm('Yakin hapus data ini? semua data yang berelasi akan ikut terhapus!')">Hapus</button>
                               </form>
                            </td>
                         </tr>
@@ -114,6 +117,8 @@
          "responsive": true,
          "autoWidth": false,
          "ordering": true,
+         "autoWidth": false,
+         "responsive": true,
       });
       $('#example2').DataTable({
          "paging": true,

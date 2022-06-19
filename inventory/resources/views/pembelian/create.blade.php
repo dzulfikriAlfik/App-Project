@@ -34,8 +34,8 @@
             <div class="card-body">
                <form action="{{ route('pembelian.store') }}" method="post">
                   @csrf
-                  <div class="row d-flex justify-content-center">
-                     <div class="col-md-5 mx-auto">
+                  <div class="row d-flex justify-content-around">
+                     <div class="col-md-5">
                         <div class="form-group">
                            <label for="no_po">No. PO <span class="text-red">*</span></label>
                            <input type="text" name="no_po" id="no_po" class="form-control @error('no_po') is-invalid @enderror" placeholder="No. PO" value="{{ old('no_po') }}">
@@ -56,55 +56,55 @@
                            </div>
                         </div>
                         <div class="form-group">
-                           <label for="supplier_id">Supplier <span class="text-red">*</span></label>
-                           <select name="supplier_id" id="supplier_id" class="form-control @error('supplier_id') is-invalid @enderror">
+                           <label for="supplier_name">Supplier <span class="text-red">*</span></label>
+                           <select name="supplier_name" id="supplier_name" class="form-control @error('supplier_name') is-invalid @enderror">
                               <option value="">-- Pilih Supplier --</option>
                               @foreach ($suppliers as $supplier)
-                              @if (old('supplier_id') == $supplier->supplier_id)
-                              <option value="{{ $supplier->supplier_id }}" selected>{{ $supplier->supplier_name }}</option>
+                              @if (old('supplier_name') == $supplier->supplier_name)
+                              <option value="{{ $supplier->supplier_name }}" selected>{{ $supplier->supplier_name }}</option>
                               @else
-                              <option value="{{ $supplier->supplier_id }}">{{ $supplier->supplier_name }}</option>
+                              <option value="{{ $supplier->supplier_name }}">{{ $supplier->supplier_name }}</option>
                               @endif
                               @endforeach
                            </select>
-                           @error('supplier_id')
+                           @error('supplier_name')
                            <small class="invalid-feedback">{{ $message }}</small>
                            @enderror
                         </div>
                         <div class="form-group">
-                           <label for="produk_id">Produk <span class="text-red">*</span></label>
-                           <select name="produk_id" id="produk_id" class="form-control @error('produk_id') is-invalid @enderror">
-                              <option value="">-- Pilih Produk --</option>
-                              @foreach ($produks as $produk)
-                              @if (old('produk_id') == $produk->id)
-                              <option value="{{ $produk->id }}" selected>{{ $produk->kode_barang }}</option>
-                              @else
-                              <option value="{{ $produk->id }}">{{ $produk->kode_barang }}</option>
-                              @endif
-                              @endforeach
-                           </select>
-                           @error('produk_id')
+                           <label for="kode_barang">Kode Barang <span class="text-red">*</span></label>
+                           <input type="text" name="kode_barang" id="kode_barang" class="form-control @error('kode_barang') is-invalid @enderror" placeholder="Kode Barang" value="{{ old('kode_barang') }}">
+                           @error('kode_barang')
                            <small class="invalid-feedback">{{ $message }}</small>
                            @enderror
                         </div>
-                        {{-- ajax --}}
+                     </div>
+                     <div class="col-md-5">
                         <div class="form-group">
-                           <label for="nama_barang">Nama Barang</label>
-                           <input type="text" name="nama_barang" id="nama_barang" value="{{ old('nama_barang') }}" class="form-control" disabled>
+                           <label for="nama_barang">Nama Barang <span class="text-red">*</span></label>
+                           <input type="text" name="nama_barang" id="nama_barang" class="form-control @error('nama_barang') is-invalid @enderror" placeholder="Nama Barang" value="{{ old('nama_barang') }}">
+                           @error('nama_barang')
+                           <small class="invalid-feedback">{{ $message }}</small>
+                           @enderror
                         </div>
                         <div class="form-group">
-                           <label for="harga_satuan">Harga Satuan</label>
-                           <input type="text" id="harga_satuan" class="form-control" disabled>
+                           <label for="satuan">Satuan <span class="text-red">*</span></label>
+                           <input type="text" name="satuan" id="satuan" class="form-control @error('satuan') is-invalid @enderror" placeholder="Satuan" value="{{ old('satuan') }}">
+                           @error('satuan')
+                           <small class="invalid-feedback">{{ $message }}</small>
+                           @enderror
                         </div>
                         <div class="form-group">
-                           <label for="jumlah_barang">Stock Barang</label>
-                           <input type="text" id="jumlah_barang" value="" class="form-control" disabled>
+                           <label for="qty_beli">Quantity Beli <span class="text-red">*</span></label>
+                           <input type="text" name="qty_beli" id="qty_beli" class="form-control @error('qty_beli') is-invalid @enderror" placeholder="Quantity Beli" value="{{ old('qty_beli') }}">
+                           @error('qty_beli')
+                           <small class="invalid-feedback">{{ $message }}</small>
+                           @enderror
                         </div>
-                        {{-- End ajax --}}
                         <div class="form-group">
-                           <label for="qty">Quantity <span class="text-red">*</span></label>
-                           <input type="text" name="qty" id="qty" class="form-control @error('qty') is-invalid @enderror" placeholder="Quantity" value="{{ old('qty') }}">
-                           @error('qty')
+                           <label for="harga_satuan">Harga Satuan <span class="text-red">*</span></label>
+                           <input type="text" name="harga_satuan" id="harga_satuan" class="form-control @error('harga_satuan') is-invalid @enderror" placeholder="Harga Satuan" value="{{ old('harga_satuan') }}">
+                           @error('harga_satuan')
                            <small class="invalid-feedback">{{ $message }}</small>
                            @enderror
                         </div>

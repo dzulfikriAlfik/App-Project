@@ -9,4 +9,10 @@ class ProdukKeluar extends Model
 {
    use HasFactory;
    protected $table = "produk_keluar";
+   protected $guarded = [];
+
+   public function pembelian()
+   {
+      return $this->belongsTo(Pembelian::class, 'pembelian_id');
+   }
 }
