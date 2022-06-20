@@ -56,9 +56,9 @@
                            <th>No</th>
                            <th>Kode</th>
                            <th>Nama Barang</th>
-                           <th>Harga</th>
                            <th>Jumlah Barang</th>
-                           <th>Harga Total</th>
+                           {{-- <th>Harga</th> --}}
+                           {{-- <th>Harga Total</th> --}}
                            <th>Aksi </th>
                         </tr>
                      </thead>
@@ -68,9 +68,9 @@
                            <td>{{ $loop->iteration }}</td>
                            <td>{{ $prod->kode_barang }}</td>
                            <td>{{ $prod->nama_barang }}</td>
-                           <td>{{ rupiah($prod->harga_satuan) }}</td>
                            <td>{{ $prod->jumlah_barang }}</td>
-                           <td>{{ total_harga($prod->harga_satuan, $prod->jumlah_barang) }}</td>
+                           {{-- <td>{{ rupiah($prod->harga_satuan) }}</td>
+                           <td>{{ total_harga($prod->harga_satuan, $prod->jumlah_barang) }}</td> --}}
                            <td>
                               {{-- <a href="{{ route('produks.edit',$prod->id) }}">
                               <button class="btn btn-warning btn-sm">Edit</button>

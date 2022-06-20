@@ -64,32 +64,32 @@
                            </div>
                         </div>
                         <div class="form-group">
-                           <label for="pembelian_id">No. PO <span class="text-red">*</span></label>
-                           <select name="pembelian_id" id="pembelian_id" class="form-control @error('pembelian_id') is-invalid @enderror">
-                              <option value="">-- Pilih No. PO --</option>
-                              @foreach ($pembelian as $pemb)
-                              @if ($pemb->qty_sisa > 0)
-                              @if (old('pembelian_id') == $pemb->id)
-                              <option value="{{ $pemb->id }}" selected>{{ $pemb->no_po }}</option>
+                           <label for="produk_id">Produk <span class="text-red">*</span></label>
+                           <select name="produk_id" id="produk_id" class="form-control @error('produk_id') is-invalid @enderror">
+                              <option value="">-- Pilih Produk --</option>
+                              @foreach ($produks as $produk)
+                              @if ($produk->jumlah_barang > 0)
+                              @if (old('produk_id') == $produk->id)
+                              <option value="{{ $produk->id }}" selected>{{ $produk->kode_barang }}</option>
                               @else
-                              <option value="{{ $pemb->id }}">{{ $pemb->no_po }}</option>
+                              <option value="{{ $produk->id }}">{{ $produk->kode_barang }}</option>
                               @endif
 
                               @endif
                               @endforeach
                            </select>
-                           @error('pembelian_id')
+                           @error('produk_id')
                            <small class="invalid-feedback">{{ $message }}</small>
                            @enderror
                         </div>
                         {{-- ajax --}}
                         <div class="form-group">
-                           <label for="qty_pembelian">Quantity Pembelian</label>
-                           <input type="text" name="qty_pembelian" id="qty_pembelian" value="{{ old('qty_pembelian') }}" class="form-control" disabled>
+                           <label for="jumlah_barang">Stok Barang</label>
+                           <input type="text" name="jumlah_barang" id="jumlah_barang" value="{{ old('jumlah_barang') }}" class="form-control" disabled>
                         </div>
                         {{-- End ajax --}}
                         <div class="form-group">
-                           <label for="qty_kirim">Quantity Kirim <span class="text-red">*</span></label>
+                           <label for="qty_kirim">Quantity Keluar <span class="text-red">*</span></label>
                            <input type="text" name="qty_kirim" id="qty_kirim" class="form-control @error('qty_kirim') is-invalid @enderror" placeholder="Masukkan Quantity yang akan dikirim" value="{{ old('qty_kirim', 1) }}">
                            @error('qty_kirim')
                            <small class="invalid-feedback">{{ $message }}</small>
@@ -125,6 +125,14 @@
 <!-- Tempusdominus Bootstrap 4 -->
 <script src="{{ asset('assets/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js') }}"></script>
 <script>
+   // on ready function
+   $(function () {
+      let produk_id = $("#produk_id").val();
+      if (produk_id) {
+         getListProduk();
+      }
+   });
+
    //Date picker
    $('#reservationdate').datetimepicker({
       format: "Y-MM-DD",
@@ -133,23 +141,22 @@
    });
 
    $("#button-add").on("click", function (e) {
-      if ($("#pembelian_id").val() == "") {
+      if ($("#produk_id").val() == "") {
          e.preventDefault();
-         commonJS.swalError("No. PO tidak boleh kosong");
+         commonJS.swalError("Produk tidak boleh kosong");
       }
    });
 
-
-   $("#pembelian_id").on("change", function () {
-      let pembelian_id = $("#pembelian_id").val()
+   function getListProduk() {
+      let produk_id = $("#produk_id").val()
       $.ajax({
-            url: `/list_pembelian/${pembelian_id}`,
+            url: `/list_produk/${produk_id}`,
             method: "GET",
             dataType: "json",
          })
          .done(function (response) {
             data = response.data;
-            $("#qty_pembelian").val(data.qty_sisa)
+            $("#jumlah_barang").val(data.jumlah_barang)
 
             calculateSisa();
             checkSisa();
@@ -161,24 +168,28 @@
 
 
          });
+   }
+
+   $("#produk_id").on("change", function () {
+      getListProduk();
    });
 
    function calculateSisa() {
-      let qtyPembelian = $("#qty_pembelian").val();
+      let qtyPembelian = $("#jumlah_barang").val();
       let qtyKirim = $("#qty_kirim").val();
       let qtySisa = parseInt(qtyPembelian) - parseInt(qtyKirim);
       $("#qty_sisa").val(qtySisa);
    }
 
    function checkSisa() {
-      let qtyPembelian = $("#qty_pembelian").val();
+      let qtyPembelian = $("#jumlah_barang").val();
       let qtyKirim = $("#qty_kirim").val();
       let qtySisa = parseInt(qtyPembelian) - parseInt(qtyKirim);
       if (qtyKirim < 1) {
          $("#qty_kirim").val(1);
          calculateSisa()
-      } else if (qtyKirim > qtyPembelian) {
-         $("#qty_kirim").val(qtyPembelian);
+      } else if (parseInt(qtyKirim) > parseInt(qtyPembelian)) {
+         $("#qty_kirim").val(parseInt(qtyPembelian));
          calculateSisa();
       }
    }

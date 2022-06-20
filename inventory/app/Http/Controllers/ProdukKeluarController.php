@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Produk;
 use App\Models\Pembelian;
 use App\Models\ProdukKeluar;
 use Illuminate\Http\Request;
@@ -32,6 +33,15 @@ class ProdukKeluarController extends Controller
       ], Response::HTTP_OK);
    }
 
+   public function list_produk(Produk $produk)
+   {
+      return response()->json([
+         'status'  => 200,
+         'message' => 'Data Found',
+         'data'    => $produk
+      ], Response::HTTP_OK);
+   }
+
    /**
     * Show the form for creating a new resource.
     *
@@ -41,8 +51,9 @@ class ProdukKeluarController extends Controller
    {
       $data = [
          "title"     => "Tambah Barang Keluar",
-         "pembelian" => Pembelian::all()
+         "produks" => Produk::all()
       ];
+      // dd($data);
       return view('produk-keluar.create', $data);
    }
 
@@ -56,32 +67,29 @@ class ProdukKeluarController extends Controller
    {
       $rules = [
          'tanggal_keluar' => 'required',
-         'pembelian_id'   => 'required',
+         'produk_id'   => 'required',
+         'qty_kirim'   => 'required',
       ];
 
-      $message = [
-         'tanggal_keluar.required' => "Tanggal Keluar tidak boleh kosong",
-         'pembelian_id.required' => "No. PO tidak boleh kosong"
-      ];
+      $produk = Produk::find($request->produk_id);
+      // dd($produk);
 
-      $pembelian = Pembelian::find($request->pembelian_id);
+      $qty_produk    = $produk->jumlah_barang;
 
-      $qty_pembelian    = $pembelian->qty_sisa;
+      // $rules['qty_kirim']     = 'required|numeric|max:' . $qty_produk;
 
-      $rules['qty_kirim']     = 'required|numeric|max:' . $qty_pembelian;
-      $message['qty_kirim.max'] = 'Quantity Kirim tidak boleh melebihi quantity pembelian : ' . $qty_pembelian;
+      $validatedData = $request->validate($rules, ServicesController::costomMessageValidation());
 
-      $validatedData = $request->validate($rules, $message);
-
-      $qty_sisa = $qty_pembelian - $request->qty_kirim;
+      $qty_sisa = $qty_produk - $request->qty_kirim;
 
       $validatedData['qty_sisa'] = $qty_sisa;
+      $validatedData['kode_barang'] = $produk->kode_barang;
+      $validatedData['nama_barang'] = $produk->nama_barang;
 
       ProdukKeluar::create($validatedData);
 
-      $pembelian->update([
-         'qty_terkirim' => ($pembelian->qty_terkirim + $request->qty_kirim),
-         'qty_sisa' => $validatedData['qty_sisa']
+      $produk->update([
+         'jumlah_barang' => $validatedData['qty_sisa']
       ]);
 
       return redirect('produk-keluar')->with('success', ' Data Produk Keluar berhasil dibuat.');

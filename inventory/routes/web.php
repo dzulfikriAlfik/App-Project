@@ -34,6 +34,7 @@ Route::post('/logout', [AuthController::class, 'logout']);
 // Get list-produk
 Route::get('pembelian/list-produk/{produk}', [PembelianController::class, 'list_product']);
 Route::get('list_pembelian/{pembelian}', [ProdukKeluarController::class, 'list_pembelian']);
+Route::get('list_produk/{produk}', [ProdukKeluarController::class, 'list_produk']);
 
 Route::group(['middleware' => 'auth'], function () {
    // Dashboard

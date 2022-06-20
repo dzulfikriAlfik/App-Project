@@ -56,9 +56,10 @@
                         <tr>
                            <th>No</th>
                            <th>Tanggal Keluar</th>
-                           <th>No. PO</th>
-                           <th>Quantity Kirim</th>
-                           <th>Sisa Kirim</th>
+                           <th>Kode Barang</th>
+                           <th>Nama Barang</th>
+                           <th>Quantity Keluar</th>
+                           <th>Sisa Barang</th>
                            <th>Aksi </th>
                         </tr>
                      </thead>
@@ -67,7 +68,8 @@
                         <tr>
                            <td>{{ $loop->iteration }}</td>
                            <td>{{ tanggal_format($produk->tanggal_keluar) }}</td>
-                           <td>{{ $produk->pembelian->no_po }}</td>
+                           <td>{{ $produk->kode_barang }}</td>
+                           <td>{{ $produk->nama_barang }}</td>
                            <td>{{ $produk->qty_kirim }}</td>
                            <td>{{ $produk->qty_sisa }}</td>
                            <td>
