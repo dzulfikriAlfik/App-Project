@@ -94,6 +94,10 @@
                      </div>
                      <div class="col-md-5">
                         <div class="form-group">
+                           <label for="qty_belum_kirim">Belum dikirim</label>
+                           <input type="text" name="qty_belum_kirim" id="qty_belum_kirim" value="{{ old('qty_belum_kirim') }}" class="form-control" disabled>
+                        </div>
+                        <div class="form-group">
                            <label for="qty_terima">Quantity Diterima <span class="text-red">*</span></label>
                            <input type="number" name="qty_terima" id="qty_terima" class="form-control @error('qty_terima') is-invalid @enderror" placeholder="Masukkan Quantity yang akan dikirim" value="{{ old('qty_terima', 1) }}">
                            @error('qty_terima')
@@ -101,7 +105,7 @@
                            @enderror
                         </div>
                         <div class="form-group">
-                           <label for="qty_sisa">Quantity Sisa</label>
+                           <label for="qty_sisa">Estimasi Sisa</label>
                            <input type="text" name="qty_sisa" id="qty_sisa" placeholder="Quantity Sisa" class="form-control @error('qty_sisa') is-invalid @enderror" disabled>
                            @error('qty_sisa')
                            <small class="invalid-feedback">{{ $message }}</small>
@@ -174,6 +178,7 @@
          .done(function (response) {
             data = response.data;
             $("#qty_pembelian").val(parseInt(data.qty_beli))
+            $("#qty_belum_kirim").val(data.qty_sisa)
             $("#nama_barang").val(data.nama_barang)
 
             calculateSisa();
@@ -191,14 +196,14 @@
    });
 
    function calculateSisa() {
-      let qtyPembelian = $("#qty_pembelian").val();
+      let qtyPembelian = $("#qty_belum_kirim").val();
       let qtyKirim = $("#qty_terima").val();
       let qtySisa = parseInt(qtyPembelian) - parseInt(qtyKirim);
       $("#qty_sisa").val(qtySisa);
    }
 
    function checkSisa() {
-      let qtyPembelian = $("#qty_pembelian").val();
+      let qtyPembelian = $("#qty_belum_kirim").val();
       let qtyKirim = $("#qty_terima").val();
       let qtySisa = parseInt(qtyPembelian) - parseInt(qtyKirim);
       if (qtyKirim < 1) {
