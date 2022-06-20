@@ -74,9 +74,7 @@ class ProdukMasukController extends Controller
          $jumlah_barang_new = $jumlah_barang_db + $request->qty_terima;
          $query->update(['jumlah_barang' => $jumlah_barang_new]);
       } else {
-         $next_id      = DB::select("SHOW TABLE STATUS LIKE 'produk_masuk'")[0]->Auto_increment;
          $produkCreate = [
-            'produk_masuk_id' => ($next_id - 1),
             'kode_barang'     => $pembelian->kode_barang,
             'nama_barang'     => $pembelian->nama_barang,
             'satuan'          => $pembelian->satuan,
