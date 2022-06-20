@@ -58,6 +58,7 @@
                            <th>Nama Barang</th>
                            <th>Harga</th>
                            <th>Jumlah Barang</th>
+                           <th>Harga Total</th>
                            <th>Aksi </th>
                         </tr>
                      </thead>
@@ -69,6 +70,7 @@
                            <td>{{ $prod->nama_barang }}</td>
                            <td>{{ rupiah($prod->harga_satuan) }}</td>
                            <td>{{ $prod->jumlah_barang }}</td>
+                           <td>{{ total_harga($prod->harga_satuan, $prod->jumlah_barang) }}</td>
                            <td>
                               {{-- <a href="{{ route('produks.edit',$prod->id) }}">
                               <button class="btn btn-warning btn-sm">Edit</button>

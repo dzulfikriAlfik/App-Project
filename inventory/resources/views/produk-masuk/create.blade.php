@@ -111,12 +111,12 @@
                            <small class="invalid-feedback">{{ $message }}</small>
                            @enderror
                         </div>
-                        <div class="form-group" id="keteranganHtml">
-                           <label for="keterangan">Keterangan <span class="text-red">*</span></label>
+                        <div class="form-group">
+                           <label for="keterangan" id="info">Keterangan <span class="text-red">*</span></label>
                            <select name="keterangan" id="keterangan" class="form-control @error('keterangan') is-invalid @enderror">
                               <option value="">-- Pilih Keterangan --</option>
                               <option value="Sisa akan dikirim pada penerimaan berikutnya">Sisa akan dikirim pada penerimaan berikutnya</option>
-                              <option value="Qty order telah terpenuhi">Qty order telah terpenuhi</option>
+                              <option style="display: none" value="Qty order telah terpenuhi">Qty order telah terpenuhi</option>
                               <option value="Stock supplier tidak memenuhi Qty Order">Stock supplier tidak memenuhi Qty Order</option>
                            </select>
                            @error('keterangan')
@@ -215,11 +215,17 @@
       }
 
       if (qtySisa == 0) {
-         $("#keterangan").attr("readonly", true);
+         // $("#keterangan").attr("readonly", true);
          $("#keterangan option[value='Qty order telah terpenuhi']").prop("selected", true)
+         // $("#keterangan").val("Qty order telah terpenuhi")
+         $("#keterangan").hide()
+         $("#info").html("Quantity Sudah Terpenuhi")
       } else {
-         $("#keterangan").val("");
-         $("#keterangan").attr("readonly", false);
+         $("#info").html(`Keterangan <span class="text-red">*</span>`)
+         $("#keterangan").show()
+         $("#keterangan option[value='']").prop("selected", true)
+         // $("#keterangan").val("");
+         // $("#keterangan").attr("readonly", false);
       }
    }
 
