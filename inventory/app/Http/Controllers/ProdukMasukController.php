@@ -95,9 +95,14 @@ class ProdukMasukController extends Controller
     * @param  int  $id
     * @return \Illuminate\Http\Response
     */
-   public function show($id)
+   public function show(ProdukMasuk $produk_masuk)
    {
-      //
+      $data = [
+         "title"     => "Edit Data Produk Masuk",
+         "pembelian" => Pembelian::find($produk_masuk->pembelian_id),
+         "produk_masuk" => $produk_masuk
+      ];
+      return view('produk-masuk.detail', $data);
    }
 
    /**
@@ -106,7 +111,7 @@ class ProdukMasukController extends Controller
     * @param  int  $id
     * @return \Illuminate\Http\Response
     */
-   public function edit($id)
+   public function edit(ProdukMasuk $produk_masuk)
    {
       //
    }

@@ -23,15 +23,29 @@
 </div>
 <!-- /.content-header -->
 
-<section class="content">
+<div class="container-fluid">
+   <div class="row">
+      <div class="col-md-12">
+         @if (session()->has('success'))
+         <div class="alert alert-info alert-dismissible fade show" role="alert">
+            <strong>Success! </strong>{{ session('success') }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+               <span aria-hidden="true">&times;</span>
+            </button>
+         </div>
+         @endif
+      </div>
+   </div>
+</div>
 
+<section class="content">
    <div class="container-fluid">
       <div class="row">
          <div class="col-md-12">
             <div class="card">
                <div class="card-header d-flex justify-content-between">
                   <h3 class="card-title">Users</h3>
-                  <a href="{{ route("users.create") }}" class="btn btn-primary btn-sm ml-auto">Tambah</a>
+                  {{-- <a href="{{ route("users.create") }}" class="btn btn-primary btn-sm ml-auto">Tambah</a> --}}
                </div>
                <!-- /.card-header -->
                <div class="card-body">
@@ -42,6 +56,7 @@
                            <th>Nama</th>
                            <th>Username</th>
                            <th>Email</th>
+                           <th>Role</th>
                            <th>Aksi </th>
                         </tr>
                      </thead>
@@ -52,13 +67,16 @@
                            <td>{{ $user->name}}</td>
                            <td>{{ $user->username }}</td>
                            <td>{{ $user->email }}</td>
+                           <td>{{ $user->role }}</td>
                            <td>
-                              <a href="#" class="btn btn-sm btn-warning">Edit</a>
-                              <form method="POST" action="#" class="d-inline">
+                              {{-- <a href="#" class="btn btn-sm btn-warning">Edit</a> --}}
+                              @if ($user->role == 'admin-produksi')
+                              <form method="POST" action="{{ route('users.destroy', $user->id) }}" class="d-inline">
                                  @csrf
                                  @method('DELETE')
-                                 <button class="btn btn-sm btn-danger">Hapus</button>
+                                 <button onclick="return confirm('Yakin ingin hapus data ini?')" class="btn btn-sm btn-danger">Hapus</button>
                               </form>
+                              @endif
                            </td>
                         </tr>
                         @endforeach

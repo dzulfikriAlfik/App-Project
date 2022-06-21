@@ -18,7 +18,7 @@ class ProdukKeluarController extends Controller
    public function index()
    {
       $data = [
-         "title" => "Produk Keluar",
+         "title"         => "Produk Keluar",
          "produk_keluar" => ProdukKeluar::all()
       ];
       return view("produk-keluar.index", $data);
@@ -50,7 +50,7 @@ class ProdukKeluarController extends Controller
    public function create()
    {
       $data = [
-         "title"     => "Tambah Barang Keluar",
+         "title"   => "Tambah Barang Keluar",
          "produks" => Produk::all()
       ];
       // dd($data);
@@ -67,14 +67,14 @@ class ProdukKeluarController extends Controller
    {
       $rules = [
          'tanggal_keluar' => 'required',
-         'produk_id'   => 'required',
-         'qty_kirim'   => 'required',
+         'produk_id'      => 'required',
+         'qty_kirim'      => 'required',
       ];
 
       $produk = Produk::find($request->produk_id);
       // dd($produk);
 
-      $qty_produk    = $produk->jumlah_barang;
+      $qty_produk = $produk->jumlah_barang;
 
       // $rules['qty_kirim']     = 'required|numeric|max:' . $qty_produk;
 
@@ -82,7 +82,7 @@ class ProdukKeluarController extends Controller
 
       $qty_sisa = $qty_produk - $request->qty_kirim;
 
-      $validatedData['qty_sisa'] = $qty_sisa;
+      $validatedData['qty_sisa']    = $qty_sisa;
       $validatedData['kode_barang'] = $produk->kode_barang;
       $validatedData['nama_barang'] = $produk->nama_barang;
 
@@ -112,9 +112,15 @@ class ProdukKeluarController extends Controller
     * @param  int  $id
     * @return \Illuminate\Http\Response
     */
-   public function edit($id)
+   public function edit(ProdukKeluar $produk_keluar)
    {
-      //
+      $data = [
+         "title"         => "Tambah Barang Keluar",
+         "produk"       => Produk::find($produk_keluar->produk_id),
+         "produk_keluar" => $produk_keluar
+      ];
+      // dd($data);
+      return view('produk-keluar.edit', $data);
    }
 
    /**

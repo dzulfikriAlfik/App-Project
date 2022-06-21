@@ -73,7 +73,7 @@
                            <td>{{ $produk->qty_kirim }}</td>
                            <td>{{ $produk->qty_sisa }}</td>
                            <td>
-                              <a href="{{ route('produk-keluar.update', $produk->id) }}" class="btn btn-sm btn-warning">Edit</a>
+                              {{-- <a href="{{ route('produk-keluar.edit', $produk->id) }}" class="btn btn-sm btn-warning">Edit</a> --}}
                               <form method="POST" action="{{ route('produk-keluar.destroy', $produk->id) }}" class="d-inline">
                                  @csrf
                                  @method('DELETE')

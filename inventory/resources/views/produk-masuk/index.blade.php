@@ -74,7 +74,7 @@
                            <td>{{ tanggal_format($produk->tanggal_masuk) }}</td>
                            <td>{{ $produk->keterangan }}</td>
                            <td>
-                              <a href="#" class="btn btn-sm btn-warning">Edit</a>
+                              <a href="{{ route('produk-masuk.show',$produk->id) }}" class="btn btn-sm btn-info">Detail</a>
                               <form method="POST" action="{{ route('produk-masuk.destroy', $produk->id) }}" class="d-inline">
                                  @csrf
                                  @method('DELETE')

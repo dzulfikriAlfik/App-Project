@@ -15,13 +15,28 @@
          <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
                <li class="breadcrumb-item"><a href="#">Data Barang</a></li>
-               <li class="breadcrumb-item active">Tambah Data Barang Keluar</li>
+               <li class="breadcrumb-item active">Edit Data Barang Keluar</li>
             </ol>
          </div><!-- /.col -->
       </div><!-- /.row -->
    </div><!-- /.container-fluid -->
 </div>
 <!-- /.content-header -->
+
+<div class="container-fluid">
+   <div class="row">
+      <div class="col-md-12">
+         @if (session()->has('error'))
+         <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>Success! </strong>{{ session('error') }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+               <span aria-hidden="true">&times;</span>
+            </button>
+         </div>
+         @endif
+      </div>
+   </div>
+</div>
 
 <section class="content">
    <div class="row">
@@ -39,7 +54,7 @@
                         <div class="form-group">
                            <label>Tanggal Keluar</label>
                            <div class="input-group date" id="reservationdate" data-target-input="nearest">
-                              <input type="text" name="tanggal_keluar" value="{{ old('tanggal_keluar') }}" class="form-control datetimepicker-input @error('tanggal_keluar') is-invalid @enderror" data-target="#reservationdate" />
+                              <input type="text" name="tanggal_keluar" value="{{ old('tanggal_keluar',$produk_keluar->tanggal_keluar) }}" class="form-control datetimepicker-input @error('tanggal_keluar') is-invalid @enderror" data-target="#reservationdate" />
                               <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
                                  <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                               </div>
@@ -49,33 +64,21 @@
                            </div>
                         </div>
                         <div class="form-group">
-                           <label for="pembelian_id">No. PO <span class="text-red">*</span></label>
-                           <select name="pembelian_id" id="pembelian_id" class="form-control @error('pembelian_id') is-invalid @enderror">
-                              <option value="">-- Pilih No. PO --</option>
-                              @foreach ($pembelian as $pemb)
-                              @if ($pemb->qty_terkirim < $pemb->qty_sisa)
-                                 @if (old('pembelian_id') == $pemb->id)
-                                 <option value="{{ $pemb->id }}" selected>{{ $pemb->no_po }}</option>
-                                 @else
-                                 <option value="{{ $pemb->id }}">{{ $pemb->no_po }}</option>
-                                 @endif
-                                 @else
-
-                                 @endif
-                                 @endforeach
-                           </select>
-                           @error('pembelian_id')
+                           <label for="produk_id">Produk</label>
+                           <input type="hidden" name="produk_id" id="produk_id" value="{{ $produk->id }}" class="form-control" disabled>
+                           <input type="text" name="no_po" id="no_po" value="{{ $produk->kode_barang }}" class="form-control" disabled>
+                           @error('no_po')
                            <small class="invalid-feedback">{{ $message }}</small>
                            @enderror
                         </div>
                         {{-- ajax --}}
                         <div class="form-group">
-                           <label for="qty_pembelian">Quantity Pembelian</label>
-                           <input type="text" name="qty_pembelian" id="qty_pembelian" value="{{ old('qty_pembelian') }}" class="form-control" disabled>
+                           <label for="jumlah_barang">Stok Barang</label>
+                           <input type="text" name="jumlah_barang" id="jumlah_barang" value="{{ old('jumlah_barang') }}" class="form-control" disabled>
                         </div>
                         {{-- End ajax --}}
                         <div class="form-group">
-                           <label for="qty_kirim">Quantity Kirim <span class="text-red">*</span></label>
+                           <label for="qty_kirim">Quantity Keluar <span class="text-red">*</span></label>
                            <input type="text" name="qty_kirim" id="qty_kirim" class="form-control @error('qty_kirim') is-invalid @enderror" placeholder="Masukkan Quantity yang akan dikirim" value="{{ old('qty_kirim', 1) }}">
                            @error('qty_kirim')
                            <small class="invalid-feedback">{{ $message }}</small>
@@ -111,6 +114,14 @@
 <!-- Tempusdominus Bootstrap 4 -->
 <script src="{{ asset('assets/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js') }}"></script>
 <script>
+   // on ready function
+   $(function () {
+      let produk_id = $("#produk_id").val();
+      if (produk_id) {
+         getListProduk();
+      }
+   });
+
    //Date picker
    $('#reservationdate').datetimepicker({
       format: "Y-MM-DD",
@@ -119,23 +130,22 @@
    });
 
    $("#button-add").on("click", function (e) {
-      if ($("#pembelian_id").val() == "") {
+      if ($("#produk_id").val() == "") {
          e.preventDefault();
-         commonJS.swalError("No. PO tidak boleh kosong");
+         commonJS.swalError("Produk tidak boleh kosong");
       }
    });
 
-
-   $("#pembelian_id").on("change", function () {
-      let pembelian_id = $("#pembelian_id").val()
+   function getListProduk() {
+      let produk_id = $("#produk_id").val()
       $.ajax({
-            url: `/list_pembelian/${pembelian_id}`,
+            url: `/list_produk/${produk_id}`,
             method: "GET",
             dataType: "json",
          })
          .done(function (response) {
             data = response.data;
-            $("#qty_pembelian").val(data.qty_sisa)
+            $("#jumlah_barang").val(data.jumlah_barang)
 
             calculateSisa();
             checkSisa();
@@ -147,24 +157,28 @@
 
 
          });
+   }
+
+   $("#produk_id").on("change", function () {
+      getListProduk();
    });
 
    function calculateSisa() {
-      let qtyPembelian = $("#qty_pembelian").val();
+      let qtyPembelian = $("#jumlah_barang").val();
       let qtyKirim = $("#qty_kirim").val();
       let qtySisa = parseInt(qtyPembelian) - parseInt(qtyKirim);
       $("#qty_sisa").val(qtySisa);
    }
 
    function checkSisa() {
-      let qtyPembelian = $("#qty_pembelian").val();
+      let qtyPembelian = $("#jumlah_barang").val();
       let qtyKirim = $("#qty_kirim").val();
       let qtySisa = parseInt(qtyPembelian) - parseInt(qtyKirim);
       if (qtyKirim < 1) {
          $("#qty_kirim").val(1);
          calculateSisa()
-      } else if (qtyKirim > qtyPembelian) {
-         $("#qty_kirim").val(qtyPembelian);
+      } else if (parseInt(qtyKirim) > parseInt(qtyPembelian)) {
+         $("#qty_kirim").val(parseInt(qtyPembelian));
          calculateSisa();
       }
    }

@@ -2,6 +2,8 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\AdminGudangMiddleware;
+use App\Http\Middleware\AdminProduksiMiddleware;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -62,5 +64,7 @@ class Kernel extends HttpKernel
       'signed'           => \Illuminate\Routing\Middleware\ValidateSignature::class,
       'throttle'         => \Illuminate\Routing\Middleware\ThrottleRequests::class,
       'verified'         => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+      'admingudang' => \App\Http\Middleware\AdminGudangMiddleware::class,
+      'adminproduksi' => \App\Http\Middleware\AdminProduksiMiddleware::class,
    ];
 }

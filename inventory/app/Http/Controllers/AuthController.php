@@ -37,9 +37,13 @@ class AuthController extends Controller
       ]);
 
       if (Auth::attempt($credentials)) {
+         $user = User::all()->where('email', $credentials["email"])->first();
+         $role = $user->role;
+         $name = $user->name;
          $request->session()->regenerate();
-
-         return redirect()->intended('/dashboard');
+         $request->session()->put('role', $role);
+         $request->session()->put('name', $name);
+         return redirect('/dashboard');
       }
 
       return back()->with('error', "Login tidak valid");
@@ -65,7 +69,7 @@ class AuthController extends Controller
 
       User::create($validatedData);
 
-      return redirect('login')->with('success', ' User baru berhasil di registrasi');
+      return redirect('/')->with('success', ' User baru berhasil di registrasi');
    }
 
    public function logout(Request $request)

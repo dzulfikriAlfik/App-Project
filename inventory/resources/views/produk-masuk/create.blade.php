@@ -52,7 +52,7 @@
                   <div class="row d-flex justify-content-around">
                      <div class="col-md-5">
                         <div class="form-group">
-                           <label>Tanggal Masuk</label>
+                           <label>Tanggal Terima</label>
                            <div class="input-group date" id="reservationdate" data-target-input="nearest">
                               <input type="text" name="tanggal_masuk" value="{{ old('tanggal_masuk') }}" class="form-control datetimepicker-input @error('tanggal_masuk') is-invalid @enderror" data-target="#reservationdate" />
                               <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">

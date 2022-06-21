@@ -105,11 +105,11 @@ class PembelianController extends Controller
     * @param  int  $id
     * @return \Illuminate\Http\Response
     */
-   public function edit($id)
+   public function edit(Pembelian $pembelian)
    {
       $data = [
          "title"     => "Edit Data Pembelian",
-         "pembelian" => Pembelian::findOrFail($id),
+         "pembelian" => $pembelian,
          "suppliers" => Supplier::all()
       ];
       return view("pembelian.edit", $data);
@@ -132,11 +132,13 @@ class PembelianController extends Controller
          'kode_barang'   => 'required|max:50|unique:pembelian,kode_barang,' . $pembelian->id . ',id',
          'nama_barang'   => 'required|max:50',
          'satuan'        => 'required|max:30',
-         'qty_beli'      => 'required|numeric',
+         'qty_beli'      => 'required|numeric|min:' . $pembelian->qty_beli,
          'harga_satuan'  => 'required|numeric',
       ];
 
       $validatedData = $request->validate($rules, ServicesController::costomMessageValidation());
+
+      $validatedData['qty_sisa'] = ($pembelian->qty_sisa + ($request->qty_beli - $pembelian->qty_beli));
 
       $pembelian->update($validatedData);
 
