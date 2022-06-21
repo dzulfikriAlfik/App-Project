@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Jun 18, 2022 at 06:23 AM
+-- Generation Time: Jun 21, 2022 at 02:39 PM
 -- Server version: 5.7.36
 -- PHP Version: 7.4.26
 
@@ -24,194 +24,35 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `failed_jobs`
---
-
-DROP TABLE IF EXISTS `failed_jobs`;
-CREATE TABLE IF NOT EXISTS `failed_jobs` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `uuid` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `connection` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `failed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `migrations`
---
-
-DROP TABLE IF EXISTS `migrations`;
-CREATE TABLE IF NOT EXISTS `migrations` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `batch` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `migrations`
---
-
-INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
-(1, '2014_10_12_000000_create_users_table', 1),
-(2, '2014_10_12_100000_create_password_resets_table', 1),
-(3, '2019_08_19_000000_create_failed_jobs_table', 1),
-(4, '2021_07_10_181705_create_posts_table', 1),
-(5, '2021_07_22_133128_create_barang_keluars_table', 2),
-(6, '2021_07_22_134754_barang_keluar', 2),
-(7, '2021_07_22_135503_creat_barangkeluat_table', 2),
-(8, '2021_07_27_154019_create_barang_keluars_table', 3),
-(9, '2021_07_27_160725_create_pengeluarans_table', 4),
-(10, '2021_08_10_134758_create_pembelians_table', 5);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `password_resets`
---
-
-DROP TABLE IF EXISTS `password_resets`;
-CREATE TABLE IF NOT EXISTS `password_resets` (
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `pegawai`
---
-
-DROP TABLE IF EXISTS `pegawai`;
-CREATE TABLE IF NOT EXISTS `pegawai` (
-  `pegawai_id` int(11) NOT NULL,
-  `pegawai_nama` varchar(50) NOT NULL,
-  `pegawai_jabatan` varchar(50) NOT NULL,
-  `pegawai_umur` int(11) NOT NULL,
-  `pegawai_alamat` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `pegawai`
---
-
-INSERT INTO `pegawai` (`pegawai_id`, `pegawai_nama`, `pegawai_jabatan`, `pegawai_umur`, `pegawai_alamat`) VALUES
-(0, 'haryadi', 'it support', 18, 'bddjd');
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `pembelian`
 --
 
 DROP TABLE IF EXISTS `pembelian`;
 CREATE TABLE IF NOT EXISTS `pembelian` (
   `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `tanggal_po` datetime NOT NULL,
   `no_po` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `supplier_id` int(11) NOT NULL,
-  `produk_id` int(11) NOT NULL,
-  `qty` int(11) NOT NULL,
+  `supplier_name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `kode_barang` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nama_barang` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `satuan` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `qty_beli` int(11) NOT NULL,
+  `qty_sisa` int(11) NOT NULL,
+  `harga_satuan` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `pembelian`
 --
 
-INSERT INTO `pembelian` (`id`, `no_po`, `supplier_id`, `produk_id`, `qty`, `created_at`, `updated_at`) VALUES
-(6, 'PO-001', 9, 1, 1, '2022-06-17 21:02:08', '2022-06-17 22:55:24'),
-(8, 'PO-002', 7, 1, 1, '2022-06-17 21:10:55', '2022-06-17 22:55:53'),
-(10, 'asdf', 7, 2, 10, '2022-06-17 22:25:45', '2022-06-17 22:25:45');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `pengeluaran`
---
-
-DROP TABLE IF EXISTS `pengeluaran`;
-CREATE TABLE IF NOT EXISTS `pengeluaran` (
-  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `nama_toko` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `no_surat_jalan` int(11) NOT NULL,
-  `alamat_toko` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `nama_barang` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `qty` int(11) NOT NULL,
-  `keterangan` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `harga_satuan` double NOT NULL,
-  `jumlah_total` double NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `pengeluaran`
---
-
-INSERT INTO `pengeluaran` (`id`, `nama_toko`, `no_surat_jalan`, `alamat_toko`, `nama_barang`, `qty`, `keterangan`, `harga_satuan`, `jumlah_total`, `created_at`, `updated_at`) VALUES
-(16, 'Toko Surya', 1, 'bandung', 'Sementigaroda', 5, '5 @ 50 KG', 55000, 275000, '2021-08-14 03:56:18', '2021-08-14 03:56:18'),
-(17, 'Toko Surya', 2, 'Toko Surya', 'BataMerah', 500, '500 PCS', 1800, 900000, '2021-08-14 04:36:16', '2021-08-14 04:36:16'),
-(18, 'tb', 5, 'tb', 'Sementigaroda', 5, '100000', 5, 25, '2021-08-14 05:53:03', '2021-08-14 05:53:03'),
-(19, 'tb', 5, 'tb', 'Sementigaroda', 5, '100000', 5, 25, '2021-08-14 05:53:05', '2021-08-14 05:53:05');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `permintaan_produk`
---
-
-DROP TABLE IF EXISTS `permintaan_produk`;
-CREATE TABLE IF NOT EXISTS `permintaan_produk` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `kode_barang` varchar(50) NOT NULL,
-  `nama_barang` varchar(50) NOT NULL,
-  `harga_barang` int(11) NOT NULL,
-  `jumlah_barang` int(11) NOT NULL,
-  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `posts`
---
-
-DROP TABLE IF EXISTS `posts`;
-CREATE TABLE IF NOT EXISTS `posts` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `no_penerimaan` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `kode` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `supplier_id` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `nama_barang` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `satuan` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `qty_po` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `qty_penerimaan` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `keterangan` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `no_po` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `posts`
---
-
-INSERT INTO `posts` (`id`, `no_penerimaan`, `kode`, `supplier_id`, `nama_barang`, `satuan`, `qty_po`, `qty_penerimaan`, `keterangan`, `no_po`, `created_at`, `updated_at`) VALUES
-(16, 'M00021', 'ST', 'JAKARTA', 'Semen tiga roda', 'KG', '200', '100', '100 @ 50 kg', '2021-01-21', '2021-08-14 03:39:41', '2021-08-14 03:39:41'),
-(17, 'M0002', 'BM', 'JAKARTA', 'Bata Merah', 'PCS', '1000', '500', '500 PCS', '2021-01-22', '2021-08-14 03:41:26', '2021-08-14 03:41:26'),
-(18, 'M0003', 'GTJ', 'JATIWANGI', 'Genteng', 'PCS', '2000', '1500', '1500 PCS', '2021-01-23', '2021-08-14 03:42:47', '2021-08-14 03:42:47'),
-(19, 'M0004', 'BS10', 'JAKARTA', 'Besi Beton', 'OCS', '100', '50', '50 PCS', '2021-01-24', '2021-08-14 03:45:13', '2021-08-14 03:45:13'),
-(20, 'M0006', 'SL', 'BANDUNG', 'Selang 10', 'ROLL', '25', '25', '25 ROLL', '2021-01-26', '2021-08-14 03:47:37', '2021-08-14 03:47:37');
+INSERT INTO `pembelian` (`id`, `tanggal_po`, `no_po`, `supplier_name`, `kode_barang`, `nama_barang`, `satuan`, `qty_beli`, `qty_sisa`, `harga_satuan`, `created_at`, `updated_at`) VALUES
+(1, '2022-06-23 00:00:00', 'PO-001', 'Toko Komputer Aceng', 'sp-laptop-01', 'Spare Part Laptop', 'Pcs', 110, 10, 50000, '2022-06-19 06:10:32', '2022-06-21 06:06:40'),
+(2, '2022-06-30 00:00:00', 'PO-002', 'Mall Mangga Dua AD5', 'pelindung-hp', 'Pelindung Handphone', 'Pcs', 30, 0, 20000, '2022-06-20 05:45:59', '2022-06-20 07:29:35'),
+(3, '2022-06-20 00:00:00', 'PO-003', 'Toko Aksesoris PC - Bang Jono', 'mouse-gaming', 'Mouse Gaming Logitech', 'Pcs', 15, 0, 125000, '2022-06-20 06:53:46', '2022-06-20 07:15:59'),
+(4, '2022-06-20 00:00:00', 'PO-004', 'Toko Komputer Aceng', 'rokok-elektrik', 'Rokok Elektrik', 'Unit', 10, 3, 300000, '2022-06-21 05:19:04', '2022-06-21 05:19:26');
 
 -- --------------------------------------------------------
 
@@ -222,6 +63,7 @@ INSERT INTO `posts` (`id`, `no_penerimaan`, `kode`, `supplier_id`, `nama_barang`
 DROP TABLE IF EXISTS `produk`;
 CREATE TABLE IF NOT EXISTS `produk` (
   `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `pembelian_id` int(11) NOT NULL,
   `kode_barang` varchar(50) NOT NULL,
   `nama_barang` varchar(50) NOT NULL,
   `satuan` varchar(50) NOT NULL,
@@ -236,9 +78,11 @@ CREATE TABLE IF NOT EXISTS `produk` (
 -- Dumping data for table `produk`
 --
 
-INSERT INTO `produk` (`id`, `kode_barang`, `nama_barang`, `satuan`, `harga_satuan`, `jumlah_barang`, `created_at`, `updated_at`) VALUES
-(1, 'laptop-01', 'Laptop', 'Pcs', 10000000, 12, '2022-06-18 02:50:59', '2022-06-18 05:55:53'),
-(2, 'mouse-01', 'Mouse', 'Pcs', 250000, 11, '2022-06-18 02:53:52', '2022-06-18 05:53:36');
+INSERT INTO `produk` (`id`, `pembelian_id`, `kode_barang`, `nama_barang`, `satuan`, `harga_satuan`, `jumlah_barang`, `created_at`, `updated_at`) VALUES
+(1, 1, 'sp-laptop-01', 'Spare Part Laptop', 'Pcs', 50000, 0, '2022-06-20 14:15:03', '2022-06-21 13:11:06'),
+(2, 2, 'pelindung-hp', 'Pelindung Handphone', 'Pcs', 20000, 0, '2022-06-20 14:15:32', '2022-06-20 15:03:19'),
+(3, 3, 'mouse-gaming', 'Mouse Gaming Logitech', 'Pcs', 125000, 5, '2022-06-20 14:15:59', '2022-06-21 13:23:28'),
+(4, 4, 'rokok-elektrik', 'Rokok Elektrik', 'Unit', 300000, 7, '2022-06-21 12:19:26', '2022-06-21 12:19:26');
 
 -- --------------------------------------------------------
 
@@ -249,14 +93,27 @@ INSERT INTO `produk` (`id`, `kode_barang`, `nama_barang`, `satuan`, `harga_satua
 DROP TABLE IF EXISTS `produk_keluar`;
 CREATE TABLE IF NOT EXISTS `produk_keluar` (
   `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `tanggal_keluar` datetime NOT NULL,
+  `produk_id` int(11) NOT NULL,
   `kode_barang` varchar(50) NOT NULL,
   `nama_barang` varchar(50) NOT NULL,
-  `harga_barang` int(11) NOT NULL,
-  `jumlah_barang` int(11) NOT NULL,
+  `qty_kirim` int(11) NOT NULL,
+  `qty_sisa` int(11) DEFAULT NULL,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=32 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `produk_keluar`
+--
+
+INSERT INTO `produk_keluar` (`id`, `tanggal_keluar`, `produk_id`, `kode_barang`, `nama_barang`, `qty_kirim`, `qty_sisa`, `created_at`, `updated_at`) VALUES
+(27, '2022-07-06 00:00:00', 2, 'pelindung-hp', 'Pelindung Handphone', 30, 0, '2022-06-20 15:03:19', '2022-06-20 15:03:19'),
+(28, '2022-06-20 00:00:00', 1, 'sp-laptop-01', 'Spare Part Laptop', 45, 15, '2022-06-20 15:04:50', '2022-06-20 15:04:50'),
+(29, '2022-06-21 00:00:00', 1, 'sp-laptop-01', 'Spare Part Laptop', 10, 5, '2022-06-21 13:10:44', '2022-06-21 13:10:44'),
+(30, '2022-06-21 00:00:00', 1, 'sp-laptop-01', 'Spare Part Laptop', 5, 0, '2022-06-21 13:11:06', '2022-06-21 13:11:06'),
+(31, '2022-06-21 00:00:00', 3, 'mouse-gaming', 'Mouse Gaming Logitech', 5, 5, '2022-06-21 13:23:28', '2022-06-21 13:23:28');
 
 -- --------------------------------------------------------
 
@@ -267,14 +124,27 @@ CREATE TABLE IF NOT EXISTS `produk_keluar` (
 DROP TABLE IF EXISTS `produk_masuk`;
 CREATE TABLE IF NOT EXISTS `produk_masuk` (
   `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `kode_barang` varchar(50) NOT NULL,
-  `nama_barang` varchar(50) NOT NULL,
-  `harga_barang` int(11) NOT NULL,
-  `jumlah_barang` int(11) NOT NULL,
+  `tanggal_masuk` datetime NOT NULL,
+  `pembelian_id` int(11) NOT NULL,
+  `qty_terima` int(11) NOT NULL,
+  `qty_sisa` int(11) DEFAULT NULL,
+  `keterangan` varchar(50) NOT NULL,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `produk_masuk`
+--
+
+INSERT INTO `produk_masuk` (`id`, `tanggal_masuk`, `pembelian_id`, `qty_terima`, `qty_sisa`, `keterangan`, `created_at`, `updated_at`) VALUES
+(1, '2022-06-20 00:00:00', 1, 10, 90, 'Sisa akan dikirim pada penerimaan berikutnya', '2022-06-20 14:15:03', '2022-06-20 14:15:03'),
+(2, '2022-06-20 00:00:00', 2, 5, 25, 'Sisa akan dikirim pada penerimaan berikutnya', '2022-06-20 14:15:32', '2022-06-20 14:15:32'),
+(3, '2022-06-20 00:00:00', 3, 10, 5, 'Stock supplier tidak memenuhi Qty Order', '2022-06-20 14:15:59', '2022-06-20 14:15:59'),
+(4, '2022-06-20 00:00:00', 1, 50, 40, 'Stock supplier tidak memenuhi Qty Order', '2022-06-20 14:17:28', '2022-06-20 14:17:28'),
+(5, '2022-06-20 00:00:00', 2, 25, 0, 'Qty order telah terpenuhi', '2022-06-20 14:29:35', '2022-06-20 14:29:35'),
+(6, '2022-06-22 00:00:00', 4, 7, 3, 'Sisa akan dikirim pada penerimaan berikutnya', '2022-06-21 12:19:26', '2022-06-21 12:19:26');
 
 -- --------------------------------------------------------
 
@@ -291,16 +161,17 @@ CREATE TABLE IF NOT EXISTS `supplier` (
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`supplier_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `supplier`
 --
 
 INSERT INTO `supplier` (`supplier_id`, `supplier_name`, `supplier_phone`, `supplier_address`, `created_at`, `updated_at`) VALUES
-(7, 'PT. Tjiwi Kimia Farma', '081325890111', 'Sumedang', '2022-06-17 14:22:48', '2022-06-17 14:36:27'),
-(8, 'PT. ABC', '082121885834', 'Jalan Cibiru Bandung', '2022-06-18 03:25:43', '2022-06-18 03:25:43'),
-(9, 'PT. Anugerah Perkasa', '081320477567', 'Rawamangung, Jakarta', '2022-06-18 03:26:07', '2022-06-18 03:26:07');
+(7, 'Toko Komputer Aceng', '081325890111', 'Sumedang', '2022-06-17 14:22:48', '2022-06-18 12:08:44'),
+(8, 'Toko Aksesoris PC - Bang Jono', '082121885834', 'Jalan Cibiru Bandung', '2022-06-18 03:25:43', '2022-06-18 12:09:08'),
+(9, 'Toko Anugerah Perkasa', '081320477567', 'Rawamangung, Jakarta', '2022-06-18 03:26:07', '2022-06-18 12:09:20'),
+(10, 'Mall Mangga Dua AD5', '089507436785', 'Mangga Dua, Jakarta', '2022-06-18 12:10:02', '2022-06-18 12:10:02');
 
 -- --------------------------------------------------------
 
@@ -314,12 +185,20 @@ CREATE TABLE IF NOT EXISTS `users` (
   `name` varchar(128) COLLATE utf8mb4_unicode_ci NOT NULL,
   `username` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email` varchar(128) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `phone` varchar(13) COLLATE utf8mb4_unicode_ci NOT NULL,
   `password` varchar(128) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `role` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'admin-produksi',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `name`, `username`, `email`, `password`, `role`, `created_at`, `updated_at`) VALUES
+(1, 'Haryadi', 'haryadi', 'haryadi@gmail.com', '$2y$10$CtFtlhraVMXffRvouUlCN.o238vPMOtwcFjHB1zAtGvXD0Ln/gvb6', 'admin-gudang', '2022-06-21 07:32:42', '2022-06-21 07:32:42'),
+(2, 'Deni Sumargo', 'deni', 'deni@gmail.com', '$2y$10$GACngdjlFvOwaHpU.ErgXOTssDWLiuANqUfQ0ET/64g3omZjRXQ1G', 'admin-produksi', '2022-06-21 07:08:09', '2022-06-21 07:08:09');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
