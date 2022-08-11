@@ -13,7 +13,8 @@ class ServicesController extends Controller
          'unique'   => ':attribute sudah digunakan',
          'numeric'  => 'input :attribute harus berupa angka',
          'string'   => 'input :attribute harus berupa huruf',
-         'min'      => ':attribute tidak boleh kurang dari quantity sebelumnya : :min'
+         'min'      => ':attribute tidak boleh kurang dari : :min',
+         'max'      => ':attribute tidak boleh lebih dari : :max'
       ];
       return $message;
    }
