@@ -1,0 +1,14 @@
+.swal-jdih>div{
+    font-size: 14px !important;
+    min-height: 0px !important;
+}
+
+.swal-jdih>div>.swal2-actions>button{
+    min-width: 100px !important;
+}
+.btn-confirm{
+    margin-left: 5px;
+}
+.btn-cancel{
+    margin-right: 5px;
+}
