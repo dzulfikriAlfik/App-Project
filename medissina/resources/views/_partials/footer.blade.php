@@ -6,7 +6,7 @@
         <div class="col-md-6 col-lg-4 mb-4 mb-sm-0">
           <div class="item_about">
             <a class="logo" href="{{ url('/') }}">
-              <img src="{{ asset('assets/images/logo-medissina.jpg') }}" alt="" />
+              <img src="{{ asset('assets/images/logo-medissina.png') }}" alt="" />
             </a>
             <p>
               TK Islam Medissina memiliki moto pendidikan anak usia dini sangatlah penting

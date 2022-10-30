@@ -27,7 +27,7 @@
   <link rel="stylesheet" href="{{ asset('sweetalert/style.css') }}">
   <!-- End layout styles -->
   {{-- <link rel="shortcut icon" href="{{ asset('') }}assets/images/favicon.png" /> --}}
-  <link rel="shortcut icon" href="{{ url('img/jdihn-favicon.png') }}?v={{ date('YmdHis') }}">
+  <link rel="shortcut icon" href="{{ url('assets/images/logo-medissina.png') }}">
   {{-- customcall --}}
   @yield('custom-header')
 </head>
@@ -90,6 +90,11 @@
   {{-- tempusdominus --}}
   <script src="{{ asset('assets/vendors/tempusdominus-bootstrap-4/tempusdominus-bootstrap-4.js') }}"></script>
   <!-- JQuery -->
+  <script>
+    const baseUrl = $("#base-url").html()
+    console.log("Base URL : ", baseUrl);
+
+  </script>
   @yield('jquery')
   <script src="{{ asset('js/common.js') }}"></script>
   <script src="{{ asset('jquery/navbar-cms.js') }}"></script>
@@ -103,11 +108,6 @@
   {{-- CKEditor --}}
   <!-- <script src="{{ asset('ckeditor/ckeditor.js')}}"></script> -->
   <!-- <script>CKEDITOR.replace('article-ckeditor');</script> -->
-  <script>
-    const baseUrl = $("#base-url").html()
-    console.log("Base URL : ", baseUrl);
-
-  </script>
   <script type="text/javascript">
     $.ajaxSetup({
       headers: {

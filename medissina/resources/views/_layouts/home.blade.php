@@ -14,7 +14,7 @@
 
   <title>TK Islam Medissina | {{ $title ?? "" }}</title>
   <!-- favicon -->
-  <link rel="shortcut icon" href="{{ asset('assets/images/logo-medissina.jpg') }}" type="image/x-icon" />
+  <link rel="shortcut icon" href="{{ asset('assets/images/logo-medissina.png') }}" type="image/x-icon" />
   <!-- Bootstrap 4.5 -->
   <link rel="stylesheet" href="{{ asset('assets/homepage/assets/css/bootstrap.min.css') }}" type="text/css" />
   <!-- animate -->
@@ -36,6 +36,7 @@
 
 <body>
   <div id="wrapper">
+    <div id="base-url" style="display: none">{{ url('/') }}</div>
 
     <div id="content">
       <!-- Start header -->
@@ -111,6 +112,11 @@
   <!-- main file -->
   <script src="{{ asset('assets/homepage/assets/js/main.js') }}" type="text/javascript"></script>
   <script src="{{ asset('sweetalert/sweetalert2.all.min.js') }}"></script>
+  <script>
+    const baseUrl = $("#base-url").html()
+    console.log("Base URL : ", baseUrl);
+
+  </script>
   {{-- custom jquery --}}
   @yield('jquery')
   {{-- custom jquery --}}

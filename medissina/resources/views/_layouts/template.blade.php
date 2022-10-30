@@ -46,14 +46,14 @@
 
   </script>
   {{-- JQuery --}}
-  @yield('jquery')
-  {{-- Blog Client --}}
-  <script src="{{ asset('jquery/blog-client.js') }}"></script>
   <script>
     const baseUrl = $("#base-url").html()
     console.log("Base URL : ", baseUrl);
 
   </script>
+  @yield('jquery')
+  {{-- Blog Client --}}
+  <script src="{{ asset('jquery/blog-client.js') }}"></script>
   <script type="text/javascript">
     $.ajaxSetup({
       headers: {

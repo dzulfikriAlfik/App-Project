@@ -8,7 +8,7 @@
     <!-- navbar -->
     <nav class="navbar navbar-expand-lg navbar-light px-sm-0">
       <a class="navbar-brand" href="{{ url('/') }}">
-        <img class="logo" src="{{ asset('assets/images/logo-medissina.jpg') }}" alt="logo" />
+        <img class="logo" src="{{ asset('assets/images/logo-medissina.png') }}" alt="logo" />
       </a>
 
       <button class="navbar-toggler menu ripplemenu" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

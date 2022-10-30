@@ -22,26 +22,29 @@ function readUserLogin() {
           // for edit profile page
           $("#previewPartnerImage").attr(
             "src",
-            `/storage/user-profile/user.png`
+            `${baseUrl}/storage/user-profile/user.png`
           );
-          $("#croppingImageUser").attr("src", `/storage/user-profile/user.png`);
+          $("#croppingImageUser").attr(
+            "src",
+            `${baseUrl}/storage/user-profile/user.png`
+          );
         } else {
           $("#user_image").attr(
             "src",
-            `/storage/user-profile/${response.data.user_image}`
+            `${baseUrl}/storage/user-profile/${response.data.user_image}`
           );
           $("#user_image_sm").attr(
             "src",
-            `/storage/user-profile/${response.data.user_image}`
+            `${baseUrl}/storage/user-profile/${response.data.user_image}`
           );
           // for edit profile page
           $("#previewPartnerImage").attr(
             "src",
-            `/storage/user-profile/${response.data.user_image}`
+            `${baseUrl}/storage/user-profile/${response.data.user_image}`
           );
           $("#croppingImageUser").attr(
             "src",
-            `/storage/user-profile/${response.data.user_image}`
+            `${baseUrl}/storage/user-profile/${response.data.user_image}`
           );
         }
         $("#user_name").html(`${response.data.user_name}`);
@@ -103,37 +106,4 @@ function logout() {
       // })
     }
   );
-  // console.log("Logout Clicked")
-  // const swalWithBootstrapButtons = Swal.mixin({
-  // customClass: {
-  //     confirmButton: 'btn btn-success',
-  //     cancelButton: 'btn btn-danger mr-2'
-  // },
-  // buttonsStyling: false,
-  // })
-
-  // swalWithBootstrapButtons.fire({
-  // title: 'Apakah anda yakin ingin logouts?',
-  // icon: 'warning',
-  // showCancelButton: true,
-  // confirmButtonClass: 'mr-2',
-  // confirmButtonText: 'Yes',
-  // cancelButtonText: 'No',
-  // reverseButtons: false,
-  // showLoaderOnConfirm: true,
-  // preConfirm: function () {
-  //     window.location.href = '/logout';
-  // },
-  // }).then((result) => {
-  // if (result.value) {
-  //     console.log("Success Logout")
-  // } else if (
-  //     // Read more about handling dismissals
-  //     result.dismiss === Swal.DismissReason.cancel
-  // ) {
-  //     swalWithBootstrapButtons.fire(
-  //     'Cancelled',
-  //     )
-  // }
-  // })
 }
