@@ -31,31 +31,13 @@
   @yield('custom-header')
 </head>
 
-<body class="sidebar-dark">
-  <div class="main-wrapper">
-    <div style="display: none" id="base-url">{{ url('/') }}</div>
+<body style="background: #FFFFFF;">
+  <div style="display: none" id="base-url">{{ url('/') }}</div>
 
-
-    {{-- Partial Sidebar --}}
-    @include('_partials.sidebar-cms')
-
-    <div class="page-wrapper">
-
-      {{-- Partial Header --}}
-      @include('_partials.header-cms')
-
-      <div class="page-content">
-
-        {{-- Partial Content --}}
-        @yield('content')
-
-      </div>
-
-      <!-- Partial Footer -->
-      @include('_partials.footer-cms')
-
+  <div class="container" style="margin-top:100px">
+    <div class="row col-12">
+      @yield('content')
     </div>
-
   </div>
 
   <!-- core:js -->
@@ -94,11 +76,11 @@
     console.log("Base URL : ", baseUrl);
 
   </script>
-  @yield('jquery')
   <script src="{{ asset('js/common.js') }}"></script>
   <script src="{{ asset('jquery/navbar-cms.js') }}"></script>
   <script src="{{ asset('js/commonMessage.js') }}"></script>
   <script src="{{ asset('js/commonAPI.js') }}"></script>
+  @yield('jquery')
   {{-- Bootstrap Datepicker --}}
   <script src="{{ asset('assets/js/datepicker.js') }}"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.js"></script>

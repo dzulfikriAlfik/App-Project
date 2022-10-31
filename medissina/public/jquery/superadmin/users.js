@@ -42,7 +42,7 @@ function buildTemplate(data, index, page, perPage) {
          <td>${data[index].user_email} <br/>
             <span style='color: #b1b1b1'>${data[index].user_phone}</span>
          </td>
-         <td>${data[index].created_dt} <br/>
+         <td>${data[index].created_date} <br/>
             ${data[index].user_banned == 1 ? "Blocked" : "Active"}
          </td>
          <td>${data[index].user_role}</td>

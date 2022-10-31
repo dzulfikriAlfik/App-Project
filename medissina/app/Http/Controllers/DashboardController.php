@@ -11,8 +11,14 @@ class DashboardController extends Controller
   {
     return view('Dashboard', ["title" => 'Dashboard']);
   }
+
   public function Cms()
   {
-    return redirect('/cms/dashboard');
+    return redirect(url('/cms/dashboard'));
+  }
+
+  public function gallery()
+  {
+    return view('Superadmin.gallery', ["title" => 'Gallery']);
   }
 }

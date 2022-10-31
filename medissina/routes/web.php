@@ -51,8 +51,6 @@ Route::get('/login', 'AuthController@Login');
 Route::group(['middleware' => ['login.middleware', 'superadmin.middleware']], function () {
   Route::prefix('cms')->group(function () {
     Route::get('/users', 'UsersController@Users');
-    Route::get('/trivias', 'TriviasController@Trivias');
-    Route::get('/systems', 'SystemsController@Systems');
   });
 });
 
@@ -62,6 +60,9 @@ Route::group(['middleware' => ['login.middleware']], function () {
   Route::get('/logout', 'AuthController@logout');
   Route::prefix('cms')->group(function () {
     Route::get('/dashboard', 'DashboardController@Dashboard');
-    Route::get('/video', 'VideoController@Video');
+    Route::get('/gallery', 'DashboardController@gallery');
   });
 });
+
+// Iframe
+Route::get('/iframe-gallery', 'IframeController@gallery');
