@@ -1,0 +1,29 @@
+/* style Header */
+#header {
+ background:yellow;
+ height: 80px;
+ width: 99%;
+ padding: 10px 0px 0px 10px;
+}
+/* style sidebar */
+#sidebar {
+ background:gray;
+ height: 520px;
+ width: 15%;
+ padding: 20px;
+}
+/* style content */
+#content {
+ height: 500px;
+ width: 75%;
+ float: right;
+ border:dotted gray 1px;
+ padding: 20px;
+}
+/* costum navigasi */
+.nav {
+ font-family: arial;
+}
+.a {
+ text-decoration: none;
+}

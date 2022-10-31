@@ -1,0 +1,429 @@
+/* -------------------------------------------------------------------------- */
+/*                                  CSS Reset                                 */
+/* -------------------------------------------------------------------------- */
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+   margin: 0;
+   padding: 0;
+   border: 0;
+   font-size: 100%;
+   font: inherit;
+   vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+   display: block;
+}
+body {
+   line-height: 1;
+   font-family: "Redressed", cursive;
+}
+ol,
+ul {
+   list-style: none;
+}
+blockquote,
+q {
+   quotes: none;
+}
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+   content: "";
+   content: none;
+}
+table {
+   border-collapse: collapse;
+   border-spacing: 0;
+}
+/* ------------------------------ End CSS Reset ----------------------------- */
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap");
+
+/* ---------------------------- jumbotron section --------------------------- */
+.jumbotron {
+   min-height: 100vh;
+   background-color: rgb(54, 58, 61);
+   background-image: url("https://rumahwebsiteku.com/undangan-nikah/agit/img/couple.jpg");
+   background-repeat: no-repeat;
+   background-size: 100vw;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+
+.jumbotron-name {
+   text-align: center;
+   color: #f1f1f1;
+   text-shadow: -3px 0 black, 0 2px black, 2px 0 black, 0 -3px black;
+   /* font-weight: bold;    */
+}
+
+.jumbotron-name p {
+   font-family: "Lovers Quarrel", cursive;
+   font-size: 7rem;
+   margin-bottom: 10px;
+   text-align: center;
+}
+
+.jumbotron-name span {
+   /* font-family: Arial, Helvetica, sans-serif; */
+   text-shadow: -2px 0 black, 0 1px black, 1px 0 black, 0 -2px black;
+   font-size: 1.5rem;
+}
+
+/* ---------------------------- ayat section --------------------------- */
+.ayat {
+   background-color: #f1f1f1;
+   padding: 70px;
+   box-sizing: border-box;
+}
+.ayat-card {
+   background-color: white;
+   border-radius: 20px;
+   padding: 30px;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+}
+
+.ayat-card p {
+   margin-top: 10px;
+   font-size: 1.5rem;
+   padding: 20px;
+}
+
+.ayat-card img {
+   width: 50vh;
+}
+
+/* ----------------------------- couple section ----------------------------- */
+.couple-img {
+   padding: 10px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+.couple-img img {
+   width: 300px;
+   height: 350px;
+   padding: 10px;
+   border-radius: 15px;
+   margin-top: 5vh;
+}
+
+/* --------------------------------- Footer --------------------------------- */
+#footer {
+   min-height: 60vh;
+   background-color: rgb(54, 58, 61);
+}
+/* tablet version */
+@media screen and (max-width: 834px) {
+   /* Jumbotron */
+   .jumbotron {
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+   }
+   .jumbotron-name p {
+      font-family: "Lovers Quarrel", cursive;
+      font-size: 5rem;
+      margin-bottom: 10px;
+   }
+
+   .jumbotron-name span {
+      /* font-family: Arial, Helvetica, sans-serif; */
+      font-size: 1.5rem;
+   }
+   /* Ayat */
+   .ayat {
+      padding: 30px;
+   }
+   .ayat-card img {
+      width: 40vw;
+   }
+   /* Couple */
+
+   /* Footer */
+   #footer {
+      min-height: 30vh;
+      background-color: rgb(54, 58, 61);
+   }
+}
+
+/* smartphone version */
+@media screen and (max-width: 480px) {
+   /* Jumbotron */
+   .jumbotron {
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+   }
+   /* Ayat */
+   .ayat {
+      padding: 20px;
+   }
+   .ayat-card {
+      padding: 10px;
+      font-family: "Redressed", sans-serif;
+      text-align: center;
+   }
+   .ayat-card img {
+      margin-top: 20px;
+      width: 40vw;
+   }
+   /* Couple */
+   .couple {
+      margin-bottom: 50px;
+   }
+   .couple-header {
+      text-align: center;
+      margin-top: 30px;
+      font-size: 2.5rem;
+      font-weight: bold;
+   }
+   .couple-card {
+      text-align: center;
+   }
+   .couple-img {
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+   }
+   .couple-img img {
+      width: 60vmin;
+      height: 35vmax;
+   }
+   .couple-text {
+      font-family: "Times New Roman", Times, serif;
+   }
+   .couple-text h1 {
+      font-family: "Redressed", cursive;
+      margin-top: 10px;
+      font-size: 2rem;
+      font-weight: bold;
+   }
+   .couple-text .divider {
+      width: 50%;
+      border-bottom: 2px solid black;
+      margin: 20px auto;
+   }
+   .couple-text h2 {
+      font-size: 1.7rem;
+   }
+   .couple-text h3 {
+      font-size: 1rem;
+      margin-top: 10px;
+   }
+   .couple-text a img {
+      margin-top: 5px;
+      width: 32px;
+      height: 32px;
+   }
+   /* Akad */
+   .akad {
+      font-family: Arial, Helvetica, sans-serif;
+   }
+   .akad-hero {
+      height: 50vh;
+      background-image: url("https://rumahwebsiteku.com/undangan-nikah/agit/img/couple-2.jpg");
+      background-size: 53vh;
+      background-position: 80% 5%;
+      background-repeat: no-repeat;
+   }
+   .akad-card-bg {
+      border-top: 2px solid #f1f1f1;
+      height: 180vh;
+      background-image: url("https://rumahwebsiteku.com/undangan-nikah/agit/img/couple-3.jpg");
+      background-position: 78% 5%;
+      background-repeat: no-repeat;
+   }
+   .akad-card {
+      text-align: center;
+      box-sizing: border-box;
+      height: 173vh;
+      border-radius: 20px;
+      margin: 20px 25px;
+      opacity: 0.7;
+      background-color: black;
+      color: white;
+      padding: 20px;
+   }
+   .akad-card .akad-card-header {
+      font-size: 2rem;
+      margin-top: 30px;
+      margin-bottom: 30px;
+   }
+   .akad-card p {
+      font-size: 1.2rem;
+      margin-top: 30px;
+      margin-bottom: 30px;
+      line-height: 25px;
+   }
+   .akad-card img.ring-icon {
+      margin-top: 20px;
+      width: 70px;
+   }
+   .akad-card p.p3,
+   .akad-card p.p6,
+   .akad-card p.p9 {
+      font-weight: bold;
+      margin-top: 15px;
+      font-size: 1.5rem;
+   }
+   .akad-card p.p4 {
+      margin-bottom: 5px;
+   }
+   .akad-card p.p10 {
+      font-weight: bold;
+      margin-bottom: 10px;
+   }
+   .akad-card a.akad-button {
+      background-color: rgb(119, 119, 119);
+      padding: 15px;
+      color: white;
+      text-decoration: none;
+      margin-top: 15px;
+      border-radius: 10px;
+   }
+   /* Countdown */
+   .countdown {
+      height: 100vh;
+   }
+   .countdown .countdown-card {
+      padding: 30px;
+      height: 300px;
+      background-color: white;
+      color: #333;
+   }
+   .countdown .countdown-card .bg-header {
+      border-top-left-radius: 20px;
+      border-top-right-radius: 20px;
+      height: 20vh;
+      background-image: url("https://rumahwebsiteku.com/undangan-nikah/agit/img/couple-4.jpg");
+      background-position: 63% 38%;
+   }
+   .countdown .countdown-card .card-inner {
+      padding: 20px;
+      background-color: rgb(54, 58, 61);
+      color: white;
+      border-bottom-left-radius: 20px;
+      border-bottom-right-radius: 20px;
+      text-align: center;
+   }
+   .countdown .countdown-card .card-inner .text-header {
+      font-family: "Lovers Quarrel", cursive;
+      font-size: 2.5rem;
+      margin: 15px auto;
+   }
+   .countdown .countdown-card .card-inner p {
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 25px;
+   }
+   .countdown-times {
+      margin-top: 30px;
+      display: flex;
+      font-size: 2rem;
+      justify-content: space-evenly;
+      margin-bottom: 30px;
+   }
+   .countdown-times .countdown-time span {
+      font-size: 1rem;
+   }
+   /* Footer */
+   #footer {
+      min-height: 30vh;
+      /* background-color: rgb(54, 58, 61); */
+   }
+}
