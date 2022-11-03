@@ -5,10 +5,10 @@ namespace App\Models;
 use App\Traits\Uuids;
 use Illuminate\Database\Eloquent\Model;
 
-class Gallery extends Model
+class ProfileLembaga extends Model
 {
   use Uuids;
-  protected $table        = 'gallery';
+  protected $table        = 'profile_lembaga';
   protected $primaryKey   = 'id';
   public    $incrementing = false;
   public    $timestamps   = false;

@@ -26,6 +26,12 @@
         </a>
       </li>
       <li class="nav-item">
+        <a href="{{ url('/cms/profile_lembaga') }}" class="nav-link">
+          <i class="link-icon" data-feather="airplay"></i>
+          <span class="link-title">Profil Lembaga</span>
+        </a>
+      </li>
+      <li class="nav-item">
         <a href="{{ url('/cms/gallery') }}" class="nav-link">
           <i class="link-icon" data-feather="camera"></i>
           <span class="link-title">Foto kegiatan</span>

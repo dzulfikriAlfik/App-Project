@@ -43,14 +43,7 @@
         </div>
         <div class="col-lg-6 ml-auto">
           <div class="title_sections_inner mb-0">
-            <p>Hi! We Are Annette Collier And Francis Ericksen, Two Individuals With A Passion For Creativity —
-              Creativity Makes Us Happy. We Truly Believe In The Transformative Power Of Illustration And Design
-              And Their Ability To Simplify Communications, Elevate Experiences, Engage And Inspire People
-              Everywhere.
-              <br>
-              <br>
-              Good Design And Good Relationships Come From Collaboration. We're Excited To Start A Visual
-              Dialogue, Learn About You, And Make Something Beautiful Together.</p>
+            {!! $lembaga->tentang_kami !!}
           </div>
         </div>
       </div>
@@ -78,74 +71,14 @@
                   <div class="card-header active" id="headingOne">
                     <h3 class="mb-0">
                       <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                        Tahun 2005 - 2010
+                        Tahun 2004 - Sekarang
                       </button>
                     </h3>
                   </div>
                   <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
                     <div class="card-body">
                       <p class="mb-0">
-                        Serenity Is Multi-Faceted Blockchain Based
-                        Ecosystem, Energy Retailer For The People,
-                        Focusing On The Promotion Of Sustainable Living,
-                        Renewable Energy Production And Smart Energy
-                        Grid Utility Services.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div class="card" data-aos="fade-up" data-aos-delay="100">
-                  <div class="card-header" id="headingTwo">
-                    <h3 class="mb-0">
-                      <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                        Tahun 2011 - 2016
-                      </button>
-                    </h3>
-                  </div>
-                  <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-                    <div class="card-body">
-                      <p>
-                        Serenity Is Multi-Faceted Blockchain Based
-                        Ecosystem, Energy Retailer For The People,
-                        Focusing On The Promotion Of Sustainable Living,
-                        Renewable Energy Production And Smart Energy
-                        Grid Utility Services.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div class="card" data-aos="fade-up" data-aos-delay="200">
-                  <div class="card-header" id="headingThree">
-                    <h3 class="mb-0">
-                      <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                        Tahun 2017 - 2019
-                      </button>
-                    </h3>
-                  </div>
-                  <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
-                    <div class="card-body">
-                      <p>
-                        We Aim To Become The Incubator For New Renewable
-                        Energy-Related Projects By Using The Power Of
-                        Crowd.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div class="card" data-aos="fade-up" data-aos-delay="300">
-                  <div class="card-header" id="headingFour">
-                    <h3 class="mb-0">
-                      <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                        Tahun 2020 - Sekarang
-                      </button>
-                    </h3>
-                  </div>
-                  <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
-                    <div class="card-body">
-                      <p>
-                        We Aim To Become The Incubator For New Renewable
-                        Energy-Related Projects By Using The Power Of
-                        Crowd.
+                        {!! $lembaga->sejarah !!}
                       </p>
                     </div>
                   </div>
@@ -176,11 +109,7 @@
               <div class="media-body">
                 <div class="title_sections mb-0">
                   <h2>Visi</h2>
-                  <p>
-                    In cursus turpis massa tincidunt. Eu nisl nunc mi ipsum faucibus. Viverra vitae congue eu
-                    consequat.
-                    Enim ut tellus elementum sagittis vitae et leo duis ut. Eget felis eget nunc lobortis.
-                  </p>
+                  {!! $lembaga->visi !!}
                 </div>
               </div>
             </div>
@@ -194,11 +123,7 @@
               <div class="media-body">
                 <div class="title_sections mb-0">
                   <h2>Misi</h2>
-                  <p>
-                    In cursus turpis massa tincidunt. Eu nisl nunc mi ipsum faucibus. Viverra vitae congue eu
-                    consequat.
-                    Enim ut tellus elementum sagittis vitae et leo duis ut. Eget felis eget nunc lobortis.
-                  </p>
+                  {!! $lembaga->misi !!}
                 </div>
               </div>
             </div>

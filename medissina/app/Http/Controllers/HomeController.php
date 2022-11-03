@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ProfileLembaga;
+
 class HomeController extends Controller
 {
   public function index()
   {
-    return view("Homepage.Index", [
+    return view("Homepage.index", [
       "title"  => "Homepage",
       "active" => "home-page"
     ]);
@@ -15,8 +17,9 @@ class HomeController extends Controller
   public function profileLembaga()
   {
     return view("Homepage.profile.index", [
-      "title"  => "Profil Lembaga",
-      "active" => "profil-lembaga"
+      "title"   => "Profil Lembaga",
+      "active"  => "profil-lembaga",
+      "lembaga" => ProfileLembaga::all()->first()
     ]);
   }
 
@@ -39,8 +42,9 @@ class HomeController extends Controller
   public function infoKontak()
   {
     return view("Homepage.info.kontak", [
-      "title"  => "Informasi Kontak",
-      "active" => "kontak"
+      "title"   => "Informasi Kontak",
+      "active"  => "kontak",
+      "lembaga" => ProfileLembaga::all()->first()
     ]);
   }
 

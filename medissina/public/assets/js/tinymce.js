@@ -1,30 +1,35 @@
-$(function() {
-  'use strict';
+$(function () {
+  "use strict";
 
-  //Tinymce editor
-  if ($("#tinymceExample").length) {
-    tinymce.init({
-      selector: '#tinymceExample',
-      height: 400,
-      theme: 'silver',
-      plugins: [
-        'advlist autolink lists link image charmap print preview hr anchor pagebreak',
-        'searchreplace wordcount visualblocks visualchars code fullscreen',
-      ],
-      toolbar1: 'undo redo | insert | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
-      toolbar2: 'print preview media | forecolor backcolor emoticons | codesample help',
+  function tinymceInit(selectorId) {
+    return tinymce.init({
+      selector: selectorId,
+      height: 250,
+      theme: "silver",
+      plugins: [""],
+      toolbar1:
+        "undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist",
+      toolbar2: "",
       image_advtab: true,
-      templates: [{
-          title: 'Test template 1',
-          content: 'Test 1'
-        },
-        {
-          title: 'Test template 2',
-          content: 'Test 2'
-        }
-      ],
-      content_css: []
+      templates: [],
+      content_css: [],
     });
   }
-  
+
+  //Tinymce editor
+  if ($("#visi").length) {
+    tinymceInit("#visi");
+  }
+
+  if ($("#misi").length) {
+    tinymceInit("#misi");
+  }
+
+  if ($("#tentang-kami").length) {
+    tinymceInit("#tentang-kami");
+  }
+
+  if ($("#sejarah").length) {
+    tinymceInit("#sejarah");
+  }
 });

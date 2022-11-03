@@ -334,6 +334,10 @@ class CommonJS {
     if (ASCIICode > 31 && (ASCIICode < 48 || ASCIICode > 57)) return false;
     return true;
   }
+
+  trimText(text) {
+    return text.replace(/\s+/g, " ").trim();
+  }
 }
 
 const commonJS = new CommonJS();

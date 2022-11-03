@@ -42,6 +42,9 @@ Route::get('/galery', 'HomeController@galery');
 Route::get('/register', 'AuthController@Register');
 Route::get('/404', 'NotFoundController@NotFound');
 
+// Kirim masukan
+Route::post('/kirim-masukan', 'DashboardController@sendMasukan');
+
 // // route login
 Route::get('/login_process/{role}', 'AuthController@login_process');
 Route::get('/login', 'AuthController@Login');
@@ -61,6 +64,8 @@ Route::group(['middleware' => ['login.middleware']], function () {
   Route::prefix('cms')->group(function () {
     Route::get('/dashboard', 'DashboardController@Dashboard');
     Route::get('/gallery', 'DashboardController@gallery');
+    Route::get('/profile_lembaga', 'DashboardController@profile_lembaga');
+    Route::post('/edit_profile_lembaga', 'DashboardController@editProfileLembaga');
   });
 });
 
