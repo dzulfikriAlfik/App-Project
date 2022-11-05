@@ -63,9 +63,31 @@ Route::group(['middleware' => ['login.middleware']], function () {
   Route::get('/logout', 'AuthController@logout');
   Route::prefix('cms')->group(function () {
     Route::get('/dashboard', 'DashboardController@Dashboard');
-    Route::get('/gallery', 'DashboardController@gallery');
+    // Profile Lembaga
     Route::get('/profile_lembaga', 'DashboardController@profile_lembaga');
     Route::post('/edit_profile_lembaga', 'DashboardController@editProfileLembaga');
+    // Gallery
+    Route::get('/gallery', 'GalleryController@index');
+    Route::get('/gallery/add', 'GalleryController@add');
+    Route::post('/gallery/post', 'GalleryController@store');
+    Route::get('/gallery/detail/{id}', 'GalleryController@show');
+    Route::get('/gallery/edit/{gallery}', 'GalleryController@edit');
+    Route::post('/gallery/update/{gallery}', 'GalleryController@update');
+    Route::get('/gallery/delete/{gallery}', 'GalleryController@destroy');
+    // Berita
+    Route::get('/berita', 'BeritaController@index');
+    Route::get('/berita/add', 'BeritaController@add');
+    Route::post('/berita/post', 'BeritaController@store');
+    Route::get('/berita/detail/{id}', 'BeritaController@show');
+    Route::get('/berita/edit/{berita}', 'BeritaController@edit');
+    Route::post('/berita/update/{berita}', 'BeritaController@update');
+    Route::get('/berita/delete/{berita}', 'BeritaController@destroy');
+    // Struktur Organisasi
+    Route::get('/struktur', 'DashboardController@struktur');
+    // Masukan
+    Route::get('/masukan', 'MasukanController@index');
+    Route::get('/masukan/detail/{masukan}', 'MasukanController@show');
+    Route::get('/masukan/delete/{masukan}', 'MasukanController@destroy');
   });
 });
 

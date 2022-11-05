@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Berita;
+use App\Models\Gallery;
 use App\Models\ProfileLembaga;
 
 class HomeController extends Controller
@@ -66,17 +68,31 @@ class HomeController extends Controller
 
   public function berita()
   {
-    return view("Homepage.berita", [
+    $berita = Berita::join("users", "berita.created_by", "=", "users.user_id")
+      ->select("berita.*", "users.user_id", "users.user_name", "users.user_image")
+      ->get();
+
+    $data = [
       "title"  => "Berita",
-      "active" => "berita"
-    ]);
+      "active" => "berita",
+      "berita" => $berita
+    ];
+
+    return view("Homepage.berita", $data);
   }
 
   public function galery()
   {
-    return view("Homepage.galery", [
-      "title"  => "Galeri",
-      "active" => "galeri"
-    ]);
+    $galleries = Gallery::join("users", "gallery.created_by", "=", "users.user_id")
+      ->select("gallery.*", "users.user_id", "users.user_name", "users.user_image")
+      ->get();
+
+    $data = [
+      "title"     => "Galeri",
+      "active"    => "galeri",
+      "galleries" => $galleries
+    ];
+
+    return view("Homepage.galery", $data);
   }
 }

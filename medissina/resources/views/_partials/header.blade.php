@@ -53,35 +53,39 @@
             </div>
           </li>
 
-          <li class="nav-item dropdown dropdown-hover {{ activeGroupClass("siswa") }}">
-            <a class="nav-link dropdown-toggle dropdown_menu" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Kesiswaan
-              <div class="icon_arrow">
-                <i class="tio chevron_right"></i>
-              </div>
-            </a>
-            <div class="dropdown-menu single-drop sm_dropdown" aria-labelledby="navbarDropdown" style="margin-top: -20px">
-              <ul class="dropdown_menu_nav" style="margin-top: 20px">
-                <li><a class="dropdown-item {{ activeClass($active, "kurikulum") }}" href="{{ url('/siswa/kurikulum') }}">Kurikulum dan Pembelajaran</a></li>
-                <li><a class="dropdown-item {{ activeClass($active, "ekskul") }}" href="{{ url('/siswa/ekskul') }}">Ekstrakulikuler</a></li>
-              </ul>
+          {{-- <li class="nav-item dropdown dropdown-hover {{ activeGroupClass("siswa") }}">
+          <a class="nav-link dropdown-toggle dropdown_menu" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Kesiswaan
+            <div class="icon_arrow">
+              <i class="tio chevron_right"></i>
             </div>
-          </li>
+          </a>
+          <div class="dropdown-menu single-drop sm_dropdown" aria-labelledby="navbarDropdown" style="margin-top: -20px">
+            <ul class="dropdown_menu_nav" style="margin-top: 20px">
+              <li><a class="dropdown-item {{ activeClass($active, "kurikulum") }}" href="{{ url('/siswa/kurikulum') }}">Kurikulum dan Pembelajaran</a></li>
+              <li><a class="dropdown-item {{ activeClass($active, "ekskul") }}" href="{{ url('/siswa/ekskul') }}">Ekstrakulikuler</a></li>
+            </ul>
+          </div>
+          </li> --}}
 
-          <li class="nav-item dropdown dropdown-hover {{ activeGroupClass("info") }}">
-            <a class="nav-link dropdown-toggle dropdown_menu" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Informasi
-              <div class="icon_arrow">
-                <i class="tio chevron_right"></i>
-              </div>
-            </a>
-            <div class="dropdown-menu single-drop sm_dropdown" aria-labelledby="navbarDropdown" style="margin-top: -20px">
-              <ul class="dropdown_menu_nav" style="margin-top: 20px">
-                <li><a class="dropdown-item {{ activeClass($active, "kontak") }}" href="{{ url('/info/kontak') }}">Kontak</a></li>
-                <li><a class="dropdown-item {{ activeClass($active, "beasiswa") }}" href="{{ url('/info/beasiswa') }}">Beasiswa</a></li>
-                <li><a class="dropdown-item {{ activeClass($active, "layanan") }}" href="{{ url('/info/layanan') }}">Layanan dan Fasilitas</a></li>
-              </ul>
+          {{-- <li class="nav-item dropdown dropdown-hover {{ activeGroupClass("info") }}">
+          <a class="nav-link dropdown-toggle dropdown_menu" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Informasi
+            <div class="icon_arrow">
+              <i class="tio chevron_right"></i>
             </div>
+          </a>
+          <div class="dropdown-menu single-drop sm_dropdown" aria-labelledby="navbarDropdown" style="margin-top: -20px">
+            <ul class="dropdown_menu_nav" style="margin-top: 20px">
+              <li><a class="dropdown-item {{ activeClass($active, "kontak") }}" href="{{ url('/info/kontak') }}">Kontak</a></li>
+              <li><a class="dropdown-item {{ activeClass($active, "beasiswa") }}" href="{{ url('/info/beasiswa') }}">Beasiswa</a></li>
+              <li><a class="dropdown-item {{ activeClass($active, "layanan") }}" href="{{ url('/info/layanan') }}">Layanan dan Fasilitas</a></li>
+            </ul>
+          </div>
+          </li> --}}
+
+          <li class="nav-item">
+            <a class="nav-link {{ activeClass($active, "kontak") }}" href="{{ url('/info/kontak') }}">Kontak</a>
           </li>
 
           <li class="nav-item">

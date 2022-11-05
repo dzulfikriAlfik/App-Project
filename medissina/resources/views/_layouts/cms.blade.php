@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="{{ asset('assets/vendors/core/core.css') }}">
   <!-- endinject -->
   <!-- plugin css for this page -->
-  <link rel="stylesheet" href="{{ asset('assets/vendors/datatables.net-bs4/dataTables.bootstrap4.css') }}">
+  <link href="{{ asset('assets/vendors/datatables-net/dataTables.bootstrap4.css') }}" rel="stylesheet" />
   <link rel="stylesheet" href="{{ asset('assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css') }}">
   <link rel="stylesheet" href="{{ asset('assets/vendors/tempusdominus-bootstrap-4/tempusdominus-bootstrap-4.min.css') }}" />
   <link rel="stylesheet" href="{{ asset('assets/vendors/sweetalert2/sweetalert2.min.css') }}">

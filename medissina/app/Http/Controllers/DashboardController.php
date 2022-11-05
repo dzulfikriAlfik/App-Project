@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Masukan;
-use App\Models\ProfileLembaga;
 use Illuminate\Http\Request;
+use App\Models\ProfileLembaga;
 
 class DashboardController extends Controller
 {
@@ -17,11 +17,6 @@ class DashboardController extends Controller
   public function Cms()
   {
     return redirect(url("/cms/dashboard"));
-  }
-
-  public function gallery()
-  {
-    return view("Superadmin.gallery", ["title" => "Gallery"]);
   }
 
   public function profile_lembaga()
@@ -67,12 +62,21 @@ class DashboardController extends Controller
     $masukan = Masukan::select("*")
       ->where("created_date", $today)->get();
 
-    if (count($masukan) >= 15) {
+    if (count($masukan) > 15) {
       return redirect(url('/info/kontak'))->with('failed', 'Gagal mengirim pesan karena terlalu banyak pesan masuk hari ini. Silahkan coba lagi besok');
     }
 
     Masukan::create($data);
 
     return redirect(url('/info/kontak'))->with('success', 'Berhasil mengirimkan pesan');
+  }
+
+  public function struktur()
+  {
+    $data = [
+      "title"   => "Struktur Organisasi"
+    ];
+
+    return view("Superadmin.struktur", $data);
   }
 }

@@ -32,9 +32,27 @@
         </a>
       </li>
       <li class="nav-item">
+        <a href="{{ url('/cms/struktur') }}" class="nav-link">
+          <i class="link-icon" data-feather="tag"></i>
+          <span class="link-title">Struktur Organisasi</span>
+        </a>
+      </li>
+      <li class="nav-item">
         <a href="{{ url('/cms/gallery') }}" class="nav-link">
           <i class="link-icon" data-feather="camera"></i>
           <span class="link-title">Foto kegiatan</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="{{ url('/cms/berita') }}" class="nav-link">
+          <i class="link-icon" data-feather="book-open"></i>
+          <span class="link-title">Berita</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="{{ url('/cms/masukan') }}" class="nav-link">
+          <i class="link-icon" data-feather="mail"></i>
+          <span class="link-title">Pesan Masukan</span>
         </a>
       </li>
       <li class="nav-item">

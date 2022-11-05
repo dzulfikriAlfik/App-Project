@@ -39,8 +39,8 @@
         <div class="col-12 col-md-2">
           <div class="item_links">
             <h4>Kesiswaan</h4>
-            <a class="nav-link" href="{{ url('/siswa/kurikulum') }}">Kurikulum</a>
-            <a class="nav-link" href="{{ url('/siswa/ekskul') }}">Ekstrakulikuler</a>
+            {{-- <a class="nav-link" href="{{ url('/siswa/kurikulum') }}">Kurikulum</a>
+            <a class="nav-link" href="{{ url('/siswa/ekskul') }}">Ekstrakulikuler</a> --}}
             <a class="nav-link" href="{{ url('/galery') }}">Galeri</a>
           </div>
         </div>
@@ -48,8 +48,8 @@
           <div class="item_links">
             <h4>Informasi</h4>
             <a class="nav-link" href="{{ url('/info/kontak') }}">Kontak</a>
-            <a class="nav-link" href="{{ url('/info/beasiswa') }}">Beasiswa</a>
-            <a class="nav-link" href="{{ url('/info/layanan') }}">Layanan dan Fasilitas</a>
+            {{-- <a class="nav-link" href="{{ url('/info/beasiswa') }}">Beasiswa</a>
+            <a class="nav-link" href="{{ url('/info/layanan') }}">Layanan dan Fasilitas</a> --}}
             <a class="nav-link" href="{{ url('/berita') }}">Berita</a>
           </div>
         </div>

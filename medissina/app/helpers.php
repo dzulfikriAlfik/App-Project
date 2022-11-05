@@ -6,11 +6,9 @@ function rupiah($angka)
   return $hasil_rupiah;
 }
 
-function humanize_number($num)
+function humanizeNumber($num)
 {
-
   if ($num > 1000) {
-
     $x = round($num);
     $x_number_format = number_format($x);
     $x_array = explode(',', $x_number_format);
@@ -26,7 +24,7 @@ function humanize_number($num)
   return $num;
 }
 
-function date_time_format($time)
+function dateTimeFormat($time)
 {
   $tanggal = date('Y-m-d-H-i-s', strtotime($time));
   $bulan = array(
@@ -44,7 +42,9 @@ function date_time_format($time)
     'Desember'
   );
   $pecahkan = explode('-', $tanggal);
-  return $pecahkan[2] . ' ' . $bulan[(int)$pecahkan[1]] . ' ' . $pecahkan[0] . ' ' . $pecahkan[3] . ':' . $pecahkan[4] . ':' . $pecahkan[5];
+
+  // return $pecahkan[2] . ' ' . $bulan[(int)$pecahkan[1]] . ' ' . $pecahkan[0] . ' ' . $pecahkan[3] . ':' . $pecahkan[4] . ':' . $pecahkan[5];
+  return $pecahkan[2] . ' ' . $bulan[(int)$pecahkan[1]] . ' ' . $pecahkan[0];
 }
 
 function activeClass($active, $menu)
@@ -60,4 +60,34 @@ function activeGroupClass($groupMenu)
 function routeToSection($menu, $section)
 {
   return Request::segment(1) !== $menu ? "/$menu/$section" : "/$menu#$section";
+}
+
+function humanizeTime($time)
+{
+  $time = time() - strtotime($time); // to get the time since that moment
+  $time = ($time < 1) ? 1 : $time;
+  $tokens = array(
+    31536000 => 'tahun',
+    2592000 => 'bulan',
+    604800 => 'minggu',
+    86400 => 'hari',
+    3600 => 'jam',
+    60 => 'menit',
+    1 => 'detik'
+  );
+
+  foreach ($tokens as $unit => $text) {
+    if ($time < $unit) continue;
+    $numberOfUnits = floor($time / $unit);
+    return $numberOfUnits . ' ' . $text . (($numberOfUnits > 1) ? '' : '') . " yang lalu";
+  }
+}
+
+function labelPosted($createdDate, $updatedDate)
+{
+  if (strtotime($updatedDate) > strtotime($createdDate)) {
+    return "Disunting " . humanizeTime($updatedDate);
+  }
+
+  return "Diunggah " . humanizeTime($createdDate);
 }
