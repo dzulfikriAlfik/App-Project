@@ -99,7 +99,7 @@ class GalleryController extends Controller
     // dd($validatedData);
     Gallery::where("id", $gallery->id)->update($validatedData);
 
-    return redirect(url('/cms/gallery'))->with('success', 'Data kegiatan berhasil ditambahkan');
+    return redirect(url('/cms/gallery'))->with('success', 'Data kegiatan berhasil diubah');
   }
 
   public function destroy(Gallery $gallery)

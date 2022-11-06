@@ -91,3 +91,17 @@ function labelPosted($createdDate, $updatedDate)
 
   return "Diunggah " . humanizeTime($createdDate);
 }
+
+function checkSelected($userRole, $checkRole)
+{
+  return $userRole === $checkRole ? "selected" : "";
+}
+
+function jabatan($userRole)
+{
+  if ($userRole === "kepala-sekolah") return "Kepala Sekolah";
+  if ($userRole === "guru") return "Guru";
+  if ($userRole === "bendahara") return "Bendahara";
+  if ($userRole === "tata-usaha") return "Tata Usaha";
+  if ($userRole === "operator") return "Operator";
+}

@@ -80,7 +80,7 @@ class BeritaController extends Controller
     // dd($validatedData);
     Berita::where("id", $berita->id)->update($validatedData);
 
-    return redirect(url('/cms/berita'))->with('success', 'Data kegiatan berhasil ditambahkan');
+    return redirect(url('/cms/berita'))->with('success', 'Data kegiatan berhasil diubah');
   }
 
   public function destroy(Berita $berita)

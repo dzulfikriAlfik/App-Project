@@ -12,7 +12,7 @@
               <span class="c-green2 font-w-500">Selamat Datang 🖐</span>
             </div>
             <h1 data-aos="fade-up" data-aos-delay="100">
-              We're excited to help you on your journey!
+              Medissina siap mendidik anak untuk menghadapi zamannya
             </h1>
             <p data-aos="fade-up" data-aos-delay="200">
               Leave us a little info, and we’ll be in touch.
@@ -27,7 +27,7 @@
       <div class="row">
         <div class="col-lg-12">
           <div class="parallax_cover">
-            <img class="cover-parallax" src="{{ asset('assets/homepage/assets/img/inner/12.jpg') }}" alt="image">
+            <img class="cover-parallax" src="{{ asset('assets/homepage/homepage.jpeg') }}" alt="image">
           </div>
         </div>
       </div>
@@ -147,12 +147,8 @@
                   <div class="before_title">
                     <span class="c-green2">Lets's Go</span>
                   </div>
-                  <h2>Our Story</h2>
-                  <p>
-                    began in 2005. After years in the web hosting industry, we realized that it was near
-                    impossible for the average Jane or Joe to create their own website. Traditional web hosting
-                    services were simply too complicated, time consuming, and expensive to manage.
-                  </p>
+                  <h2>Sejarah kami</h2>
+                  <p>{!! $lembaga->sejarah !!}</p>
 
                 </div>
               </div>
@@ -179,22 +175,6 @@
         </div>
       </div>
 
-      <div class="row margin-t-8">
-        <div class="col-lg-6">
-          <p class="font-s-18 c-gray">
-            We believe everyone deserves to have a website or online store. Innovation and simplicity makes us
-            happy: our goal is to remove any technical or financial barriers that can prevent business owners from
-            making their own website.
-          </p>
-        </div>
-        <div class="col-lg-5 ml-auto">
-          <p class="font-s-18 c-gray">
-            Today, we're proud to empower individuals and small business owners around the world. Everyone
-            deserves a website, and we're excited to see what you create.
-          </p>
-        </div>
-      </div>
-
     </div>
   </section>
   <!-- End.our_story -->
@@ -205,102 +185,39 @@
       <div class="row">
         <div class="col-lg-6">
           <div class="title_sections_inner margin-b-5">
-            <h2>Our Team</h2>
+            <h2>Staff</h2>
           </div>
         </div>
       </div>
       <div class="row">
+
+        @foreach ($strukturs as $struktur)
         <div class="col-md-6 col-lg-3">
           <div class="item_group" data-aos="fade-up" data-aos-delay="0">
             <div class="image_ps">
-              <img src="{{ asset('assets/homepage/assets/img/persons/17.jpg') }}" alt="">
-
+              <img src="{{ asset('/storage') . "/" . $struktur->user_image }}" alt="">
               <div class="content_txt left-side">
-                <h3>Christopher L. Belle</h3>
-                <p>Co-Founder & CEO</p>
+                <h3>{{ $struktur->user_name }}</h3>
+                <p>{{ jabatan($struktur->user_role) }}</p>
               </div>
             </div>
-            <div class="social_text">
-              <a href="">
-                Linkedin
-              </a>
-              <a href="">
-                Twitter
-              </a>
-              <a href="">
-                Github
-              </a>
-            </div>
-
           </div>
         </div>
+        @endforeach
 
+        @foreach ($staffs as $staff)
         <div class="col-md-6 col-lg-3">
-          <div class="item_group" data-aos="fade-up" data-aos-delay="100">
+          <div class="item_group" data-aos="fade-up" data-aos-delay="0">
             <div class="image_ps">
-              <img src="{{ asset('assets/homepage/assets/img/persons/20.jpg') }}" alt="">
-              <div class="content_txt right-side">
-                <h3>CLee Carter</h3>
-                <p>Managing Partner </p>
-              </div>
-            </div>
-            <div class="social_text">
-              <a href="">
-                Twitter
-              </a>
-              <a href="">
-                Linkedin
-              </a>
-            </div>
-
-          </div>
-        </div>
-
-        <div class="col-md-6 col-lg-3">
-          <div class="item_group" data-aos="fade-up" data-aos-delay="200">
-            <div class="image_ps">
-              <img src="{{ asset('assets/homepage/assets/img/persons/19.jpg') }}" alt="">
+              <img src="{{ asset('/storage') . "/" . $staff->user_image }}" alt="">
               <div class="content_txt left-side">
-                <h3>Mary Merrill</h3>
-                <p>Operations Director</p>
+                <h3>{{ $staff->user_name }}</h3>
+                <p>{{ jabatan($staff->user_role) }}</p>
               </div>
             </div>
-            <div class="social_text">
-
-              <a href="">
-                Facebook
-              </a>
-              <a href="">
-                Twitter
-              </a>
-            </div>
-
           </div>
         </div>
-
-        <div class="col-md-6 col-lg-3">
-          <div class="item_group" data-aos="fade-up" data-aos-delay="300">
-            <div class="image_ps">
-              <img src="{{ asset('assets/homepage/assets/img/persons/22.jpg') }}" alt="">
-              <div class="content_txt right-side">
-                <h3>John Myers</h3>
-                <p>Chief Technology Officer</p>
-              </div>
-            </div>
-            <div class="social_text">
-              <a href="">
-                Github
-              </a>
-              <a href="">
-                Twitter
-              </a>
-              <a href="">
-                Dribbble
-              </a>
-            </div>
-
-          </div>
-        </div>
+        @endforeach
 
       </div>
     </div>

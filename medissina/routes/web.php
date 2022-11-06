@@ -83,7 +83,13 @@ Route::group(['middleware' => ['login.middleware']], function () {
     Route::post('/berita/update/{berita}', 'BeritaController@update');
     Route::get('/berita/delete/{berita}', 'BeritaController@destroy');
     // Struktur Organisasi
-    Route::get('/struktur', 'DashboardController@struktur');
+    Route::get('/struktur', 'StrukturController@index');
+    Route::get('/struktur/add', 'StrukturController@add');
+    Route::post('/struktur/post', 'StrukturController@store');
+    Route::get('/struktur/detail/{user}', 'StrukturController@show');
+    Route::get('/struktur/edit/{user}', 'StrukturController@edit');
+    Route::post('/struktur/update/{id}', 'StrukturController@update');
+    Route::get('/struktur/delete/{id}', 'StrukturController@destroy');
     // Masukan
     Route::get('/masukan', 'MasukanController@index');
     Route::get('/masukan/detail/{masukan}', 'MasukanController@show');

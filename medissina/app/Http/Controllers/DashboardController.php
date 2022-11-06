@@ -70,13 +70,4 @@ class DashboardController extends Controller
 
     return redirect(url('/info/kontak'))->with('success', 'Berhasil mengirimkan pesan');
   }
-
-  public function struktur()
-  {
-    $data = [
-      "title"   => "Struktur Organisasi"
-    ];
-
-    return view("Superadmin.struktur", $data);
-  }
 }

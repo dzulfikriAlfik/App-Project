@@ -55,12 +55,12 @@
           <span class="link-title">Pesan Masukan</span>
         </a>
       </li>
-      <li class="nav-item">
+      {{-- <li class="nav-item">
         <a href="{{ url('/cms/users') }}" class="nav-link">
-          <i class="link-icon" data-feather="users"></i>
-          <span class="link-title">Users</span>
-        </a>
-      </li>
+      <i class="link-icon" data-feather="users"></i>
+      <span class="link-title">Users</span>
+      </a>
+      </li> --}}
     </ul>
   </div>
 </nav>
