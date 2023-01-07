@@ -24,3 +24,8 @@ function tgl_indo($tanggal)
 
   return $pecahkan[2] . ' ' . $bulan[(int)$pecahkan[1]] . ' ' . $pecahkan[0];
 }
+
+function isActive($menu)
+{
+  return request()->is($menu) ? 'active' : '';
+}

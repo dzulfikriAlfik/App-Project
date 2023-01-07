@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CompanyProfile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -10,7 +11,8 @@ class AuthController extends Controller
   public function index()
   {
     $data = [
-      'title' => 'Login'
+      'title'   => 'Login',
+      "company" => CompanyProfile::all()->first(),
     ];
 
     return view('login.index', $data);
@@ -25,6 +27,9 @@ class AuthController extends Controller
 
     if (Auth::attempt($validatedData)) {
       $request->session()->regenerate();
+      $request->session()->put('login', true);
+      $request->session()->put('role', auth()->user()->role);
+
       return redirect()->intended('/dashboard');
     }
 

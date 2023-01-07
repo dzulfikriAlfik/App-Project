@@ -7,6 +7,7 @@ use App\Models\CompanyProfile;
 use App\Models\Kegiatan;
 use App\Models\Mitra;
 use App\Models\Services;
+use App\Models\User;
 
 class WebController extends Controller
 {
@@ -27,7 +28,7 @@ class WebController extends Controller
     $data = [
       "title"      => "Tentang Kami",
       "company"    => CompanyProfile::all()->first(),
-      "mitra_kami" => Mitra::all()
+      "mitra_kami" => User::where("role", "mitra")->get()
     ];
 
     return view("web.tentang-kami", $data);
@@ -49,7 +50,7 @@ class WebController extends Controller
     $data = [
       "title"      => "Mitra",
       "company"    => CompanyProfile::all()->first(),
-      "mitra_kami" => Mitra::all()
+      "mitra_kami" => User::where("role", "mitra")->get()
     ];
 
     return view("web.mitra", $data);
@@ -58,8 +59,8 @@ class WebController extends Controller
   public function kontak()
   {
     $data = [
-      "title"    => "Kontak",
-      "company"  => CompanyProfile::all()->first(),
+      "title"   => "Kontak",
+      "company" => CompanyProfile::all()->first(),
     ];
 
     return view("web.kontak", $data);

@@ -90,9 +90,11 @@
               <li>
                 <a href="{{ url("kontak") }}" data-title="Kontak"><span>Kontak</span></a>
               </li>
-              <li><a href="" data-title="Dashboard"><span>Dashboard Admin if</span></a></li>
-              <li><a href="" data-title="Dashboard"><span>Dashboard Mitra if</span></a></li>
-              <li><a href="" data-title="Login/Daftar"><span>Login/Daftar</span></a></li>
+              @if (session('login') === true)
+              <li><a href="{{ url("dashboard") }}" data-title="Dashboard"><span>Dashboard</span></a></li>
+              @else
+              <li><a href="{{ url('login') }}" data-title="Login/Daftar"><span>Login/Daftar</span></a></li>
+              @endif
             </ul>
           </nav><!-- End main menu -->
         </div>

@@ -50,9 +50,11 @@
                 <li><a href="{{ url('kegiatan') }}" class="hover-link" data-title="Kegiatan"><span>Kegiatan</span></a></li>
                 <li><a href="{{ url('mitra') }}" class="hover-link" data-title="Mitra"><span>Mitra</span></a></li>
                 <li><a href="{{ url('kontak') }}" class="hover-link" data-title="Kontak"><span>Kontak</span></a></li>
-                <li><a href="" class="hover-link" data-title="Dashboard"><span>Dashboard Admin</span></a></li>
-                <li><a href="" class="hover-link" data-title="Dashboard"><span>Dashboard Mitra</span></a></li>
+                @if (session('login') === true)
+                <li><a href="{{ url('dashboard') }}" class="hover-link" data-title="Dashboard"><span>Dashboard</span></a></li>
+                @else
                 <li><a href="{{ url('login') }}" class="hover-link" data-title="Login/Daftar"><span>Login/Daftar</span></a></li>
+                @endif
               </ul>
             </nav>
           </div>
