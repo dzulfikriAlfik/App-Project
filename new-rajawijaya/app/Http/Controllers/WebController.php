@@ -4,8 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\CompanyProfile;
-use App\Models\Kegiatan;
-use App\Models\Mitra;
+use App\Models\Gallery;
 use App\Models\Services;
 use App\Models\User;
 
@@ -17,7 +16,7 @@ class WebController extends Controller
       "title"    => "Home Page",
       "company"  => CompanyProfile::all()->first(),
       "services" => Services::all(),
-      "kegiatan" => Kegiatan::join("galery_kegiatan", "kegiatan.id_kegiatan", "=", "galery_kegiatan.id_kegiatan")->select(["galery_kegiatan.*", "kegiatan.*"])->get()
+      "kegiatan" => Gallery::all()
     ];
 
     return view("web.index", $data);
@@ -39,7 +38,7 @@ class WebController extends Controller
     $data = [
       "title"    => "Kegiatan",
       "company"  => CompanyProfile::all()->first(),
-      "kegiatan" => Kegiatan::join("galery_kegiatan", "kegiatan.id_kegiatan", "=", "galery_kegiatan.id_kegiatan")->select(["galery_kegiatan.*", "kegiatan.*"])->get()
+      "kegiatan" => Gallery::all()
     ];
 
     return view("web.kegiatan", $data);

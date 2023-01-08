@@ -7,9 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class CompanyProfile extends Model
 {
-    use HasFactory;
+  use HasFactory;
 
-    protected $table      = "company_profile";
-    protected $primaryKey = "id_company";
-    protected $guarded    = ["id_company"];
+  protected $table      = "company_profile";
+  protected $primaryKey = "id_company";
+  protected $guarded    = ["id_company"];
+  public    $timestamps = false;
 }

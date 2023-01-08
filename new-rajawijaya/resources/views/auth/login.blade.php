@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Raja Wijaya Cirebon | {{ $title }}</title>
 
-  <link rel="icon" href="{{ asset("assets/img/logo/" . $company->logo ) }}" type="image/x-icon">
+  <link rel="icon" href="{{ companyLogo() }}" type="image/x-icon">
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
@@ -23,48 +23,57 @@
       <a href="#"><b>Login</b> Admin</a>
     </div>
     <!-- /.login-logo -->
-    @if (session()->has('loginError'))
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-      {{ session('loginError') }}
-      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    @endif
-
     <div class="card">
       <div class="card-body login-card-body">
         <p class="login-box-msg">Sign in to start your session</p>
 
-        <?php if (isset($_SESSION["alert"])) :
-               $message   = $_SESSION["message"];
-               $type   = $_SESSION["type"];
-            ?>
-        <div class="alert alert-<?= $type ?> alert-dismissible">
-          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-          <h5><i class="icon fas fa-<?= ($type == "success") ? 'check' : 'ban' ?>"></i> <?= $message ?>!</h5>
+        <!-- alert -->
+        @if (session()->has('success'))
+        <div class="row">
+          <div class="col-md-12">
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+              <strong>Sukses!</strong> {{ session('success') }}
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+          </div>
         </div>
-        <?php
-        unset($_SESSION["alert"]);
-        endif; ?>
+        @endif
+        <!-- alert -->
+
+        @if (session()->has('loginError'))
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+          {{ session('loginError') }}
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        @endif
 
         <form action="{{ url('authenticate') }}" method="post">
           @csrf
           <div class="mb-3 input-group">
-            <input type="text" class="form-control" name="username" placeholder="Username">
+            <input type="text" class="form-control @error('username') is-invalid @enderror" name="username" placeholder="Username" value="{{ old('username') }}">
             <div class="input-group-append">
               <div class="input-group-text">
                 <span class="fas fa-user-shield"></span>
               </div>
             </div>
+            @error('username')
+            <small class="invalid-feedback mb-2">{{ $message }}</small>
+            @enderror
           </div>
           <div class="mb-3 input-group">
-            <input type="password" class="form-control" name="password" placeholder="Password">
+            <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" placeholder="Password" value="{{ old('password') }}">
             <div class="input-group-append">
               <div class="input-group-text">
                 <span class="fas fa-lock"></span>
               </div>
             </div>
+            @error('password')
+            <small class="invalid-feedback mb-2">{{ $message }}</small>
+            @enderror
           </div>
           <div class="row">
             <!-- /.col -->
@@ -78,8 +87,7 @@
           <a href="<?= url(''); ?>" class="text-center">Back to Homepage</a>
         </p>
         <p class="text-center">Mitra?<br>
-          <a href="{{ url('daftar_mitra') }}" class="text-center">Belum punya akun? Daftar</a><br>
-          <a href="{{ url('login_mitra') }}" class="text-center">Sudah punya akun? Login</a>
+          <a href="{{ url('register') }}" class="text-center">Belum punya akun? Daftar</a><br>
         </p>
       </div>
       <!-- /.login-card-body -->

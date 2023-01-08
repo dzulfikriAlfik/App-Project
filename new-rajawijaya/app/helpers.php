@@ -29,3 +29,22 @@ function isActive($menu)
 {
   return request()->is($menu) ? 'active' : '';
 }
+
+function isMenuOpen($menu)
+{
+  return request()->is($menu) ? 'menu-open' : '';
+}
+
+function companyLogo()
+{
+  $logo = \App\Models\CompanyProfile::all()->first()->logo;
+
+  return asset("assets/img/logo/$logo");
+}
+
+function mitraLogo($userId)
+{
+  $logo = \App\Models\User::where("id", $userId)->first()->logo_mitra;
+
+  return asset("assets/img/mitra/$logo");
+}

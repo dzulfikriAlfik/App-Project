@@ -7,9 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Gallery extends Model
 {
-    use HasFactory;
+  use HasFactory;
 
-    protected $table      = "galery_kegiatan";
-    protected $primaryKey = "id_galery_kegiatan";
-    protected $guarded    = ["id_galery_kegiatan"];
+  protected $table      = "gallery";
+  protected $guarded    = ["id"];
+  public    $timestamps = false;
 }

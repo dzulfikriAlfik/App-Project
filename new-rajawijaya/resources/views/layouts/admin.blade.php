@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Admin Rajawijaya</title>
-  <link rel="icon" href="{{ asset("assets/img/logo/" . $company->logo ) }}" type="image/x-icon">
+  <link rel="icon" href="{{ companyLogo() }}" type="image/x-icon">
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome Icons -->
@@ -84,7 +84,6 @@
   <script src="{{ asset('assets/admin/plugins/daterangepicker/daterangepicker.js') }}"></script>
   <!-- Tempusdominus Bootstrap 4 -->
   <script src="{{ asset('assets/admin/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js') }}"></script>
-  <script src="{{ asset('assets/custom/myValidator.js') }}"></script>
   <script src="{{ asset('assets/custom/myDataTables.js') }}"></script>
   <script src="{{ asset('assets/custom/myDateTimePicker.js') }}"></script>
   <script src="{{ asset('assets/custom/myScript.js') }}"></script>

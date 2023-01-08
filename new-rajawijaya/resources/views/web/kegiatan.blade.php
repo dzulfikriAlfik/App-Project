@@ -30,20 +30,20 @@
           <h2>Foto Progress Pekerjaan</h2>
         </div>
       </div>
-      <?php foreach ($kegiatan as $galery) : ?>
+      <?php foreach ($kegiatan as $gallery) : ?>
       <div class="col-lg-4 col-md-6 col-12 item">
         <!-- Begin news item -->
         <article class="news-item item-style">
           <a href="#" class="news-item-img">
-            <img data-src="{{ asset('assets/img/kegiatan/') . $galery->foto }}" class="lazy" src="{{ asset('assets/img/kegiatan/') . $galery->foto }}" alt="">
+            <img data-src="{{ asset('assets/img/kegiatan/') . $gallery->foto }}" class="lazy" src="{{ asset('assets/img/kegiatan/') . $gallery->foto }}" alt="">
           </a>
           <div class="news-item-info">
-            <div class="news-item-date">{{ tgl_indo($galery->tanggal) }}</div>
+            <div class="news-item-date">{{ tgl_indo($gallery->tanggal) }}</div>
             <h3 class="news-item-heading item-heading">
-              <a href="#" title="{{ $galery->nama_kegiatan }}">{{ $galery->nama_kegiatan }}</a>
+              <a href="#" title="{{ $gallery->nama_kegiatan }}">{{ $gallery->nama_kegiatan }}</a>
             </h3>
             <div class="news-item-desc">
-              <p>{{ $galery->keterangan }}</p>
+              <p>{{ $gallery->keterangan }}</p>
             </div>
           </div>
         </article><!-- End news item -->
