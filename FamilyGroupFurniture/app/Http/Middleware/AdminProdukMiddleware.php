@@ -16,7 +16,7 @@ class AdminProdukMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        if (!auth()->check() || auth()->user()->role !== 'admin_produk') {
+        if (!auth()->check() || auth()->user()->role !== 'admin') {
             abort(403);
         }
 

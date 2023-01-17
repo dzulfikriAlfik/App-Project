@@ -64,8 +64,8 @@ class Kernel extends HttpKernel
         'throttle'         => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified'         => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'login'            => \App\Http\Middleware\LoginMiddleware::class,
-        'mitra'            => \App\Http\Middleware\MitraMiddleware::class,
+        'customer'         => \App\Http\Middleware\MitraMiddleware::class,
         'pemilik'          => \App\Http\Middleware\PemilikMiddleware::class,
-        'admin_produk'     => \App\Http\Middleware\AdminProdukMiddleware::class,
+        'admin'            => \App\Http\Middleware\AdminProdukMiddleware::class,
     ];
 }

@@ -13,7 +13,9 @@
             <div class="intro-content bg-hero">
               <div class="section-heading shm-none">
                 <h1>Sekilas <br> Tentang Kami</h1>
-                <p class="section-desc">{{ $company->sejarah }}</p>
+                <p class="section-desc">
+                  {{ dataCompany()->sejarah }}
+                </p>
               </div>
               <div class="ml-4 wrap-btn intro-btns">
                 <a href="tentang-kami" class="btn btn-with-icon btn-border btn-xsall ripple">
@@ -42,7 +44,6 @@
         </div>
       </div>
 
-      <?php foreach ($services as $service) : ?>
       <div class="col-lg-4 col-md-6 col-12 item">
         <a href="single-services.html" class="iitem item-style">
           <div class="iitem-icon">
@@ -51,11 +52,10 @@
           <div class="iitem-icon-bg">
             <i class="material-icons material-icons-outlined">corporate_fare</i>
           </div>
-          <h3 class="iitem-heading item-heading-large"><?= $service->service; ?></h3>
-          <div class="iitem-desc"><?= $service->keterangan; ?></div>
+          <h3 class="iitem-heading item-heading-large">Judul Layanan</h3>
+          <div class="iitem-desc">Keterangan Layanan</div>
         </a>
       </div>
-      <?php endforeach; ?>
     </div>
   </div>
 </section><!-- End services -->
@@ -111,25 +111,23 @@
         </div>
       </div>
 
-      <?php foreach ($kegiatan as $gallery) : ?>
       <div class="col-lg-4 col-md-6 col-12 item">
         <!-- Begin news item -->
         <article class="news-item item-style">
           <a href="#" class="news-item-img">
-            <img data-src="{{ fotoKegiatan($gallery->id) }}" class="lazy" src="{{ fotoKegiatan($gallery->id) }}" alt="">
+            <img data-src="https://cdnwpseller.gramedia.net/wp-content/uploads/2022/02/18223754/image003-14.png" class="lazy" src="https://cdnwpseller.gramedia.net/wp-content/uploads/2022/02/18223754/image003-14.png" alt="">
           </a>
           <div class="news-item-info">
-            <div class="news-item-date">{{ tgl_indo($gallery->tanggal) }}</div>
+            <div class="news-item-date">23 Januari 2023</div>
             <h3 class="news-item-heading item-heading">
-              <a href="#" title="{{ $gallery->nama_kegiatan }}">{{ $gallery->nama_kegiatan }}</a>
+              <a href="#" title="Nama kegiatan">Nama kegiatan</a>
             </h3>
             <div class="news-item-desc">
-              <p>{{ $gallery->keterangan }}</p>
+              <p>Keterangan foto</p>
             </div>
           </div>
         </article><!-- End news item -->
       </div>
-      <?php endforeach; ?>
 
       <div class="col-12">
         <div class="section-btns justify-content-center">

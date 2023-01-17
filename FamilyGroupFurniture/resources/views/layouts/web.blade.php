@@ -3,11 +3,11 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Raja Wijaya | {{ $title }}</title>
+  <title>{{ $title }}</title>
   <meta name="description" content="Description">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-  <link rel="icon" href="{{ asset("assets/img/logo/" . $company->logo ) }}" type="image/x-icon">
+  <link rel="icon" href="{{ logoPerusahaan() }}" type="image/x-icon">
   <link rel="stylesheet" href="{{ asset("assets/web/css/libs.css") }}">
   <link rel="stylesheet" href="{{ asset("assets/web/css/style.css") }}">
   <link rel="preload" href="{{ asset("assets/web/fonts/istok-web-v15-latin/istok-web-v15-latin-regular.woff2") }}" as="font" type="font/woff2" crossorigin>

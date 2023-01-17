@@ -8,29 +8,29 @@
           <div class="footer-company-info">
             <div class="footer-company-top">
               <a href="#" class="logo" title="Logo">
-                <img src="{{ asset("assets/img/logo/" . $company->logo ) }}" class="logo-footer" width="200" alt="Logo Raja Wijaya">
+                <img src="{{ logoPerusahaan() }}" class="logo-footer" width="200" alt="Logo Family Group Furniture">
               </a>
               <div class="footer-company-desc">
-                <p>{{ $company->sejarah }}</p>
+                <p>{{ dataCompany()->sejarah }}</p>
               </div>
             </div>
             <ul class="footer-social-links">
               <li>
-                <a href="https://facebook.com/{{ $company->facebook }}" title="Facebook">
+                <a href="{{ dataCompany()->facebook }}" title="Facebook">
                   <svg viewBox="0 0 320 512">
                     <use xlink:href="{{ asset('assets/web/img/sprite.svg#facebook-icon') }}"></use>
                   </svg>
                 </a>
               </li>
               <li>
-                <a href="https://instagram.com/{{ $company->instagram }}" title="Instagram">
+                <a href="{{ dataCompany()->instagram }}" title="Instagram">
                   <svg viewBox="0 0 448 512">
                     <use xlink:href="{{ asset('assets/web/img/sprite.svg#instagram-icon') }}"></use>
                   </svg>
                 </a>
               </li>
               <li>
-                <a href="https://twitter.com/{{ $company->twitter }}" title="Twitter">
+                <a href="{{ dataCompany()->twitter }}" title="Twitter">
                   <svg viewBox="0 0 512 512">
                     <use xlink:href="{{ asset('assets/web/img/sprite.svg#twitter-icon') }}"></use>
                   </svg>
@@ -47,7 +47,6 @@
               <ul class="footer-mnu">
                 <li><a href="{{ url('') }}" class="hover-link" data-title="Home"><span>Home</span></a></li>
                 <li><a href="{{ url("tentang-kami") }}" class="hover-link" data-title="Tentang Kami"><span>Tentang Kami</span></a></li>
-                <li><a href="{{ url('kegiatan') }}" class="hover-link" data-title="Kegiatan"><span>Kegiatan</span></a></li>
                 <li><a href="{{ url('mitra') }}" class="hover-link" data-title="Mitra"><span>Mitra</span></a></li>
                 <li><a href="{{ url('kontak') }}" class="hover-link" data-title="Kontak"><span>Kontak</span></a></li>
                 @if (session('login') === true)
@@ -66,19 +65,19 @@
               <li>
                 <i class="material-icons md-22">location_on</i>
                 <div class="footer-contact-info">
-                  {{ $company->address }}
+                  {{ dataCompany()->alamat }}
                 </div>
               </li>
               <li>
                 <i class="material-icons md-22 footer-contact-tel">smartphone</i>
                 <div class="footer-contact-info">
-                  <a href="#!" class="formingHrefTel">{{ $company->telp }}</a>
+                  <a href="#!" class="formingHrefTel">{{ dataCompany()->telepon }}</a>
                 </div>
               </li>
               <li>
                 <i class="material-icons md-22 footer-contact-email">email</i>
                 <div class="footer-contact-info">
-                  <a href="mailto:{{ $company->email }}">{{ $company->email }}</a>
+                  <a href="mailto:{{ dataCompany()->email }}">{{ dataCompany()->email }}</a>
                 </div>
               </li>
             </ul>
@@ -91,7 +90,7 @@
     <div class="container">
       <div class="row justify-content-center items">
         <div class="col-md-auto col-12 item">
-          <div class="copyright">© 2021 Raja Wijaya</div>
+          <div class="copyright">©2021 Family Group Furniture</div>
         </div>
       </div>
     </div>

@@ -37,14 +37,14 @@
               <i class="material-icons md-22">location_on</i>
               <div class="footer-contact-info">
                 <a href="https://www.google.com/maps/place/6%C2%B043'57.1%22S+108%C2%B031'51.0%22E/@-6.732521,108.53082,17z/data=!4m5!3m4!1s0x0:0x0!8m2!3d-6.732521!4d108.53082">
-                  {{ $company->address }}
+                  {{ $company->alamat }}
                 </a>
               </div>
             </li>
             <li>
               <i class="material-icons md-22 footer-contact-tel">smartphone</i>
               <div class="footer-contact-info">
-                <a href="tel:{{ $company->telp }}" class="formingHrefTel">{{ $company->telp }}</a>
+                <a href="tel:{{ $company->telepon }}" class="formingHrefTel">{{ $company->telepon }}</a>
               </div>
             </li>
             <li>

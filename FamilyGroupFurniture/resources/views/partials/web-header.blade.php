@@ -8,15 +8,15 @@
           <!-- Begin header top info -->
           <ul class="header-top-info">
             <li>
-              <a href="mailto:{{ $company->email }}">
+              <a href="mailto:{{ dataCompany()->email }}">
                 <i class="material-icons md-18">mail_outline</i>
-                <span>{{ $company->email }}</span>
+                <span>{{ dataCompany()->email }}</span>
               </a>
             </li>
             <li>
-              <a href="mailto:{{ $company->telp }}" class="formingHrefTel">
+              <a href="mailto:{{ dataCompany()->telepon }}" class="formingHrefTel">
                 <i class="material-icons md-18">phone_in_talk</i>
-                <span>{{ $company->telp }}</span>
+                <span>{{ dataCompany()->telepon }}</span>
               </a>
             </li>
           </ul><!-- Ennd header top info -->
@@ -26,21 +26,21 @@
             <!-- Begin social links -->
             <ul class="social-links">
               <li>
-                <a href="https://facebook.com/{{ $company->facebook }}" target="_blank" title="Facebook">
+                <a href="{{ dataCompany()->facebook }}" target="_blank" title="Facebook">
                   <svg viewBox="0 0 320 512">
                     <use xlink:href="{{ asset('assets/web/img/sprite.svg#facebook-icon') }}"></use>
                   </svg>
                 </a>
               </li>
               <li>
-                <a href="https://instagram.com/{{ $company->instagram }}" target="_blank" title="Instagram">
+                <a href="{{ dataCompany()->instagram }}" target="_blank" title="Instagram">
                   <svg viewBox="0 0 448 512">
                     <use xlink:href="{{ asset('assets/web/img/sprite.svg#instagram-icon') }}"></use>
                   </svg>
                 </a>
               </li>
               <li>
-                <a href="https://twitter.com/{{ $company->twitter }}" target="_blank" title="Twitter">
+                <a href="{{ dataCompany()->twitter }}" target="_blank" title="Twitter">
                   <svg viewBox="0 0 512 512">
                     <use xlink:href="{{ asset('assets/web/img/sprite.svg#twitter-icon') }}"></use>
                   </svg>
@@ -67,8 +67,8 @@
         </div>
         <div class="col-auto header-fixed-col">
           <!-- Begin logo -->
-          <a href="#" class="logo ml-md-5" title="Logo Raja Wijaya">
-            <img src="assets/img/logo/{{ $company->logo }}" width="200" alt="Logo Raja Wijaya">
+          <a href="#" class="logo ml-md-5" title="Logo Family Group Furniture">
+            <img src="{{ logoPerusahaan() }}" width="200" alt="Logo Family Group Furniture">
           </a><!-- End logo -->
         </div>
         <div class="col-auto header-fixed-col d-none d-lg-block col-static">
@@ -80,9 +80,6 @@
               </li>
               <li>
                 <a href="{{ url("tentang-kami") }}" data-title="Tentang Kami"><span>Tentang Kami</span></a>
-              </li>
-              <li>
-                <a href="{{ url("kegiatan") }}" data-title="Kegiatan"><span>Kegiatan</span></a>
               </li>
               <li>
                 <a href="{{ url("mitra") }}" data-title="Mitra"><span>Mitra</span></a>
@@ -109,36 +106,36 @@
                 </div>
                 <ul class="header-navbar-content">
                   <li>
-                    <a href="mailto:{{ $company->email }}">
+                    <a href="mailto:{{ dataCompany()->email }}">
                       <i class="material-icons md-20">mail_outline</i>
-                      <span>{{ $company->email }}</span>
+                      <span>{{ dataCompany()->email }}</span>
                     </a>
                   </li>
                   <li>
-                    <a href="mailto:{{ $company->telp }}" class="formingHrefTel">
+                    <a href="mailto:{{ dataCompany()->telepon }}" class="formingHrefTel">
                       <i class="material-icons md-20">support_agent</i>
-                      <span>{{ $company->telp }}</span>
+                      <span>{{ dataCompany()->telepon }}</span>
                     </a>
                   </li>
                   <li>
                     <!-- Begin social links -->
                     <ul class="social-links">
                       <li>
-                        <a href="https://facebook.com/{{ $company->facebook }}" target="_blank" title="Facebook">
+                        <a href="{{ dataCompany()->facebook }}" target="_blank" title="Facebook">
                           <svg viewBox="0 0 320 512">
                             <use xlink:href="{{ asset('assets/web/img/sprite.svg#facebook-icon') }}"></use>
                           </svg>
                         </a>
                       </li>
                       <li>
-                        <a href="https://instagram.com/{{ $company->instagram }}" target="_blank" title="Instagram">
+                        <a href="{{ dataCompany()->instagram }}" target="_blank" title="Instagram">
                           <svg viewBox="0 0 448 512">
                             <use xlink:href="{{ asset('assets/web/img/sprite.svg#instagram-icon') }}"></use>
                           </svg>
                         </a>
                       </li>
                       <li>
-                        <a href="https://twitter.com/{{ $company->twitter }}" target="_blank" title="Twitter">
+                        <a href="{{ dataCompany()->twitter }}" target="_blank" title="Twitter">
                           <svg viewBox="0 0 512 512">
                             <use xlink:href="{{ asset('assets/web/img/sprite.svg#twitter-icon') }}"></use>
                           </svg>
