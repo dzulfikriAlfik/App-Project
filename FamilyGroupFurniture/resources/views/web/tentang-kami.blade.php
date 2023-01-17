@@ -67,16 +67,6 @@
         </div>
       </div>
 
-      <?php foreach ($mitra_kami as $mitra) : ?>
-      <div class="col-lg-3 col-md-4 col-sm-4 col-6 item">
-        <!-- Begin brands item -->
-        <div class="brands-item item-style">
-          <img data-src="{{ asset('assets/img/mitra/' . $mitra->logo) }}" class="lazy" src="{{ asset('assets/img/mitra/' . $mitra->logo) }}" alt="" />
-        </div>
-        <!-- End brands item -->
-      </div>
-      <?php endforeach; ?>
-
     </div>
   </div>
 </section>

@@ -36,7 +36,7 @@
             <li>
               <i class="material-icons md-22">location_on</i>
               <div class="footer-contact-info">
-                <a href="https://www.google.com/maps/place/6%C2%B043'57.1%22S+108%C2%B031'51.0%22E/@-6.732521,108.53082,17z/data=!4m5!3m4!1s0x0:0x0!8m2!3d-6.732521!4d108.53082">
+                <a href="https://goo.gl/maps/vgUTRfyJUxwphjSq9" target="_blank">
                   {{ $company->alamat }}
                 </a>
               </div>
@@ -103,7 +103,8 @@
 
 <!-- Begin map -->
 <div class="map">
-  <iframe class="lazy" data-src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3962.3056001620507!2d108.53081999999999!3d-6.732521!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNsKwNDMnNTcuMSJTIDEwOMKwMzEnNTEuMCJF!5e0!3m2!1sen!2sid!4v1634391230044!5m2!1sen!2sid"></iframe>
+  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d767.5457715856635!2d108.36918276815193!3d-7.021298327228736!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e6f3ffa7b045e7f%3A0xf036b6727b3749ce!2sFamily%20group%20furniture!5e0!3m2!1sen!2sid!4v1673958307065!5m2!1sen!2sid"
+    width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 </div>
 <!-- End map -->
 @endsection

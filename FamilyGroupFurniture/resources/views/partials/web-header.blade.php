@@ -82,7 +82,7 @@
                 <a href="{{ url("tentang-kami") }}" data-title="Tentang Kami"><span>Tentang Kami</span></a>
               </li>
               <li>
-                <a href="{{ url("mitra") }}" data-title="Mitra"><span>Mitra</span></a>
+                <a href="{{ url("customer") }}" data-title="Customer"><span>Customer</span></a>
               </li>
               <li>
                 <a href="{{ url("kontak") }}" data-title="Kontak"><span>Kontak</span></a>

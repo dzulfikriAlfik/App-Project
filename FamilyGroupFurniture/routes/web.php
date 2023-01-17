@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [WebController::class, "index"]);
 Route::get('/tentang-kami', [WebController::class, "tentangKami"]);
-Route::get('/mitra', [WebController::class, "mitra"]);
+Route::get('/customer', [WebController::class, "customer"]);
 Route::get('/kontak', [WebController::class, "kontak"]);
 
 Route::get('/login', [AuthController::class, "index"])->middleware('guest');

@@ -4,7 +4,7 @@
     <ul class="mmm-list">
       <li><a href="{{ url('') }}">Home</a></li>
       <li><a href="{{ url('tentang-kami') }}">Tentang Kami</a></li>
-      <li><a href="{{ url('mitra') }}">Mitra</a></li>
+      <li><a href="{{ url('customer') }}">Customer</a></li>
       <li><a href="{{ url('kontak') }}">Kontak</a></li>
       @if (session('login') === true)
       <li><a href="{{ url('dashboard') }}">Dashboard</a></li>

@@ -47,7 +47,7 @@
               <ul class="footer-mnu">
                 <li><a href="{{ url('') }}" class="hover-link" data-title="Home"><span>Home</span></a></li>
                 <li><a href="{{ url("tentang-kami") }}" class="hover-link" data-title="Tentang Kami"><span>Tentang Kami</span></a></li>
-                <li><a href="{{ url('mitra') }}" class="hover-link" data-title="Mitra"><span>Mitra</span></a></li>
+                <li><a href="{{ url('customer') }}" class="hover-link" data-title="Customer"><span>Customer</span></a></li>
                 <li><a href="{{ url('kontak') }}" class="hover-link" data-title="Kontak"><span>Kontak</span></a></li>
                 @if (session('login') === true)
                 <li><a href="{{ url('dashboard') }}" class="hover-link" data-title="Dashboard"><span>Dashboard</span></a></li>

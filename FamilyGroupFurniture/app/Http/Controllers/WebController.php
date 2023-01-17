@@ -27,15 +27,15 @@ class WebController extends Controller
     return view("web.tentang-kami", $data);
   }
 
-  public function mitra()
+  public function customer()
   {
     $data = [
       "title"      => "Mitra",
       "company"    => dataCompany(),
-      "mitra_kami" => User::where("role", "mitra")->get()
+      "mitra_kami" => User::where("role", "customer")->get()
     ];
 
-    return view("web.mitra", $data);
+    return view("web.customer", $data);
   }
 
   public function kontak()

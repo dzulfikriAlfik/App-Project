@@ -12,7 +12,7 @@
             <a href="{{ url('') }}">Home</a>
             <i class="material-icons md-18">chevron_right</i>
           </li>
-          <li><a href="#!">Daftar Mitra</a></li>
+          <li><a href="#!">Daftar Customer</a></li>
         </ul>
       </div>
     </div>
@@ -25,7 +25,7 @@
     <div class="row">
       <div class="col-12">
         <div class="section-heading heading-center">
-          <h1>Daftar Mitra Kami</h1>
+          <h1>Daftar Customer Kami</h1>
         </div>
         <div class="content">
           <p>Welcome to our wonderful world. We sincerely hope that each and every user entering our website will find
@@ -35,11 +35,8 @@
 
           <h4>Testimoni</h4>
           <blockquote>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante. Lorem ipsum
-              dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante. Lorem ipsum dolor sit
-              amet, consectetur adipiscing elit. Integer posuere erat a ante. Lorem ipsum dolor sit amet,
-              consectetur adipiscing elit. Integer posuere erat a ante.</p>
-            <footer>Oleh PT. Telkom Indonesia Tbk</footer>
+            <p>Bahannya sangat bagus, designnya pun sangat enak dilihat. Pokoknya saya suka</p>
+            <footer>Oleh Yandra Roni</footer>
           </blockquote>
 
           <br>
@@ -47,7 +44,7 @@
             <thead>
               <tr>
                 <th>#</th>
-                <th>Mitra</th>
+                <th>Customer</th>
               </tr>
             </thead>
             <tbody>
@@ -64,16 +61,6 @@
           <br>
         </div>
       </div>
-
-      <?php foreach ($mitra_kami as $mitra) : ?>
-      <div class="col-lg-3 col-md-4 col-sm-4 col-6 item">
-        <!-- Begin brands item -->
-        <div class="brands-item item-style">
-          <img data-src="{{ mitraLogo($mitra->id) }}" class="lazy" src="{{ mitraLogo($mitra->id) }}" alt="" />
-        </div>
-        <!-- End brands item -->
-      </div>
-      <?php endforeach; ?>
 
     </div>
   </div>
