@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\WebController;
 use Illuminate\Support\Facades\Route;
 
@@ -34,6 +35,11 @@ Route::group(['middleware' => 'login'], function () {
   Route::get('/dashboard', [DashboardController::class, "index"]);
 });
 
+// Admin & Pemilik
+Route::group(["middleware" => ["login", "adminpemilik"]], function () {
+  //
+});
+
 // Admin
 Route::group(['middleware' => ['login', 'admin']], function () {
   Route::prefix('admin')->group(function () {
@@ -44,6 +50,18 @@ Route::group(['middleware' => ['login', 'admin']], function () {
     Route::post('/{user}/update', [AdminController::class, "update"]);
     Route::get('/{user}/delete', [AdminController::class, "destroy"]);
   });
+});
+
+// Pemilik
+Route::group(['middleware' => ['login', 'pemilik']], function () {
+  Route::prefix('supplier')->group(function () {
+    Route::get('/list', [SupplierController::class, "listSupplier"]);
+    Route::get('/list/add', [SupplierController::class, "create"]);
+    Route::post('/store', [SupplierController::class, "store"]);
+    Route::get('/list/{user}/edit', [SupplierController::class, "edit"]);
+    Route::post('/{user}/update', [SupplierController::class, "update"]);
+    Route::get('/{user}/delete', [SupplierController::class, "destroy"]);
+  });
 
   Route::prefix('customer')->group(function () {
     Route::get('/list', [CustomerController::class, "listCustomer"]);
@@ -53,4 +71,9 @@ Route::group(['middleware' => ['login', 'admin']], function () {
     Route::post('/{user}/update', [CustomerController::class, "update"]);
     Route::get('/{user}/delete', [CustomerController::class, "destroy"]);
   });
+});
+
+// Customer
+Route::group(['middleware' => ['login', 'customer']], function () {
+  //
 });

@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 
-class AdminProdukMiddleware
+class AdminPemilikMiddleware
 {
   /**
    * Handle an incoming request.
@@ -16,7 +16,7 @@ class AdminProdukMiddleware
    */
   public function handle(Request $request, Closure $next)
   {
-    if (!auth()->check() || auth()->user()->role !== 'admin') {
+    if (!auth()->check() || (auth()->user()->role !== 'admin' && auth()->user()->role !== "pemilik")) {
       abort(403);
     }
 

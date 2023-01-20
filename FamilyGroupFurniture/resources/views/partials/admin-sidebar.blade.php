@@ -38,92 +38,98 @@
             <p>Customers</p>
           </a>
         </li>
+        <li class="nav-item">
+          <a href="{{ url('supplier/list') }}" class="nav-link {{ isActive('supplier/list*') }}">
+            <i class="nav-icon fas fa-truck"></i>
+            <p>Supplier</p>
+          </a>
+        </li>
 
         {{-- Data Produk --}}
-        <li class="nav-item has-treeview {{ isMenuOpen("produk*") }}">
-          <a href="#" class="nav-link {{ isActive("produk*") }}">
-            <i class="nav-icon fas fa-file"></i>
-            <p>Produk
-              <i class="right fas fa-angle-left"></i>
-            </p>
-          </a>
-          <ul class="nav nav-treeview">
-            <li class="nav-item">
-              <a href="#" class="nav-link {{ isActive("produk/categories*") }}">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Categories</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="#" class="nav-link {{ isActive("produk/unit*") }}">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Units</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="#" class="nav-link  {{ isActive("produk/item*") }}">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Items</p>
-              </a>
-            </li>
-          </ul>
-        </li>
+        {{-- <li class="nav-item has-treeview {{ isMenuOpen("produk*") }}">
+        <a href="#" class="nav-link {{ isActive("produk*") }}">
+          <i class="nav-icon fas fa-file"></i>
+          <p>Produk
+            <i class="right fas fa-angle-left"></i>
+          </p>
+        </a>
+        <ul class="nav nav-treeview">
+          <li class="nav-item">
+            <a href="#" class="nav-link {{ isActive("produk/categories*") }}">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Categories</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link {{ isActive("produk/unit*") }}">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Units</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link  {{ isActive("produk/item*") }}">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Items</p>
+            </a>
+          </li>
+        </ul>
+        </li> --}}
 
         {{-- Data Transaksi --}}
-        <li class="nav-item has-treeview {{ isMenuOpen('transaksi*') }}">
-          <a href="#" class="nav-link {{ isActive('transaksi*') }}">
-            <i class="nav-icon fas fa-shopping-cart"></i>
-            <p>
-              Transaksi
-              <i class="fas fa-angle-left right"></i>
-            </p>
-          </a>
-          <ul class="nav nav-treeview">
-            <li class="nav-item">
-              <a href="#" class="nav-link {{ isActive('transaksi/penjualan*') }}">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Penjualan</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="#" class="nav-link {{ isActive('transaksi/stock-in*') }}">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Stock In</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="#" class="nav-link {{ isActive('transaksi/stock-out*') }}">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Stock Out</p>
-              </a>
-            </li>
-          </ul>
-        </li>
+        {{-- <li class="nav-item has-treeview {{ isMenuOpen('transaksi*') }}">
+        <a href="#" class="nav-link {{ isActive('transaksi*') }}">
+          <i class="nav-icon fas fa-shopping-cart"></i>
+          <p>
+            Transaksi
+            <i class="fas fa-angle-left right"></i>
+          </p>
+        </a>
+        <ul class="nav nav-treeview">
+          <li class="nav-item">
+            <a href="#" class="nav-link {{ isActive('transaksi/penjualan*') }}">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Penjualan</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link {{ isActive('transaksi/stock-in*') }}">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Stock In</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link {{ isActive('transaksi/stock-out*') }}">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Stock Out</p>
+            </a>
+          </li>
+        </ul>
+        </li> --}}
 
         {{-- Data Laporan --}}
-        <li class="nav-item has-treeview {{ isMenuOpen('laporan*') }}">
-          <a href="#" class="nav-link {{ isActive('laporan*') }}">
-            <i class="nav-icon fas fa-chart-pie"></i>
-            <p>
-              Laporan
-              <i class="fas fa-angle-left right"></i>
-            </p>
-          </a>
-          <ul class="nav nav-treeview">
-            <li class="nav-item">
-              <a href="#" class="nav-link {{ isActive('laporan/penjualan*') }}">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Penjualan</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="#" class="nav-link {{ isActive('laporan/stok*') }}">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Stock</p>
-              </a>
-            </li>
-          </ul>
-        </li>
+        {{-- <li class="nav-item has-treeview {{ isMenuOpen('laporan*') }}">
+        <a href="#" class="nav-link {{ isActive('laporan*') }}">
+          <i class="nav-icon fas fa-chart-pie"></i>
+          <p>
+            Laporan
+            <i class="fas fa-angle-left right"></i>
+          </p>
+        </a>
+        <ul class="nav nav-treeview">
+          <li class="nav-item">
+            <a href="#" class="nav-link {{ isActive('laporan/penjualan*') }}">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Penjualan</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link {{ isActive('laporan/stok*') }}">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Stock</p>
+            </a>
+          </li>
+        </ul>
+        </li> --}}
         @endif
 
         @if (session('role') === 'customer')
