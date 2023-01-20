@@ -5,12 +5,15 @@
 
   <!-- Sidebar -->
   <div class="sidebar">
-    <div class="pb-3 mt-3 mb-3 user-panel d-flex">
+    <div class="pb-3 mt-3 mb-3 user-panel d-flex align-items-center">
       <div class="image">
         <img src="{{ asset('assets/admin/dist/img/user2-160x160.jpg') }}" class="img-circle elevation-2" alt="User Image">
       </div>
       <div class="info">
-        <a href="#" class="d-block">{{ auth()->user()->nama }}</a>
+        <p href="#" class="d-block text-white">
+          {{ auth()->user()->nama }} <br>
+          ({{ ucfirst(auth()->user()->role) }})
+        </p>
       </div>
     </div>
 
@@ -31,20 +34,6 @@
         </li>
 
         @if (session('role') === 'admin' || session('role') === 'pemilik')
-        {{-- Data Customers --}}
-        <li class="nav-item">
-          <a href="{{ url('customer/list') }}" class="nav-link {{ isActive('customer/list*') }}">
-            <i class="nav-icon fas fa-users"></i>
-            <p>Customers</p>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="{{ url('supplier/list') }}" class="nav-link {{ isActive('supplier/list*') }}">
-            <i class="nav-icon fas fa-truck"></i>
-            <p>Supplier</p>
-          </a>
-        </li>
-
         {{-- Data Produk --}}
         {{-- <li class="nav-item has-treeview {{ isMenuOpen("produk*") }}">
         <a href="#" class="nav-link {{ isActive("produk*") }}">
@@ -130,6 +119,22 @@
           </li>
         </ul>
         </li> --}}
+        @endif
+
+        @if (session('role') === 'pemilik')
+        {{-- Data Customers --}}
+        <li class="nav-item">
+          <a href="{{ url('customer/list') }}" class="nav-link {{ isActive('customer/list*') }}">
+            <i class="nav-icon fas fa-users"></i>
+            <p>Customers</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="{{ url('supplier/list') }}" class="nav-link {{ isActive('supplier/list*') }}">
+            <i class="nav-icon fas fa-truck"></i>
+            <p>Supplier</p>
+          </a>
+        </li>
         @endif
 
         @if (session('role') === 'customer')
