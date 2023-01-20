@@ -9,67 +9,67 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
-    public function index()
-    {
-        $data = [
-            'title' => 'Login',
-        ];
+  public function index()
+  {
+    $data = [
+      'title' => 'Login',
+    ];
 
-        return view('auth.login', $data);
+    return view('auth.login', $data);
+  }
+
+  public function authenticate(Request $request)
+  {
+    $validatedData = $request->validate([
+      'email'    => 'required|email',
+      'password' => 'required|min:5|max:16'
+    ]);
+
+    if (Auth::attempt($validatedData)) {
+      $request->session()->regenerate();
+      $request->session()->put('login', true);
+      $request->session()->put('role', auth()->user()->role);
+
+      return redirect()->intended('/dashboard');
     }
 
-    public function authenticate(Request $request)
-    {
-        $validatedData = $request->validate([
-            'email'    => 'required|email',
-            'password' => 'required|min:5|max:16'
-        ]);
+    return back()->with('loginError', 'Login Failed');
+  }
 
-        if (Auth::attempt($validatedData)) {
-            $request->session()->regenerate();
-            $request->session()->put('login', true);
-            $request->session()->put('role', auth()->user()->role);
+  public function register()
+  {
+    $data = [
+      'title' => 'Register',
+    ];
 
-            return redirect()->intended('/dashboard');
-        }
+    return view('auth.register', $data);
+  }
 
-        return back()->with('loginError', 'Login Failed');
-    }
+  public function store(Request $request)
+  {
+    $validatedData = $request->validate([
+      'nama'     => 'required|max:50',
+      'email'    => 'required|email|unique:users,email',
+      'alamat'   => 'required',
+      'telepon'  => 'required|numeric|unique:users,telepon',
+      'password' => 'required|min:6|max:16'
+    ]);
 
-    public function register()
-    {
-        $data = [
-            'title' => 'Register',
-        ];
+    $validatedData['password'] = Hash::make($validatedData['password']);
+    $validatedData['role']     = "customer";
 
-        return view('auth.register', $data);
-    }
+    User::create($validatedData);
 
-    public function store(Request $request)
-    {
-        $validatedData = $request->validate([
-            'nama'     => 'required|max:50',
-            'email'    => 'required|email|unique:users,email',
-            'alamat'   => 'required',
-            'telepon'  => 'required|numeric|unique:users,telepon',
-            'password' => 'required|min:6|max:16'
-        ]);
+    return redirect('/login')->with('success', 'Akun anda berhasil didaftarkan');
+  }
 
-        $validatedData['password']     = Hash::make($validatedData['password']);
-        $validatedData['role']         = "mitra";
+  public function logout(Request $request)
+  {
+    Auth::logout();
 
-        User::create($validatedData);
+    $request->session()->invalidate();
+    $request->session()->regenerateToken();
 
-        return redirect('/login')->with('success', 'Akun anda berhasil didaftarkan');
-    }
-
-    public function logout(Request $request)
-    {
-        Auth::logout();
-
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
-
-        return redirect('/');
-    }
+    return redirect('/');
+  }
 }

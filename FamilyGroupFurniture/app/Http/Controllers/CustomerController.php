@@ -31,23 +31,12 @@ class CustomerController extends Controller
       'nama'     => 'required|max:50',
       'alamat'   => 'required',
       'email'    => 'required|email|unique:users,email',
-      'logo'     => 'required|image|file|max:1024|mimes:jpg,jpeg,png',
-      'telp'     => 'required|numeric|unique:users,telp',
-      'username' => 'required|unique:users,username|min:6|max:16',
+      'telepon'  => 'required|numeric|unique:users,telepon',
       'password' => 'required|min:6|max:16'
     ]);
 
-    $validatedData['password']     = Hash::make($validatedData['password']);
-    $validatedData['role']         = "customer";
-    $validatedData['status_customer'] = "active";
-
-    if ($logo = $request->file('logo')) {
-      $fileName        = time() . "." . $logo->getClientOriginalExtension();
-      $destinationPath = public_path('assets/img/customer');
-      $logo->move($destinationPath, $fileName);
-
-      $validatedData['logo_customer']   = $fileName;
-    }
+    $validatedData['password'] = Hash::make($validatedData['password']);
+    $validatedData['role']     = "customer";
 
     User::create($validatedData);
 
@@ -73,10 +62,10 @@ class CustomerController extends Controller
   public function update(Request $request, User $user)
   {
     $rules = [
-      'nama'    => 'required|max:50',
-      'alamat'  => 'required',
-      'email'   => ['required', Rule::unique('users', 'email')->ignore($user->email, 'email'), 'email'],
-      'telepon' => ['required', Rule::unique('users', 'telp')->ignore($user->telp, 'telp'), 'numeric'],
+      'nama'     => 'required|max:50',
+      'alamat'   => 'required',
+      'email'    => ['required', Rule::unique('users', 'email')->ignore($user->email, 'email'), 'email'],
+      'telepon'  => ['required', Rule::unique('users', 'telepon')->ignore($user->telepon, 'telepon'), 'numeric']
     ];
 
     if ($request->filled('password')) {

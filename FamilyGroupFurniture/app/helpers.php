@@ -65,7 +65,7 @@ function fotoProduk($foto)
 
 function countPembeli()
 {
-  return \App\Models\User::where("role", "pembeli")->count();
+  return \App\Models\User::where("role", "customer")->count();
 }
 
 function dataCompany()

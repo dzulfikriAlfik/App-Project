@@ -19,7 +19,7 @@ class AdminController extends Controller
       "list_admin" => User::where('role', 'admin')->where('id', '!=', $user->id)->get(),
     ];
 
-    return view("admin.list-admin", $data);
+    return view("admin.list", $data);
   }
 
   public function addAdmin()
@@ -35,8 +35,7 @@ class AdminController extends Controller
       'nama'     => 'required|max:50',
       'alamat'   => 'required',
       'email'    => 'required|email|unique:users,email',
-      'telp'     => 'required|numeric|unique:users,telp',
-      'username' => 'required|unique:users,username|min:6|max:16',
+      'telepon'  => 'required|numeric|unique:users,telepon',
       'password' => 'required|min:6|max:16'
     ]);
 
@@ -63,8 +62,7 @@ class AdminController extends Controller
       'nama'     => 'required|max:50',
       'alamat'   => 'required',
       'email'    => ['required', Rule::unique('users', 'email')->ignore($user->email, 'email'), 'email'],
-      'telp'     => ['required', Rule::unique('users', 'telp')->ignore($user->telp, 'telp'), 'numeric'],
-      'username' => ['required', Rule::unique('users', 'username')->ignore($user->username, 'username'), 'min:6', 'max:16']
+      'telepon'  => ['required', Rule::unique('users', 'telepon')->ignore($user->telepon, 'telepon'), 'numeric']
     ];
 
     if ($request->filled('password')) {

@@ -130,10 +130,10 @@
         {{--  --}}
         @endif
 
-        @if (session('role') === 'pemilik')
+        @if (session('role') === 'admin')
         <li class="nav-header">SETTING</li>
         <li class="nav-item">
-          <a href="#" class="nav-link {{ isActive('admin*') }}">
+          <a href="{{ url('admin/list') }}" class="nav-link {{ isActive('admin*') }}">
             <i class="nav-icon fas fa-user text-info"></i>
             <p>Admin</p>
           </a>
