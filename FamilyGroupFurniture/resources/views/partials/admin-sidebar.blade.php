@@ -17,7 +17,6 @@
     <!-- Sidebar Menu -->
     <nav class="mt-2">
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-        @if (session('role') === 'admin' || session('role') === 'customer' || session('role') === 'pemilik')
         <li class="nav-item">
           <a href="{{ url('') }}" class="nav-link">
             <i class="nav-icon fas fa-home"></i>
@@ -30,7 +29,6 @@
             <p>Dashboard</p>
           </a>
         </li>
-        @endif
 
         @if (session('role') === 'admin' || session('role') === 'pemilik')
         {{-- Data Customers --}}
